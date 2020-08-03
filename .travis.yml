@@ -1,9 +1,21 @@
-language: java
-jdk:
-  - openjdk11
+dist: trusty
+sudo: false
+
+language: node_js
+node_js:
+  - '12'
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+cache:
+  directories:
+    - ./node_modules
 install:
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - npm install
 script:
-  - mvn package
+  - npm run coverage
 after_success:
   - bash <(curl -s https://codecov.io/bash)

@@ -14,13 +14,13 @@ before_install:
 before_script:
   - npm install -g typescript
   - npm install -g @angular/cli
+  - npm install
 
 script:
-  - npm install
   - ng lint
   - npm run coverage
-  - ng build --prod
 
 after_success:
+  - ng build --prod
   - bash <(curl -s https://codecov.io/bash)
   - firebase deploy --token "1//03US7AsmsF_MnCgYIARAAGAMSNwF-L9IrEo35tBQjTjjx2k0FwYs3eVV01lPcA36cTjkvgic34FO6o1iz-oyAlTibIgIy5zqdA34"

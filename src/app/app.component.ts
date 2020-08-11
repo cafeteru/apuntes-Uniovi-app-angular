@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {NGXLogger} from 'ngx-logger';
+import {TranslationService} from './core/services/translation.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,11 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'Apuntes Uniovi App';
+
+  constructor(
+    private logger: NGXLogger,
+    private translationService: TranslationService
+  ) {
+    this.logger.debug(this.title);
+  }
 }

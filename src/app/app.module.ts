@@ -6,6 +6,9 @@ import {AppComponent} from './app.component';
 import {ComponentsModule} from './components/components.module';
 import {CoreModule} from './core/core.module';
 import {SharedModule} from './shared/shared.module';
+import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,7 @@ import {SharedModule} from './shared/shared.module';
     AppRoutingModule,
     ComponentsModule,
     CoreModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

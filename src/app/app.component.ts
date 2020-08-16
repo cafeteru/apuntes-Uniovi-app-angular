@@ -12,7 +12,6 @@ export class AppComponent {
 
   constructor(
     private logger: NGXLogger,
-    private translationService: TranslationService
   ) {
     this.logger.debug(this.title);
   }

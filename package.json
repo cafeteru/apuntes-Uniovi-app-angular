@@ -8,7 +8,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "coverage": "ng test --watch=false --code-coverage"
+    "coverage": "ng test --watch=false --code-coverage",
+    "compodoc": "npx compodoc -p tsconfig.base.json",
+    "serve-compodoc": "npx compodoc -s tsconfig.base.json"
   },
   "private": true,
   "dependencies": {
@@ -31,6 +33,7 @@
     "@angular-devkit/build-angular": "~0.1000.2",
     "@angular/cli": "~10.0.2",
     "@angular/compiler-cli": "~10.0.8",
+    "@compodoc/compodoc": "^1.1.11",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.12.54",

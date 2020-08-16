@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private logger: NGXLogger,
+    private translationService: TranslationService
   ) {
   }
 

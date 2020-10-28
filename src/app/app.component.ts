@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {NGXLogger} from 'ngx-logger';
-import {TranslationService} from './core/services/translation.service';
 
 @Component({
   selector: 'app-root',

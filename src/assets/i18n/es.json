@@ -1,5 +1,7 @@
 {
-  "login": {
-    "title": "Identificarse"
-  }
+	"error.login.text": "Por favor compruebe sus credenciales",
+	"error.login.title": "Login failed",
+	"login.login": "Iniciar sesión",
+	"login.password": "Contraseña",
+	"login.username": "Usuario"
 }

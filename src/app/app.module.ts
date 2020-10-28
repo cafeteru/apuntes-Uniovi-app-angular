@@ -6,9 +6,14 @@ import {AppComponent} from './app.component';
 import {ComponentsModule} from './components/components.module';
 import {CoreModule} from './core/core.module';
 import {SharedModule} from './shared/shared.module';
-import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
-import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
+import {registerLocaleData} from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+
+registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [
@@ -20,6 +25,17 @@ import {HttpClientModule} from '@angular/common/http';
     ComponentsModule,
     CoreModule,
     SharedModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (http: HttpClient) => {
+          return new TranslateHttpLoader(http);
+        },
+        deps: [HttpClient]
+      },
+      defaultLanguage: 'es'
+    }),
+    SweetAlert2Module,
   ],
   providers: [],
   bootstrap: [AppComponent]

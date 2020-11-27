@@ -2,6 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {NGXLogger} from 'ngx-logger';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import Swal from 'sweetalert2';
+import {marker} from '@biesbjerg/ngx-translate-extract-marker';
+import {TranslateService} from '@ngx-translate/core';
+
+const SUCCESS_LOGIN_TITLE = marker('success.login.title');
+const SUCCESS_LOGIN_TEXT = marker('success.login.text');
+const ERROR_LOGIN_TITLE = marker('error.login.title');
+const ERROR_LOGIN_TEXT = marker('error.login.text');
 
 @Component({
   selector: 'app-login',
@@ -13,6 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private logger: NGXLogger,
+    private translateService: TranslateService
   ) {
     this.logger.debug(LoginComponent.name, 'constructor()', 'start');
     this.logger.debug(LoginComponent.name, 'constructor()', 'end');
@@ -29,17 +37,27 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     if (this.formGroup.valid) {
-      Swal.fire({
-        icon: 'success',
-        title: ('error.login.title'),
-        text: ('error.login.title')
-      }).then();
+      this.translateService.use('en');
+      this.translateService.get([SUCCESS_LOGIN_TITLE, SUCCESS_LOGIN_TEXT])
+        .subscribe(res => {
+            Swal.fire({
+              icon: 'success',
+              title: (res[SUCCESS_LOGIN_TITLE]),
+              text: (res[SUCCESS_LOGIN_TEXT])
+            }).then();
+          }
+        );
     } else {
-      Swal.fire({
-        icon: 'error',
-        title: ('error.login.title'),
-        text: ('error.login.text')
-      }).then();
+      this.translateService.use('es');
+      this.translateService.get([ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT])
+        .subscribe(res => {
+            Swal.fire({
+              icon: 'error',
+              title: (res[ERROR_LOGIN_TITLE]),
+              text: (res[ERROR_LOGIN_TEXT])
+            }).then();
+          }
+        );
     }
   }
 }

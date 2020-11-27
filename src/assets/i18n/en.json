@@ -1,7 +1,9 @@
 {
 	"error.login.text": "Please check your credentials",
-	"error.login.title": "error.login.title",
+	"error.login.title": "Error login",
 	"login.login": "Login",
 	"login.password": "Password",
-	"login.username": "Username"
+	"login.username": "Username",
+	"success.login.text": "Success",
+	"success.login.title": "Success Title"
 }

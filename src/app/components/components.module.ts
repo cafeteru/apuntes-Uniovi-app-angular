@@ -4,18 +4,17 @@ import { LoginComponent } from './login/login.component';
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-import {ReactiveFormsModule} from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [
+    LoginComponent
+  ],
   imports: [
     CommonModule,
     CoreModule,
     SharedModule,
     RouterModule,
-    TranslateModule,
     ReactiveFormsModule
   ]
 })

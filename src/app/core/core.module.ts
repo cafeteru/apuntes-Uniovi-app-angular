@@ -1,13 +1,15 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {LoggerModule, NGXLogger, NgxLoggerLevel} from 'ngx-logger';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { LoggerModule, NGXLogger, NgxLoggerLevel } from 'ngx-logger';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+
+  ],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -23,14 +25,13 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
           return new TranslateHttpLoader(http);
         },
         deps: [HttpClient]
-      }
-    })
+      },
+      defaultLanguage: 'es'
+    }),
   ],
   exports: [
+    LoggerModule,
     TranslateModule
-  ],
-  providers: [
-    {provide: NGXLogger, useClass: NGXLogger}
   ]
 })
 export class CoreModule {

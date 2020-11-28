@@ -22,6 +22,6 @@ script:
 
 after_success:
   - ng build --prod
-  - npm run codacy
   - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -Ls https://coverage.codacy.com/get.sh) --help
   - if [ "$TRAVIS_BRANCH" = "master" ]; then firebase deploy --token "1//03US7AsmsF_MnCgYIARAAGAMSNwF-L9IrEo35tBQjTjjx2k0FwYs3eVV01lPcA36cTjkvgic34FO6o1iz-oyAlTibIgIy5zqdA34"; fi

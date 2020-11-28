@@ -11,7 +11,7 @@
     "coverage": "ng test --watch=false --code-coverage",
     "compodoc": "npx compodoc -p tsconfig.base.json",
     "serve-compodoc": "npx compodoc -s tsconfig.base.json",
-    "load-i18n": "ngx-translate-extract --input ./src --output ./src/assets/i18n/es.json ./src/assets/i18n/en.json --clean --sort --key-as-default-value --format json",
+    "load-i18n": "ngx-translate-extract --input ./src --output ./src/assets/i18n/es.json ./src/assets/i18n/en.json --clean --sort --key-as-default-value --format json"
   },
   "private": true,
   "dependencies": {

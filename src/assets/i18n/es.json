@@ -3,7 +3,5 @@
 	"error.login.title": "Error al identificarse",
 	"login.login": "Iniciar sesión",
 	"login.password": "Contraseña",
-	"login.username": "Usuario",
-	"success.login.text": "text",
-	"success.login.title": "title"
+	"login.username": "Usuario"
 }

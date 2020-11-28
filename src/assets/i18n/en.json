@@ -3,7 +3,5 @@
 	"error.login.title": "Error login",
 	"login.login": "Login",
 	"login.password": "Password",
-	"login.username": "Username",
-	"success.login.text": "Success",
-	"success.login.title": "Success Title"
+	"login.username": "Username"
 }

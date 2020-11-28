@@ -5,10 +5,9 @@ import Swal from 'sweetalert2';
 import {marker} from '@biesbjerg/ngx-translate-extract-marker';
 import {TranslateService} from '@ngx-translate/core';
 import {BaseComponent} from '../../core/base/base.component';
-import {Subscription} from 'rxjs';
+import {LoginService} from '../../core/services/login.service';
+import {User} from '../../core/models/user';
 
-const SUCCESS_LOGIN_TITLE = marker('success.login.title');
-const SUCCESS_LOGIN_TEXT = marker('success.login.text');
 const ERROR_LOGIN_TITLE = marker('error.login.title');
 const ERROR_LOGIN_TEXT = marker('error.login.text');
 
@@ -22,7 +21,8 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   constructor(
     protected logger: NGXLogger,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private loginService: LoginService
   ) {
     super(logger);
     this.logger.debug(LoginComponent.name, 'constructor()', 'start');
@@ -39,28 +39,33 @@ export class LoginComponent extends BaseComponent implements OnInit {
   }
 
   login(): void {
-    let subscription: Subscription;
     if (this.formGroup.valid) {
-      subscription = this.translateService.get([SUCCESS_LOGIN_TITLE, SUCCESS_LOGIN_TEXT])
-        .subscribe(res => {
-            Swal.fire({
-              icon: 'success',
-              title: (res[SUCCESS_LOGIN_TITLE]),
-              text: (res[SUCCESS_LOGIN_TEXT])
-            }).then();
-          }
-        );
-    } else {
-      subscription = this.translateService.get([ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT])
-        .subscribe(res => {
-            Swal.fire({
-              icon: 'error',
-              title: (res[ERROR_LOGIN_TITLE]),
-              text: (res[ERROR_LOGIN_TEXT])
-            }).then();
-          }
-        );
+      const user = new User();
+      user.username = this.formGroup.controls.username.value;
+      user.password = this.formGroup.controls.password.value;
+      this.loginService.login(user).subscribe(
+        (result) => {
+          this.translateService.get([ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT]).subscribe(res => {
+              Swal.fire({
+                icon: 'success',
+                title: (result.username),
+                text: (result.Authorization)
+              }).then();
+            }
+          );
+        },
+        () => {
+          this.translateService.get([ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT]).subscribe(
+            res => {
+              Swal.fire({
+                icon: 'error',
+                title: (res[ERROR_LOGIN_TITLE]),
+                text: (res[ERROR_LOGIN_TEXT])
+              }).then();
+            }
+          );
+        }
+      );
     }
-    this.subscriptions.push(subscription);
   }
 }

@@ -12,6 +12,7 @@ export class AppComponent {
     private logger: NGXLogger,
   ) {
     this.logger.debug(AppComponent.name, 'constructor()', 'start');
+    localStorage.clear();
     this.logger.debug(AppComponent.name, 'constructor()', 'end');
   }
 }

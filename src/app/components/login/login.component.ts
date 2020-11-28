@@ -7,6 +7,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {BaseComponent} from '../../core/base/base.component';
 import {LoginService} from '../../core/services/login.service';
 import {User} from '../../core/models/user';
+import {FormGroupUtil} from '../../core/utils/form-group-util';
 
 const ERROR_LOGIN_TITLE = marker('error.login.title');
 const ERROR_LOGIN_TEXT = marker('error.login.text');
@@ -39,17 +40,17 @@ export class LoginComponent extends BaseComponent implements OnInit {
   }
 
   login(): void {
-    if (this.formGroup.valid) {
+    if (FormGroupUtil.valid(this.formGroup)) {
       const user = new User();
       user.username = this.formGroup.controls.username.value;
       user.password = this.formGroup.controls.password.value;
       this.loginService.login(user).subscribe(
-        (result) => {
+        () => {
           this.translateService.get([ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT]).subscribe(res => {
               Swal.fire({
                 icon: 'success',
-                title: (result.username),
-                text: (result.Authorization)
+                title: (localStorage.getItem('username')),
+                text: (localStorage.getItem('Authorization'))
               }).then();
             }
           );

@@ -1,7 +1,8 @@
 {
 	"error.login.text": "Please check your credentials",
 	"error.login.title": "Error login",
-	"login.login": "Login",
+	"login.button": "Enter",
 	"login.password": "Password",
+	"login.title": "Log in",
 	"login.username": "Username"
 }

@@ -1,4 +1,4 @@
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 /**
  * Clase para manejar los formGroups de los formularios
@@ -190,7 +190,7 @@ export class FormGroupUtil {
    *
    * @param key identificador del formControl
    */
-  private static getErrorKey(key: string) {
+  private static getErrorKey(key: string): string {
     return `No existe el valor ${key} dentro del formGroup`;
   }
 }

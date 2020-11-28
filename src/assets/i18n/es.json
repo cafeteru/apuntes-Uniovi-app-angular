@@ -1,7 +1,8 @@
 {
 	"error.login.text": "Por favor compruebe sus credenciales",
 	"error.login.title": "Error al identificarse",
-	"login.login": "Iniciar sesión",
+	"login.button": "Entrar",
 	"login.password": "Contraseña",
+	"login.title": "Identificarse",
 	"login.username": "Usuario"
 }

@@ -9,6 +9,8 @@ import { SharedModule } from './shared/shared.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MaterialDesignModule} from './shared/material-design/material-design.module';
 
 registerLocaleData(localeEs);
 
@@ -23,6 +25,7 @@ registerLocaleData(localeEs);
     CoreModule,
     SharedModule,
     SweetAlert2Module,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

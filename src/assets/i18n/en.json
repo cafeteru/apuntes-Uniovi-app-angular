@@ -4,5 +4,7 @@
 	"login.button": "Enter",
 	"login.password": "Password",
 	"login.title": "Log in",
-	"login.username": "Username"
+	"login.username": "Username",
+	"password.error.required": "Password is required",
+	"username.error.required": "Username is required"
 }

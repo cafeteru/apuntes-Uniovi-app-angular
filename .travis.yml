@@ -1,6 +1,11 @@
 language: node_js
+
+env:
+  - CODACY_PROJECT_TOKEN="a826990e6f64474685332c0e7c48b382"
+
 node_js:
-  - '12'
+  - '12.18.2'
+
 addons:
   chrome: stable
 dist: trusty
@@ -14,12 +19,13 @@ before_install:
 before_script:
   - npm install -g typescript
   - npm install -g @angular/cli
+  - npm install
 
 script:
-  - npm install
   - ng lint
   - npm run coverage
-  - ng build --prod
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - ng build --prod
+  - bash <(curl -Ls https://coverage.codacy.com/get.sh) report
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then firebase deploy --token "1//03US7AsmsF_MnCgYIARAAGAMSNwF-L9IrEo35tBQjTjjx2k0FwYs3eVV01lPcA36cTjkvgic34FO6o1iz-oyAlTibIgIy5zqdA34"; fi

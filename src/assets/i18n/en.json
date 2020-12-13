@@ -1,0 +1,10 @@
+{
+	"error.login.text": "Please check your credentials",
+	"error.login.title": "Error login",
+	"login.button": "Enter",
+	"login.password": "Password",
+	"login.title": "Log in",
+	"login.username": "Username",
+	"password.error.required": "Password is required",
+	"username.error.required": "Username is required"
+}

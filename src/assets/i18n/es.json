@@ -1,0 +1,10 @@
+{
+  "error.login.text": "Por favor compruebe sus credenciales",
+  "error.login.title": "Error al identificarse",
+  "login.button": "Entrar",
+  "login.password": "Contraseña",
+  "login.title": "Identificarse",
+  "login.username": "Nombre de usuario",
+  "password.error.required": "Contraseña es requerida",
+  "username.error.required": "Nombre de usuario es requerido"
+}

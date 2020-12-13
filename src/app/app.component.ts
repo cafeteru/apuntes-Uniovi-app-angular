@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'apuntes-Uniovi-app-angular';
+
+  constructor(
+    private logger: NGXLogger,
+  ) {
+    this.logger.debug(AppComponent.name, 'constructor()', 'start');
+    localStorage.clear();
+    this.logger.debug(AppComponent.name, 'constructor()', 'end');
+  }
 }

@@ -1,0 +1,26 @@
+<h1>{{'login.title' | translate}}</h1>
+<form [formGroup]="formGroup">
+  <div class="row form-group">
+    <mat-form-field class="col">
+      <mat-label>{{'login.username' | translate}}</mat-label>
+      <input matInput formControlName="username" required [placeholder]="'login.username' | translate">
+      <mat-error *ngIf="formGroup.controls.username.errors?.required">
+        {{'username.error.required' | translate}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row form-group">
+    <mat-form-field class="col">
+      <mat-label>{{'login.password' | translate}}</mat-label>
+      <input matInput formControlName="password" type="password" name="password"
+             [placeholder]="'login.password' | translate"
+             required>
+      <mat-error *ngIf="formGroup.controls.password.errors?.required">
+        {{'password.error.required' | translate}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <button class="btn btn-primary btn-block" (click)="login()">{{'login.button' | translate}}</button>
+  </div>
+</form>

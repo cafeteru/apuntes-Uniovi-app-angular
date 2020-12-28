@@ -9,7 +9,6 @@ import {ShowHidePasswordModule} from 'ngx-show-hide-password';
 import {NoImagePipe} from './pipes/no-image.pipe';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-
 @NgModule({
   declarations: [
     FooterComponent,

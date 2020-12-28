@@ -4,6 +4,7 @@ import {LoginComponent} from './login.component';
 import {LoggerTestingModule} from 'ngx-logger/testing';
 import {CoreModule} from '../../core/core.module';
 import {SharedModule} from '../../shared/shared.module';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -16,6 +17,7 @@ describe('LoginComponent', () => {
       ],
       imports: [
         LoggerTestingModule,
+        RouterTestingModule,
         CoreModule,
         SharedModule
       ]

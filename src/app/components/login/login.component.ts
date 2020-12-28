@@ -8,6 +8,7 @@ import {BaseComponent} from '../../core/base/base.component';
 import {LoginService} from '../../core/services/login.service';
 import {User} from '../../core/models/user';
 import {FormGroupUtil} from '../../core/utils/form-group-util';
+import {Router} from '@angular/router';
 
 const ERROR_LOGIN_TITLE = marker('error.login.title');
 const ERROR_LOGIN_TEXT = marker('error.login.text');
@@ -23,6 +24,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   constructor(
     protected logger: NGXLogger,
+    private router: Router,
     private translateService: TranslateService,
     private loginService: LoginService
   ) {
@@ -50,16 +52,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
       user.password = this.formGroup.controls.password.value;
       this.loginService.login(user).subscribe(
         () => {
-          this.subscriptions.push(
-            this.translateService.get([ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT]).subscribe(() => {
-                Swal.fire({
-                  icon: 'success',
-                  title: (localStorage.getItem('username')),
-                  text: (localStorage.getItem('Authorization'))
-                }).then();
-              }
-            )
-          );
+          this.router.navigateByUrl('/menu').then();
         },
         () => {
           this.subscriptions.push(

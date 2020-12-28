@@ -3,6 +3,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
 import {LoggerTestingModule} from 'ngx-logger/testing';
 import {CoreModule} from './core/core.module';
+import {FooterComponent} from './shared/footer/footer.component';
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
@@ -10,10 +11,11 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         LoggerTestingModule,
-        CoreModule
+        CoreModule,
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        FooterComponent
       ]
     }).compileComponents();
   }));

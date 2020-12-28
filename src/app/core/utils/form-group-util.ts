@@ -1,41 +1,40 @@
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 /**
- * Clase para manejar los formGroups de los formularios
+ * Class to handle the formGroups of the forms
  */
 export class FormGroupUtil {
-  private static errorFormGroup = 'No existe el formGroup';
-  private static errorFormControl = 'No existe el formControl';
+  static errorFormGroup = 'The formGroup does not exist';
+  static errorFormControl = 'The formControl does not exist';
 
   /**
-   * Comprueba que todos los datos de un formGroup son válidos.
-   * Si no hay fallos devuelve true.
-   * En caso contrario, marca todos los campos con errores y devuelve false.
+   * Verify that all data in a formGroup is valid.
+   * If there are no errors, it returns true.
+   * Otherwise, it marks all fields with errors and returns false.
    *
-   * @param formGroup FormGroup a comprobar
+   * @param formGroup FormGroup to verify
    *
-   * @returns si contiene errores el formulario o no
+   * @returns boolean
    */
   static valid(formGroup: FormGroup): boolean {
     return this.getNumErrors(formGroup) === 0;
   }
 
   /**
-   * Devuelve el número de errores que contiene un formGroup
+   * Returns the number of errors that a formGroup contains
    *
-   * @param formGroup FormGroup a comprobar
+   * @param formGroup FormGroup to verify
    *
-   * @returns Número de errores
+   * @returns Number of errors
    */
   static getNumErrors(formGroup: FormGroup): number {
     let errors = 0;
     if (formGroup) {
-      const list: string[] = Object.keys(formGroup.controls);
-      list.forEach((key: string) => {
-        const abstractControl: AbstractControl = formGroup.get(key);
-        if (this.getError(formGroup, key) != null) {
+      const list = Object.keys(formGroup.controls);
+      list.forEach(key => {
+        if (this.getError(formGroup, key)) {
           errors++;
-          abstractControl.markAllAsTouched();
+          formGroup.get(key).markAllAsTouched();
         }
       });
       return errors;
@@ -69,16 +68,16 @@ export class FormGroupUtil {
   }
 
   /**
-   * Devuelve los errores de un dato concreto de un formGroup
+   * Returns the errors of a specific data of a formGroup
    *
-   * @param formGroup FormGroup a comprobar
-   * @param key Identificador del dato
+   * @param formGroup FormGroup to verify
+   * @param key Data identifier
    *
-   * @returns los errores que contenga el dato
+   * @returns the errors that the data contains
    */
   static getError(formGroup: FormGroup, key: string): ValidationErrors {
     if (formGroup) {
-      const abstractControl: AbstractControl = formGroup.get(key);
+      const abstractControl = formGroup.get(key);
       if (abstractControl) {
         return abstractControl.errors;
       }

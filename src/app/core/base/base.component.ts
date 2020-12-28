@@ -6,7 +6,7 @@ import {NGXLogger} from 'ngx-logger';
   template: ''
 })
 export abstract class BaseComponent implements OnInit, OnDestroy {
-  protected subscriptions: Subscription[];
+  protected subscriptions: Subscription[] = [];
 
   protected constructor(
     protected logger: NGXLogger

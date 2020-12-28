@@ -5,6 +5,7 @@ import {CoreModule} from '../core/core.module';
 import {SharedModule} from '../shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
+import {ShowHidePasswordModule} from 'ngx-show-hide-password';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     SharedModule,
     RouterModule,
     ReactiveFormsModule,
+    ShowHidePasswordModule,
   ]
 })
 export class ComponentsModule {

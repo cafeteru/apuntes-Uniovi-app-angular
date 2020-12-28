@@ -6,7 +6,8 @@ import {CoreModule} from '../core/core.module';
 import {FooterComponent} from './footer/footer.component';
 import {MaterialDesignModule} from './material-design/material-design.module';
 import {ShowHidePasswordModule} from 'ngx-show-hide-password';
-import { NoImagePipe } from './pipes/no-image.pipe';
+import {NoImagePipe} from './pipes/no-image.pipe';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -21,12 +22,16 @@ import { NoImagePipe } from './pipes/no-image.pipe';
     ReactiveFormsModule,
     CoreModule,
     MaterialDesignModule,
-    ShowHidePasswordModule
+    BrowserAnimationsModule,
+    ShowHidePasswordModule,
   ],
   exports: [
     FooterComponent,
     MaterialDesignModule,
     NoImagePipe,
+    FormsModule,
+    ReactiveFormsModule,
+    ShowHidePasswordModule,
   ]
 })
 export class SharedModule {

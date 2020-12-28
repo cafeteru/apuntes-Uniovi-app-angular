@@ -3,9 +3,7 @@ import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {LoginComponent} from './login.component';
 import {LoggerTestingModule} from 'ngx-logger/testing';
 import {CoreModule} from '../../core/core.module';
-import {MaterialDesignModule} from '../../shared/material-design/material-design.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ReactiveFormsModule} from '@angular/forms';
+import {SharedModule} from '../../shared/shared.module';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -19,12 +17,9 @@ describe('LoginComponent', () => {
       imports: [
         LoggerTestingModule,
         CoreModule,
-        BrowserAnimationsModule,
-        MaterialDesignModule,
-        ReactiveFormsModule
+        SharedModule
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -35,5 +30,9 @@ describe('LoginComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(component.formGroup).not.toBeUndefined();
+    const numControls = Object.keys(component.formGroup.controls).length;
+    expect(numControls).toEqual(2);
+    expect(component.disable).toBeFalse();
   });
 });

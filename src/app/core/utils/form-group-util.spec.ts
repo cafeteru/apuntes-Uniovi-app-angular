@@ -9,7 +9,6 @@ describe('FormGroupUtil', () => {
   const noValidKey = 'noExist';
   const email = 'email@gmail.com';
   const errorKey = `No existe el valor ${noValidKey} dentro del formGroup`;
-  const errorFormGroup = `No existe el formGroup`;
 
   beforeEach(() => {
     formGroup = new FormGroup({
@@ -30,8 +29,8 @@ describe('FormGroupUtil', () => {
   });
 
   it('Comprueba el método setValue con un formGroup no válido', () => {
-    expect(() => FormGroupUtil.setValue(null, noValidKey, email)).toThrowError(errorFormGroup);
-    expect(() => FormGroupUtil.setValue(undefined, noValidKey, email)).toThrowError(errorFormGroup);
+    expect(() => FormGroupUtil.setValue(null, noValidKey, email)).toThrowError(FormGroupUtil.errorFormGroup);
+    expect(() => FormGroupUtil.setValue(undefined, noValidKey, email)).toThrowError(FormGroupUtil.errorFormGroup);
   });
 
   it('Comprueba el método getValue con una clave que existe', () => {
@@ -45,8 +44,8 @@ describe('FormGroupUtil', () => {
   });
 
   it('Comprueba el método getValue con un formGroup no válido', () => {
-    expect(() => FormGroupUtil.getValue(null, emailKey)).toThrowError(errorFormGroup);
-    expect(() => FormGroupUtil.getValue(undefined, emailKey)).toThrowError(errorFormGroup);
+    expect(() => FormGroupUtil.getValue(null, emailKey)).toThrowError(FormGroupUtil.errorFormGroup);
+    expect(() => FormGroupUtil.getValue(undefined, emailKey)).toThrowError(FormGroupUtil.errorFormGroup);
   });
 
   it('Comprueba el método getError con una clave que existe', () => {
@@ -67,8 +66,8 @@ describe('FormGroupUtil', () => {
   });
 
   it('Comprueba el método getError con un formGroup no válido', () => {
-    expect(() => FormGroupUtil.getError(null, passwordKey)).toThrowError(errorFormGroup);
-    expect(() => FormGroupUtil.getError(undefined, emailKey)).toThrowError(errorFormGroup);
+    expect(() => FormGroupUtil.getError(null, passwordKey)).toThrowError(FormGroupUtil.errorFormGroup);
+    expect(() => FormGroupUtil.getError(undefined, emailKey)).toThrowError(FormGroupUtil.errorFormGroup);
   });
 
   it('Comprueba el método checkError con una clave que existe', () => {
@@ -89,7 +88,7 @@ describe('FormGroupUtil', () => {
   });
 
   it('Comprueba el método checkError con un formGroup nulo', () => {
-    expect(() => FormGroupUtil.checkError(null, passwordKey)).toThrowError(errorFormGroup);
+    expect(() => FormGroupUtil.checkError(null, passwordKey)).toThrowError(FormGroupUtil.errorFormGroup);
   });
 
   it('Comprueba el método validFormGroup', () => {
@@ -102,7 +101,7 @@ describe('FormGroupUtil', () => {
   });
 
   it('Comprueba el método validFormGroup con un formGroup inválido', () => {
-    expect(() => FormGroupUtil.valid(null)).toThrowError(errorFormGroup);
+    expect(() => FormGroupUtil.valid(null)).toThrowError(FormGroupUtil.errorFormGroup);
   });
 
   it('Comprueba el método changeValidator con una clave que existe', () => {
@@ -136,8 +135,10 @@ describe('FormGroupUtil', () => {
   });
 
   it('Comprueba el método changeValidator con un formGroup nulo', () => {
-    expect(() => FormGroupUtil.changeValidator(null, emailKey, [Validators.minLength(2)], '1')).toThrowError(errorFormGroup);
-    expect(() => FormGroupUtil.changeValidator(undefined, passwordKey, [Validators.minLength(2)])).toThrowError(errorFormGroup);
+    expect(() => FormGroupUtil.changeValidator(null, emailKey, [Validators.minLength(2)], '1'))
+      .toThrowError(FormGroupUtil.errorFormGroup);
+    expect(() => FormGroupUtil.changeValidator(undefined, passwordKey, [Validators.minLength(2)]))
+      .toThrowError(FormGroupUtil.errorFormGroup);
   });
 
   it('Comprueba el método addFormControl con datos válidos', () => {
@@ -147,7 +148,8 @@ describe('FormGroupUtil', () => {
   });
 
   it('Comprueba el método addFormControl con datos inválidos', () => {
-    expect(() => FormGroupUtil.addFormControl(formGroup, 'prueba', null)).toThrowError(`No existe el formControl`);
-    expect(() => FormGroupUtil.addFormControl(undefined, 'prueba', new FormControl(''))).toThrowError(errorFormGroup);
+    expect(() => FormGroupUtil.addFormControl(formGroup, 'prueba', null)).toThrowError(FormGroupUtil.errorFormControl);
+    expect(() => FormGroupUtil.addFormControl(undefined, 'prueba', new FormControl('')))
+      .toThrowError(FormGroupUtil.errorFormGroup);
   });
 });

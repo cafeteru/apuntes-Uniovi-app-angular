@@ -1,6 +1,7 @@
 {
 	"error.login.text": "Please check your credentials",
 	"error.login.title": "Error login",
+	"error.token.invalid": "Expired Session. Please login again",
 	"login.button": "Enter",
 	"login.password": "Password",
 	"login.title": "Log in",

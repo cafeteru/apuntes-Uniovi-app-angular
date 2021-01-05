@@ -21,7 +21,7 @@ interface IToken {
   providedIn: 'root'
 })
 export class LoginService {
-  private readonly URL = `${environment.urlAPI}/login`;
+  private URL = `${environment.urlAPI}/login`;
 
   constructor(
     private logger: NGXLogger,
@@ -31,12 +31,17 @@ export class LoginService {
     this.logger.debug(LoginService.name, 'constructor()', 'end');
   }
 
+  /**
+   * Gets user authentication
+   *
+   * @param user User with username and password
+   */
   login(user: User): Observable<void> {
     this.logger.debug(LoginService.name, `login(user: ${user.toString()})`, 'start');
     localStorage.clear();
     return this.http.post<ResponseLogin>(`${this.URL}`, user).pipe(
       map((res) => {
-        const result: IToken = jwt_decode(res.Authorization);
+        const result = jwt_decode<IToken>(res.Authorization);
         localStorage.setItem('Authorization', res.Authorization);
         localStorage.setItem('username', result.username);
         localStorage.setItem('id', result.id.toString());

@@ -8,6 +8,7 @@ import {BaseComponent} from '../../core/base/base.component';
 import {LoginService} from '../../core/services/login.service';
 import {User} from '../../core/models/user';
 import {FormGroupUtil} from '../../core/utils/form-group-util';
+import {Router} from '@angular/router';
 
 const ERROR_LOGIN_TITLE = marker('error.login.title');
 const ERROR_LOGIN_TEXT = marker('error.login.text');
@@ -19,9 +20,11 @@ const ERROR_LOGIN_TEXT = marker('error.login.text');
 })
 export class LoginComponent extends BaseComponent implements OnInit {
   formGroup: FormGroup;
+  disable: boolean;
 
   constructor(
     protected logger: NGXLogger,
+    private router: Router,
     private translateService: TranslateService,
     private loginService: LoginService
   ) {
@@ -32,6 +35,8 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.logger.debug(LoginComponent.name, 'ngOnInit()', 'start');
+    localStorage.clear();
+    this.disable = false;
     this.formGroup = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
@@ -41,29 +46,26 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   login(): void {
     if (FormGroupUtil.valid(this.formGroup)) {
+      this.disable = true;
       const user = new User();
       user.username = this.formGroup.controls.username.value;
       user.password = this.formGroup.controls.password.value;
       this.loginService.login(user).subscribe(
         () => {
-          this.translateService.get([ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT]).subscribe(res => {
-              Swal.fire({
-                icon: 'success',
-                title: (localStorage.getItem('username')),
-                text: (localStorage.getItem('Authorization'))
-              }).then();
-            }
-          );
+          this.router.navigateByUrl('/menu').then();
         },
         () => {
-          this.translateService.get([ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT]).subscribe(
-            res => {
-              Swal.fire({
-                icon: 'error',
-                title: (res[ERROR_LOGIN_TITLE]),
-                text: (res[ERROR_LOGIN_TEXT])
-              }).then();
-            }
+          this.subscriptions.push(
+            this.translateService.get([ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT]).subscribe(
+              res => {
+                this.disable = false;
+                Swal.fire({
+                  icon: 'error',
+                  title: (res[ERROR_LOGIN_TITLE]),
+                  text: (res[ERROR_LOGIN_TEXT])
+                }).then();
+              }
+            )
           );
         }
       );

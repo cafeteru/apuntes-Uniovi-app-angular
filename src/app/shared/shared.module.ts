@@ -8,11 +8,13 @@ import {MaterialDesignModule} from './material-design/material-design.module';
 import {ShowHidePasswordModule} from 'ngx-show-hide-password';
 import {NoImagePipe} from './pipes/no-image.pipe';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     FooterComponent,
-    NoImagePipe
+    NoImagePipe,
+    NavbarComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +33,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     ShowHidePasswordModule,
+    NavbarComponent,
   ]
 })
 export class SharedModule {

@@ -6,6 +6,7 @@
 	"login.password": "Password",
 	"login.title": "Log in",
 	"login.username": "Username",
+	"logout": "Logout",
 	"password.error.required": "Password is required",
 	"username.error.required": "Username is required"
 }

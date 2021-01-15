@@ -6,6 +6,7 @@
 	"login.password": "Contraseña",
 	"login.title": "Identificarse",
 	"login.username": "Nombre de usuario",
+	"logout": "Cerrar sesión",
 	"password.error.required": "Contraseña es requerida",
 	"username.error.required": "Nombre de usuario es requerido"
 }

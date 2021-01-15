@@ -50,4 +50,10 @@ export class LoginService {
       tap(() => this.logger.debug(LoginService.name, `login(user: ${user.toString()})`, 'start'))
     );
   }
+
+  logout(): void {
+      this.logger.debug(LoginService.name, `logout()`, 'start');
+      localStorage.clear();
+      this.logger.debug(LoginService.name, `logout()`, 'end');
+  }
 }

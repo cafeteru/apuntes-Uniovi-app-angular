@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlAPI: 'sin-definir'
+  urlAPI: 'https://localhost:8080'
 };

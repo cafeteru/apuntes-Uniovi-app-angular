@@ -6,6 +6,9 @@
 	"login.password": "Contraseña",
 	"login.title": "Identificarse",
 	"login.username": "Nombre de usuario",
+	"logo.login": "Logo de la Universidad de Oviedo",
+	"logo.navbar": "Logo de la Universidad de Oviedo",
+	"logout": "Cerrar sesión",
 	"password.error.required": "Contraseña es requerida",
 	"username.error.required": "Nombre de usuario es requerido"
 }

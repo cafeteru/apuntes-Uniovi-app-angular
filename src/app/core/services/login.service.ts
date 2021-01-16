@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {NGXLogger} from 'ngx-logger';
-import {Observable} from 'rxjs';
-import {User} from '../models/user';
-import {map, tap} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { NGXLogger } from 'ngx-logger';
+import { Observable } from 'rxjs';
+import { User } from '../models/user';
+import { map, tap } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 import jwt_decode from 'jwt-decode';
 
 interface ResponseLogin {
@@ -49,5 +49,11 @@ export class LoginService {
       }),
       tap(() => this.logger.debug(LoginService.name, `login(user: ${user.toString()})`, 'start'))
     );
+  }
+
+  logout(): void {
+    this.logger.debug(LoginService.name, `logout()`, 'start');
+    localStorage.clear();
+    this.logger.debug(LoginService.name, `logout()`, 'end');
   }
 }

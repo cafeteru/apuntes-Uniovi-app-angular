@@ -1,8 +1,8 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {LoginService} from './login.service';
-import {LoggerTestingModule} from 'ngx-logger/testing';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { LoginService } from './login.service';
+import { LoggerTestingModule } from 'ngx-logger/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('LoginService', () => {
   let service: LoginService;

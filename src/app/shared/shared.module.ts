@@ -8,7 +8,7 @@ import {MaterialDesignModule} from './material-design/material-design.module';
 import {ShowHidePasswordModule} from 'ngx-show-hide-password';
 import {NoImagePipe} from './pipes/no-image.pipe';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { NavbarComponent } from './navbar/navbar.component';
+import {NavbarComponent} from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +28,7 @@ import { NavbarComponent } from './navbar/navbar.component';
   ],
   exports: [
     FooterComponent,
+    NavbarComponent,
     MaterialDesignModule,
     NoImagePipe,
     FormsModule,

@@ -1,10 +1,10 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import { Injectable, OnDestroy } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import jwt_decode from 'jwt-decode';
 import Swal from 'sweetalert2';
-import {Subscription} from 'rxjs';
-import {TranslateService} from '@ngx-translate/core';
-import {marker} from '@biesbjerg/ngx-translate-extract-marker';
+import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 
 const ERROR_TOKEN_INVALID = marker('error.token.invalid');
 

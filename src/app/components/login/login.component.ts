@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {NGXLogger} from 'ngx-logger';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { NGXLogger } from 'ngx-logger';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import {marker} from '@biesbjerg/ngx-translate-extract-marker';
-import {TranslateService} from '@ngx-translate/core';
-import {BaseComponent} from '../../core/base/base.component';
-import {LoginService} from '../../core/services/login.service';
-import {User} from '../../core/models/user';
-import {FormGroupUtil} from '../../core/utils/form-group-util';
-import {Router} from '@angular/router';
+import { marker } from '@biesbjerg/ngx-translate-extract-marker';
+import { TranslateService } from '@ngx-translate/core';
+import { BaseComponent } from '../../core/base/base.component';
+import { LoginService } from '../../core/services/login.service';
+import { User } from '../../core/models/user';
+import { FormGroupUtil } from '../../core/utils/form-group-util';
+import { Router } from '@angular/router';
 
 const ERROR_LOGIN_TITLE = marker('error.login.title');
 const ERROR_LOGIN_TEXT = marker('error.login.text');

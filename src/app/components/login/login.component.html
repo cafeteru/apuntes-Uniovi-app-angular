@@ -2,14 +2,14 @@
   <fieldset>
     <h1>{{'login.title' | translate}}</h1>
     <header class="head">
-      <img src="assets/img/logo-uniovi.png" alt="Logo"/>
+      <img [alt]="'logo.login' | translate" [src]="'assets/img/logo-uniovi.png' | noImage"/>
     </header>
     <form (ngSubmit)="login()" [formGroup]="formGroup">
       <div class="form-group">
         <mat-form-field>
           <mat-label>{{'login.username' | translate}}</mat-label>
-          <input matInput formControlName="username" id="username" required
-                 [placeholder]="'login.username' | translate">
+          <input [placeholder]="'login.username' | translate" formControlName="username" id="username" matInput
+                 required>
           <mat-error *ngIf="formGroup.controls.username.errors?.required">
             {{'username.error.required' | translate}}
           </mat-error>
@@ -17,19 +17,19 @@
       </div>
       <div class="form-group">
         <mat-form-field>
-          <input formControlName="password" id="password" matInput
-                 [placeholder]="'login.password' | translate"
-                 required="required" type="password" showHideInput/>
-          <i matSuffix class="material-icons material-design" showHideTrigger="password"
-             [showHideStatus]="{ materialIcon: true, id: 'password' }"></i>
+          <input [placeholder]="'login.password' | translate" formControlName="password" id="password"
+                 matInput
+                 required="required" showHideInput type="password"/>
+          <i [showHideStatus]="{ materialIcon: true, id: 'password' }" class="material-icons material-design" matSuffix
+             showHideTrigger="password"></i>
           <mat-error *ngIf="formGroup.controls.password.errors?.required">
             {{'password.error.required' | translate}}
           </mat-error>
         </mat-form-field>
       </div>
       <div class="submit">
-        <input class="btn btn-outline-info" id="logIn" type="submit" value="{{'login.button' | translate}}"
-               [disabled]="disable"/>
+        <input [disabled]="disable" class="btn btn-outline-info" id="logIn" type="submit"
+               value="{{'login.button' | translate}}"/>
       </div>
     </form>
   </fieldset>

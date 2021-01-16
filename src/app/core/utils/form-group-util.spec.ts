@@ -1,6 +1,6 @@
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import {FormGroupUtil} from './form-group-util';
+import { FormGroupUtil } from './form-group-util';
 
 describe('FormGroupUtil', () => {
   let formGroup: FormGroup;

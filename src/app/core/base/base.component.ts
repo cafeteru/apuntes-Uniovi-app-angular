@@ -16,14 +16,14 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.logger.debug(BaseComponent.name, 'ngOnInit()', 'start');
+    this.logger.debug(this.constructor.name, 'ngOnInit()', 'start');
     this.subscriptions = [];
-    this.logger.debug(BaseComponent.name, 'ngOnInit()', 'end');
+    this.logger.debug(this.constructor.name, 'ngOnInit()', 'end');
   }
 
   ngOnDestroy(): void {
-    this.logger.debug(BaseComponent.name, 'ngOnDestroy()', 'start');
+    this.logger.debug(this.constructor.name, 'ngOnDestroy()', 'start');
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
-    this.logger.debug(BaseComponent.name, 'ngOnDestroy()', 'end');
+    this.logger.debug(this.constructor.name, 'ngOnDestroy()', 'end');
   }
 }

@@ -8,8 +8,7 @@
       <div class="form-group">
         <mat-form-field>
           <mat-label>{{'login.username' | translate}}</mat-label>
-          <input [placeholder]="'login.username' | translate" formControlName="username" id="username" matInput
-                 required>
+          <input formControlName="username" id="username" matInput required>
           <mat-error *ngIf="formGroup.controls.username.errors?.required">
             {{'username.error.required' | translate}}
           </mat-error>
@@ -18,8 +17,7 @@
       <div class="form-group">
         <mat-form-field>
           <input [placeholder]="'login.password' | translate" formControlName="password" id="password"
-                 matInput
-                 required="required" showHideInput type="password"/>
+                 matInput required showHideInput type="password"/>
           <i [showHideStatus]="{ materialIcon: true, id: 'password' }" class="material-icons material-design" matSuffix
              showHideTrigger="password"></i>
           <mat-error *ngIf="formGroup.controls.password.errors?.required">
@@ -34,4 +32,3 @@
     </form>
   </fieldset>
 </article>
-<app-footer></app-footer>

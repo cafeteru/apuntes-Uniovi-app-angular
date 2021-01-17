@@ -5,6 +5,7 @@ import { LoggerTestingModule } from 'ngx-logger/testing';
 import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -19,7 +20,8 @@ describe('LoginComponent', () => {
         LoggerTestingModule,
         RouterTestingModule,
         CoreModule,
-        SharedModule
+        SharedModule,
+        BrowserAnimationsModule
       ]
     }).compileComponents();
   }));

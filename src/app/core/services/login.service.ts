@@ -15,11 +15,15 @@ interface IToken {
   username: string;
   role: string;
   id: number;
+  exp: number;
 }
 
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Service to identify users
+ */
 export class LoginService {
   private URL = `${environment.urlAPI}/login`;
 
@@ -38,19 +42,22 @@ export class LoginService {
    */
   login(user: User): Observable<void> {
     this.logger.debug(LoginService.name, `login(user: ${user.toString()})`, 'start');
-    localStorage.clear();
-    return this.http.post<ResponseLogin>(`${this.URL}`, user).pipe(
+    return this.http.post<ResponseLogin>(this.URL, user).pipe(
       map((res) => {
         const result = jwt_decode<IToken>(res.Authorization);
         localStorage.setItem('Authorization', res.Authorization);
         localStorage.setItem('username', result.username);
         localStorage.setItem('id', result.id.toString());
         localStorage.setItem('role', result.role);
+        localStorage.setItem('exp', result.exp.toString());
       }),
       tap(() => this.logger.debug(LoginService.name, `login(user: ${user.toString()})`, 'start'))
     );
   }
 
+  /**
+   * Delete logged user data
+   */
   logout(): void {
     this.logger.debug(LoginService.name, `logout()`, 'start');
     localStorage.clear();

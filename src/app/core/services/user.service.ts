@@ -15,6 +15,13 @@ import { Page } from '../models/page';
  */
 export class UserService {
   private URL = `${environment.urlAPI}/users`;
+  private httpOptions: {} = {
+    responseType: 'json',
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: localStorage.Authorization,
+    })
+  };
 
   constructor(
     private logger: NGXLogger,
@@ -24,22 +31,12 @@ export class UserService {
     this.logger.debug(UserService.name, 'constructor()', 'end');
   }
 
-  private static getOptions(): {} {
-    return {
-      responseType: 'json',
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: localStorage.Authorization,
-      })
-    };
-  }
-
   /**
    * Returns all users
    */
   findAll(): Observable<User[]> {
     this.logger.debug(UserService.name, `findAll()`, 'start');
-    return this.http.get<Page<User>>(this.URL, UserService.getOptions()).pipe(
+    return this.http.get<Page<User>>(this.URL, this.httpOptions).pipe(
       map((x) => x.content),
       tap(() => this.logger.debug(UserService.name, `findAll()`, 'start'))
     );

@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: 'users',
     loadChildren: () =>
-      import('./users/user.module').then(
+      import('./user/user.module').then(
         (u) => u.UserModule
       ),
     canActivate: [CheckValidTokenGuard]

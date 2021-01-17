@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UsersListComponent } from './users-list.component';
+import { UserListComponent } from './user-list.component';
 import { LoggerTestingModule } from 'ngx-logger/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('UsersListComponent', () => {
-  let component: UsersListComponent;
-  let fixture: ComponentFixture<UsersListComponent>;
+  let component: UserListComponent;
+  let fixture: ComponentFixture<UserListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        UsersListComponent
+        UserListComponent
       ],
       imports: [
         LoggerTestingModule,
@@ -22,7 +22,7 @@ describe('UsersListComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UsersListComponent);
+    fixture = TestBed.createComponent(UserListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

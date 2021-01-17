@@ -1,5 +1,5 @@
 /**
- * Represents users
+ * Represents user
  */
 export class User {
   id: number;

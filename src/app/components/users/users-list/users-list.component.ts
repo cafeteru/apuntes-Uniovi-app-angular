@@ -11,7 +11,7 @@ import { User } from '../../../core/models/user';
   styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent extends BaseComponent implements OnInit {
-  displayedColumns = ['name'];
+  displayedColumns = ['username', 'name', 'surname', 'role', 'actions'];
   dataSource = new MatTableDataSource<User>();
 
   constructor(

@@ -7,19 +7,16 @@ import { SharedModule } from './shared/shared.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
-import { FooterComponent } from './components/footer/footer.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { ComponentsModule } from './components/components.module';
 
 registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
-    NavbarComponent
   ],
   imports: [
     AppRoutingModule,
@@ -28,7 +25,8 @@ registerLocaleData(localeEs);
     CoreModule,
     SharedModule,
     SweetAlert2Module,
-    RouterModule
+    RouterModule,
+    ComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

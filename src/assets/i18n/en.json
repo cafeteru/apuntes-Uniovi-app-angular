@@ -10,6 +10,10 @@
 	"logo.navbar": "Logo of the University of Oviedo",
 	"logout": "Logout",
 	"password.error.required": "Password is required",
+	"user.name": "Name",
+	"user.role": "Role",
+	"user.surname": "Surname",
+	"user.username": "Username",
 	"username.error.required": "Username is required",
 	"users": "Users"
 }

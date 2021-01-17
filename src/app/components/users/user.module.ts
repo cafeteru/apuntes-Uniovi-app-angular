@@ -3,6 +3,7 @@ import { UsersListComponent } from './users-list/users-list.component';
 import { UserRoutingModule } from './user-routing.module';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
+import { CoreModule } from '../../core/core.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     UserRoutingModule,
     CommonModule,
-    SharedModule
+    SharedModule,
+    CoreModule
   ]
 })
 export class UserModule {

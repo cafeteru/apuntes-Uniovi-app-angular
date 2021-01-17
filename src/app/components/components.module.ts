@@ -7,11 +7,16 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialDesignModule } from '../shared/material-design/material-design.module';
 import { SharedModule } from '../shared/shared.module';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     MenuComponent,
+    NavbarComponent
+  ],
+  exports: [
+    NavbarComponent
   ],
   imports: [
     ComponentsRoutingModule,

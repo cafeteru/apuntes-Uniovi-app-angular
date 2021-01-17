@@ -3,10 +3,12 @@ import { MaterialDesignModule } from './material-design/material-design.module';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { NoImagePipe } from './pipes/no-image.pipe';
 import { TranslateModule } from '@ngx-translate/core';
+import { RoleTypePipe } from './pipes/role-type.pipe';
 
 @NgModule({
   declarations: [
     NoImagePipe,
+    RoleTypePipe,
   ],
   imports: [
     MaterialDesignModule,
@@ -16,7 +18,8 @@ import { TranslateModule } from '@ngx-translate/core';
     MaterialDesignModule,
     NoImagePipe,
     ShowHidePasswordModule,
-    TranslateModule
+    TranslateModule,
+    RoleTypePipe
   ]
 })
 export class SharedModule {

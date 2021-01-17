@@ -6,6 +6,9 @@ import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -15,13 +18,17 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         LoginComponent,
+        NavbarComponent
       ],
       imports: [
         LoggerTestingModule,
         RouterTestingModule,
         CoreModule,
         SharedModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        TranslateModule.forRoot(),
+        FormsModule,
+        ReactiveFormsModule,
       ]
     }).compileComponents();
   }));

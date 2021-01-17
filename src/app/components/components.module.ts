@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialDesignModule } from '../shared/material-design/material-design.module';
 import { SharedModule } from '../shared/shared.module';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
@@ -21,10 +22,10 @@ import { NavbarComponent } from './navbar/navbar.component';
   imports: [
     ComponentsRoutingModule,
     CommonModule,
-    TranslateModule,
     ReactiveFormsModule,
     MaterialDesignModule,
-    SharedModule
+    SharedModule,
+    CoreModule
   ]
 })
 export class ComponentsModule {

@@ -16,11 +16,11 @@ const routes: Routes = [
       ),
     canActivate: [CheckValidTokenGuard]
   },
-  {
-    path: '**',
-    redirectTo: '',
-    pathMatch: 'full'
-  }
+  // {
+  //   path: '**',
+  //   redirectTo: '',
+  //   pathMatch: 'full'
+  // }
 ];
 
 @NgModule({

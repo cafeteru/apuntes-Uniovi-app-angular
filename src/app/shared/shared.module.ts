@@ -11,12 +11,12 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     MaterialDesignModule,
     ShowHidePasswordModule,
-    TranslateModule
   ],
   exports: [
     MaterialDesignModule,
     NoImagePipe,
-    ShowHidePasswordModule
+    ShowHidePasswordModule,
+    TranslateModule
   ]
 })
 export class SharedModule {

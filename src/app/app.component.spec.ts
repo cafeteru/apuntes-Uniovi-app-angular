@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { LoggerTestingModule } from 'ngx-logger/testing';
 import { CoreModule } from './core/core.module';
-import { FooterComponent } from './shared/footer/footer.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { SharedModule } from './shared/shared.module';
 
 describe('AppComponent', () => {

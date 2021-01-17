@@ -1,19 +1,25 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
-import { CoreModule } from '../core/core.module';
-import { SharedModule } from '../shared/shared.module';
 import { MenuComponent } from './menu/menu.component';
+import { ComponentsRoutingModule } from './components-routing.module';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialDesignModule } from '../shared/material-design/material-design.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     LoginComponent,
-    MenuComponent
+    MenuComponent,
   ],
   imports: [
+    ComponentsRoutingModule,
     CommonModule,
-    CoreModule,
-    SharedModule,
+    TranslateModule,
+    ReactiveFormsModule,
+    MaterialDesignModule,
+    SharedModule
   ]
 })
 export class ComponentsModule {

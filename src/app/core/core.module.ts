@@ -9,7 +9,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
     HttpClientModule,
     LoggerModule.forRoot({
       level: NgxLoggerLevel.DEBUG,

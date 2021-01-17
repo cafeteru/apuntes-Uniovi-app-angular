@@ -1,3 +1,6 @@
+/**
+ * Represents users
+ */
 export class User {
   id: number;
   name: string;
@@ -13,6 +16,9 @@ export class User {
   identificationType: string;
   numberIdentification: string;
 
+  /**
+   * Create string from user data
+   */
   toString(): string {
     const user = {...this};
     delete user.password;

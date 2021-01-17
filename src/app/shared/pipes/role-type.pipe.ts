@@ -28,7 +28,7 @@ export class RoleTypePipe implements PipeTransform, OnDestroy {
       ROLE_TYPE_TEACHER,
       ROLE_TYPE_STUDENT
     ];
-    this.subscription = this.translateService.get(elements).subscribe(
+    this.subscription = this.translateService?.get(elements).subscribe(
       res => this.map = res
     );
   }
@@ -41,9 +41,8 @@ export class RoleTypePipe implements PipeTransform, OnDestroy {
         return this.map['role-type.teacher'];
       case RoleType.TEACHER:
         return this.map['role-type.student'];
-      default:
-        return '';
     }
+    return '';
   }
 
   ngOnDestroy(): void {

@@ -15,20 +15,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
       serverLogLevel: NgxLoggerLevel.ERROR,
       disableConsoleLogging: false
     }),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (http: HttpClient) => {
-          return new TranslateHttpLoader(http);
-        },
-        deps: [HttpClient]
-      },
-      defaultLanguage: 'es'
-    }),
   ],
   exports: [
-    LoggerModule,
-    TranslateModule
+    LoggerModule
   ]
 })
 export class CoreModule {

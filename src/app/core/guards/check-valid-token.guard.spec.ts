@@ -4,6 +4,7 @@ import { CheckValidTokenGuard } from './check-valid-token.guard';
 import { CoreModule } from '../core.module';
 import { SharedModule } from '../../shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('CheckValidTokenGuard', () => {
   let guard: CheckValidTokenGuard;
@@ -13,7 +14,8 @@ describe('CheckValidTokenGuard', () => {
       imports: [
         CoreModule,
         RouterTestingModule,
-        SharedModule
+        SharedModule,
+        TranslateModule.forRoot(),
       ]
     });
     guard = TestBed.inject(CheckValidTokenGuard);

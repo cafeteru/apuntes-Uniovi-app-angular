@@ -4,6 +4,8 @@ import { AppComponent } from './app.component';
 import { LoggerTestingModule } from 'ngx-logger/testing';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
@@ -12,10 +14,12 @@ describe('AppComponent', () => {
         RouterTestingModule,
         LoggerTestingModule,
         CoreModule,
-        SharedModule
+        SharedModule,
+        TranslateModule.forRoot(),
       ],
       declarations: [
         AppComponent,
+        NavbarComponent
       ]
     }).compileComponents();
   }));

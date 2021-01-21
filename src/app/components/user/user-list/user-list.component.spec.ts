@@ -1,28 +1,32 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UsersListComponent } from './users-list.component';
+import { UserListComponent } from './user-list.component';
 import { LoggerTestingModule } from 'ngx-logger/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MaterialDesignModule } from '../../../shared/material-design/material-design.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('UsersListComponent', () => {
-  let component: UsersListComponent;
-  let fixture: ComponentFixture<UsersListComponent>;
+  let component: UserListComponent;
+  let fixture: ComponentFixture<UserListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        UsersListComponent
+        UserListComponent
       ],
       imports: [
         LoggerTestingModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        MaterialDesignModule,
+        TranslateModule.forRoot(),
       ]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UsersListComponent);
+    fixture = TestBed.createComponent(UserListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

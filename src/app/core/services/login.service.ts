@@ -22,7 +22,7 @@ interface IToken {
   providedIn: 'root'
 })
 /**
- * Service to identify users
+ * Service to identify user
  */
 export class LoginService {
   private URL = `${environment.urlAPI}/login`;

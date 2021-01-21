@@ -11,6 +11,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './components/components.module';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 registerLocaleData(localeEs);
 
@@ -26,7 +29,17 @@ registerLocaleData(localeEs);
     SharedModule,
     SweetAlert2Module,
     RouterModule,
-    ComponentsModule
+    ComponentsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (http: HttpClient) => {
+          return new TranslateHttpLoader(http);
+        },
+        deps: [HttpClient]
+      },
+      defaultLanguage: 'es'
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

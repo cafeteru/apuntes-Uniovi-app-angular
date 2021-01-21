@@ -11,7 +11,7 @@ import { Page } from '../models/page';
   providedIn: 'root'
 })
 /**
- * Service to manage users
+ * Service to manage user
  */
 export class UserService {
   private URL = `${environment.urlAPI}/users`;
@@ -32,7 +32,7 @@ export class UserService {
   }
 
   /**
-   * Returns all users
+   * Returns all user
    */
   findAll(): Observable<User[]> {
     this.logger.debug(UserService.name, `findAll()`, 'start');

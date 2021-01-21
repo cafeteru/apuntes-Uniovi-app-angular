@@ -6,11 +6,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { User } from '../../../core/models/user';
 
 @Component({
-  selector: 'app-users-list',
-  templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.scss']
+  selector: 'app-user-list',
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.scss']
 })
-export class UsersListComponent extends BaseComponent implements OnInit {
+export class UserListComponent extends BaseComponent implements OnInit {
   displayedColumns = ['username', 'name', 'surname', 'role', 'actions'];
   dataSource = new MatTableDataSource<User>();
 
@@ -19,12 +19,12 @@ export class UsersListComponent extends BaseComponent implements OnInit {
     private userService: UserService
   ) {
     super(logger);
-    this.logger.debug(UsersListComponent.name, 'constructor()', 'start');
-    this.logger.debug(UsersListComponent.name, 'constructor()', 'end');
+    this.logger.debug(UserListComponent.name, 'constructor()', 'start');
+    this.logger.debug(UserListComponent.name, 'constructor()', 'end');
   }
 
   ngOnInit(): void {
-    this.logger.debug(UsersListComponent.name, 'ngOnInit()', 'start');
+    this.logger.debug(UserListComponent.name, 'ngOnInit()', 'start');
     this.subscriptions.push(
       this.userService.findAll().subscribe(
         res => {
@@ -32,7 +32,7 @@ export class UsersListComponent extends BaseComponent implements OnInit {
         }
       )
     );
-    this.logger.debug(UsersListComponent.name, 'ngOnInit()', 'end');
+    this.logger.debug(UserListComponent.name, 'ngOnInit()', 'end');
   }
 
 }

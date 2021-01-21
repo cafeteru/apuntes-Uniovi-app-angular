@@ -5,6 +5,7 @@ import { LoggerTestingModule } from 'ngx-logger/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -19,7 +20,8 @@ describe('NavbarComponent', () => {
         LoggerTestingModule,
         RouterTestingModule,
         CoreModule,
-        SharedModule
+        SharedModule,
+        TranslateModule.forRoot(),
       ]
     })
       .compileComponents();

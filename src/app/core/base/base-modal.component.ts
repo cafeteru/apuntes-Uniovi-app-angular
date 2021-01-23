@@ -15,6 +15,10 @@ const ERROR_SERVICE_TEXT = marker('error.modal.service.text');
 const BTN_ADD = marker('buttons.add');
 const BTN_UPDATE = marker('buttons.update');
 
+interface ErrorResponse {
+  error: string;
+}
+
 @Component({
   template: ''
 })
@@ -64,7 +68,8 @@ export abstract class BaseModalComponent<T, U> extends BaseComponent implements 
           (res) => {
             this.closeModal(res);
           },
-          (error) => {
+          (error: ErrorResponse) => {
+            // TODO add error back
             this.showAlert(ERROR_SERVICE_TITLE, ERROR_SERVICE_TEXT, 'error');
             this.logger.debug(BaseModalComponent.name, `saveOrUpdate()`, error);
           }

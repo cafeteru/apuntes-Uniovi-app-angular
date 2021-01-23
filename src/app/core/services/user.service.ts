@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { NGXLogger } from 'ngx-logger';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -37,12 +37,20 @@ export class UserService {
   findAll(): Observable<User[]> {
     this.logger.debug(UserService.name, `findAll()`, 'start');
     return this.http.get<Page<User>>(this.URL, this.httpOptions).pipe(
-      map((x) => x.content),
-      tap(() => this.logger.debug(UserService.name, `findAll()`, 'start'))
+      map((page) => page.content),
+      tap(() => this.logger.debug(UserService.name, `findAll()`, 'end'))
     );
   }
 
+  /**
+   * Save a user
+   *
+   * @param user User to save
+   */
   save(user: User): Observable<User> {
-    return this.http.post<User>(`${this.URL}/create`, user, this.httpOptions);
+    this.logger.debug(UserService.name, `save(user: ${user})`, 'start');
+    return this.http.post<User>(`${this.URL}/create`, user, this.httpOptions).pipe(
+      tap(() => this.logger.debug(UserService.name, `save(user: ${user})`, 'end'))
+    );
   }
 }

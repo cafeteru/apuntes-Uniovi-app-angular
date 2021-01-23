@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../core/base/base.component';
@@ -24,11 +23,11 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   constructor(
     protected logger: NGXLogger,
+    protected translateService: TranslateService,
     private router: Router,
-    private translateService: TranslateService,
     private loginService: LoginService
   ) {
-    super(logger);
+    super(logger, translateService);
     this.logger.debug(LoginComponent.name, 'constructor()', 'start');
     this.logger.debug(LoginComponent.name, 'constructor()', 'end');
   }
@@ -45,30 +44,31 @@ export class LoginComponent extends BaseComponent implements OnInit {
   }
 
   login(): void {
+    this.logger.debug(LoginComponent.name, 'login()', 'start');
     if (FormGroupUtil.valid(this.formGroup)) {
-      this.disable = true;
+      this.changeDisable();
       const user = new User();
       user.username = this.formGroup.controls.username.value;
       user.password = this.formGroup.controls.password.value;
-      this.loginService.login(user).subscribe(
-        () => {
-          this.router.navigateByUrl('/menu').then();
-        },
-        () => {
-          this.subscriptions.push(
-            this.translateService.get([ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT]).subscribe(
-              res => {
-                this.disable = false;
-                Swal.fire({
-                  icon: 'error',
-                  title: (res[ERROR_LOGIN_TITLE]),
-                  text: (res[ERROR_LOGIN_TEXT])
-                }).then();
-              }
-            )
-          );
-        }
+      this.subscriptions.push(
+        this.loginService.login(user).subscribe(
+          () => {
+            this.router.navigateByUrl('/menu').then();
+            this.logger.debug(LoginComponent.name, 'login()', 'end');
+          },
+          () => {
+            this.showAlert(ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT, 'error',
+              () => this.changeDisable());
+            this.logger.error(LoginComponent.name, 'login()', 'error');
+          },
+        )
       );
+      return;
     }
+    this.logger.debug(LoginComponent.name, 'ngOnInit()', 'end');
+  }
+
+  changeDisable(): void {
+    this.disable = !this.disable;
   }
 }

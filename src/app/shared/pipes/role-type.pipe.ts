@@ -33,7 +33,7 @@ export class RoleTypePipe implements PipeTransform, OnDestroy {
     );
   }
 
-  transform(value: RoleType): unknown {
+  transform(value: RoleType | string): string {
     switch (value) {
       case RoleType.ADMIN:
         return this.map['role-type.admin'];

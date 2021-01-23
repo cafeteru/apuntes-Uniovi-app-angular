@@ -4,6 +4,10 @@ import { NGXLogger } from 'ngx-logger';
 import { UserService } from '../../../core/services/user.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { User } from '../../../core/models/user';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalUserComponent } from '../add-user/modal-user.component';
+import { GLOBAL_CONSTANTS } from '../../../core/utils/global-constants';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-list',
@@ -16,9 +20,11 @@ export class UserListComponent extends BaseComponent implements OnInit {
 
   constructor(
     protected logger: NGXLogger,
-    private userService: UserService
+    protected translateService: TranslateService,
+    private userService: UserService,
+    public dialog: MatDialog
   ) {
-    super(logger);
+    super(logger, translateService);
     this.logger.debug(UserListComponent.name, 'constructor()', 'start');
     this.logger.debug(UserListComponent.name, 'constructor()', 'end');
   }
@@ -35,4 +41,19 @@ export class UserListComponent extends BaseComponent implements OnInit {
     this.logger.debug(UserListComponent.name, 'ngOnInit()', 'end');
   }
 
+  openModal(): void {
+    this.logger.debug(UserListComponent.name, `openModal()`, 'start');
+    const data = new User();
+    const config = {
+      width: GLOBAL_CONSTANTS.maxWidthModal,
+      maxHeight: GLOBAL_CONSTANTS.maxHeightModal,
+      data
+    };
+    const dialogRef = this.dialog.open(ModalUserComponent, config);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.ngOnInit();
+      }
+    });
+  };
 }

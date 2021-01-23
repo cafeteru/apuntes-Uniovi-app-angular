@@ -1,0 +1,55 @@
+<header class="modal-header-material">
+  <h1 mat-dialog-title>{{ title | translate}}
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </h1>
+</header>
+<form [formGroup]="formGroup">
+  <section class="form-group row">
+    <mat-form-field class="col">
+      <input id="surname" matInput formControlName="surname" placeholder="{{'user.surname' | translate}}"
+             type="text" cdkFocusInitial>
+    </mat-form-field>
+    <mat-form-field class="col">
+      <input matInput formControlName="name" placeholder="{{'user.name' | translate}}"
+             id="name" type="text">
+    </mat-form-field>
+  </section>
+  <section class="row form-group">
+    <mat-form-field class="col">
+      <mat-label>{{'user.identificationType' | translate}}</mat-label>
+      <mat-select formControlName="identificationType" (ngModelChange)="validNumberIdentification()">
+        <mat-option [value]="undefined">{{'user.role-type.undefined' | translate}}</mat-option>
+        <mat-option *ngFor="let role of RoleType" [value]="role">{{role | roleType}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col">
+      <input #numberIdentification id="numberIdentification" matInput
+             maxlength="9" formControlName="numberIdentification"
+             [placeholder]="'user.numberIdentification' | translate"
+             type="text">
+      <mat-hint align="end">{{numberIdentification.value.length}} / 9</mat-hint>
+    </mat-form-field>
+  </section>
+  <section class="form-group row">
+    <mat-form-field class="col">
+      <input formControlName="username" id="username" name="username" matInput
+             placeholder="{{'user.username' | translate}}"
+             required/>
+    </mat-form-field>
+    <mat-form-field class="col">
+      <input formControlName="password" id="password" name="password" matInput
+             placeholder="{{'user.password' | translate}}" type="password" showHideInput/>
+      <i matSuffix class="material-icons" [showHideStatus]="{ materialIcon: true, id: 'password' }"
+         showHideTrigger="password"></i>
+    </mat-form-field>
+  </section>
+  <div class="row form-group">
+    <mat-checkbox class="col" formControlName="active">{{'user.active' | translate}}</mat-checkbox>
+  </div>
+  <section class="float-right modal-buttons">
+    <button class="btn btn-outline-success" id="add" (click)="saveOrUpdate()">Guardar</button>
+    <button class="btn btn-outline-danger" id="cancel" (click)="closeModal()" type="button">Cancelar</button>
+  </section>
+</form>

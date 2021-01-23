@@ -41,4 +41,8 @@ export class UserService {
       tap(() => this.logger.debug(UserService.name, `findAll()`, 'start'))
     );
   }
+
+  save(user: User): Observable<User> {
+    return this.http.post<User>(`${this.URL}/create`, user, this.httpOptions);
+  }
 }

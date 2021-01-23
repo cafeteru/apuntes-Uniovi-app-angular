@@ -1,13 +1,8 @@
+import { RoleType } from './types/role-type';
+
 /**
  * Represents user
  */
-import { RoleType } from './types/role-type';
-import { marker } from '@biesbjerg/ngx-translate-extract-marker';
-
-const ROLE_TYPE_ADMIN = marker('role-type.admin');
-const ROLE_TYPE_TEACHER = marker('role-type.teacher');
-const ROLE_TYPE_STUDENT = marker('role-type.student');
-
 export class User {
   id: number;
   name: string;
@@ -23,6 +18,10 @@ export class User {
   identificationType: string;
   numberIdentification: string;
 
+  constructor() {
+    this.active = true;
+  }
+
   /**
    * Create string from user data
    */
@@ -30,18 +29,5 @@ export class User {
     const user = {...this};
     delete user.password;
     return JSON.stringify(user);
-  }
-
-  getRoleName(): string {
-    switch (this.role) {
-      case RoleType.ADMIN:
-        return ROLE_TYPE_ADMIN;
-      case RoleType.STUDENT:
-        return ROLE_TYPE_STUDENT;
-      case RoleType.TEACHER:
-        return ROLE_TYPE_TEACHER;
-      default:
-        return '';
-    }
   }
 }

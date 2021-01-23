@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../../core/base/base.component';
 import { NGXLogger } from 'ngx-logger';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-menu',
@@ -11,8 +12,9 @@ export class MenuComponent extends BaseComponent implements OnInit {
 
   constructor(
     protected logger: NGXLogger,
+    protected translateService: TranslateService,
   ) {
-    super(logger);
+    super(logger, translateService);
     this.logger.debug(MenuComponent.name, 'constructor()', 'start');
     this.logger.debug(MenuComponent.name, 'constructor()', 'end');
   }

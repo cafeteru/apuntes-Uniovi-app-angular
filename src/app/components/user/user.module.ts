@@ -7,10 +7,12 @@ import { CoreModule } from '../../core/core.module';
 import { ComponentsRoutingModule } from '../components-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialDesignModule } from '../../shared/material-design/material-design.module';
+import { ModalUserComponent } from './add-user/modal-user.component';
 
 @NgModule({
   declarations: [
-    UserListComponent
+    UserListComponent,
+    ModalUserComponent
   ],
   imports: [
     UserRoutingModule,

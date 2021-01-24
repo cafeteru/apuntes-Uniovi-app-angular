@@ -1,4 +1,6 @@
-<button (click)="openModal()">{{'buttons.add' | translate}}</button>
+<div id="filter-buttons" class="form-group">
+  <button (click)="openModal()" class="btn btn-outline-success" id="addStation">{{'buttons.add' | translate}}</button>
+</div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="users-list">
   <!-- Username Column -->
   <ng-container matColumnDef="username">

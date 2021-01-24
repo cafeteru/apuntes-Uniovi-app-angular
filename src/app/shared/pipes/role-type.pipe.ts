@@ -1,5 +1,5 @@
 import { OnDestroy, Pipe, PipeTransform } from '@angular/core';
-import { RoleType } from '../../core/models/types/role-type';
+import { RoleType } from '../../core/models/enums/role-type';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';

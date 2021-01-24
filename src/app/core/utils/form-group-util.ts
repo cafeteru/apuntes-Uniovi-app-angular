@@ -88,13 +88,13 @@ export class FormGroupUtil {
   }
 
   /**
-   * Devuelve el valor de un dato concreto de un formGroup.
-   * Si no existe el dato devuelve null
+   * Returns the value of a specific data from a formGroup.
+   * If the data does not exist, it returns null
    *
-   * @param formGroup FormGroup a comprobar
-   * @param key Identificador del dato
+   * @param formGroup FormGroup to check
+   * @param key Identifier of the data
    *
-   * @returns El dato concreto solicitado
+   * @returns The specific data requested
    */
   static getValue(formGroup: FormGroup, key: string): any {
     if (formGroup) {
@@ -109,11 +109,11 @@ export class FormGroupUtil {
   }
 
   /**
-   * Cambia el valor de un dato concreto de un formGroup
+   * Change the value of a specific data in a formGroup
    *
-   * @param formGroup FormGroup a comprobar
-   * @param key Identificador del dato
-   * @param value Nuevo valor
+   * @param formGroup FormGroup to check
+   * @param key Identifier of the data
+   * @param value New value
    */
   static setValue(formGroup: FormGroup, key: string, value: any): void {
     if (formGroup) {
@@ -129,12 +129,12 @@ export class FormGroupUtil {
   }
 
   /**
-   * Cambia los validadores a un dato concreto de un formGroup
+   * Change the validators to a specific data of a formGroup
    *
-   * @param formGroup FormGroup a comprobar
-   * @param key Identificador del dato
-   * @param validator Lista de validadores
-   * @param initValue Valor inicial del dato
+   * @param formGroup FormGroup to check
+   * @param key Identifier of the data
+   * @param validator List of validators
+   * @param initValue Initial value of the data
    */
   static changeValidator(formGroup: FormGroup, key: string, validator: ValidatorFn[], initValue?: any): void {
     if (formGroup) {
@@ -150,11 +150,11 @@ export class FormGroupUtil {
   }
 
   /**
-   * Añade un nuevo dato a un formGroup
+   * Add a new data to a formGroup
    *
-   * @param formGroup FormGroup a comprobar
-   * @param key Identificador del dato
-   * @param formControl Nuevo valor
+   * @param formGroup FormGroup to check
+   * @param key Identifier of the data
+   * @param formControl New value
    */
   static addFormControl(formGroup: FormGroup, key: string, formControl: FormControl): void {
     if (formGroup) {
@@ -168,8 +168,9 @@ export class FormGroupUtil {
     }
   }
 
+
   /**
-   * Limpia todos los campos del formGroup
+   * Clear all fields from the formGroup
    *
    * @param formGroup Formgroup
    */
@@ -185,11 +186,27 @@ export class FormGroupUtil {
   }
 
   /**
-   * Devuelve el mensaje de error cuando no se encuentra un formControl
+   * Returns the error message when a formControl is not found
    *
-   * @param key identificador del formControl
+   * @param key identifier of the formControl
    */
   private static getErrorKey(key: string): string {
-    return `No existe el valor ${key} dentro del formGroup`;
+    return `There is no ${key} value inside the formGroup`;
+  }
+
+  /**
+   * Delete a error
+   *
+   * @param abstractControl Field of form
+   * @param error Name of error
+   */
+  static deleteError(abstractControl: AbstractControl, error: string): void {
+    if (abstractControl) {
+      if (abstractControl.errors) {
+        delete abstractControl.errors[error];
+      } else {
+        abstractControl.setErrors(null);
+      }
+    }
   }
 }

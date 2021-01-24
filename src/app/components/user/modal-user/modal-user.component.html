@@ -1,0 +1,113 @@
+<header class="modal-header-material">
+  <h1 mat-dialog-title>{{ title | translate}}
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </h1>
+</header>
+<form [formGroup]="formGroup">
+  <section class="form-group row">
+    <mat-form-field class="col">
+      <input id="surname" matInput formControlName="surname" placeholder="{{'user.surname' | translate}}"
+             cdkFocusInitial>
+    </mat-form-field>
+    <mat-form-field class="col">
+      <input matInput formControlName="name" placeholder="{{'user.name' | translate}}"
+             id="name">
+    </mat-form-field>
+  </section>
+  <section class="form-group row">
+    <mat-form-field class="col">
+      <input id="email" matInput formControlName="email" placeholder="{{'user.email' | translate}}"
+             type="email" email>
+      <mat-error *ngIf="formGroup.controls.email.errors?.email">
+        {{'user.email.error.email' | translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col">
+      <input #phone matInput formControlName="phone" placeholder="{{'user.phone' | translate}}"
+             id="phone">
+      <mat-hint align="end">{{phone.value.length}} / 9</mat-hint>
+      <mat-error *ngIf="formGroup.controls.phone.errors?.phone">
+        {{'user.phone.error.phone' | translate}}
+      </mat-error>
+    </mat-form-field>
+  </section>
+  <section class="form-group row">
+    <mat-form-field class="col">
+      <mat-label>{{'user.birthDate' | translate}}</mat-label>
+      <input id="birthDate" matInput formControlName="birthDate" [matDatepicker]="birthDate">
+      <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
+      <mat-datepicker #birthDate startView="multi-year"></mat-datepicker>
+      <mat-error *ngIf="formGroup.controls.birthDate.errors?.maxDate">
+        {{'user.birthDate.error.maxDate' | translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col">
+      <mat-label>{{'user.role' | translate}}</mat-label>
+      <mat-select formControlName="role" required>
+        <mat-option [value]="undefined">{{'enum.undefined' | translate}}</mat-option>
+        <mat-option *ngFor="let role of RoleType" [value]="role">{{role | roleType}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formGroup.controls.role.errors?.required">
+        {{'user.role.error.required' | translate}}
+      </mat-error>
+    </mat-form-field>
+  </section>
+  <section class="row form-group">
+    <mat-form-field class="col">
+      <mat-label>{{'user.identificationType' | translate}}</mat-label>
+      <mat-select formControlName="identificationType" [required]="isRequiredIdentificationType()">
+        <mat-option [value]="undefined">{{'enum.undefined' | translate}}</mat-option>
+        <mat-option *ngFor="let type of IdentificationType" [value]="type">{{type}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formGroup.controls.identificationType.errors?.required">
+        {{'user.identificationType.error.required' | translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col">
+      <input #numberIdentification id="numberIdentification" matInput formControlName="numberIdentification"
+             [placeholder]="'user.numberIdentification' | translate">
+      <mat-hint align="end">{{numberIdentification.value.length}} / 9</mat-hint>
+      <mat-error *ngIf="formGroup.controls.numberIdentification.errors?.wrongLetter">
+        {{'user.numberIdentification.error.wrongLetter' | translate}}
+      </mat-error>
+      <mat-error *ngIf="formGroup.controls.numberIdentification.errors?.formatNoValid">
+        {{'user.numberIdentification.error.formatNoValid' | translate}}
+      </mat-error>
+    </mat-form-field>
+  </section>
+  <section class="form-group row">
+    <mat-form-field class="col">
+      <input formControlName="username" id="username" name="username" matInput
+             placeholder="{{'user.username' | translate}}" required/>
+      <mat-error *ngIf="formGroup.controls.username.errors?.required">
+        {{'user.username.error.required' | translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col">
+      <input formControlName="password" id="password" name="password" matInput required
+             placeholder="{{'user.password' | translate}}" type="password" showHideInput/>
+      <i matSuffix class="material-icons" [showHideStatus]="{ materialIcon: true, id: 'password' }"
+         showHideTrigger="password"></i>
+      <mat-error *ngIf="formGroup.controls.password.errors?.required">
+        {{'user.password.error.required' | translate}}
+      </mat-error>
+    </mat-form-field>
+  </section>
+  <div class="row form-group">
+    <!--    TODO ADDRESS -->
+    <!--    <input formControlName="address" id="address" name="address" matInput-->
+    <!--           placeholder="{{'user.address' | translate}}" required/>-->
+  </div>
+  <div class="row form-group">
+    <input formControlName="img" id="img" name="img" matInput placeholder="{{'user.img' | translate}}"/>
+  </div>
+  <div class="row form-group">
+    <mat-checkbox class="col" formControlName="active" id="active">{{'user.active' | translate}}</mat-checkbox>
+  </div>
+  <section class="float-right modal-buttons">
+    <button class="btn btn-outline-success" id="add" (click)="saveOrUpdate()">Guardar</button>
+    <button class="btn btn-outline-danger" id="cancel" (click)="closeModal()" type="button">Cancelar</button>
+  </section>
+</form>

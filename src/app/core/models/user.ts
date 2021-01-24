@@ -1,7 +1,8 @@
-import { RoleType } from './types/role-type';
+import { RoleType } from './enums/role-type';
+import { Address } from './address';
 
 /**
- * Represents user
+ * Represents users
  */
 export class User {
   id: number;
@@ -17,9 +18,11 @@ export class User {
   role: RoleType;
   identificationType: string;
   numberIdentification: string;
+  address: Address;
 
   constructor() {
     this.active = true;
+    this.address = new Address();
   }
 
   /**

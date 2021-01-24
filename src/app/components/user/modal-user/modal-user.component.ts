@@ -6,9 +6,13 @@ import { BaseModalComponent } from '../../../core/base/base-modal.component';
 import { TranslateService } from '@ngx-translate/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
-import { RoleType } from '../../../core/models/types/role-type';
+import { RoleType } from '../../../core/models/enums/role-type';
 import { Observable, of } from 'rxjs';
 import { UserService } from '../../../core/services/user.service';
+import { IdentificationType } from '../../../core/models/enums/identification-type';
+import { ValidatorPhone } from '../../../core/validators/validator-phone';
+import { ValidatorMaxDate } from '../../../core/validators/validator-max-date';
+import { ValidatorNumberIdentification } from '../../../core/validators/validator-number-identification';
 
 const TITLE_ADD = marker('modal.user.title.add');
 const TITLE_UPDATE = marker('modal.user.title.update');
@@ -19,6 +23,7 @@ const TITLE_UPDATE = marker('modal.user.title.update');
 })
 export class ModalUserComponent extends BaseModalComponent<User, ModalUserComponent> implements OnInit {
   RoleType = Object.keys(RoleType);
+  IdentificationType = Object.keys(IdentificationType);
 
   constructor(
     protected logger: NGXLogger,
@@ -53,19 +58,22 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
   protected getFormGroup(): FormGroup {
     this.logger.debug(BaseModalComponent.name, 'getFormGroup()', 'start');
     const formGroup = new FormGroup({
-      name: new FormControl(this.user.name),
-      surname: new FormControl(this.user.surname),
-      email: new FormControl(this.user.email),
-      phone: new FormControl(this.user.phone),
-      active: new FormControl(this.user.active),
-      img: new FormControl(this.user.name),
-      birthDate: new FormControl(this.user.birthDate),
-      username: new FormControl(this.user.username, [Validators.required]),
-      password: new FormControl(this.user.password, [Validators.required]),
-      role: new FormControl(this.user.role),
-      identificationType: new FormControl(this.user.identificationType),
-      numberIdentification: new FormControl(this.user.numberIdentification),
-    });
+        surname: new FormControl(this.user.surname),
+        name: new FormControl(this.user.name),
+        email: new FormControl(this.user.email),
+        phone: new FormControl(this.user.phone, [ValidatorPhone.isValid()]),
+        birthDate: new FormControl(this.user.birthDate, [ValidatorMaxDate.isValid(new Date())]),
+        role: new FormControl(this.user.role, [Validators.required]),
+        username: new FormControl(this.user.username, [Validators.required]),
+        password: new FormControl(this.user.password, [Validators.required]),
+        identificationType: new FormControl(this.user.identificationType),
+        numberIdentification: new FormControl(this.user.numberIdentification),
+        img: new FormControl(this.user.name),
+        active: new FormControl(this.user.active),
+      },
+      {
+        validators: [ValidatorNumberIdentification.isValid()]
+      });
     this.logger.debug(BaseModalComponent.name, 'getFormGroup()', 'end');
     return formGroup;
   }
@@ -78,14 +86,17 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
     return this.isSaveOrUpdate() ? TITLE_UPDATE : TITLE_ADD;
   }
 
-  validNumberIdentification(): void {
-
-  }
-
   protected saveOrUpdateService(data: User): Observable<User> {
     if (this.isSaveOrUpdate()) {
       return of();
     }
     return this.userService.save(this.user);
+  }
+
+  /**
+   * Indicate if identificationType is required
+   */
+  isRequiredIdentificationType(): boolean {
+    return Boolean(this.formGroup.get('numberIdentification').value);
   }
 }

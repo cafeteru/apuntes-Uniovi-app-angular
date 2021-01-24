@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { TestUtils } from '../../core/utils/TestUtils';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -26,7 +27,7 @@ describe('LoginComponent', () => {
         CoreModule,
         SharedModule,
         BrowserAnimationsModule,
-        TranslateModule.forRoot(),
+        TestUtils.getLanguages(),
         FormsModule,
         ReactiveFormsModule,
       ]

@@ -5,7 +5,7 @@ import { UserService } from '../../../core/services/user.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { User } from '../../../core/models/user';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalUserComponent } from '../add-user/modal-user.component';
+import { ModalUserComponent } from '../modal-user/modal-user.component';
 import { GLOBAL_CONSTANTS } from '../../../core/utils/global-constants';
 import { TranslateService } from '@ngx-translate/core';
 

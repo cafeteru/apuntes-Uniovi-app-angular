@@ -13,6 +13,7 @@ import { IdentificationType } from '../../../core/models/enums/identification-ty
 import { ValidatorPhone } from '../../../core/validators/validator-phone';
 import { ValidatorMaxDate } from '../../../core/validators/validator-max-date';
 import { ValidatorNumberIdentification } from '../../../core/validators/validator-number-identification';
+import { UserMessages } from '../../../shared/messages/user-messages';
 
 const TITLE_ADD = marker('modal.user.title.add');
 const TITLE_UPDATE = marker('modal.user.title.update');
@@ -51,6 +52,9 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
     this.user.role = this.formGroup.get('role').value;
     this.user.identificationType = this.formGroup.get('identificationType').value;
     this.user.numberIdentification = this.formGroup.get('numberIdentification').value;
+    this.user.address.street = this.formGroup.get('street').value;
+    this.user.address.city = this.formGroup.get('city').value;
+    this.user.address.postalCode = this.formGroup.get('postalCode').value;
     this.logger.debug(BaseModalComponent.name, 'getFormGroup()', 'start');
     return this.user;
   }
@@ -68,6 +72,9 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
         password: new FormControl(this.user.password, [Validators.required]),
         identificationType: new FormControl(this.user.identificationType),
         numberIdentification: new FormControl(this.user.numberIdentification),
+        street: new FormControl(this.user.address.street),
+        city: new FormControl(this.user.address.city),
+        postalCode: new FormControl(this.user.address.postalCode),
         img: new FormControl(this.user.name),
         active: new FormControl(this.user.active),
       },
@@ -93,10 +100,33 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
     return this.userService.save(this.user);
   }
 
+  protected getMessageErrorBack(key: string): string {
+    return UserMessages[key];
+  }
+
   /**
    * Indicate if identificationType is required
    */
   isRequiredIdentificationType(): boolean {
     return Boolean(this.formGroup.get('numberIdentification').value);
+  }
+
+  /**
+   * Read and check a photo
+   *
+   * @param $event File with the photo
+   */
+  readPhoto($event: any): void {
+    const file = $event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (file.type.includes('image')) {
+        this.formGroup.get('img').setValue(reader.result);
+        console.warn(this.formGroup.get('img').value.length);
+      } else {
+        alert('Tiene que ser una imagen');
+      }
+    };
+    reader.readAsDataURL(file);
   }
 }

@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../../core/models/user';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { TestUtils } from '../../../core/utils/TestUtils';
+import { TestUtils } from '../../../core/utils/test-utils';
 
 describe('AddUserComponent', () => {
   let component: ModalUserComponent;

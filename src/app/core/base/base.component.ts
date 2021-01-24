@@ -31,13 +31,17 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
   }
 
   showAlert(title: string, text: string, icon: SweetAlertIcon, action?: () => void): void {
+    this.showAlertBack(title, text, icon, undefined, action);
+  }
+
+  showAlertBack(title: string, text: string, icon: SweetAlertIcon, errorBack: string, action?: () => void): void {
     this.subscriptions.push(
-      this.translateService.get([title, text]).subscribe(
+      this.translateService.get([title, text].concat(errorBack)).subscribe(
         res => {
           Swal.fire({
             icon,
             title: (res[title]),
-            text: (res[text])
+            html: errorBack ? `<div>${res[text]}<br/>${res[errorBack]}</div>` : `<div>${res[text]}</div>`
           }).then(
             () => {
               if (action) {

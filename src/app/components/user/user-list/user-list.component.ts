@@ -55,5 +55,5 @@ export class UserListComponent extends BaseComponent implements OnInit {
         this.ngOnInit();
       }
     });
-  };
+  }
 }

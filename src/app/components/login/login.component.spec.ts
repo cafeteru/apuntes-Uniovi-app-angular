@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { TestUtils } from '../../core/utils/TestUtils';
+import { TestUtils } from '../../core/utils/test-utils';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

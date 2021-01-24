@@ -21,7 +21,7 @@
       <input id="email" matInput formControlName="email" placeholder="{{'user.email' | translate}}"
              type="email" email>
       <mat-error *ngIf="formGroup.controls.email.errors?.email">
-        {{'user.email.error.email' | translate}}
+        {{'error.user.invalid.email' | translate}}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
@@ -29,7 +29,7 @@
              id="phone">
       <mat-hint align="end">{{phone.value.length}} / 9</mat-hint>
       <mat-error *ngIf="formGroup.controls.phone.errors?.phone">
-        {{'user.phone.error.phone' | translate}}
+        {{'error.user.invalid.phone' | translate}}
       </mat-error>
     </mat-form-field>
   </section>
@@ -40,7 +40,7 @@
       <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
       <mat-datepicker #birthDate startView="multi-year"></mat-datepicker>
       <mat-error *ngIf="formGroup.controls.birthDate.errors?.maxDate">
-        {{'user.birthDate.error.maxDate' | translate}}
+        {{'error.user.max-date.birthDate' | translate}}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
@@ -50,7 +50,7 @@
         <mat-option *ngFor="let role of RoleType" [value]="role">{{role | roleType}}</mat-option>
       </mat-select>
       <mat-error *ngIf="formGroup.controls.role.errors?.required">
-        {{'user.role.error.required' | translate}}
+        {{'error.user.required.role' | translate}}
       </mat-error>
     </mat-form-field>
   </section>
@@ -62,7 +62,7 @@
         <mat-option *ngFor="let type of IdentificationType" [value]="type">{{type}}</mat-option>
       </mat-select>
       <mat-error *ngIf="formGroup.controls.identificationType.errors?.required">
-        {{'user.identificationType.error.required' | translate}}
+        {{'error.user.required.identificationType' | translate}}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
@@ -70,10 +70,10 @@
              [placeholder]="'user.numberIdentification' | translate">
       <mat-hint align="end">{{numberIdentification.value.length}} / 9</mat-hint>
       <mat-error *ngIf="formGroup.controls.numberIdentification.errors?.wrongLetter">
-        {{'user.numberIdentification.error.wrongLetter' | translate}}
+        {{'error.user.wrong-letter.numberIdentification' | translate}}
       </mat-error>
       <mat-error *ngIf="formGroup.controls.numberIdentification.errors?.formatNoValid">
-        {{'user.numberIdentification.error.formatNoValid' | translate}}
+        {{'error.user.formatNoValid.numberIdentification' | translate}}
       </mat-error>
     </mat-form-field>
   </section>
@@ -82,7 +82,7 @@
       <input formControlName="username" id="username" name="username" matInput
              placeholder="{{'user.username' | translate}}" required/>
       <mat-error *ngIf="formGroup.controls.username.errors?.required">
-        {{'user.username.error.required' | translate}}
+        {{'error.user.required.username' | translate}}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
@@ -91,17 +91,32 @@
       <i matSuffix class="material-icons" [showHideStatus]="{ materialIcon: true, id: 'password' }"
          showHideTrigger="password"></i>
       <mat-error *ngIf="formGroup.controls.password.errors?.required">
-        {{'user.password.error.required' | translate}}
+        {{'error.user.required.password' | translate}}
       </mat-error>
     </mat-form-field>
   </section>
   <div class="row form-group">
-    <!--    TODO ADDRESS -->
-    <!--    <input formControlName="address" id="address" name="address" matInput-->
-    <!--           placeholder="{{'user.address' | translate}}" required/>-->
+    <mat-form-field class="col">
+      <input matInput formControlName="street" id="street" name="street"
+             placeholder="{{'user.address.street' | translate}}"/>
+    </mat-form-field>
   </div>
   <div class="row form-group">
-    <input formControlName="img" id="img" name="img" matInput placeholder="{{'user.img' | translate}}"/>
+    <mat-form-field class="col">
+      <input matInput formControlName="city" id="city" name="city"
+             placeholder="{{'user.address.city' | translate}}"/>
+    </mat-form-field>
+    <mat-form-field class="col">
+      <input matInput formControlName="postalCode" id="postalCode" name="postalCode"
+             placeholder="{{'user.address.postalCode' | translate}}"/>
+    </mat-form-field>
+  </div>
+  <div class="row form-group">
+    <div class="col">
+      <label for="file">{{'user.img' | translate}}</label>
+      <input type="file" id="file" name="file" class="form-control-file" (change)="readPhoto($event)"
+             accept="image/x-png,image/gif,image/jpeg">
+    </div>
   </div>
   <div class="row form-group">
     <mat-checkbox class="col" formControlName="active" id="active">{{'user.active' | translate}}</mat-checkbox>

@@ -16,7 +16,23 @@ const BTN_ADD = marker('buttons.add');
 const BTN_UPDATE = marker('buttons.update');
 
 interface ErrorResponse {
+  headers: Headers;
+  status: number;
+  statusText: string;
+  url: string;
+  ok: boolean;
+  name: string;
+  message: string;
+  error: Error;
+}
+
+interface Error {
   error: string;
+}
+
+interface Headers {
+  normalizedNames: {};
+  lazyUpdate: null;
 }
 
 @Component({
@@ -68,10 +84,10 @@ export abstract class BaseModalComponent<T, U> extends BaseComponent implements 
           (res) => {
             this.closeModal(res);
           },
-          (error: ErrorResponse) => {
-            // TODO add error back
-            this.showAlert(ERROR_SERVICE_TITLE, ERROR_SERVICE_TEXT, 'error');
-            this.logger.debug(BaseModalComponent.name, `saveOrUpdate()`, error);
+          (res: ErrorResponse) => {
+            this.showAlertBack(ERROR_SERVICE_TITLE, ERROR_SERVICE_TEXT, 'error',
+              this.getMessageErrorBack(res.error.error));
+            this.logger.debug(BaseModalComponent.name, `saveOrUpdate()`, res);
           }
         )
       );
@@ -107,4 +123,11 @@ export abstract class BaseModalComponent<T, U> extends BaseComponent implements 
    * @param data Data of the modal
    */
   protected abstract saveOrUpdateService(data: T): Observable<T>;
+
+  /**
+   * Show the error message that the service returns
+   *
+   * @param key Key of message to i18n
+   */
+  protected abstract getMessageErrorBack(key: string): string;
 }

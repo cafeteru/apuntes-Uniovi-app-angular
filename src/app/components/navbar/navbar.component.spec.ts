@@ -5,7 +5,7 @@ import { LoggerTestingModule } from 'ngx-logger/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
-import { TestUtils } from '../../core/utils/TestUtils';
+import { TestUtils } from '../../core/utils/test-utils';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;

@@ -4,7 +4,7 @@ import { UserListComponent } from './user-list.component';
 import { LoggerTestingModule } from 'ngx-logger/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MaterialDesignModule } from '../../../shared/material-design/material-design.module';
-import { TestUtils } from '../../../core/utils/TestUtils';
+import { TestUtils } from '../../../core/utils/test-utils';
 
 describe('UsersListComponent', () => {
   let component: UserListComponent;

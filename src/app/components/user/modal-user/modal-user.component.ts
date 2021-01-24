@@ -17,6 +17,8 @@ import { UserMessages } from '../../../shared/messages/user-messages';
 
 const TITLE_ADD = marker('modal.user.title.add');
 const TITLE_UPDATE = marker('modal.user.title.update');
+const ERROR_TITLE_IMG = marker('error.user.invalid.img');
+const ERROR_TEXT_IMG = marker('error.user.invalid.img.text');
 
 @Component({
   templateUrl: './modal-user.component.html',
@@ -122,9 +124,8 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
     reader.onload = () => {
       if (file.type.includes('image')) {
         this.formGroup.get('img').setValue(reader.result);
-        console.warn(this.formGroup.get('img').value.length);
       } else {
-        alert('Tiene que ser una imagen');
+        this.showAlert(ERROR_TITLE_IMG, ERROR_TEXT_IMG, 'error');
       }
     };
     reader.readAsDataURL(file);

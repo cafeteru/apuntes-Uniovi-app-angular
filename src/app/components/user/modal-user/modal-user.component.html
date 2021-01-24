@@ -40,7 +40,7 @@
       <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
       <mat-datepicker #birthDate startView="multi-year"></mat-datepicker>
       <mat-error *ngIf="formGroup.controls.birthDate.errors?.maxDate">
-        {{'error.user.max-date.birthDate' | translate}}
+        {{'error.user.limit.birth.date' | translate}}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
@@ -70,7 +70,7 @@
              [placeholder]="'user.numberIdentification' | translate">
       <mat-hint align="end">{{numberIdentification.value.length}} / 9</mat-hint>
       <mat-error *ngIf="formGroup.controls.numberIdentification.errors?.wrongLetter">
-        {{'error.user.wrong-letter.numberIdentification' | translate}}
+        {{'error.user.wrongLetter.numberIdentification' | translate}}
       </mat-error>
       <mat-error *ngIf="formGroup.controls.numberIdentification.errors?.formatNoValid">
         {{'error.user.formatNoValid.numberIdentification' | translate}}

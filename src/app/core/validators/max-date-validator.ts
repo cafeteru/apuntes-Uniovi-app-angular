@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-export class ValidatorMaxDate {
+export class MaxDateValidator {
   static isValid(maxDate: Date): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.value) {

@@ -1,7 +1,7 @@
 import { FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { FormGroupUtil } from '../utils/form-group-util';
 
-export class ValidatorNumberIdentification {
+export class NumberIdentificationValidator {
   static isValid(): ValidatorFn {
     return (formGroup: FormGroup): ValidationErrors | null => {
       const identificationType = formGroup.controls.identificationType;

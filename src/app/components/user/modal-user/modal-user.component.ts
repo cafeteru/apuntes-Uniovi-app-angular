@@ -10,9 +10,9 @@ import { RoleType } from '../../../core/models/enums/role-type';
 import { Observable, of } from 'rxjs';
 import { UserService } from '../../../core/services/user.service';
 import { IdentificationType } from '../../../core/models/enums/identification-type';
-import { ValidatorPhone } from '../../../core/validators/validator-phone';
-import { ValidatorMaxDate } from '../../../core/validators/validator-max-date';
-import { ValidatorNumberIdentification } from '../../../core/validators/validator-number-identification';
+import { PhoneValidator } from '../../../core/validators/phone-validator';
+import { MaxDateValidator } from '../../../core/validators/max-date-validator';
+import { NumberIdentificationValidator } from '../../../core/validators/number-identification-validator';
 import { UserMessages } from '../../../shared/messages/user-messages';
 
 const TITLE_ADD = marker('modal.user.title.add');
@@ -67,8 +67,8 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
         surname: new FormControl(this.user.surname),
         name: new FormControl(this.user.name),
         email: new FormControl(this.user.email),
-        phone: new FormControl(this.user.phone, [ValidatorPhone.isValid()]),
-        birthDate: new FormControl(this.user.birthDate, [ValidatorMaxDate.isValid(new Date())]),
+        phone: new FormControl(this.user.phone, [PhoneValidator.isValid()]),
+        birthDate: new FormControl(this.user.birthDate, [MaxDateValidator.isValid(new Date())]),
         role: new FormControl(this.user.role, [Validators.required]),
         username: new FormControl(this.user.username, [Validators.required]),
         password: new FormControl(this.user.password, [Validators.required]),
@@ -81,7 +81,7 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
         active: new FormControl(this.user.active),
       },
       {
-        validators: [ValidatorNumberIdentification.isValid()]
+        validators: [NumberIdentificationValidator.isValid()]
       });
     this.logger.debug(BaseModalComponent.name, 'getFormGroup()', 'end');
     return formGroup;

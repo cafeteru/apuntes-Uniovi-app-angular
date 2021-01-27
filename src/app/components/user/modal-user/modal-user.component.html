@@ -79,14 +79,14 @@
   </section>
   <section class="form-group row">
     <mat-form-field class="col">
-      <input formControlName="username" id="username" name="username" matInput
+      <input formControlName="username" id="username" matInput
              placeholder="{{'user.username' | translate}}" required/>
       <mat-error *ngIf="formGroup.controls.username.errors?.required">
         {{'error.user.required.username' | translate}}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
-      <input formControlName="password" id="password" name="password" matInput required
+      <input formControlName="password" id="password" matInput required
              placeholder="{{'user.password' | translate}}" type="password" showHideInput/>
       <i matSuffix class="material-icons" [showHideStatus]="{ materialIcon: true, id: 'password' }"
          showHideTrigger="password"></i>

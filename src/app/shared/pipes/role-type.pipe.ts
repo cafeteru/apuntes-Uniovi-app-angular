@@ -38,9 +38,9 @@ export class RoleTypePipe implements PipeTransform, OnDestroy {
       case RoleType.ADMIN:
         return this.map['role-type.admin'];
       case RoleType.STUDENT:
-        return this.map['role-type.teacher'];
-      case RoleType.TEACHER:
         return this.map['role-type.student'];
+      case RoleType.TEACHER:
+        return this.map['role-type.teacher'];
     }
     return '';
   }

@@ -45,9 +45,9 @@
     </mat-form-field>
     <mat-form-field class="col">
       <mat-label>{{'user.role' | translate}}</mat-label>
-      <mat-select formControlName="role" required>
-        <mat-option [value]="undefined">{{'enum.undefined' | translate}}</mat-option>
-        <mat-option *ngFor="let role of RoleType" [value]="role">{{role | roleType}}</mat-option>
+      <mat-select formControlName="role" id="role" required>
+        <mat-option [value]="undefined" id="undefinedRole">{{'enum.undefined' | translate}}</mat-option>
+        <mat-option *ngFor="let role of RoleType" [value]="role" [id]="role">{{role | roleType}}</mat-option>
       </mat-select>
       <mat-error *ngIf="formGroup.controls.role.errors?.required">
         {{'error.user.required.role' | translate}}
@@ -57,9 +57,10 @@
   <section class="row form-group">
     <mat-form-field class="col">
       <mat-label>{{'user.identificationType' | translate}}</mat-label>
-      <mat-select formControlName="identificationType" [required]="isRequiredIdentificationType()">
-        <mat-option [value]="undefined">{{'enum.undefined' | translate}}</mat-option>
-        <mat-option *ngFor="let type of IdentificationType" [value]="type">{{type}}</mat-option>
+      <mat-select formControlName="identificationType" [required]="isRequiredIdentificationType()"
+                  id="identificationType">
+        <mat-option [value]="undefined" id="undefinedRol">{{'enum.undefined' | translate}}</mat-option>
+        <mat-option *ngFor="let type of IdentificationType" [value]="type" [id]="type">{{type}}</mat-option>
       </mat-select>
       <mat-error *ngIf="formGroup.controls.identificationType.errors?.required">
         {{'error.user.required.identificationType' | translate}}

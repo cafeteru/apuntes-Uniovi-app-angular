@@ -37,6 +37,7 @@
 	"error.user.not.found.username": "No se encuentra al usuario con el nombre indicado",
 	"error.user.null": "El usuario es null",
 	"error.user.required.identificationType": "El tipo de identificación es requerido",
+	"error.user.required.numberIdentification": "El número de identificación es requerido",
 	"error.user.required.password": "La contraseña es requerida",
 	"error.user.required.role": "El rol es requerido",
 	"error.user.required.username": "El nombre de usuario es requerido",

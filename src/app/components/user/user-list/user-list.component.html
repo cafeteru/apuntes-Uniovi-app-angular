@@ -1,7 +1,7 @@
 <div id="filter-buttons" class="form-group">
   <button (click)="openModal()" class="btn btn-outline-success" id="addUser">{{'buttons.add' | translate}}</button>
 </div>
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="users-list">
+<table mat-table [dataSource]="users$ | async" class="mat-elevation-z8" id="users-list">
   <!-- Username Column -->
   <ng-container matColumnDef="username">
     <th mat-header-cell *matHeaderCellDef id="usernameColumn">{{'user.username' | translate}}</th>

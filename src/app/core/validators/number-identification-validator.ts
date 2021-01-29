@@ -3,7 +3,7 @@ import { FormGroupUtil } from '../utils/form-group-util';
 
 export class NumberIdentificationValidator {
   static isValid(): ValidatorFn {
-    return (formGroup: FormGroup): ValidationErrors | null => {
+    return (formGroup: FormGroup): ValidationErrors => {
       const identificationType = formGroup.controls.identificationType;
       const numberIdentification = formGroup.controls.numberIdentification;
       FormGroupUtil.deleteError(identificationType, 'required');
@@ -13,9 +13,11 @@ export class NumberIdentificationValidator {
         if (numberIdentification.value) {
           identificationType.setErrors({required: true});
           identificationType.markAsTouched({onlySelf: true});
-          return;
         }
-        return null;
+        return;
+      }
+      if (identificationType.value && !numberIdentification.value) {
+        return;
       }
       let str = numberIdentification.value;
       let expression = /^\d{8}[A-Z]$/;
@@ -32,13 +34,12 @@ export class NumberIdentificationValidator {
         if (letter !== letterDni.toUpperCase()) {
           numberIdentification.setErrors({wrongLetter: true});
           numberIdentification.markAsTouched({onlySelf: true});
-        } else {
-          return null;
         }
       } else {
         numberIdentification.setErrors({formatNoValid: true});
         numberIdentification.markAsTouched({onlySelf: true});
       }
+      return;
     };
   }
 }

@@ -68,8 +68,12 @@
     </mat-form-field>
     <mat-form-field class="col">
       <input #numberIdentification id="numberIdentification" matInput formControlName="numberIdentification"
-             [placeholder]="'user.numberIdentification' | translate">
+             [placeholder]="'user.numberIdentification' | translate"
+             [required]="formGroup.controls.identificationType.value">
       <mat-hint align="end">{{numberIdentification.value.length}} / 9</mat-hint>
+      <mat-error *ngIf="formGroup.controls.numberIdentification.errors?.required">
+        {{'error.user.required.numberIdentification' | translate}}
+      </mat-error>
       <mat-error *ngIf="formGroup.controls.numberIdentification.errors?.wrongLetter">
         {{'error.user.wrongLetter.numberIdentification' | translate}}
       </mat-error>
@@ -114,8 +118,8 @@
   </div>
   <div class="row form-group">
     <div class="col">
-      <label for="file">{{'user.img' | translate}}</label>
-      <input type="file" id="file" name="file" class="form-control-file" (change)="readPhoto($event)"
+      <label for="img">{{'user.img' | translate}}</label>
+      <input type="file" id="img" name="img" class="form-control-file" (change)="readPhoto($event)"
              accept="image/x-png,image/gif,image/jpeg">
     </div>
   </div>

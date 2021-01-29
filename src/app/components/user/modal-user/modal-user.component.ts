@@ -118,8 +118,10 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
    *
    * @param $event File with the photo
    */
-  readPhoto($event: any): void {
-    const file = $event.target.files[0];
+  readPhoto($event: Event): void {
+    const target = $event.target as HTMLInputElement;
+    const files = target.files as FileList;
+    const file = files[0];
     const reader = new FileReader();
     reader.onload = () => {
       if (file.type.includes('image')) {

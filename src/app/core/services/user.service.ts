@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { NGXLogger } from 'ngx-logger';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -39,6 +39,18 @@ export class UserService {
     return this.http.get<Page<User>>(this.URL, this.httpOptions).pipe(
       map((page) => page.content),
       tap(() => this.logger.debug(UserService.name, `findAll()`, 'end'))
+    );
+  }
+
+  /**
+   * Returns a user by id
+   *
+   * @param id User´s id
+   */
+  findById(id: number): Observable<User> {
+    this.logger.debug(UserService.name, `findById(id: ${id})`, 'start');
+    return this.http.get<User>(`${this.URL}/${id}`, this.httpOptions).pipe(
+      tap(() => this.logger.debug(UserService.name, `findById(id: ${id})`, 'end'))
     );
   }
 

@@ -1,5 +1,5 @@
 import { OnDestroy, Pipe, PipeTransform } from '@angular/core';
-import { RoleType } from '../../core/models/types/role-type';
+import { RoleType } from '../../core/models/enums/role-type';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -33,14 +33,14 @@ export class RoleTypePipe implements PipeTransform, OnDestroy {
     );
   }
 
-  transform(value: RoleType): unknown {
+  transform(value: RoleType | string): string {
     switch (value) {
       case RoleType.ADMIN:
         return this.map['role-type.admin'];
       case RoleType.STUDENT:
-        return this.map['role-type.teacher'];
-      case RoleType.TEACHER:
         return this.map['role-type.student'];
+      case RoleType.TEACHER:
+        return this.map['role-type.teacher'];
     }
     return '';
   }

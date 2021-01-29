@@ -8,7 +8,7 @@ describe('FormGroupUtil', () => {
   const passwordKey = 'password';
   const noValidKey = 'noExist';
   const email = 'email@gmail.com';
-  const errorKey = `No existe el valor ${noValidKey} dentro del formGroup`;
+  const errorKey = `There is no ${noValidKey} value inside the formGroup`;
 
   beforeEach(() => {
     formGroup = new FormGroup({
@@ -39,7 +39,7 @@ describe('FormGroupUtil', () => {
     expect(FormGroupUtil.getValue(formGroup, emailKey)).toBe(email);
   });
 
-  it('Comprueba el método getValue con una clave que no existe', () => {
+  it('Checks the getValue method with a key that doesn\'t exist', () => {
     expect(() => FormGroupUtil.getValue(formGroup, noValidKey)).toThrowError(errorKey);
   });
 
@@ -87,7 +87,7 @@ describe('FormGroupUtil', () => {
     expect(() => FormGroupUtil.checkError(formGroup, noValidKey)).toThrowError(errorKey);
   });
 
-  it('Comprueba el método checkError con un formGroup nulo', () => {
+  it('Checks the checkError method with a null formGroup\n', () => {
     expect(() => FormGroupUtil.checkError(null, passwordKey)).toThrowError(FormGroupUtil.errorFormGroup);
   });
 
@@ -143,13 +143,13 @@ describe('FormGroupUtil', () => {
 
   it('Check the addFormControl method with valid data', () => {
     expect(Object.keys(formGroup.controls).length).toBe(2);
-    FormGroupUtil.addFormControl(formGroup, 'prueba', new FormControl('', []));
+    FormGroupUtil.addFormControl(formGroup, 'test', new FormControl('', []));
     expect(Object.keys(formGroup.controls).length).toBe(3);
   });
 
   it('Checks the addFormControl method with invalid data', () => {
-    expect(() => FormGroupUtil.addFormControl(formGroup, 'prueba', null)).toThrowError(FormGroupUtil.errorFormControl);
-    expect(() => FormGroupUtil.addFormControl(undefined, 'prueba', new FormControl('')))
+    expect(() => FormGroupUtil.addFormControl(formGroup, 'test', null)).toThrowError(FormGroupUtil.errorFormControl);
+    expect(() => FormGroupUtil.addFormControl(undefined, 'test', new FormControl('')))
       .toThrowError(FormGroupUtil.errorFormGroup);
   });
 });

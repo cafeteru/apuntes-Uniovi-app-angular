@@ -1,25 +1,28 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="users-list">
+<div id="filter-buttons" class="form-group">
+  <button (click)="openModal()" class="btn btn-outline-success" id="addUser">{{'buttons.add' | translate}}</button>
+</div>
+<table mat-table [dataSource]="users$ | async" class="mat-elevation-z8" id="users-list">
   <!-- Username Column -->
   <ng-container matColumnDef="username">
-    <th mat-header-cell *matHeaderCellDef id="username">{{'user.username' | translate}}</th>
+    <th mat-header-cell *matHeaderCellDef id="usernameColumn">{{'user.username' | translate}}</th>
     <td mat-cell *matCellDef="let user; let i = index" [id]="'username'+ (i + 1)"> {{user.username}} </td>
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef id="name">{{'user.name' | translate}}</th>
+    <th mat-header-cell *matHeaderCellDef id="nameColumn">{{'user.name' | translate}}</th>
     <td mat-cell *matCellDef="let user; let i = index" [id]="'name'+ (i + 1)"> {{user.name}} </td>
   </ng-container>
 
   <!-- Surname Column -->
   <ng-container matColumnDef="surname">
-    <th mat-header-cell *matHeaderCellDef id="surname">{{'user.surname' | translate}}</th>
+    <th mat-header-cell *matHeaderCellDef id="surnameColumn">{{'user.surname' | translate}}</th>
     <td mat-cell *matCellDef="let user; let i = index" [id]="'surname'+ (i + 1)"> {{user.surname}} </td>
   </ng-container>
 
   <!-- Role Column -->
   <ng-container matColumnDef="role">
-    <th mat-header-cell *matHeaderCellDef id="role">{{'user.role' | translate}}</th>
+    <th mat-header-cell *matHeaderCellDef id="roleColumn">{{'user.role' | translate}}</th>
     <td mat-cell *matCellDef="let user; let i = index" [id]="'role'+ (i + 1)"> {{user.role | roleType}} </td>
   </ng-container>
 

@@ -15,13 +15,6 @@ import { Page } from '../models/page';
  */
 export class UserService {
   private URL = `${environment.urlAPI}/users`;
-  private httpOptions: {} = {
-    responseType: 'json',
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: localStorage.Authorization,
-    })
-  };
 
   constructor(
     private logger: NGXLogger,
@@ -36,7 +29,7 @@ export class UserService {
    */
   findAll(): Observable<User[]> {
     this.logger.debug(UserService.name, `findAll()`, 'start');
-    return this.http.get<Page<User>>(this.URL, this.httpOptions).pipe(
+    return this.http.get<Page<User>>(this.URL, this.getHttpOptions()).pipe(
       map((page) => page.content),
       tap(() => this.logger.debug(UserService.name, `findAll()`, 'end'))
     );
@@ -49,7 +42,7 @@ export class UserService {
    */
   findById(id: number): Observable<User> {
     this.logger.debug(UserService.name, `findById(id: ${id})`, 'start');
-    return this.http.get<User>(`${this.URL}/${id}`, this.httpOptions).pipe(
+    return this.http.get<User>(`${this.URL}/${id}`, this.getHttpOptions()).pipe(
       tap(() => this.logger.debug(UserService.name, `findById(id: ${id})`, 'end'))
     );
   }
@@ -61,8 +54,18 @@ export class UserService {
    */
   save(user: User): Observable<User> {
     this.logger.debug(UserService.name, `save(user: ${user})`, 'start');
-    return this.http.post<User>(`${this.URL}/create`, user, this.httpOptions).pipe(
+    return this.http.post<User>(`${this.URL}/create`, user, this.getHttpOptions()).pipe(
       tap(() => this.logger.debug(UserService.name, `save(user: ${user})`, 'end'))
     );
+  }
+
+  private getHttpOptions(): {} {
+    return {
+      responseType: 'json',
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: localStorage.Authorization,
+      })
+    };
   }
 }

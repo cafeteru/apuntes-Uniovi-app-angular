@@ -48,6 +48,8 @@ export class LoginComponent extends BaseComponent implements OnInit {
     if (FormGroupUtil.valid(this.formGroup)) {
       this.changeDisable();
       const user = new User();
+      delete user.address;
+      delete user.active;
       user.username = this.formGroup.controls.username.value;
       user.password = this.formGroup.controls.password.value;
       this.subscriptions.push(

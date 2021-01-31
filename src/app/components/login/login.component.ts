@@ -4,8 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../core/base/base.component';
-import { LoginService } from '../../core/services/login.service';
-import { User } from '../../core/models/user';
+import { LoginData, LoginService } from '../../core/services/login.service';
 import { FormGroupUtil } from '../../core/utils/form-group-util';
 import { Router } from '@angular/router';
 
@@ -47,13 +46,12 @@ export class LoginComponent extends BaseComponent implements OnInit {
     this.logger.debug(LoginComponent.name, 'login()', 'start');
     if (FormGroupUtil.valid(this.formGroup)) {
       this.changeDisable();
-      const user = new User();
-      delete user.address;
-      delete user.active;
-      user.username = this.formGroup.controls.username.value;
-      user.password = this.formGroup.controls.password.value;
+      const loginData: LoginData = {
+        username: this.formGroup.controls.username.value,
+        password: this.formGroup.controls.password.value
+      };
       this.subscriptions.push(
-        this.loginService.login(user).subscribe(
+        this.loginService.login(loginData).subscribe(
           () => {
             this.router.navigateByUrl('/menu').then();
             this.logger.debug(LoginComponent.name, 'login()', 'end');

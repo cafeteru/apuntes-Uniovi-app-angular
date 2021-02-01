@@ -9,8 +9,6 @@
 	"error.modal.service.text": "An error occurred while saving the data to the server. Please try later",
 	"error.modal.service.title": "Failed to save changes",
 	"error.token.invalid": "Expired Session. Please login again",
-	"error.user.already.registered.number.identification": "Identification number already registered",
-	"error.user.already.registered.username": "Username already registered",
 	"error.user.expired.token": "Expired token",
 	"error.user.formatNoValid.numberIdentification": "The format of the identification number is invalid",
 	"error.user.invalid.data.user": "Invalid user data",

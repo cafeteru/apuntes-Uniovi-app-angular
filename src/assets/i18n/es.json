@@ -9,8 +9,6 @@
 	"error.modal.service.text": "Se ha producido el siguiente error en el servidor:",
 	"error.modal.service.title": "Error al guardar los cambios",
 	"error.token.invalid": "Sesión caducada. Por favor identifíquese otra vez",
-	"error.user.already.registered.number.identification": "Número de identificación ya registrado",
-	"error.user.already.registered.username": "Nombre de usuario ya registrado",
 	"error.user.expired.token": "Token expirado",
 	"error.user.formatNoValid.numberIdentification": "El formato del número de identificación es inválido",
 	"error.user.invalid.data.user": "Datos de usuario inválidos",

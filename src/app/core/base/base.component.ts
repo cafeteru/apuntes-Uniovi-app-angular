@@ -36,12 +36,12 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 
   showAlertBack(title: string, text: string, icon: SweetAlertIcon, errorBack: string, action?: () => void): void {
     this.subscriptions.push(
-      this.translateService.get([title, text].concat(errorBack)).subscribe(
+      this.translateService.get([title, text]).subscribe(
         res => {
           Swal.fire({
             icon,
             title: (res[title]),
-            html: errorBack ? `<div>${res[text]}<br/>${res[errorBack]}</div>` : `<div>${res[text]}</div>`
+            html: errorBack ? `<div>${res[text]}<br/>${errorBack}</div>` : `<div>${res[text]}</div>`
           }).then(
             () => {
               if (action) {

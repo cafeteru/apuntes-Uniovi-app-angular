@@ -1,7 +1,6 @@
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 
 export const UserMessages = {
-  'error.user.already.registered.username': marker('error.user.already.registered.username'),
   'error.user.already.registered.number.identification': marker('error.user.already.registered.number.identification'),
   'error.user.expired.token': marker('error.user.expired.token'),
   'error.user.login.system': marker('error.user.login.system'),

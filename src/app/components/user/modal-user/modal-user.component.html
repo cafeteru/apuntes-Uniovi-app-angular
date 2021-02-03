@@ -127,7 +127,8 @@
     <mat-checkbox class="col" formControlName="active" id="active">{{'user.active' | translate}}</mat-checkbox>
   </div>
   <section class="float-right modal-buttons">
-    <button class="btn btn-outline-success" id="add" (click)="saveOrUpdate()">Guardar</button>
-    <button class="btn btn-outline-danger" id="cancel" (click)="closeModal()" type="button">Cancelar</button>
+    <button class="btn btn-outline-success" id="add" (click)="saveOrUpdate()">{{'button.save'| translate}}</button>
+    <button class="btn btn-outline-danger" id="cancel" (click)="closeModal()"
+            type="button">{{'button.cancel'| translate}}</button>
   </section>
 </form>

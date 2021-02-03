@@ -59,6 +59,20 @@ export class UserService {
     );
   }
 
+  changeLanguage(lang: string): Observable<boolean> {
+    this.logger.debug(UserService.name, `changeLanguage(lang: ${lang})`, 'start');
+    return this.http.head(`${this.URL}/lang/${lang}`, {
+      observe: 'response',
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: localStorage.Authorization,
+      })
+    }).pipe(
+      map(x => x.status === 200),
+      tap(() => this.logger.debug(UserService.name, `changeLanguage(lang: ${lang})`, 'end'))
+    );
+  }
+
   private getHttpOptions(): {} {
     return {
       responseType: 'json',

@@ -16,7 +16,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="languages" data-toggle="dropdown" aria-haspopup="true"
            aria-expanded="false">
-          <span [ngClass]="getSelectedLanguage()"></span>
+          <span [ngClass]="selectedLanguage"></span>
         </a>
         <div class="dropdown-menu" aria-labelledby="languages">
           <button (click)="useLanguage('es')" class="btn btn-outline-primary dropdown-item" id="es">

@@ -1,4 +1,6 @@
 {
+	"button.cancel": "Cancelar",
+	"button.save": "Guardar",
 	"buttons.add": "Añadir",
 	"buttons.update": "Actualizar",
 	"enum.undefined": "Sin indicar",

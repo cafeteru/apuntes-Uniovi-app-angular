@@ -1,4 +1,6 @@
 {
+	"button.cancel": "Cancel",
+	"button.save": "Save",
 	"buttons.add": "Add",
 	"buttons.update": "Update",
 	"enum.undefined": "Undefined",

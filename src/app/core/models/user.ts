@@ -19,10 +19,12 @@ export class User {
   identificationType: string;
   numberIdentification: string;
   address: Address;
+  language: string;
 
   constructor() {
     this.active = true;
     this.address = new Address();
+    this.language = 'es';
   }
 
   /**

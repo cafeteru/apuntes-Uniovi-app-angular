@@ -11,7 +11,7 @@ import { BaseComponent } from '../../../../core/base/base.component';
   styleUrls: ['./user-personal-data.component.scss']
 })
 export class UserPersonalDataComponent extends BaseComponent implements OnInit {
-  user: User;
+  user = new User();
 
   constructor(
     protected logger: NGXLogger,
@@ -20,7 +20,9 @@ export class UserPersonalDataComponent extends BaseComponent implements OnInit {
   ) {
     super(logger, translateService);
     this.logger.debug(UserPersonalDataComponent.name, 'constructor()', 'start');
-    this.user = route.snapshot.data.user;
+    if (route.snapshot.data.user) {
+      this.user = route.snapshot.data.user;
+    }
     this.logger.debug(UserPersonalDataComponent.name, 'constructor()', 'end');
   }
 

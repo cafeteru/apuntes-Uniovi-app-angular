@@ -1,8 +1,5 @@
 language: node_js
 
-env:
-  - CODACY_PROJECT_TOKEN="a826990e6f64474685332c0e7c48b382"
-
 node_js:
   - '14.15.4'
 

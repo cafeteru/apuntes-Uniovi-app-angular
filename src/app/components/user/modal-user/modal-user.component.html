@@ -60,7 +60,8 @@
       <mat-select formControlName="identificationType" [required]="isRequiredIdentificationType()"
                   id="identificationType">
         <mat-option [value]="undefined" id="undefinedRol">{{'enum.undefined' | translate}}</mat-option>
-        <mat-option *ngFor="let type of IdentificationType" [value]="type" [id]="type">{{type}}</mat-option>
+        <mat-option *ngFor="let type of IdentificationType" [value]="type"
+                    [id]="type">{{type | identificationType}}</mat-option>
       </mat-select>
       <mat-error *ngIf="formGroup.controls.identificationType.errors?.required">
         {{'error.user.required.identificationType' | translate}}

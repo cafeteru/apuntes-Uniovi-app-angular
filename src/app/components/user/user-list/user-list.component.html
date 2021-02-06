@@ -30,6 +30,7 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let user; let i = index" [id]="'actions'+ (i + 1)">
+      <mat-icon color="primary" [routerLink]="[user.id]">find_in_page</mat-icon>
     </td>
   </ng-container>
 

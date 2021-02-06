@@ -12,6 +12,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule
   ],
   exports: [
+    SnackBarComponent,
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
@@ -33,7 +36,8 @@ import { TranslateModule } from '@ngx-translate/core';
     MatCheckboxModule,
     MatDatepickerModule,
     MatSnackBarModule,
-    SnackBarComponent
+    MatIconModule,
+    MatTabsModule
   ]
 })
 export class MaterialDesignModule {

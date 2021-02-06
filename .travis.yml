@@ -28,10 +28,3 @@ script:
 after_success:
   - ng build --prod
   - bash <(curl -Ls https://coverage.codacy.com/get.sh) report
-
-deploy:
-  provider: firebase
-    token:
-      secure: "1//03US7AsmsF_MnCgYIARAAGAMSNwF-L9IrEo35tBQjTjjx2k0FwYs3eVV01lPcA36cTjkvgic34FO6o1iz-oyAlTibIgIy5zqdA34"
-  on:
-    branch: master

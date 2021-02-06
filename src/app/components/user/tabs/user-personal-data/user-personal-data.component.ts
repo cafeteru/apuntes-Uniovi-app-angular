@@ -16,7 +16,7 @@ export class UserPersonalDataComponent extends BaseComponent implements OnInit {
   constructor(
     protected logger: NGXLogger,
     protected translateService: TranslateService,
-    private route: ActivatedRoute,
+    route: ActivatedRoute,
   ) {
     super(logger, translateService);
     this.logger.debug(UserPersonalDataComponent.name, 'constructor()', 'start');

@@ -2,8 +2,14 @@
   <div class="row form-group">
     <div class="col" id="img">
       <img [src]="user.img | noImage" alt="{{'user.img' | translate}}"/>
+      <mat-checkbox class="col" id="active" [checked]="user.active"
+                    disabled>{{'user.active' | translate}}</mat-checkbox>
     </div>
     <div class="col">
+      <div class="col">
+        <label class="col-form-label" for="username">{{'user.username' | translate}}</label>
+        <div class="form-control" id="username">{{user.username}}</div>
+      </div>
       <div class="col">
         <label class="col-form-label" for="surname">{{'user.surname' | translate}}</label>
         <div class="form-control" id="surname">{{user.surname}}</div>
@@ -12,14 +18,16 @@
         <label class="col-form-label" for="name">{{'user.name' | translate}}</label>
         <div class="form-control" id="name">{{user.name}}</div>
       </div>
-      <div class="col">
-        <label class="col-form-label" for="birthDate">{{'user.birthDate' | translate}}</label>
-        <div class="form-control" id="birthDate">{{user.birthDate | date: 'dd/MM/yyyy'}}</div>
-      </div>
-      <div class="col">
-        <label class="col-form-label" for="role">{{'user.role' | translate}}</label>
-        <div class="form-control" id="role">{{user.role | roleType}}</div>
-      </div>
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col">
+      <label class="col-form-label" for="birthDate">{{'user.birthDate' | translate}}</label>
+      <div class="form-control" id="birthDate">{{user.birthDate | date: 'dd/MM/yyyy'}}</div>
+    </div>
+    <div class="col">
+      <label class="col-form-label" for="role">{{'user.role' | translate}}</label>
+      <div class="form-control" id="role">{{user.role | roleType}}</div>
     </div>
   </div>
   <div class="row form-group">
@@ -41,10 +49,6 @@
       <label class="col-form-label" for="numberIdentification">{{'user.numberIdentification' | translate}}</label>
       <div class="form-control" id="numberIdentification">{{user.numberIdentification}}</div>
     </div>
-    <div class="col">
-      <label class="col-form-label" for="username">{{'user.username' | translate}}</label>
-      <div class="form-control" id="username">{{user.username}}</div>
-    </div>
   </div>
   <div class="row form-group">
     <div class="col">
@@ -58,12 +62,6 @@
     <div class="col">
       <label class="col-form-label" for="postalCode">{{'user.address.postalCode' | translate}}</label>
       <div class="form-control" id="postalCode">{{user.address?.postalCode}}</div>
-    </div>
-  </div>
-  <div class="row form-group">
-    <div class="col">
-      <mat-checkbox class="col" id="active" [checked]="user.active"
-                    disabled>{{'user.active' | translate}}</mat-checkbox>
     </div>
   </div>
 </section>

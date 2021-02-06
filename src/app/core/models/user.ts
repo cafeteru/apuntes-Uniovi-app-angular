@@ -1,5 +1,6 @@
 import { RoleType } from './enums/role-type';
 import { Address } from './address';
+import { LanguageType } from './enums/language-type';
 
 /**
  * Represents users
@@ -19,12 +20,12 @@ export class User {
   identificationType: string;
   numberIdentification: string;
   address: Address;
-  language: string;
+  language: LanguageType;
 
   constructor() {
     this.active = true;
     this.address = new Address();
-    this.language = 'es';
+    this.language = LanguageType.ES;
   }
 
   /**

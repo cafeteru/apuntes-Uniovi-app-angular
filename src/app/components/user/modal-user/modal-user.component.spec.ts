@@ -10,13 +10,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../../core/models/user';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TestUtils } from '../../../core/utils/test-utils';
+import { Address } from '../../../core/models/address';
+import { LanguageType } from '../../../core/models/enums/language-type';
 
 describe('AddUserComponent', () => {
   let component: ModalUserComponent;
   let fixture: ComponentFixture<ModalUserComponent>;
 
   const user: User = {
-    address: undefined,
+    address: new Address(),
     role: undefined,
     active: undefined,
     birthDate: undefined,
@@ -29,7 +31,8 @@ describe('AddUserComponent', () => {
     password: undefined,
     phone: undefined,
     surname: undefined,
-    username: undefined
+    username: undefined,
+    language: LanguageType.ES
   };
 
   beforeEach(async () => {

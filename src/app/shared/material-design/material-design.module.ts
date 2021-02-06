@@ -4,17 +4,24 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
+  declarations: [
+    SnackBarComponent
+  ],
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    TranslateModule
   ],
   exports: [
     MatFormFieldModule,
@@ -25,6 +32,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSelectModule,
     MatCheckboxModule,
     MatDatepickerModule,
+    MatSnackBarModule,
+    SnackBarComponent
   ]
 })
 export class MaterialDesignModule {

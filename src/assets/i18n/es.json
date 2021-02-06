@@ -39,6 +39,7 @@
 	"role-type.student": "Estudiante",
 	"role-type.teacher": "Profesor",
 	"user.active": "Activo",
+	"user.add.successfully": "Usuario creado correctamente",
 	"user.address.city": "Ciudad",
 	"user.address.postalCode": "Código postal",
 	"user.address.street": "Calle",

@@ -19,7 +19,7 @@ import { RoleTypePipe } from './pipes/role-type.pipe';
     NoImagePipe,
     ShowHidePasswordModule,
     TranslateModule,
-    RoleTypePipe
+    RoleTypePipe,
   ]
 })
 export class SharedModule {

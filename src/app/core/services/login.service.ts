@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NGXLogger } from 'ngx-logger';
 import { Observable } from 'rxjs';
-import { User } from '../models/user';
 import { map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import jwt_decode from 'jwt-decode';
@@ -16,6 +15,11 @@ interface IToken {
   role: string;
   id: number;
   exp: number;
+}
+
+export interface LoginData {
+  username: string;
+  password: string;
 }
 
 @Injectable({
@@ -38,11 +42,11 @@ export class LoginService {
   /**
    * Gets user authentication
    *
-   * @param user User with username and password
+   * @param loginData User with username and password
    */
-  login(user: User): Observable<void> {
-    this.logger.debug(LoginService.name, `login(user: ${user.toString()})`, 'start');
-    return this.http.post<ResponseLogin>(this.URL, user).pipe(
+  login(loginData: LoginData): Observable<void> {
+    this.logger.debug(LoginService.name, `login(user: ${loginData.toString()})`, 'start');
+    return this.http.post<ResponseLogin>(this.URL, loginData).pipe(
       map((res) => {
         const result = jwt_decode<IToken>(res.Authorization);
         localStorage.setItem('Authorization', res.Authorization);
@@ -51,7 +55,7 @@ export class LoginService {
         localStorage.setItem('role', result.role);
         localStorage.setItem('exp', result.exp.toString());
       }),
-      tap(() => this.logger.debug(LoginService.name, `login(user: ${user.toString()})`, 'start'))
+      tap(() => this.logger.debug(LoginService.name, `login(user: ${loginData.toString()})`, 'start'))
     );
   }
 

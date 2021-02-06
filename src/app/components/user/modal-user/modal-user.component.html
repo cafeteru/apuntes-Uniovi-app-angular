@@ -60,7 +60,8 @@
       <mat-select formControlName="identificationType" [required]="isRequiredIdentificationType()"
                   id="identificationType">
         <mat-option [value]="undefined" id="undefinedRol">{{'enum.undefined' | translate}}</mat-option>
-        <mat-option *ngFor="let type of IdentificationType" [value]="type" [id]="type">{{type}}</mat-option>
+        <mat-option *ngFor="let type of IdentificationType" [value]="type"
+                    [id]="type">{{type | identificationType}}</mat-option>
       </mat-select>
       <mat-error *ngIf="formGroup.controls.identificationType.errors?.required">
         {{'error.user.required.identificationType' | translate}}
@@ -127,7 +128,8 @@
     <mat-checkbox class="col" formControlName="active" id="active">{{'user.active' | translate}}</mat-checkbox>
   </div>
   <section class="float-right modal-buttons">
-    <button class="btn btn-outline-success" id="add" (click)="saveOrUpdate()">Guardar</button>
-    <button class="btn btn-outline-danger" id="cancel" (click)="closeModal()" type="button">Cancelar</button>
+    <button class="btn btn-outline-success" id="add" (click)="saveOrUpdate()">{{'button.save'| translate}}</button>
+    <button class="btn btn-outline-danger" id="cancel" (click)="closeModal()"
+            type="button">{{'button.cancel'| translate}}</button>
   </section>
 </form>

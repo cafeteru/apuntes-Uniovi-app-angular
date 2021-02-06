@@ -8,11 +8,16 @@ import { ComponentsRoutingModule } from '../components-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialDesignModule } from '../../shared/material-design/material-design.module';
 import { ModalUserComponent } from './modal-user/modal-user.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { UserPersonalDataComponent } from './tabs/user-personal-data/user-personal-data.component';
+import { UserResolver } from '../../core/resolvers/user-resolver.service';
 
 @NgModule({
   declarations: [
     UserListComponent,
-    ModalUserComponent
+    ModalUserComponent,
+    UserDetailsComponent,
+    UserPersonalDataComponent
   ],
   imports: [
     UserRoutingModule,
@@ -22,6 +27,9 @@ import { ModalUserComponent } from './modal-user/modal-user.component';
     MaterialDesignModule,
     SharedModule,
     CoreModule
+  ],
+  providers: [
+    UserResolver
   ]
 })
 export class UserModule {

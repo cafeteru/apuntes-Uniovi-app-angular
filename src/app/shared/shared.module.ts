@@ -4,11 +4,13 @@ import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { NoImagePipe } from './pipes/no-image.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { RoleTypePipe } from './pipes/role-type.pipe';
+import { IdentificationTypePipe } from './pipes/identification-type.pipe';
 
 @NgModule({
   declarations: [
     NoImagePipe,
     RoleTypePipe,
+    IdentificationTypePipe
   ],
   imports: [
     MaterialDesignModule,
@@ -19,7 +21,8 @@ import { RoleTypePipe } from './pipes/role-type.pipe';
     NoImagePipe,
     ShowHidePasswordModule,
     TranslateModule,
-    RoleTypePipe
+    RoleTypePipe,
+    IdentificationTypePipe
   ]
 })
 export class SharedModule {

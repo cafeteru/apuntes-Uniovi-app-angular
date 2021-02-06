@@ -1,5 +1,7 @@
 import { RoleType } from './enums/role-type';
 import { Address } from './address';
+import { LanguageType } from './enums/language-type';
+import { IdentificationType } from './enums/identification-type';
 
 /**
  * Represents users
@@ -17,12 +19,14 @@ export class User {
   password: string;
   role: RoleType;
   identificationType: string;
-  numberIdentification: string;
+  numberIdentification: IdentificationType;
   address: Address;
+  language: LanguageType;
 
   constructor() {
     this.active = true;
     this.address = new Address();
+    this.language = LanguageType.ES;
   }
 
   /**

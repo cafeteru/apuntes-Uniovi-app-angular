@@ -8,6 +8,10 @@ import { ModalUserComponent } from '../modal-user/modal-user.component';
 import { GLOBAL_CONSTANTS } from '../../../core/utils/global-constants';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
+import { SnackBarService } from '../../../core/services/snack-bar.service';
+import { marker } from '@biesbjerg/ngx-translate-extract-marker';
+
+const SUCCESS_ADD_USER = marker('user.add.successfully');
 
 @Component({
   selector: 'app-user-list',
@@ -22,7 +26,8 @@ export class UserListComponent extends BaseComponent implements OnInit {
     protected logger: NGXLogger,
     protected translateService: TranslateService,
     private userService: UserService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBarService: SnackBarService,
   ) {
     super(logger, translateService);
     this.logger.debug(UserListComponent.name, 'constructor()', 'start');
@@ -47,6 +52,13 @@ export class UserListComponent extends BaseComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.ngOnInit();
+        this.subscriptions.push(
+          this.translateService.get(SUCCESS_ADD_USER).subscribe(
+            res => {
+              this.snackBarService.showSuccess(res);
+            }
+          )
+        );
       }
     });
   }

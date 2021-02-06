@@ -13,7 +13,6 @@ import { IdentificationType } from '../../../core/models/enums/identification-ty
 import { PhoneValidator } from '../../../core/validators/phone-validator';
 import { MaxDateValidator } from '../../../core/validators/max-date-validator';
 import { NumberIdentificationValidator } from '../../../core/validators/number-identification-validator';
-import { UserMessages } from '../../../shared/messages/user-messages';
 
 const TITLE_ADD = marker('modal.user.title.add');
 const TITLE_UPDATE = marker('modal.user.title.update');
@@ -102,10 +101,6 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
     return this.userService.save(this.user);
   }
 
-  protected getMessageErrorBack(key: string): string {
-    return UserMessages[key];
-  }
-
   /**
    * Indicate if identificationType is required
    */
@@ -118,8 +113,10 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
    *
    * @param $event File with the photo
    */
-  readPhoto($event: any): void {
-    const file = $event.target.files[0];
+  readPhoto($event: Event): void {
+    const target = $event.target as HTMLInputElement;
+    const files = target.files as FileList;
+    const file = files[0];
     const reader = new FileReader();
     reader.onload = () => {
       if (file.type.includes('image')) {

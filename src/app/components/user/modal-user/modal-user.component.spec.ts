@@ -10,8 +10,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TestUtils } from '../../../core/utils/test-utils';
 import { Address } from '../../../core/models/address';
 import { LanguageType } from '../../../core/models/enums/language-type';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('AddUserComponent', () => {
+describe('ModalUserComponent', () => {
   let component: ModalUserComponent;
   let fixture: ComponentFixture<ModalUserComponent>;
 
@@ -42,6 +43,7 @@ describe('AddUserComponent', () => {
         CoreModule,
         SharedModule,
         TestUtils.getLanguages(),
+        BrowserAnimationsModule
       ],
       providers: [
         {provide: MatDialogRef, useValue: user},

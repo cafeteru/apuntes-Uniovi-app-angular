@@ -7,6 +7,8 @@ import { SharedModule } from '../../shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { TestUtils } from '../../core/utils/test-utils';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -24,6 +26,9 @@ describe('LoginComponent', () => {
         CoreModule,
         SharedModule,
         TestUtils.getLanguages(),
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule
       ]
     }).compileComponents();
   }));

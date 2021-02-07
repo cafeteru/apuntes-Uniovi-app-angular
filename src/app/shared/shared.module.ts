@@ -25,9 +25,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TranslateModule,
     RoleTypePipe,
     IdentificationTypePipe,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
   ]
 })
 export class SharedModule {

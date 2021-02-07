@@ -27,10 +27,9 @@ export class UserService {
   /**
    * Returns all user
    */
-  findAll(): Observable<User[]> {
+  findAll(): Observable<Page<User>> {
     this.logger.debug(UserService.name, `findAll()`, 'start');
     return this.http.get<Page<User>>(this.URL, this.getHttpOptions()).pipe(
-      map((page) => page.content),
       tap(() => this.logger.debug(UserService.name, `findAll()`, 'end'))
     );
   }

@@ -37,3 +37,4 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" [id]="'user' + (i + 1)"></tr>
 </table>
+<mat-paginator [pageSizeOptions]="elementsPage" [length]="totalElements" showFirstLastButtons></mat-paginator>

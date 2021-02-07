@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from '../../../core/base/base.component';
 import { NGXLogger } from 'ngx-logger';
 import { UserService } from '../../../core/services/user.service';
@@ -10,6 +10,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { SnackBarService } from '../../../core/services/snack-bar.service';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { map } from 'rxjs/operators';
 
 const SUCCESS_ADD_USER = marker('user.add.successfully');
 
@@ -19,8 +22,13 @@ const SUCCESS_ADD_USER = marker('user.add.successfully');
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent extends BaseComponent implements OnInit {
+  elementsPage = [5, 10, 25, 100];
   displayedColumns = ['username', 'name', 'surname', 'role', 'actions'];
   users$: Observable<User[]> = of([]);
+  totalElements = 0;
+
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
     protected logger: NGXLogger,
@@ -36,7 +44,12 @@ export class UserListComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.logger.debug(UserListComponent.name, 'ngOnInit()', 'start');
-    this.users$ = this.userService.findAll();
+    this.users$ = this.userService.findAll().pipe(
+      map((res) => {
+        this.totalElements = res.totalElements;
+        return res.content;
+      })
+    );
     this.logger.debug(UserListComponent.name, 'ngOnInit()', 'end');
   }
 

@@ -14,6 +14,7 @@ import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatDatepickerModule,
     MatSnackBarModule,
     MatIconModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSortModule
   ]
 })
 export class MaterialDesignModule {

@@ -12,7 +12,7 @@ export interface Page<T> {
   empty: boolean;
 }
 
-export interface Pageable {
+interface Pageable {
   sort: Sort;
   offset: number;
   pageSize: number;
@@ -21,8 +21,9 @@ export interface Pageable {
   unpaged: boolean;
 }
 
-export interface Sort {
+interface Sort {
   sorted: boolean;
   unsorted: boolean;
   empty: boolean;
 }
+

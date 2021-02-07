@@ -8,7 +8,6 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './components/components.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -24,7 +23,6 @@ registerLocaleData(localeEs);
   imports: [
     AppRoutingModule,
     BrowserModule,
-    BrowserAnimationsModule,
     CoreModule,
     SharedModule,
     SweetAlert2Module,

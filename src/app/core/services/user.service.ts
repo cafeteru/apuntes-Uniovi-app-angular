@@ -5,8 +5,8 @@ import { map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { NGXLogger } from 'ngx-logger';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Page } from '../models/page';
-import { OptionsPage } from '../models/options-page';
+import { Page } from '../models/server/page';
+import { OptionsPage } from '../models/server/options-page';
 
 @Injectable({
   providedIn: 'root'

@@ -1,40 +1,40 @@
-<div id="filter-buttons" class="form-group">
+<div class="form-group" id="filter-buttons">
   <button (click)="openModal()" class="btn btn-outline-success" id="addUser">{{'buttons.add' | translate}}</button>
 </div>
-<table mat-table [dataSource]="users$ | async" matSort class="mat-elevation-z8" id="users-list">
+<table [dataSource]="users$ | async" class="mat-elevation-z8" id="users-list" mat-table matSort>
   <!-- Username Column -->
   <ng-container matColumnDef="username">
-    <th mat-header-cell *matHeaderCellDef id="usernameColumn" mat-sort-header>{{'user.username' | translate}}</th>
-    <td mat-cell *matCellDef="let user; let i = index" [id]="'username'+ (i + 1)"> {{user.username}} </td>
+    <th *matHeaderCellDef id="usernameColumn" mat-header-cell mat-sort-header>{{'user.username' | translate}}</th>
+    <td *matCellDef="let user; let i = index" [id]="'username'+ (i + 1)" mat-cell> {{user.username}} </td>
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef id="nameColumn" mat-sort-header>{{'user.name' | translate}}</th>
-    <td mat-cell *matCellDef="let user; let i = index" [id]="'name'+ (i + 1)"> {{user.name}} </td>
+    <th *matHeaderCellDef id="nameColumn" mat-header-cell mat-sort-header>{{'user.name' | translate}}</th>
+    <td *matCellDef="let user; let i = index" [id]="'name'+ (i + 1)" mat-cell> {{user.name}} </td>
   </ng-container>
 
   <!-- Surname Column -->
   <ng-container matColumnDef="surname">
-    <th mat-header-cell *matHeaderCellDef id="surnameColumn" mat-sort-header>{{'user.surname' | translate}}</th>
-    <td mat-cell *matCellDef="let user; let i = index" [id]="'surname'+ (i + 1)"> {{user.surname}} </td>
+    <th *matHeaderCellDef id="surnameColumn" mat-header-cell mat-sort-header>{{'user.surname' | translate}}</th>
+    <td *matCellDef="let user; let i = index" [id]="'surname'+ (i + 1)" mat-cell> {{user.surname}} </td>
   </ng-container>
 
   <!-- Role Column -->
   <ng-container matColumnDef="role">
-    <th mat-header-cell *matHeaderCellDef id="roleColumn" mat-sort-header>{{'user.role' | translate}}</th>
-    <td mat-cell *matCellDef="let user; let i = index" [id]="'role'+ (i + 1)"> {{user.role | roleType}} </td>
+    <th *matHeaderCellDef id="roleColumn" mat-header-cell mat-sort-header>{{'user.role' | translate}}</th>
+    <td *matCellDef="let user; let i = index" [id]="'role'+ (i + 1)" mat-cell> {{user.role | roleType}} </td>
   </ng-container>
 
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let user; let i = index" [id]="'actions'+ (i + 1)">
-      <mat-icon color="primary" [routerLink]="[user.id]">find_in_page</mat-icon>
+    <th *matHeaderCellDef mat-header-cell></th>
+    <td *matCellDef="let user; let i = index" [id]="'actions'+ (i + 1)" mat-cell>
+      <mat-icon [routerLink]="[user.id]" color="primary">find_in_page</mat-icon>
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" [id]="'user' + (i + 1)"></tr>
+  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: displayedColumns; let i = index" [id]="'user' + (i + 1)" mat-row></tr>
 </table>
-<mat-paginator [pageSizeOptions]="elementsPage" [length]="totalElements" showFirstLastButtons></mat-paginator>
+<mat-paginator [length]="totalElements" [pageSizeOptions]="elementsPage" showFirstLastButtons></mat-paginator>

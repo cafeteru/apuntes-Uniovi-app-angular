@@ -5,9 +5,6 @@ import { LoggerTestingModule } from 'ngx-logger/testing';
 import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateModule } from '@ngx-translate/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { TestUtils } from '../../core/utils/test-utils';
 
@@ -26,10 +23,7 @@ describe('LoginComponent', () => {
         RouterTestingModule,
         CoreModule,
         SharedModule,
-        BrowserAnimationsModule,
         TestUtils.getLanguages(),
-        FormsModule,
-        ReactiveFormsModule,
       ]
     }).compileComponents();
   }));

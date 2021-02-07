@@ -11,6 +11,9 @@ const ROLE_TYPE_STUDENT = marker('role-type.student');
 @Pipe({
   name: 'roleType'
 })
+/**
+ * Pipe to convert Roles to string
+ */
 export class RoleTypePipe implements PipeTransform, OnDestroy {
   private subscription: Subscription;
 

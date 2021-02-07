@@ -1,5 +1,4 @@
 import { OnDestroy, Pipe, PipeTransform } from '@angular/core';
-import { RoleType } from '../../core/models/enums/role-type';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -11,6 +10,9 @@ const IDENTIFICATION_TYPE_NIE = marker('identification-type.nie');
 @Pipe({
   name: 'identificationType'
 })
+/**
+ * Pipe to convert IdentificationTypes to string
+ */
 export class IdentificationTypePipe implements PipeTransform, OnDestroy {
   private subscription: Subscription;
 

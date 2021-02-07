@@ -7,6 +7,9 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   template: ''
 })
+/**
+ * Basic component that has the common properties
+ */
 export abstract class BaseComponent implements OnInit, OnDestroy {
   protected subscriptions: Subscription[] = [];
 
@@ -30,10 +33,27 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
     this.logger.debug(this.constructor.name, 'ngOnDestroy()', 'end');
   }
 
+  /**
+   * Show a message using SweetAlert
+   *
+   * @param title Title of message
+   * @param text Content of message
+   * @param icon Icon to show
+   * @param action Action to be taken after closing the message
+   */
   showAlert(title: string, text: string, icon: SweetAlertIcon, action?: () => void): void {
     this.showAlertBack(title, text, icon, undefined, action);
   }
 
+  /**
+   * Show a error message from the server using SweetAlert
+   *
+   * @param title Title of message
+   * @param text Content of message
+   * @param icon Icon to show
+   * @param errorBack Error returned by the server
+   * @param action Action to be taken after closing the message
+   */
   showAlertBack(title: string, text: string, icon: SweetAlertIcon, errorBack: string, action?: () => void): void {
     this.subscriptions.push(
       this.translateService.get([title, text]).subscribe(

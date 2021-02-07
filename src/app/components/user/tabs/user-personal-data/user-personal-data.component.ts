@@ -10,6 +10,9 @@ import { BaseComponent } from '../../../../core/base/base.component';
   templateUrl: './user-personal-data.component.html',
   styleUrls: ['./user-personal-data.component.scss']
 })
+/**
+ * Component to display personal information of a user
+ */
 export class UserPersonalDataComponent extends BaseComponent implements OnInit {
   user = new User();
 

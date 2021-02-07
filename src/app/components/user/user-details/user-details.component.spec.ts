@@ -5,7 +5,6 @@ import { LoggerTestingModule } from 'ngx-logger/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestUtils } from '../../../core/utils/test-utils';
 import { SharedModule } from '../../../shared/shared.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('UserDetailsComponent', () => {
   let component: UserDetailsComponent;
@@ -19,7 +18,6 @@ describe('UserDetailsComponent', () => {
         HttpClientTestingModule,
         SharedModule,
         TestUtils.getLanguages(),
-        BrowserAnimationsModule
       ]
     })
       .compileComponents();

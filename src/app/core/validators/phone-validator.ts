@@ -1,6 +1,12 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
+/**
+ * Validator to verify phone numbers
+ */
 export class PhoneValidator {
+  /**
+   * Check that the number entered is a valid phone number
+   */
   static isValid(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.value) {

@@ -11,6 +11,9 @@ const ERROR_TOKEN_INVALID = marker('error.token.invalid');
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Guard to verify that the user is registering and is validated
+ */
 export class CheckValidTokenGuard implements CanActivate, OnDestroy {
   private subscription: Subscription;
 

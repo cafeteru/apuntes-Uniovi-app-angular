@@ -12,8 +12,8 @@ import { SnackBarService } from '../../../core/services/snack-bar.service';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { map } from 'rxjs/operators';
-import { OptionsPage } from '../../../core/models/options-page';
+import { map, tap } from 'rxjs/operators';
+import { OptionsPage } from '../../../core/models/server/options-page';
 
 const SUCCESS_ADD_USER = marker('user.add.successfully');
 
@@ -50,27 +50,14 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
   }
 
   ngAfterViewInit(): void {
-    this.logger.debug(UserListComponent.name, 'ngOnInit()', 'start');
+    this.logger.debug(UserListComponent.name, 'ngAfterViewInit()', 'start');
     merge(
       this.paginator?.page,
       this.sort?.sortChange
     ).subscribe(
       () => this.getUsers()
     );
-    this.logger.debug(UserListComponent.name, 'ngOnInit()', 'end');
-  }
-
-  getUsers(): void {
-    const options = new OptionsPage();
-    options.size = this.paginator?.pageSize ? this.paginator.pageSize : 5;
-    options.page = this.paginator?.pageIndex ? this.paginator.pageIndex : 0;
-    options.sort = this.sort?.active ? `${this.sort?.active},${this.sort?.direction}` : '';
-    this.users$ = this.userService.findAll(options).pipe(
-      map((res) => {
-        this.totalElements = res.totalElements;
-        return res.content;
-      })
-    );
+    this.logger.debug(UserListComponent.name, 'ngAfterViewInit()', 'end');
   }
 
   openModal(): void {
@@ -93,6 +80,29 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
           )
         );
       }
+      this.logger.debug(UserListComponent.name, `openModal()`, 'end');
     });
+  }
+
+  private getUsers(): void {
+    this.logger.debug(UserListComponent.name, 'getUsers()', 'start');
+    const options = this.createOptionsSearch();
+    this.users$ = this.userService.findAll(options).pipe(
+      map((res) => {
+        this.totalElements = res.totalElements;
+        return res.content;
+      }),
+      tap(() => this.logger.debug(UserListComponent.name, 'getUsers()', 'end'))
+    );
+  }
+
+  private createOptionsSearch(): OptionsPage {
+    this.logger.debug(UserListComponent.name, 'createOptionsSearch()', 'start');
+    const options = new OptionsPage();
+    options.size = this.paginator?.pageSize ? this.paginator.pageSize : 5;
+    options.page = this.paginator?.pageIndex ? this.paginator.pageIndex : 0;
+    options.sort = this.sort?.active ? `${this.sort?.active},${this.sort?.direction}` : '';
+    this.logger.debug(UserListComponent.name, 'createOptionsSearch()', 'end');
+    return options;
   }
 }

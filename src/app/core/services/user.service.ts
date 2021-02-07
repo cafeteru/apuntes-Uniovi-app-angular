@@ -5,7 +5,8 @@ import { map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { NGXLogger } from 'ngx-logger';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Page } from '../models/page';
+import { Page } from '../models/server/page';
+import { OptionsPage } from '../models/server/options-page';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +27,12 @@ export class UserService {
 
   /**
    * Returns all user
+   *
+   * @param options Options
    */
-  findAll(): Observable<User[]> {
+  findAll(options?: OptionsPage): Observable<Page<User>> {
     this.logger.debug(UserService.name, `findAll()`, 'start');
-    return this.http.get<Page<User>>(this.URL, this.getHttpOptions()).pipe(
-      map((page) => page.content),
+    return this.http.get<Page<User>>(`${this.URL}${options.toApi()}`, this.getHttpOptions()).pipe(
       tap(() => this.logger.debug(UserService.name, `findAll()`, 'end'))
     );
   }

@@ -35,6 +35,7 @@ export class User {
   toString(): string {
     const user = {...this};
     delete user.password;
+    delete user.img;
     return JSON.stringify(user);
   }
 }

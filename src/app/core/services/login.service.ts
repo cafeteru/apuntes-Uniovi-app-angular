@@ -6,10 +6,16 @@ import { map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import jwt_decode from 'jwt-decode';
 
+/**
+ * Response to the login request
+ */
 interface ResponseLogin {
   Authorization: string;
 }
 
+/**
+ * Parts of the token from the server
+ */
 interface IToken {
   username: string;
   role: string;
@@ -17,6 +23,9 @@ interface IToken {
   exp: number;
 }
 
+/**
+ * Information required to log into the server
+ */
 export interface LoginData {
   username: string;
   password: string;

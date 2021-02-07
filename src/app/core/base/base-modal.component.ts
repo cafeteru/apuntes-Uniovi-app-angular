@@ -7,6 +7,7 @@ import { Observable, Subscription } from 'rxjs';
 import { FormGroupUtil } from '../utils/form-group-util';
 import { BaseComponent } from './base.component';
 import { TranslateService } from '@ngx-translate/core';
+import { ErrorResponse } from '../models/server/error-response';
 
 const ERROR_FORM_GROUP_TITLE = marker('error.form-group.title');
 const ERROR_FORM_GROUP_TEXT = marker('error.form-group.text');
@@ -15,33 +16,16 @@ const ERROR_SERVICE_TEXT = marker('error.modal.service.text');
 const BTN_ADD = marker('buttons.add');
 const BTN_UPDATE = marker('buttons.update');
 
-interface ErrorResponse {
-  headers: Headers;
-  status: number;
-  statusText: string;
-  url: string;
-  ok: boolean;
-  name: string;
-  message: string;
-  error: Error;
-}
-
-interface Error {
-  error: string;
-}
-
-interface Headers {
-  normalizedNames: {};
-  lazyUpdate: null;
-}
-
 @Component({
   template: ''
 })
+/**
+ * Basic component that has the common properties of modal components
+ */
 export abstract class BaseModalComponent<T, U> extends BaseComponent implements OnInit {
   formGroup: FormGroup;
-  protected subscriptions: Subscription[] = [];
   textSaveOrUpdate: string;
+  protected subscriptions: Subscription[] = [];
 
   protected constructor(
     protected logger: NGXLogger,
@@ -53,6 +37,11 @@ export abstract class BaseModalComponent<T, U> extends BaseComponent implements 
     this.logger.debug(BaseModalComponent.name, 'constructor()', 'start');
     this.logger.debug(BaseModalComponent.name, 'constructor()', 'end');
   }
+
+  /**
+   * Get the title of the modal
+   */
+  abstract get title(): string
 
   ngOnInit(): void {
     this.logger.debug(BaseModalComponent.name, 'ngOnInit()', 'start');
@@ -98,6 +87,11 @@ export abstract class BaseModalComponent<T, U> extends BaseComponent implements 
   }
 
   /**
+   * The condition to know if it is save or update
+   */
+  abstract isSaveOrUpdate(): boolean;
+
+  /**
    * Update the entity with the data from the formGroup
    */
   protected abstract getDataForm(): T;
@@ -106,16 +100,6 @@ export abstract class BaseModalComponent<T, U> extends BaseComponent implements 
    * Initialize the formGroup that the modal will use
    */
   protected abstract getFormGroup(): FormGroup;
-
-  /**
-   * The condition to know if it is save or update
-   */
-  abstract isSaveOrUpdate(): boolean;
-
-  /**
-   * Get the title of the modal
-   */
-  abstract get title(): string
 
   /**
    * Call the service to update or save the data

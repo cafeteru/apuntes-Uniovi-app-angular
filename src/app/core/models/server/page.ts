@@ -1,3 +1,6 @@
+/**
+ * Represent paged server information
+ */
 export interface Page<T> {
   content: T[];
   pageable: Pageable;
@@ -12,7 +15,10 @@ export interface Page<T> {
   empty: boolean;
 }
 
-export interface Pageable {
+/**
+ * Represent pageable options from paged server information
+ */
+interface Pageable {
   sort: Sort;
   offset: number;
   pageSize: number;
@@ -21,8 +27,12 @@ export interface Pageable {
   unpaged: boolean;
 }
 
-export interface Sort {
+/**
+ * Represent sort options from paged server information
+ */
+interface Sort {
   sorted: boolean;
   unsorted: boolean;
   empty: boolean;
 }
+

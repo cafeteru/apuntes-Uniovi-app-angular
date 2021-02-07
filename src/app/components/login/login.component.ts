@@ -16,6 +16,9 @@ const ERROR_LOGIN_TEXT = marker('error.login.text');
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+/**
+ * Component to display the login menu
+ */
 export class LoginComponent extends BaseComponent implements OnInit {
   formGroup: FormGroup;
   disable: boolean;
@@ -42,6 +45,9 @@ export class LoginComponent extends BaseComponent implements OnInit {
     this.logger.debug(LoginComponent.name, 'ngOnInit()', 'end');
   }
 
+  /**
+   * Submit request to login.
+   */
   login(): void {
     this.logger.debug(LoginComponent.name, 'login()', 'start');
     if (FormGroupUtil.valid(this.formGroup)) {
@@ -68,6 +74,9 @@ export class LoginComponent extends BaseComponent implements OnInit {
     this.logger.debug(LoginComponent.name, 'ngOnInit()', 'end');
   }
 
+  /**
+   * Change input button disable
+   */
   changeDisable(): void {
     this.disable = !this.disable;
   }

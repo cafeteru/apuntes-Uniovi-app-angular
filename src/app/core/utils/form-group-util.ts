@@ -186,15 +186,6 @@ export class FormGroupUtil {
   }
 
   /**
-   * Returns the error message when a formControl is not found
-   *
-   * @param key identifier of the formControl
-   */
-  private static getErrorKey(key: string): string {
-    return `There is no ${key} value inside the formGroup`;
-  }
-
-  /**
    * Delete a error
    *
    * @param abstractControl Field of form
@@ -208,5 +199,14 @@ export class FormGroupUtil {
         abstractControl.setErrors(null);
       }
     }
+  }
+
+  /**
+   * Returns the error message when a formControl is not found
+   *
+   * @param key identifier of the formControl
+   */
+  private static getErrorKey(key: string): string {
+    return `There is no ${key} value inside the formGroup`;
   }
 }

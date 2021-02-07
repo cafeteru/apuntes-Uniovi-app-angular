@@ -8,12 +8,14 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './components/components.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MyMatPaginatorIntl } from './shared/material-design/my-mat-paginator-intl';
 
 registerLocaleData(localeEs);
 
@@ -41,7 +43,9 @@ registerLocaleData(localeEs);
       defaultLanguage: 'es'
     }),
   ],
-  providers: [],
+  providers: [
+    {provide: MatPaginatorIntl, useClass: MyMatPaginatorIntl}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

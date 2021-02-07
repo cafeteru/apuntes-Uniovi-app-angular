@@ -10,6 +10,9 @@ import { NGXLogger } from 'ngx-logger';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
+/**
+ * Component to display the navbar
+ */
 export class NavbarComponent extends BaseComponent {
   localStorage = localStorage;
   language = 'es';
@@ -23,11 +26,18 @@ export class NavbarComponent extends BaseComponent {
     super(logger, translateService);
   }
 
-
+  /**
+   * Get class to show flag of selected language
+   */
   get selectedLanguage(): string {
     return 'flag-icon flag-icon-' + this.language;
   }
 
+  /**
+   * Change the language to display the application
+   *
+   * @param language Selected language
+   */
   useLanguage(language: string): void {
     this.logger.debug(UserService.name, `useLanguage(language: ${language})`, 'start');
     this.language = language;

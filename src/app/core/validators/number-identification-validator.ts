@@ -1,7 +1,13 @@
 import { FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { FormGroupUtil } from '../utils/form-group-util';
 
+/**
+ * Validator to verify numbers of identification
+ */
 export class NumberIdentificationValidator {
+  /**
+   * Check that the number entered is a valid number of identification
+   */
   static isValid(): ValidatorFn {
     return (formGroup: FormGroup): ValidationErrors => {
       const identificationType = formGroup.controls.identificationType;

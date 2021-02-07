@@ -2,8 +2,8 @@
   <div class="row form-group">
     <div class="col" id="img">
       <img [src]="user.img | noImage" alt="{{'user.img' | translate}}"/>
-      <mat-checkbox class="col" id="active" [checked]="user.active"
-                    disabled>{{'user.active' | translate}}</mat-checkbox>
+      <mat-checkbox [checked]="user.active" class="col" disabled
+                    id="active">{{'user.active' | translate}}</mat-checkbox>
     </div>
     <div class="col">
       <div class="col">

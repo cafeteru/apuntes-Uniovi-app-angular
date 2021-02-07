@@ -5,15 +5,14 @@ import { LoggerTestingModule } from 'ngx-logger/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CoreModule } from '../../../core/core.module';
 import { SharedModule } from '../../../shared/shared.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../../core/models/user';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TestUtils } from '../../../core/utils/test-utils';
 import { Address } from '../../../core/models/address';
 import { LanguageType } from '../../../core/models/enums/language-type';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('AddUserComponent', () => {
+describe('ModalUserComponent', () => {
   let component: ModalUserComponent;
   let fixture: ComponentFixture<ModalUserComponent>;
 
@@ -43,10 +42,8 @@ describe('AddUserComponent', () => {
         RouterTestingModule,
         CoreModule,
         SharedModule,
-        BrowserAnimationsModule,
         TestUtils.getLanguages(),
-        FormsModule,
-        ReactiveFormsModule
+        BrowserAnimationsModule
       ],
       providers: [
         {provide: MatDialogRef, useValue: user},

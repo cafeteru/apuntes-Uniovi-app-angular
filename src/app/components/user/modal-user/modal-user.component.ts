@@ -11,7 +11,7 @@ import { Observable, of } from 'rxjs';
 import { UserService } from '../../../core/services/user.service';
 import { IdentificationType } from '../../../core/models/enums/identification-type';
 import { PhoneValidator } from '../../../core/validators/phone-validator';
-import { MaxDateValidator } from '../../../core/validators/max-date-validator';
+import { DateValidator } from '../../../core/validators/date-validator';
 import { NumberIdentificationValidator } from '../../../core/validators/number-identification-validator';
 
 const TITLE_ADD = marker('modal.user.title.add');
@@ -37,6 +37,41 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
     super(logger, translateService, matDialogRef, user);
     this.logger.debug(BaseModalComponent.name, 'constructor()', 'start');
     this.logger.debug(BaseModalComponent.name, 'constructor()', 'end');
+  }
+
+  get title(): string {
+    return this.isSaveOrUpdate() ? TITLE_UPDATE : TITLE_ADD;
+  }
+
+  isSaveOrUpdate(): boolean {
+    return Boolean(this.user.id);
+  }
+
+  /**
+   * Indicate if identificationType is required
+   */
+  isRequiredIdentificationType(): boolean {
+    return Boolean(this.formGroup.get('numberIdentification').value);
+  }
+
+  /**
+   * Read and check a photo
+   *
+   * @param $event File with the photo
+   */
+  readPhoto($event: Event): void {
+    const target = $event.target as HTMLInputElement;
+    const files = target.files as FileList;
+    const file = files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (file.type.includes('image')) {
+        this.formGroup.get('img').setValue(reader.result);
+      } else {
+        this.showAlert(ERROR_TITLE_IMG, ERROR_TEXT_IMG, 'error');
+      }
+    };
+    reader.readAsDataURL(file);
   }
 
   protected getDataForm(): User {
@@ -67,7 +102,7 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
         name: new FormControl(this.user.name),
         email: new FormControl(this.user.email),
         phone: new FormControl(this.user.phone, [PhoneValidator.isValid()]),
-        birthDate: new FormControl(this.user.birthDate, [MaxDateValidator.isValid(new Date())]),
+        birthDate: new FormControl(this.user.birthDate, [DateValidator.maxDate(new Date())]),
         role: new FormControl(this.user.role, [Validators.required]),
         username: new FormControl(this.user.username, [Validators.required]),
         password: new FormControl(this.user.password, [Validators.required]),
@@ -86,45 +121,10 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
     return formGroup;
   }
 
-  isSaveOrUpdate(): boolean {
-    return Boolean(this.user.id);
-  }
-
-  get title(): string {
-    return this.isSaveOrUpdate() ? TITLE_UPDATE : TITLE_ADD;
-  }
-
   protected saveOrUpdateService(data: User): Observable<User> {
     if (this.isSaveOrUpdate()) {
       return of();
     }
     return this.userService.save(this.user);
-  }
-
-  /**
-   * Indicate if identificationType is required
-   */
-  isRequiredIdentificationType(): boolean {
-    return Boolean(this.formGroup.get('numberIdentification').value);
-  }
-
-  /**
-   * Read and check a photo
-   *
-   * @param $event File with the photo
-   */
-  readPhoto($event: Event): void {
-    const target = $event.target as HTMLInputElement;
-    const files = target.files as FileList;
-    const file = files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (file.type.includes('image')) {
-        this.formGroup.get('img').setValue(reader.result);
-      } else {
-        this.showAlert(ERROR_TITLE_IMG, ERROR_TEXT_IMG, 'error');
-      }
-    };
-    reader.readAsDataURL(file);
   }
 }

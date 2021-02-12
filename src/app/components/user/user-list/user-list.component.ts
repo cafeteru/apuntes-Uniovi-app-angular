@@ -14,6 +14,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { map, tap } from 'rxjs/operators';
 import { OptionsPage } from '../../../core/models/server/options-page';
+import { FormControl, FormGroup } from '@angular/forms';
+import { RoleType } from '../../../core/models/enums/role-type';
+import { IdentificationType } from '../../../core/models/enums/identification-type';
 
 const SUCCESS_ADD_USER = marker('user.add.successfully');
 
@@ -33,6 +36,9 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  formGroup: FormGroup;
+  RoleType = Object.keys(RoleType);
+  IdentificationType = Object.keys(IdentificationType);
 
   constructor(
     protected logger: NGXLogger,
@@ -49,6 +55,21 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
   ngOnInit(): void {
     this.logger.debug(UserListComponent.name, 'ngOnInit()', 'start');
     this.getUsers();
+    this.formGroup = new FormGroup({
+      surname: new FormControl(undefined),
+      name: new FormControl(undefined),
+      email: new FormControl(undefined),
+      phone: new FormControl(undefined),
+      birthDate: new FormControl(undefined),
+      role: new FormControl(undefined),
+      username: new FormControl(undefined),
+      identificationType: new FormControl(undefined),
+      numberIdentification: new FormControl(undefined),
+      street: new FormControl(undefined),
+      city: new FormControl(undefined),
+      postalCode: new FormControl(undefined),
+      active: new FormControl(undefined),
+    });
     this.logger.debug(UserListComponent.name, 'ngOnInit()', 'end');
   }
 

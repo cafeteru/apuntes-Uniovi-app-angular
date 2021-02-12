@@ -2,6 +2,10 @@ body {
   font-family: 'Vollkorn', serif;
 }
 
+table {
+  width: 100%;
+}
+
 .modal-buttons {
   button {
     margin-left: 20px;
@@ -9,6 +13,11 @@ body {
 }
 
 .filter-buttons {
-  margin-top: 2%;
-  margin-left: 5px;
+  button {
+    margin-right: 10px;
+  }
+}
+
+.form-control {
+  height: auto;
 }

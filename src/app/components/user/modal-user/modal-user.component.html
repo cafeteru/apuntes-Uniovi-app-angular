@@ -68,7 +68,8 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
-      <input #numberIdentification [placeholder]="'user.numberIdentification' | translate" [required]="formGroup.controls.identificationType.value" formControlName="numberIdentification"
+      <input #numberIdentification [placeholder]="'user.numberIdentification' | translate"
+             [required]="formGroup.controls.identificationType.value" formControlName="numberIdentification"
              id="numberIdentification"
              matInput>
       <mat-hint align="end">{{numberIdentification.value.length}} / 9</mat-hint>
@@ -120,7 +121,8 @@
   <section class="row form-group">
     <div class="col">
       <label for="img">{{'user.img' | translate}}</label>
-      <input (change)="readPhoto($event)" accept="image/x-png,image/gif,image/jpeg" class="form-control-file" id="img" name="img"
+      <input (change)="readPhoto($event)" accept="image/x-png,image/gif,image/jpeg" class="form-control-file" id="img"
+             name="img"
              type="file">
     </div>
   </section>

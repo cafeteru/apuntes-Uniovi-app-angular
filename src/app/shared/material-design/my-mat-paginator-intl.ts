@@ -20,6 +20,10 @@ export class MyMatPaginatorIntl extends MatPaginatorIntl implements OnDestroy {
     this.loadRangeLabel();
   }
 
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
+
   private loadRangeLabel(): void {
     this.getRangeLabel = (page: number, pageSize: number, length: number) => {
       if (length === 0 || pageSize === 0) {
@@ -49,9 +53,5 @@ export class MyMatPaginatorIntl extends MatPaginatorIntl implements OnDestroy {
       this.lastPageLabel = res['paginator.lastPageLabel'];
       this.ofLabel = res['paginator.of'];
     });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
   }
 }

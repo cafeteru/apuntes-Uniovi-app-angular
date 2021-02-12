@@ -1,6 +1,13 @@
+$margin-size: 20px;
+
 body {
   font-family: 'Vollkorn', serif;
 }
+
+main {
+  margin: 20px 3% 0;
+}
+
 
 table {
   width: 100%;
@@ -8,13 +15,13 @@ table {
 
 .modal-buttons {
   button {
-    margin-left: 20px;
+    margin-left: $margin-size;
   }
 }
 
 .filter-buttons {
   button {
-    margin-right: 10px;
+    margin-right: $margin-size;
   }
 }
 

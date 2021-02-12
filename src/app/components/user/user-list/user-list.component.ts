@@ -22,6 +22,9 @@ const SUCCESS_ADD_USER = marker('user.add.successfully');
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
+/**
+ * Component to display the list of users
+ */
 export class UserListComponent extends BaseComponent implements OnInit, AfterViewInit {
   elementsPage = [5, 10, 25, 100];
   displayedColumns = ['username', 'name', 'surname', 'role', 'actions'];
@@ -60,6 +63,9 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
     this.logger.debug(UserListComponent.name, 'ngAfterViewInit()', 'end');
   }
 
+  /**
+   * Open a modal window to create a user
+   */
   openModal(): void {
     this.logger.debug(UserListComponent.name, `openModal()`, 'start');
     const data = new User();
@@ -71,7 +77,7 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
     const dialogRef = this.dialog.open(ModalUserComponent, config);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.ngOnInit();
+        this.getUsers();
         this.subscriptions.push(
           this.translateService.get(SUCCESS_ADD_USER).subscribe(
             res => {
@@ -86,7 +92,8 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
 
   private getUsers(): void {
     this.logger.debug(UserListComponent.name, 'getUsers()', 'start');
-    const options = this.createOptionsSearch();
+    const options = new OptionsPage();
+    options.createOptionsSearch(this.paginator, this.sort);
     this.users$ = this.userService.findAll(options).pipe(
       map((res) => {
         this.totalElements = res.totalElements;
@@ -94,15 +101,5 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
       }),
       tap(() => this.logger.debug(UserListComponent.name, 'getUsers()', 'end'))
     );
-  }
-
-  private createOptionsSearch(): OptionsPage {
-    this.logger.debug(UserListComponent.name, 'createOptionsSearch()', 'start');
-    const options = new OptionsPage();
-    options.size = this.paginator?.pageSize ? this.paginator.pageSize : 5;
-    options.page = this.paginator?.pageIndex ? this.paginator.pageIndex : 0;
-    options.sort = this.sort?.active ? `${this.sort?.active},${this.sort?.direction}` : '';
-    this.logger.debug(UserListComponent.name, 'createOptionsSearch()', 'end');
-    return options;
   }
 }

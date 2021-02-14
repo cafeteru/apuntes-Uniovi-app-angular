@@ -8,4 +8,8 @@ Trabajo fin de grado para la mejora del uso del campus virtual de Uniovi
 ## Módulos
 
 -   [Backend: Spring Boot con Kotlin y Maven](https://github.com/igm1990/apuntes-Uniovi-app-backend)
--   [Frontend: Angular 10](https://github.com/igm1990/apuntes-Uniovi-app-angular)
+-   [Frontend: Angular](https://github.com/igm1990/apuntes-Uniovi-app-angular)
+-   [Test](https://github.com/igm1990/apuntes-Uniovi-app-test)
+
+## Entorno de pruebas
+[![Firebase Badge](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9L5GIawim9buDyWHonhIOxbPtt12nla1lgQ&usqp=CAU)](https://apuntes-uniovi-app.web.app/)

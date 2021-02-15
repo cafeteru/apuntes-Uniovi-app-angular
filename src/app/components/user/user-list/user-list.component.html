@@ -1,5 +1,6 @@
-<div class="form-group">
+<div class="form-group filter-buttons">
   <button (click)="openModal()" class="btn btn-outline-success" id="addUser">{{'buttons.add' | translate}}</button>
+  <button (click)="cleanFilters()" class="btn btn-outline-secondary">{{'buttons.clean.filters' | translate}}</button>
 </div>
 <mat-accordion class="example-headers-align" multi>
   <mat-expansion-panel [formGroup]="formGroup">
@@ -61,9 +62,8 @@
       <mat-checkbox class="col" formControlName="active" id="activeFilter">{{'user.active' | translate}}</mat-checkbox>
     </section>
     <section class="row form-group">
-      <div class="col filter-buttons">
-        <button class="btn btn-outline-primary">{{'buttons.filter' | translate}}</button>
-        <button class="btn btn-outline-secondary">{{'buttons.clean.filters' | translate}}</button>
+      <div class="col">
+        <button class="btn btn-outline-primary" (click)="filter()">{{'buttons.filter' | translate}}</button>
       </div>
     </section>
   </mat-expansion-panel>

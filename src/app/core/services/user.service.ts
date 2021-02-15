@@ -29,10 +29,11 @@ export class UserService {
    * Returns all user
    *
    * @param options Options
+   * @param user User
    */
-  findAll(options?: OptionsPage): Observable<Page<User>> {
+  findAll(options?: OptionsPage, user?: User): Observable<Page<User>> {
     this.logger.debug(UserService.name, `findAll()`, 'start');
-    return this.http.get<Page<User>>(`${this.URL}${options.toApi()}`, this.getHttpOptions()).pipe(
+    return this.http.post<Page<User>>(`${this.URL}${options.toApi()}`, user, this.getHttpOptions()).pipe(
       tap(() => this.logger.debug(UserService.name, `findAll()`, 'end'))
     );
   }
@@ -61,6 +62,11 @@ export class UserService {
     );
   }
 
+  /**
+   * Change the selected language of a user
+   *
+   * @param lang Selected language
+   */
   changeLanguage(lang: string): Observable<boolean> {
     this.logger.debug(UserService.name, `changeLanguage(lang: ${lang})`, 'start');
     return this.http.head(`${this.URL}/lang/${lang}`, {

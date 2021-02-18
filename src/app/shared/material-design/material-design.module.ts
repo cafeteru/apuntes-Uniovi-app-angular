@@ -15,6 +15,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSortModule } from '@angular/material/sort';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatSnackBarModule,
     MatIconModule,
     MatTabsModule,
-    MatSortModule
+    MatSortModule,
+    MatExpansionModule
   ]
 })
 export class MaterialDesignModule {

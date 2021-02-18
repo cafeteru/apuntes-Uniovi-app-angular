@@ -1,6 +1,73 @@
-<div class="form-group" id="filter-buttons">
+<div class="form-group filter-buttons">
   <button (click)="openModal()" class="btn btn-outline-success" id="addUser">{{'buttons.add' | translate}}</button>
+  <button (click)="cleanFilters()" class="btn btn-outline-secondary">{{'buttons.clean.filters' | translate}}</button>
 </div>
+<mat-accordion multi>
+  <mat-expansion-panel [formGroup]="formGroup">
+    <mat-expansion-panel-header>
+      <mat-panel-title id="userFilters">
+        {{'filters.title' | translate}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <section class="form-group row">
+      <mat-form-field class="col">
+        <input formControlName="username" id="usernameFilter" matInput
+               placeholder="{{'user.username' | translate}}"/>
+      </mat-form-field>
+      <mat-form-field class="col">
+        <input formControlName="surname" id="surnameFilter" matInput placeholder="{{'user.surname' | translate}}">
+      </mat-form-field>
+      <mat-form-field class="col">
+        <input formControlName="name" id="nameFilter" matInput placeholder="{{'user.name' | translate}}">
+      </mat-form-field>
+    </section>
+    <section class="form-group row">
+      <mat-form-field class="col">
+        <input formControlName="email" id="emailFilter" matInput placeholder="{{'user.email' | translate}}">
+      </mat-form-field>
+      <mat-form-field class="col">
+        <input formControlName="phone" id="phoneFilter" matInput placeholder="{{'user.phone' | translate}}">
+      </mat-form-field>
+    </section>
+    <section class="form-group row">
+      <mat-form-field class="col">
+        <mat-label>{{'user.birthDate' | translate}}</mat-label>
+        <input [matDatepicker]="birthDate" formControlName="birthDate" id="birthDateFilter" matInput>
+        <mat-datepicker-toggle [for]="birthDate" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #birthDate startView="multi-year"></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="col">
+        <mat-label>{{'user.role' | translate}}</mat-label>
+        <mat-select formControlName="role" id="roleFilter">
+          <mat-option [value]="undefined" id="undefinedRole">{{'enum.undefined' | translate}}</mat-option>
+          <mat-option *ngFor="let role of RoleType" [id]="role + 'Filter'" [value]="role">{{role | roleType}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </section>
+    <section class="row form-group">
+      <mat-form-field class="col">
+        <input formControlName="street" id="streetFilter" matInput name="street"
+               placeholder="{{'user.address.street' | translate}}"/>
+      </mat-form-field>
+      <mat-form-field class="col">
+        <input formControlName="city" id="cityFilter" matInput name="city"
+               placeholder="{{'user.address.city' | translate}}"/>
+      </mat-form-field>
+      <mat-form-field class="col">
+        <input formControlName="postalCode" id="postalCodeFilter" matInput name="postalCode"
+               placeholder="{{'user.address.postalCode' | translate}}"/>
+      </mat-form-field>
+    </section>
+    <section class="row form-group">
+      <mat-checkbox class="col" formControlName="active" id="activeFilter">{{'user.active' | translate}}</mat-checkbox>
+    </section>
+    <section class="row form-group">
+      <div class="col">
+        <button class="btn btn-outline-primary" (click)="filter()" id="filterButton">{{'buttons.filter' | translate}}</button>
+      </div>
+    </section>
+  </mat-expansion-panel>
+</mat-accordion>
 <table [dataSource]="users$ | async" class="mat-elevation-z8" id="users-list" mat-table matSort>
   <!-- Username Column -->
   <ng-container matColumnDef="username">

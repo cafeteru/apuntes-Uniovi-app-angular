@@ -1,10 +1,25 @@
 $margin-size: 20px;
 
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#mat-drawer-container {
+  height: calc(100vh - 60px);
+}
+
+#navbar {
+  height: 4vh;
+  background-color: blue;
+}
+
 * {
   font-family: 'Vollkorn', serif;
 }
 
-main {
+.content {
   margin: 20px 3% 0;
 }
 

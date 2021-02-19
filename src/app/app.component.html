@@ -1,4 +1,14 @@
-<app-navbar></app-navbar>
+<app-navbar id="navbar" (booleanEventEmitter)="drawer.toggle()"></app-navbar>
 <main>
-  <router-outlet></router-outlet>
+  <mat-drawer-container id="mat-drawer-container" autosize>
+    <mat-drawer #drawer mode="side" class="mat-drawer">
+      <p>Auto-resizing sidenav</p>
+    </mat-drawer>
+
+    <div class="sidenav-content">
+      <section class="content">
+        <router-outlet></router-outlet>
+      </section>
+    </div>
+  </mat-drawer-container>
 </main>

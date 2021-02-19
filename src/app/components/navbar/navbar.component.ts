@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { LoginService } from '../../core/services/login.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../core/services/user.service';
@@ -16,6 +16,8 @@ import { NGXLogger } from 'ngx-logger';
 export class NavbarComponent extends BaseComponent {
   localStorage = localStorage;
   language = 'es';
+  showFiller = false;
+  @Output() booleanEventEmitter = new EventEmitter<boolean>();
 
   constructor(
     protected logger: NGXLogger,
@@ -54,5 +56,9 @@ export class NavbarComponent extends BaseComponent {
         )
       );
     }
+  }
+
+  openSidenav(): void {
+    this.booleanEventEmitter.emit(true);
   }
 }

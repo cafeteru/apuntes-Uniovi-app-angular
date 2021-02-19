@@ -1,18 +1,14 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <a *ngIf="localStorage.Authorization" class="navbar-brand" routerLink="/menu">
-    <img [alt]="'logo.navbar' | translate" [src]="'assets/img/black-logo.png' | noImage">
-  </a>
-  <button *ngIf="localStorage.Authorization" aria-controls="navbarNav" aria-expanded="false"
-          aria-label="Toggle navigation" class="navbar-toggler"
-          data-target="#navbarNav" data-toggle="collapse" type="button">
-    <span class="navbar-toggler-icon"></span>
+  <button type="button" class="btn btn-outline-secondary" aria-label="menu-hamburger" (click)="openSidenav()"
+          id="openSidenav">
+    <!--    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-menu-down"-->
+    <!--         viewBox="0 0 16 16">-->
+    <!--      <path-->
+    <!--        d="M7.646.146a.5.5 0 0 1 .708 0L10.207 2H14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h3.793L7.646.146zM1 7v3h14V7H1zm14-1V4a1 1 0 0 0-1-1h-3.793a1 1 0 0 1-.707-.293L8 1.207l-1.5 1.5A1 1 0 0 1 5.793 3H2a1 1 0 0 0-1 1v2h14zm0 5H1v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2zM2 4.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>-->
+    <!--    </svg>-->
+    <mat-icon>menu</mat-icon>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul *ngIf="localStorage.Authorization" class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/menu/users">{{'users' | translate}}</a>
-      </li>
-    </ul>
+  <div class="navbar-collapse cdk-overlay-backdrop-showing collapse show" id="navbarNav">
     <ul class="nav navbar-nav ml-auto">
       <li class="nav-item dropdown">
         <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
@@ -30,12 +26,10 @@
         </div>
       </li>
       <li *ngIf="localStorage.Authorization" class="nav-item">
-        <div class="form-inline my-2 my-lg-0">
-          <button (click)="loginService.logout()" class="btn btn-outline-secondary my-2 my-sm-0" id="logout"
-                  routerLink="/">
-            {{'logout' | translate}}
-          </button>
-        </div>
+        <button (click)="loginService.logout()" class="btn btn-outline-secondary" id="logout"
+                routerLink="/">
+          {{'logout' | translate}}
+        </button>
       </li>
     </ul>
   </div>

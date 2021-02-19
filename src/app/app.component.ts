@@ -8,7 +8,6 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
   constructor(
     private logger: NGXLogger,
     private translateService: TranslateService

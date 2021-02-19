@@ -1,4 +1,15 @@
-<app-navbar></app-navbar>
+<app-navbar id="navbar" (booleanEventEmitter)="drawer.toggle()"></app-navbar>
 <main>
-  <router-outlet></router-outlet>
+  <mat-sidenav-container id="mat-drawer-container" autosize>
+    <mat-sidenav #drawer [mode]="'side'">
+      <mat-nav-list>
+        <a mat-list-item routerLink="/menu/users" id="usersNavList">{{'users' | translate}}</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="sidenav-content">
+      <section class="content">
+        <router-outlet></router-outlet>
+      </section>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </main>

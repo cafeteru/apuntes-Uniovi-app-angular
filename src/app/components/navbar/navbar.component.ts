@@ -16,7 +16,6 @@ import { NGXLogger } from 'ngx-logger';
 export class NavbarComponent extends BaseComponent {
   localStorage = localStorage;
   language = 'es';
-  showFiller = false;
   @Output() booleanEventEmitter = new EventEmitter<boolean>();
 
   constructor(

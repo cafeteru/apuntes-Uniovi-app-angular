@@ -6,6 +6,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
@@ -13,6 +14,7 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         LoggerTestingModule,
+        BrowserAnimationsModule,
         CoreModule,
         SharedModule,
         TranslateModule.forRoot(),

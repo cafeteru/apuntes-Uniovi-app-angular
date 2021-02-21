@@ -11,11 +11,12 @@ import { OptionsPage } from '../models/server/options-page';
 @Injectable({
   providedIn: 'root'
 })
+
 /**
  * Service to manage user
  */
 export class UserService {
-  private URL = `${environment.urlAPI}/users`;
+  private url = `${environment.urlApi}/users`;
 
   constructor(
     private logger: NGXLogger,
@@ -33,7 +34,7 @@ export class UserService {
    */
   findAll(options?: OptionsPage, user?: User): Observable<Page<User>> {
     this.logger.debug(UserService.name, `findAll()`, 'start');
-    return this.http.post<Page<User>>(`${this.URL}${options.toApi()}`, user, this.getHttpOptions()).pipe(
+    return this.http.post<Page<User>>(`${this.url}${options.toApi()}`, user, this.getHttpOptions()).pipe(
       tap(() => this.logger.debug(UserService.name, `findAll()`, 'end'))
     );
   }
@@ -45,7 +46,7 @@ export class UserService {
    */
   findById(id: number): Observable<User> {
     this.logger.debug(UserService.name, `findById(id: ${id})`, 'start');
-    return this.http.get<User>(`${this.URL}/${id}`, this.getHttpOptions()).pipe(
+    return this.http.get<User>(`${this.url}/${id}`, this.getHttpOptions()).pipe(
       tap(() => this.logger.debug(UserService.name, `findById(id: ${id})`, 'end'))
     );
   }
@@ -57,7 +58,7 @@ export class UserService {
    */
   save(user: User): Observable<User> {
     this.logger.debug(UserService.name, `save(user: ${user})`, 'start');
-    return this.http.post<User>(`${this.URL}/create`, user, this.getHttpOptions()).pipe(
+    return this.http.post<User>(`${this.url}/create`, user, this.getHttpOptions()).pipe(
       tap(() => this.logger.debug(UserService.name, `save(user: ${user})`, 'end'))
     );
   }
@@ -69,11 +70,11 @@ export class UserService {
    */
   changeLanguage(lang: string): Observable<boolean> {
     this.logger.debug(UserService.name, `changeLanguage(lang: ${lang})`, 'start');
-    return this.http.head(`${this.URL}/lang/${lang}`, {
+    return this.http.head(`${this.url}/lang/${lang}`, {
       observe: 'response',
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: localStorage.Authorization,
+        authorization: localStorage.authorization,
       })
     }).pipe(
       map(x => x.status === 200),
@@ -81,12 +82,12 @@ export class UserService {
     );
   }
 
-  private getHttpOptions(): {} {
+  private getHttpOptions(): unknown {
     return {
       responseType: 'json',
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: localStorage.Authorization,
+        authorization: localStorage.authorization,
       })
     };
   }

@@ -40,7 +40,7 @@
         <mat-label>{{'user.role' | translate}}</mat-label>
         <mat-select formControlName="role" id="roleFilter">
           <mat-option [value]="undefined" id="undefinedRole">{{'enum.undefined' | translate}}</mat-option>
-          <mat-option *ngFor="let role of RoleType" [id]="role + 'Filter'" [value]="role">{{role | roleType}}</mat-option>
+          <mat-option *ngFor="let role of roleType" [id]="role + 'Filter'" [value]="role">{{role | roleType}}</mat-option>
         </mat-select>
       </mat-form-field>
     </section>

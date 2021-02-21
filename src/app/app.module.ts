@@ -35,9 +35,7 @@ registerLocaleData(localeEs);
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: (http: HttpClient) => {
-          return new TranslateHttpLoader(http);
-        },
+        useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
         deps: [HttpClient]
       },
       defaultLanguage: 'es'

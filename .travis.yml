@@ -20,7 +20,7 @@ before_script:
 
 script:
   - ng lint
-  - npm run coverage
+  - npm run test-coverage
 
 after_success:
   - ng build --prod

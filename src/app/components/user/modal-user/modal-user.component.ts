@@ -24,8 +24,8 @@ const ERROR_TEXT_IMG = marker('error.user.invalid.img.text');
   styleUrls: ['./modal-user.component.scss']
 })
 export class ModalUserComponent extends BaseModalComponent<User, ModalUserComponent> implements OnInit {
-  RoleType = Object.keys(RoleType);
-  IdentificationType = Object.keys(IdentificationType);
+  roleType = Object.keys(RoleType);
+  identificationType = Object.keys(IdentificationType);
 
   constructor(
     protected logger: NGXLogger,

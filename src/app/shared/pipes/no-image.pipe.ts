@@ -10,6 +10,7 @@ export class NoImagePipe implements PipeTransform {
 
   /**
    * Check if src is valid
+   *
    * @param image Path where the image is hosted
    */
   transform(image: string): string {

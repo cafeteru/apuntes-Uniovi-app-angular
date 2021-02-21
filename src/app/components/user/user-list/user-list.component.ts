@@ -30,16 +30,15 @@ const SUCCESS_ADD_USER = marker('user.add.successfully');
  * Component to display the list of users
  */
 export class UserListComponent extends BaseComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   elementsPage = [5, 10, 25, 100];
   displayedColumns = ['username', 'name', 'surname', 'role', 'actions'];
   users$: Observable<User[]> = of([]);
   totalElements = 0;
-
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   formGroup: FormGroup;
-  RoleType = Object.keys(RoleType);
-  IdentificationType = Object.keys(IdentificationType);
+  roleType = Object.keys(RoleType);
+  identificationType = Object.keys(IdentificationType);
   private user = new User();
 
   constructor(

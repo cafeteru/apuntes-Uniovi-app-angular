@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <button *ngIf="localStorage.Authorization" type="button" class="btn btn-outline-secondary" aria-label="menu-hamburger"
+  <button *ngIf="localStorage.authorization" type="button" class="btn btn-outline-secondary" aria-label="menu-hamburger"
           (click)="openSidenav()" id="openSidenav">
     <mat-icon>menu</mat-icon>
   </button>
@@ -20,7 +20,7 @@
           </button>
         </div>
       </li>
-      <li *ngIf="localStorage.Authorization" class="nav-item">
+      <li *ngIf="localStorage.authorization" class="nav-item">
         <button (click)="loginService.logout()" class="btn btn-outline-secondary" id="logout"
                 routerLink="/">
           {{'logout' | translate}}

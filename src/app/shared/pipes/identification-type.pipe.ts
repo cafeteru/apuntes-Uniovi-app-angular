@@ -16,10 +16,7 @@ const IDENTIFICATION_TYPE_NIE = marker('identification-type.nie');
 export class IdentificationTypePipe implements PipeTransform, OnDestroy {
   private subscription: Subscription;
 
-  private map = {
-    IDENTIFICATION_TYPE_DNI: '',
-    IDENTIFICATION_TYPE_NIE: '',
-  };
+  private map = {};
 
   constructor(
     private translateService: TranslateService

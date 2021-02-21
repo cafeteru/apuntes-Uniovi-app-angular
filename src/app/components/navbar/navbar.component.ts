@@ -14,9 +14,9 @@ import { NGXLogger } from 'ngx-logger';
  * Component to display the navbar
  */
 export class NavbarComponent extends BaseComponent {
+  @Output() booleanEventEmitter = new EventEmitter<boolean>();
   localStorage = localStorage;
   language = 'es';
-  @Output() booleanEventEmitter = new EventEmitter<boolean>();
 
   constructor(
     protected logger: NGXLogger,
@@ -43,7 +43,7 @@ export class NavbarComponent extends BaseComponent {
     this.logger.debug(UserService.name, `useLanguage(language: ${language})`, 'start');
     this.language = language;
     this.translateService.use(language);
-    if (localStorage.Authorization) {
+    if (localStorage.authorization) {
       this.subscriptions.push(
         this.userService.changeLanguage(language).subscribe(
           () => {

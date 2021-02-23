@@ -17,12 +17,13 @@ before_script:
   - npm install -g typescript
   - npm install -g @angular/cli
   - npm install
+  - npm install codecov -g
 
 script:
   - ng lint
   - npm run test-coverage
 
 after_success:
+  - codecov
   - ng build --prod
-  - bash <(curl -Ls https://coverage.codacy.com/get.sh) report
   - firebase deploy --token $FIREBASE_TOKEN

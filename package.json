@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "test-once": "ng test --no-watch",
-    "test-coverage": "ng test --no-watch --code-coverage",
+    "test-coverage": "ng test --browsers=ChromeHeadlessNoSandbox --codeCoverage --no-watch",
     "load-i18n": "ngx-translate-extract --input ./src --output ./src/assets/i18n/es.json src/assets/i18n/us.json --clean --sort --key-as-default-value --format json"
   },
   "private": true,
@@ -56,6 +56,7 @@
     "@types/node": "^14.14.31",
     "@typescript-eslint/eslint-plugin": "4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
+    "codecov": "^3.8.1",
     "codelyzer": "^6.0.1",
     "eslint": "^7.20.0",
     "eslint-plugin-import": "2.22.1",

@@ -6,9 +6,6 @@ node_js:
 addons:
   chrome: stable
 dist: trusty
-env:
-  global:
-    CODECOV_TOKEN=$CODECOV_TOKEN
 
 before_install:
   - export CHROME_BIN=chromium-browser

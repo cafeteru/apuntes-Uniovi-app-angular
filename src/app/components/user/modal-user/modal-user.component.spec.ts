@@ -46,8 +46,14 @@ describe('ModalUserComponent', () => {
         BrowserAnimationsModule
       ],
       providers: [
-        {provide: MatDialogRef, useValue: user},
-        {provide: MAT_DIALOG_DATA, useValue: user},
+        {
+          provide: MatDialogRef,
+          useValue: user
+        },
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: user
+        },
       ]
     }).compileComponents();
   });

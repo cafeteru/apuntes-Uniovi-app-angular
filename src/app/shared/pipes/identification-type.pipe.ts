@@ -25,7 +25,7 @@ export class IdentificationTypePipe implements PipeTransform, OnDestroy {
       IDENTIFICATION_TYPE_DNI,
       IDENTIFICATION_TYPE_NIE
     ];
-    this.subscription = this.translateService?.get(elements).subscribe(
+    this.subscription = this.translateService.get(elements).subscribe(
       res => this.map = res
     );
   }
@@ -41,7 +41,7 @@ export class IdentificationTypePipe implements PipeTransform, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 }

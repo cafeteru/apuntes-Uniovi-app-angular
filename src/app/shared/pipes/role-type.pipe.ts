@@ -51,5 +51,4 @@ export class RoleTypePipe implements PipeTransform, OnDestroy {
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
   }
-
 }

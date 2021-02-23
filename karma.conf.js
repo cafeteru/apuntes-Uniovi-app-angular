@@ -15,10 +15,13 @@ module.exports = function (config) {
     client: {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
-    coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, './coverage/apuntes-Uniovi-app-angular'),
-      subdir: '.',
-      reports: ['html', 'lcovonly', 'text-summary'],
+    coverageReporter: {
+      dir: 'build/reports/coverage',
+      reporters: [
+        { type: 'html', subdir: 'report-html' },
+        { type: 'lcov', subdir: 'report-lcov' },
+        { type: 'text-summary', subdir: 'report-text-summary' }
+      ],
       fixWebpackSourcePaths: true
     },
     reporters: ['progress', 'kjhtml'],
@@ -26,12 +29,8 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome', 'ChromeHeadlessNoSandbox'],
+    browsers: ['Chrome'],
     customLaunchers: {
-      ChromeHeadlessNoSandbox: {
-        base: 'ChromeHeadless',
-        flags: ['--no-sandbox']
-      },
       Chrome_travis_ci: {
         base: 'Chrome',
         flags: ['--no-sandbox']

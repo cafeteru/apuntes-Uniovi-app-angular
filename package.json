@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "test-once": "ng test --no-watch",
-    "test-coverage": "ng test --browsers=ChromeHeadlessNoSandbox --codeCoverage --no-watch",
+    "test-coverage": "ng test --no-watch --code-coverage",
     "load-i18n": "ngx-translate-extract --input ./src --output ./src/assets/i18n/es.json src/assets/i18n/us.json --clean --sort --key-as-default-value --format json"
   },
   "private": true,

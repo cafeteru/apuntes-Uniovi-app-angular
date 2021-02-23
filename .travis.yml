@@ -26,6 +26,6 @@ script:
   - npm run test-coverage
 
 after_success:
-  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./node_modules/.bin/codecov; fi
+  - bash <(curl -s https://codecov.io/bash)
   - ng build --prod
   - firebase deploy --token $FIREBASE_TOKEN

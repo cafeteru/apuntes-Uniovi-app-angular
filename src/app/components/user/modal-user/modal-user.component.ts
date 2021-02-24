@@ -125,6 +125,6 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
     if (this.isSaveOrUpdate()) {
       return of();
     }
-    return this.userService.save(this.user);
+    return this.userService.create(this.user);
   }
 }

@@ -1,4 +1,4 @@
 export const GLOBAL_CONSTANTS = {
-  maxWidthModal: '75%',
+  maxWidthModal: '75vw',
   maxHeightModal: '90vh',
 };

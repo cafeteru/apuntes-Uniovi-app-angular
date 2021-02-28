@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlApi: 'https://apuntes-uniovi.herokuapp.com'
+  urlAPI: 'https://app-apuntes-uniovi.herokuapp.com'
 };

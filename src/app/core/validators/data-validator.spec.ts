@@ -33,7 +33,7 @@ describe('DateValidator', () => {
   });
 
   it('input a valid date, today', () => {
-    birthDate.setValue(new Date());
+    birthDate.setValue(new Date(new Date().getTime() - 100));
     expect(formGroup.status).toBe('VALID');
   });
 

@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
@@ -26,11 +26,9 @@ export class CheckValidTokenGuard implements CanActivate, OnDestroy {
     this.logger.debug(CheckValidTokenGuard.name, 'constructor()', 'end');
   }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
+  canActivate(): boolean {
     const exp = localStorage.exp;
-    if (exp && exp && Date.now() < (exp * 1000)) {
+    if (exp && !isNaN(localStorage.exp) && Date.now() < (Number(exp) * 1_000)) {
       return true;
     }
     this.subscription = this.translateService.get(ERROR_TOKEN_INVALID).subscribe(
@@ -38,7 +36,6 @@ export class CheckValidTokenGuard implements CanActivate, OnDestroy {
         Swal.fire({
           icon: 'warning',
           title: (res),
-          timer: 2500
         }).then(
           () => {
             this.router.navigate(['/']).then();

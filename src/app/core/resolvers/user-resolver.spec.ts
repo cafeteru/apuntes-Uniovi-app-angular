@@ -52,6 +52,14 @@ describe('UserResolver', () => {
     httpMock.verify();
   });
 
+  afterEach(() => {
+    const list = document.getElementsByClassName('swal2-container swal2-center swal2-backdrop-show');
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
+    for (let i = 0; i < list.length; i++) {
+      list[i].remove();
+    }
+  });
+
   it('should be created', () => {
     expect(resolver).toBeTruthy();
   });
@@ -70,19 +78,18 @@ describe('UserResolver', () => {
     req.flush(user);
   });
 
-  it('check with no existed user',
-    () => {
-      const id = 1;
-      spyOn(service, 'findById').and.callThrough();
-      resolver.resolve(route.snapshot, null).subscribe(
-        () => {
-        },
-        () => {
-          expect(location.path()).toBe('/users');
-        }
-      );
-      const req = httpMock.expectOne(`${environment.urlApi}/users/${id}`);
-      expect(req.request.method).toBe('GET');
-      req.error(new ErrorEvent('error'));
-    });
+  it('check with no existed user', () => {
+    const id = 1;
+    spyOn(service, 'findById').and.callThrough();
+    resolver.resolve(route.snapshot, null).subscribe(
+      () => {
+      },
+      () => {
+        expect(location.path()).toBe('/users');
+      }
+    );
+    const req = httpMock.expectOne(`${environment.urlApi}/users/${id}`);
+    expect(req.request.method).toBe('GET');
+    req.error(new ErrorEvent('error'));
+  });
 });

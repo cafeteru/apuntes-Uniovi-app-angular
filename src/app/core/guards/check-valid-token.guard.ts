@@ -37,7 +37,8 @@ export class CheckValidTokenGuard implements CanActivate, OnDestroy {
       res => {
         Swal.fire({
           icon: 'warning',
-          title: (res)
+          title: (res),
+          timer: 2500
         }).then(
           () => {
             this.router.navigate(['/']).then();

@@ -9,14 +9,14 @@ import jwt_decode from 'jwt-decode';
 /**
  * Response to the login request
  */
-interface ResponseLogin {
+export interface ResponseLogin {
   authorization: string;
 }
 
 /**
  * Parts of the token from the server
  */
-interface IToken {
+export interface IToken {
   username: string;
   role: string;
   id: number;

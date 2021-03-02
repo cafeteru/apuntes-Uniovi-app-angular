@@ -33,6 +33,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "@sweetalert2/ngx-sweetalert2": "^9.0.0",
     "jwt-decode": "^3.1.2",
+    "jwt-simple": "^0.5.6",
     "ngx-logger": "^4.1.9",
     "ngx-show-hide-password": "^2.3.0",
     "rxjs": "~6.6.3",

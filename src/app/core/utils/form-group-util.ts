@@ -98,7 +98,7 @@ export class FormGroupUtil {
    */
   static getValue(formGroup: FormGroup, key: string): any {
     if (formGroup) {
-      const abstractControl: AbstractControl = formGroup.get(key);
+      const abstractControl = formGroup.get(key);
       if (abstractControl) {
         return abstractControl.value;
       }
@@ -117,7 +117,7 @@ export class FormGroupUtil {
    */
   static setValue(formGroup: FormGroup, key: string, value: any): void {
     if (formGroup) {
-      const abstractControl: AbstractControl = formGroup.get(key);
+      const abstractControl = formGroup.get(key);
       if (abstractControl) {
         abstractControl.setValue(value);
       } else {
@@ -138,7 +138,7 @@ export class FormGroupUtil {
    */
   static changeValidator(formGroup: FormGroup, key: string, validator: ValidatorFn[], initValue?: any): void {
     if (formGroup) {
-      const abstractControl: AbstractControl = formGroup.get(key);
+      const abstractControl = formGroup.get(key);
       if (abstractControl) {
         formGroup.setControl(key, new FormControl(initValue, validator));
       } else {
@@ -176,8 +176,8 @@ export class FormGroupUtil {
    */
   static clean(formGroup: FormGroup): void {
     if (formGroup) {
-      const list: string[] = Object.keys(formGroup.controls);
-      list.forEach((key: string) => {
+      const list = Object.keys(formGroup.controls);
+      list.forEach((key) => {
         this.setValue(formGroup, key, '');
       });
     } else {
@@ -198,6 +198,8 @@ export class FormGroupUtil {
       } else {
         abstractControl.setErrors(null);
       }
+    } else {
+      throw new Error(this.errorFormControl);
     }
   }
 

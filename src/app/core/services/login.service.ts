@@ -9,14 +9,14 @@ import jwt_decode from 'jwt-decode';
 /**
  * Response to the login request
  */
-interface ResponseLogin {
-  Authorization: string;
+export interface ResponseLogin {
+  authorization: string;
 }
 
 /**
  * Parts of the token from the server
  */
-interface IToken {
+export interface IToken {
   username: string;
   role: string;
   id: number;
@@ -38,7 +38,7 @@ export interface LoginData {
  * Service to identify user
  */
 export class LoginService {
-  private URL = `${environment.urlAPI}/login`;
+  private url = `${environment.urlApi}/login`;
 
   constructor(
     private logger: NGXLogger,
@@ -55,10 +55,10 @@ export class LoginService {
    */
   login(loginData: LoginData): Observable<void> {
     this.logger.debug(LoginService.name, `login(user: ${loginData.toString()})`, 'start');
-    return this.http.post<ResponseLogin>(this.URL, loginData).pipe(
+    return this.http.post<ResponseLogin>(this.url, loginData).pipe(
       map((res) => {
-        const result = jwt_decode<IToken>(res.Authorization);
-        localStorage.setItem('Authorization', res.Authorization);
+        const result = jwt_decode<IToken>(res.authorization);
+        localStorage.setItem('authorization', res.authorization);
         localStorage.setItem('username', result.username);
         localStorage.setItem('id', result.id.toString());
         localStorage.setItem('role', result.role);

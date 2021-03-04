@@ -1,11 +1,15 @@
 language: node_js
 
 node_js:
-  - '14.15.4'
+  - '14.15.5'
 
 addons:
   chrome: stable
 dist: trusty
+
+env:
+  global:
+    CODECOV_TOKEN=$CODECOV_TOKEN
 
 before_install:
   - export CHROME_BIN=chromium-browser
@@ -20,9 +24,9 @@ before_script:
 
 script:
   - ng lint
-  - npm run coverage
+  - npm run test-coverage
 
 after_success:
+  - bash <(curl -s https://codecov.io/bash)
   - ng build --prod
-  - bash <(curl -Ls https://coverage.codacy.com/get.sh) report
   - firebase deploy --token $FIREBASE_TOKEN

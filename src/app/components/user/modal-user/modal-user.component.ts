@@ -24,8 +24,8 @@ const ERROR_TEXT_IMG = marker('error.user.invalid.img.text');
   styleUrls: ['./modal-user.component.scss']
 })
 export class ModalUserComponent extends BaseModalComponent<User, ModalUserComponent> implements OnInit {
-  RoleType = Object.keys(RoleType);
-  IdentificationType = Object.keys(IdentificationType);
+  roleType = Object.keys(RoleType);
+  identificationType = Object.keys(IdentificationType);
 
   constructor(
     protected logger: NGXLogger,
@@ -101,11 +101,11 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
         surname: new FormControl(this.user.surname),
         name: new FormControl(this.user.name),
         email: new FormControl(this.user.email),
-        phone: new FormControl(this.user.phone, [PhoneValidator.isValid()]),
-        birthDate: new FormControl(this.user.birthDate, [DateValidator.maxDate(new Date())]),
-        role: new FormControl(this.user.role, [Validators.required]),
-        username: new FormControl(this.user.username, [Validators.required]),
-        password: new FormControl(this.user.password, [Validators.required]),
+        phone: new FormControl(this.user.phone, PhoneValidator.isValid()),
+        birthDate: new FormControl(this.user.birthDate, DateValidator.maxDate(new Date())),
+        role: new FormControl(this.user.role, Validators.required),
+        username: new FormControl(this.user.username, Validators.required),
+        password: new FormControl(this.user.password, Validators.required),
         identificationType: new FormControl(this.user.identificationType),
         numberIdentification: new FormControl(this.user.numberIdentification),
         street: new FormControl(this.user.address.street),
@@ -115,7 +115,7 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
         active: new FormControl(this.user.active),
       },
       {
-        validators: [NumberIdentificationValidator.isValid()]
+        validators: NumberIdentificationValidator.isValid()
       });
     this.logger.debug(BaseModalComponent.name, 'getFormGroup()', 'end');
     return formGroup;
@@ -125,6 +125,6 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
     if (this.isSaveOrUpdate()) {
       return of();
     }
-    return this.userService.save(this.user);
+    return this.userService.create(this.user);
   }
 }

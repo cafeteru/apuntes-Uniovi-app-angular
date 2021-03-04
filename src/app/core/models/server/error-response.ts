@@ -23,6 +23,6 @@ interface Error {
  * Headers from a error response
  */
 interface Headers {
-  normalizedNames: {};
+  normalizedNames: unknown;
   lazyUpdate: null;
 }

@@ -41,7 +41,7 @@ export abstract class BaseModalComponent<T, U> extends BaseComponent implements 
   /**
    * Get the title of the modal
    */
-  abstract get title(): string
+  abstract get title(): string;
 
   ngOnInit(): void {
     this.logger.debug(BaseModalComponent.name, 'ngOnInit()', 'start');

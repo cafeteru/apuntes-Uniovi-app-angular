@@ -16,10 +16,7 @@ const IDENTIFICATION_TYPE_NIE = marker('identification-type.nie');
 export class IdentificationTypePipe implements PipeTransform, OnDestroy {
   private subscription: Subscription;
 
-  private map = {
-    IDENTIFICATION_TYPE_DNI: '',
-    IDENTIFICATION_TYPE_NIE: '',
-  };
+  private map = {};
 
   constructor(
     private translateService: TranslateService
@@ -28,7 +25,7 @@ export class IdentificationTypePipe implements PipeTransform, OnDestroy {
       IDENTIFICATION_TYPE_DNI,
       IDENTIFICATION_TYPE_NIE
     ];
-    this.subscription = this.translateService?.get(elements).subscribe(
+    this.subscription = this.translateService.get(elements).subscribe(
       res => this.map = res
     );
   }
@@ -44,7 +41,7 @@ export class IdentificationTypePipe implements PipeTransform, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 }

@@ -17,9 +17,9 @@ export class OptionsPage {
    * @param sort MatSort of the component
    */
   createOptionsSearch(paginator: MatPaginator, sort: MatSort): void {
-    this.size = paginator?.pageSize ? paginator.pageSize : 5;
-    this.page = paginator?.pageIndex ? paginator.pageIndex : 0;
-    this.sort = sort?.active ? `${sort?.active},${sort?.direction}` : '';
+    this.size = paginator.pageSize ? paginator.pageSize : 5;
+    this.page = paginator.pageIndex ? paginator.pageIndex : 0;
+    this.sort = sort.active ? `${sort?.active},${sort?.direction}` : '';
   }
 
   /**

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { CheckValidTokenGuard } from './core/guards/check-valid-token.guard';
 
-const routes: Routes = [
+export const rootRoutes: Routes = [
   {
     path: '',
     component: LoginComponent
@@ -16,15 +16,15 @@ const routes: Routes = [
       ),
     canActivate: [CheckValidTokenGuard]
   },
-  // {
-  //   path: '**',
-  //   redirectTo: '',
-  //   pathMatch: 'full'
-  // }
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(rootRoutes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

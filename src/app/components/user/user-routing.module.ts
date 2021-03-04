@@ -5,7 +5,7 @@ import { CheckValidTokenGuard } from '../../core/guards/check-valid-token.guard'
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserResolver } from '../../core/resolvers/user-resolver.service';
 
-const routes: Routes = [
+export const userRoutes: Routes = [
   {
     path: '',
     component: UserListComponent,
@@ -22,7 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(userRoutes)],
   exports: [RouterModule]
 })
 export class UserRoutingModule {

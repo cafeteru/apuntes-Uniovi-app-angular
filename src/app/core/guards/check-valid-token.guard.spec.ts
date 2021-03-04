@@ -36,11 +36,7 @@ describe('CheckValidTokenGuard', () => {
   });
 
   afterEach(() => {
-    const list = document.getElementsByClassName('swal2-container swal2-center swal2-backdrop-show');
-    // eslint-disable-next-line @typescript-eslint/prefer-for-of
-    for (let i = 0; i < list.length; i++) {
-      list[i].remove();
-    }
+    TestUtils.cleanSweetAlert();
   });
 
   it('should be created', () => {

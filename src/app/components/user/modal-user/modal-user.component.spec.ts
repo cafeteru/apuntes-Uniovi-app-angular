@@ -14,7 +14,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { UserService } from '../../../core/services/user.service';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { of } from 'rxjs';
 import { RoleType } from '../../../core/models/enums/role-type';
 
@@ -63,8 +62,7 @@ describe('ModalUserComponent', () => {
           CoreModule,
           SharedModule,
           TestUtils.getLanguages(),
-          BrowserAnimationsModule,
-          BrowserDynamicTestingModule
+          BrowserAnimationsModule
         ],
         providers: [
           UserService,
@@ -106,6 +104,7 @@ describe('ModalUserComponent', () => {
   });
 
   it('check change title', () => {
+    user.id = undefined;
     component.ngOnInit();
     expect(component.title).toBe(TITLE_ADD);
     user.id = 1;

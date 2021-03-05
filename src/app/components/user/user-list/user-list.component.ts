@@ -99,8 +99,8 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
   ngAfterViewInit(): void {
     this.logger.debug(UserListComponent.name, 'ngAfterViewInit()', 'start');
     merge(
-      this.paginator?.page,
-      this.sort?.sortChange
+      this.paginator.page,
+      this.sort.sortChange
     ).subscribe(
       () => this.getUsers()
     );

@@ -63,7 +63,7 @@ describe('UserResolver', () => {
   it('check with existed user', () => {
     const id = 1;
     const user = new User();
-    resolver.resolve(route.snapshot, null).subscribe(
+    resolver.resolve(route.snapshot).subscribe(
       (res) => {
         expect(res).toBeTruthy();
         expect(res).toBe(user);
@@ -77,7 +77,7 @@ describe('UserResolver', () => {
   it('check with no existed user', () => {
     const id = 1;
     spyOn(service, 'findById').and.callThrough();
-    resolver.resolve(route.snapshot, null).subscribe(
+    resolver.resolve(route.snapshot).subscribe(
       () => {
       },
       () => {

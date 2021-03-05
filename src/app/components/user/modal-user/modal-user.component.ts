@@ -30,7 +30,7 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
   constructor(
     protected logger: NGXLogger,
     protected translateService: TranslateService,
-    public matDialogRef: MatDialogRef<ModalUserComponent>,
+    protected matDialogRef: MatDialogRef<ModalUserComponent>,
     @Inject(MAT_DIALOG_DATA) private user: User,
     private userService: UserService
   ) {

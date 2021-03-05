@@ -22,6 +22,10 @@ const BTN_UPDATE = marker('buttons.update');
 const TITLE_ADD = marker('modal.user.title.add');
 const TITLE_UPDATE = marker('modal.user.title.update');
 
+const matDialogRefMock = {
+  close: () => of(),
+};
+
 describe('ModalUserComponent', () => {
   let component: ModalUserComponent;
   let fixture: ComponentFixture<ModalUserComponent>;
@@ -68,7 +72,7 @@ describe('ModalUserComponent', () => {
           UserService,
           {
             provide: MatDialogRef,
-            useValue: user
+            useValue: matDialogRefMock
           },
           {
             provide: MAT_DIALOG_DATA,

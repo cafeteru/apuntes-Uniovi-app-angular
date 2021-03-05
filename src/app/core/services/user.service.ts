@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { NGXLogger } from 'ngx-logger';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Page } from '../models/server/page';
 import { OptionsPage } from '../models/server/options-page';
 
@@ -71,6 +71,18 @@ export class UserService {
     this.logger.debug(UserService.name, `save(user: ${user})`, 'start');
     return this.http.post<User>(`${this.url}/create`, user, UserService.getHttpOptions()).pipe(
       tap(() => this.logger.debug(UserService.name, `save(user: ${user})`, 'end'))
+    );
+  }
+
+  /**
+   * Update a user
+   *
+   * @param user User to create
+   */
+  update(user: User): Observable<User> {
+    this.logger.debug(UserService.name, `update(user: ${user})`, 'start');
+    return this.http.put<User>(`${this.url}/update/${user.id}`, user, UserService.getHttpOptions()).pipe(
+      tap(() => this.logger.debug(UserService.name, `update(user: ${user})`, 'end'))
     );
   }
 

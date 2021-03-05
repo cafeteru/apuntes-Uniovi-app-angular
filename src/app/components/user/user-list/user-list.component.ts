@@ -45,7 +45,7 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
     protected logger: NGXLogger,
     protected translateService: TranslateService,
     private userService: UserService,
-    public dialog: MatDialog,
+    private dialog: MatDialog,
     private snackBarService: SnackBarService,
   ) {
     super(logger, translateService);

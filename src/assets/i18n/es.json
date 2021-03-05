@@ -33,7 +33,6 @@
 	"login.title": "Identificarse",
 	"login.username": "Nombre de usuario",
 	"logo.login": "Logo de la Universidad de Oviedo",
-	"logo.navbar": "Logo de la Universidad de Oviedo",
 	"logout": "Cerrar sesión",
 	"modal.user.title.add": "Añadir usuario",
 	"modal.user.title.update": "Actualizar usuario",
@@ -65,6 +64,7 @@
 	"user.phone": "Teléfono",
 	"user.role": "Rol",
 	"user.surname": "Apellidos",
+	"user.update.successfully": "Usuario actualizado correctamente",
 	"user.username": "Nombre de usuario",
 	"username.error.required": "Nombre de usuario es requerido",
 	"users": "Usuarios"

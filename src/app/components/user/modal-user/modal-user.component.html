@@ -94,7 +94,7 @@
     </mat-form-field>
     <mat-form-field class="col">
       <input formControlName="password" id="password" matInput placeholder="{{'user.password' | translate}}"
-             required showHideInput type="password"/>
+             [required]="!isSaveOrUpdate()" showHideInput type="password"/>
       <i [showHideStatus]="{ materialIcon: true, id: 'password' }" class="material-icons" matSuffix
          showHideTrigger="password"></i>
       <mat-error *ngIf="formGroup.controls.password.errors?.required">

@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { RoleType } from '../../../core/models/enums/role-type';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { UserService } from '../../../core/services/user.service';
 import { IdentificationType } from '../../../core/models/enums/identification-type';
 import { PhoneValidator } from '../../../core/validators/phone-validator';
@@ -81,7 +81,8 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
     this.user.email = this.formGroup.get('email').value;
     this.user.phone = this.formGroup.get('phone').value;
     this.user.active = this.formGroup.get('active').value;
-    this.user.img = this.formGroup.get('img').value;
+    const img = this.formGroup.get('img').value;
+    this.user.img = img ? img : this.user.img;
     this.user.birthDate = this.formGroup.get('birthDate').value;
     this.user.username = this.formGroup.get('username').value;
     this.user.password = this.formGroup.get('password').value;
@@ -105,7 +106,7 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
         birthDate: new FormControl(this.user.birthDate, DateValidator.maxDate(new Date())),
         role: new FormControl(this.user.role, Validators.required),
         username: new FormControl(this.user.username, Validators.required),
-        password: new FormControl(this.user.password, Validators.required),
+        password: new FormControl(this.user.password),
         identificationType: new FormControl(this.user.identificationType),
         numberIdentification: new FormControl(this.user.numberIdentification),
         street: new FormControl(this.user.address.street),
@@ -123,7 +124,7 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
 
   protected saveOrUpdateService(data: User): Observable<User> {
     if (this.isSaveOrUpdate()) {
-      return of();
+      return this.userService.update(this.user);
     }
     return this.userService.create(this.user);
   }

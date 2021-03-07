@@ -23,7 +23,7 @@ const TITLE_ADD = marker('modal.user.title.add');
 const TITLE_UPDATE = marker('modal.user.title.update');
 
 const matDialogRefMock = {
-  close: () => of(),
+  close: () => of()
 };
 
 describe('ModalUserComponent', () => {

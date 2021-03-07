@@ -40,7 +40,8 @@
         <mat-label>{{'user.role' | translate}}</mat-label>
         <mat-select formControlName="role" id="roleFilter">
           <mat-option [value]="undefined" id="undefinedRole">{{'enum.undefined' | translate}}</mat-option>
-          <mat-option *ngFor="let role of roleType" [id]="role + 'Filter'" [value]="role">{{role | roleType}}</mat-option>
+          <mat-option *ngFor="let role of roleType" [id]="role + 'Filter'"
+                      [value]="role">{{role | roleType}}</mat-option>
         </mat-select>
       </mat-form-field>
     </section>
@@ -63,7 +64,8 @@
     </section>
     <section class="row form-group">
       <div class="col">
-        <button class="btn btn-outline-primary" (click)="filter()" id="filterButton">{{'buttons.filter' | translate}}</button>
+        <button class="btn btn-outline-primary" (click)="filter()"
+                id="filterButton">{{'buttons.filter' | translate}}</button>
       </div>
     </section>
   </mat-expansion-panel>
@@ -97,7 +99,7 @@
   <ng-container matColumnDef="actions">
     <th *matHeaderCellDef mat-header-cell></th>
     <td *matCellDef="let user; let i = index" [id]="'actions'+ (i + 1)" mat-cell>
-      <mat-icon [routerLink]="[user.id]" color="primary">find_in_page</mat-icon>
+      <mat-icon [routerLink]="[user.id]" color="primary" [id]="'details'+ (i + 1)">find_in_page</mat-icon>
     </td>
   </ng-container>
 

@@ -77,6 +77,20 @@ describe('UserService', () => {
     req.flush(user);
   });
 
+  it('check update', () => {
+    const user = new User();
+    user.id = 1;
+    service.update(user).subscribe(
+      (res) => {
+        expect(res).toBeTruthy();
+        expect(res).toBe(user);
+      }
+    );
+    const req = httpMock.expectOne(`${environment.urlApi}/users/update/${user.id}`);
+    expect(req.request.method).toBe('PUT');
+    req.flush(user);
+  });
+
   it('check changeLanguage', () => {
     const lang = 'es';
     service.changeLanguage(lang).subscribe(

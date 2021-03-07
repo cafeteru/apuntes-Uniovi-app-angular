@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from '../../../../core/models/user';
 import { ActivatedRoute } from '@angular/router';
 import { NGXLogger } from 'ngx-logger';
@@ -20,28 +20,27 @@ const SUCCESS_UPDATE_USER = marker('user.update.successfully');
 /**
  * Component to display personal information of a user
  */
-export class UserPersonalDataComponent extends BaseComponent implements OnInit {
-  user = new User();
+export class UserPersonalDataComponent extends BaseComponent {
+  user: User;
 
   constructor(
     protected logger: NGXLogger,
     protected translateService: TranslateService,
-    route: ActivatedRoute,
+    private route: ActivatedRoute,
     private dialog: MatDialog,
     private snackBarService: SnackBarService,
   ) {
     super(logger, translateService);
     this.logger.debug(UserPersonalDataComponent.name, 'constructor()', 'start');
-    if (route.snapshot.data.user) {
-      this.user = route.snapshot.data.user;
+    if (this.route.snapshot.data.user) {
+      this.user = this.route.snapshot.data.user;
     }
     this.logger.debug(UserPersonalDataComponent.name, 'constructor()', 'end');
   }
 
-  ngOnInit(): void {
-  }
-
-
+  /**
+   * Update user´s information
+   */
   updateUser(): void {
     this.logger.debug(UserPersonalDataComponent.name, `updateUser()`, 'start');
     const config = {

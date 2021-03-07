@@ -112,7 +112,7 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
         street: new FormControl(this.user.address.street),
         city: new FormControl(this.user.address.city),
         postalCode: new FormControl(this.user.address.postalCode),
-        img: new FormControl(this.user.name),
+        img: new FormControl(this.user.img),
         active: new FormControl(this.user.active),
       },
       {

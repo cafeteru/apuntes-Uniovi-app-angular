@@ -53,7 +53,6 @@ export class UserPersonalDataComponent extends BaseComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       (user: User) => {
         if (user) {
-          // this.user = user;
           this.subscriptions.push(
             this.translateService.get(SUCCESS_UPDATE_USER).subscribe(
               res => {

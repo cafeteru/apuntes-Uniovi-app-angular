@@ -39,13 +39,13 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
   formGroup: FormGroup;
   roleType = Object.keys(RoleType);
   identificationType = Object.keys(IdentificationType);
-  private user = new User();
+  private userFilter = new User();
 
   constructor(
     protected logger: NGXLogger,
     protected translateService: TranslateService,
     private userService: UserService,
-    public dialog: MatDialog,
+    private dialog: MatDialog,
     private snackBarService: SnackBarService,
   ) {
     super(logger, translateService);
@@ -63,34 +63,34 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
     this.logger.debug(UserListComponent.name, 'filter()', 'start');
     const namesFormGroups = Object.keys(this.formGroup.controls);
     namesFormGroups.forEach(name => {
-      this.user[name] = this.formGroup.get(name).value;
+      this.userFilter[name] = this.formGroup.get(name).value;
     });
     const address = new Address();
     address.street = this.formGroup.get('street').value;
     address.city = this.formGroup.get('city').value;
     address.postalCode = this.formGroup.get('postalCode').value;
-    this.user.address = address;
+    this.userFilter.address = address;
     this.getUsers();
     this.logger.debug(UserListComponent.name, 'filter()', 'end');
   }
 
   cleanFilters(): void {
     this.logger.debug(UserListComponent.name, 'cleanFilters()', 'start');
-    this.user = new User();
+    this.userFilter = new User();
     this.formGroup = new FormGroup({
-      surname: new FormControl(this.user.surname),
-      name: new FormControl(this.user.name),
-      email: new FormControl(this.user.email),
-      phone: new FormControl(this.user.phone),
-      birthDate: new FormControl(this.user.birthDate),
-      role: new FormControl(this.user.role),
-      username: new FormControl(this.user.username),
-      identificationType: new FormControl(this.user.identificationType),
-      numberIdentification: new FormControl(this.user.numberIdentification),
-      street: new FormControl(this.user.address.street),
-      city: new FormControl(this.user.address.city),
-      postalCode: new FormControl(this.user.address.postalCode),
-      active: new FormControl(this.user.active),
+      surname: new FormControl(this.userFilter.surname),
+      name: new FormControl(this.userFilter.name),
+      email: new FormControl(this.userFilter.email),
+      phone: new FormControl(this.userFilter.phone),
+      birthDate: new FormControl(this.userFilter.birthDate),
+      role: new FormControl(this.userFilter.role),
+      username: new FormControl(this.userFilter.username),
+      identificationType: new FormControl(this.userFilter.identificationType),
+      numberIdentification: new FormControl(this.userFilter.numberIdentification),
+      street: new FormControl(this.userFilter.address.street),
+      city: new FormControl(this.userFilter.address.city),
+      postalCode: new FormControl(this.userFilter.address.postalCode),
+      active: new FormControl(this.userFilter.active),
     });
     this.getUsers();
     this.logger.debug(UserListComponent.name, 'cleanFilters()', 'end');
@@ -99,8 +99,8 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
   ngAfterViewInit(): void {
     this.logger.debug(UserListComponent.name, 'ngAfterViewInit()', 'start');
     merge(
-      this.paginator?.page,
-      this.sort?.sortChange
+      this.paginator.page,
+      this.sort.sortChange
     ).subscribe(
       () => this.getUsers()
     );
@@ -138,7 +138,7 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
     this.logger.debug(UserListComponent.name, 'getUsers()', 'start');
     const options = new OptionsPage();
     options.createOptionsSearch(this.paginator, this.sort);
-    this.users$ = this.userService.findAll(options, this.user).pipe(
+    this.users$ = this.userService.findAll(options, this.userFilter).pipe(
       map((res) => {
         this.totalElements = res.totalElements;
         return res.content;

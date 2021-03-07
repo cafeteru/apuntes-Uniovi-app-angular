@@ -7,7 +7,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
@@ -39,7 +38,6 @@ import { MatListModule } from '@angular/material/list';
     MatDialogModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatDatepickerModule,
     MatSnackBarModule,
     MatIconModule,
     MatTabsModule,

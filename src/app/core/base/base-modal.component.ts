@@ -30,7 +30,7 @@ export abstract class BaseModalComponent<T, U> extends BaseComponent implements 
   protected constructor(
     protected logger: NGXLogger,
     protected translateService: TranslateService,
-    public matDialogRef: MatDialogRef<U>,
+    protected matDialogRef: MatDialogRef<U>,
     @Inject(MAT_DIALOG_DATA) public entity: T
   ) {
     super(logger, translateService);

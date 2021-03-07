@@ -16,6 +16,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MyMatPaginatorIntl } from './shared/material-design/my-mat-paginator-intl';
+import { MAT_DATE_LOCALE} from '@angular/material/core';
 
 registerLocaleData(localeEs);
 
@@ -42,7 +43,8 @@ registerLocaleData(localeEs);
     }),
   ],
   providers: [
-    {provide: MatPaginatorIntl, useClass: MyMatPaginatorIntl}
+    {provide: MatPaginatorIntl, useClass: MyMatPaginatorIntl},
+    {provide: MAT_DATE_LOCALE, useValue: 'es-ES'}
   ],
   bootstrap: [AppComponent]
 })

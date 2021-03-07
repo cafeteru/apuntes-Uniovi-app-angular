@@ -36,9 +36,7 @@
   <section class="form-group row">
     <mat-form-field class="col">
       <mat-label>{{'user.birthDate' | translate}}</mat-label>
-      <input [matDatepicker]="birthDate" formControlName="birthDate" id="birthDate" matInput>
-      <mat-datepicker-toggle [for]="birthDate" matSuffix></mat-datepicker-toggle>
-      <mat-datepicker #birthDate startView="multi-year"></mat-datepicker>
+      <input type="date" formControlName="birthDate" id="birthDate" matInput>
       <mat-error *ngIf="formGroup.controls.birthDate.errors?.maxDate">
         {{'error.user.limit.birth.date' | translate}}
       </mat-error>
@@ -94,7 +92,7 @@
     </mat-form-field>
     <mat-form-field class="col">
       <input formControlName="password" id="password" matInput placeholder="{{'user.password' | translate}}"
-             required showHideInput type="password"/>
+             [required]="!isSaveOrUpdate()" showHideInput type="password"/>
       <i [showHideStatus]="{ materialIcon: true, id: 'password' }" class="material-icons" matSuffix
          showHideTrigger="password"></i>
       <mat-error *ngIf="formGroup.controls.password.errors?.required">

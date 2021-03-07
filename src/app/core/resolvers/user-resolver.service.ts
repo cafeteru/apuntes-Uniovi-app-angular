@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user';
@@ -18,7 +18,7 @@ export class UserResolver implements Resolve<User> {
   ) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User> {
+  resolve(route: ActivatedRouteSnapshot): Observable<User> {
     const id = Number(route.paramMap.get('id'));
     return this.userService.findById(id).pipe(
       catchError(() => {

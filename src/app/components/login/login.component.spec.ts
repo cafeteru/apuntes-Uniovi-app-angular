@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { of, throwError } from 'rxjs';
 import { rootRoutes } from '../../app-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -40,7 +41,7 @@ describe('LoginComponent', () => {
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
       ],
       providers: [
         LoginService

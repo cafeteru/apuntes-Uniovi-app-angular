@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,9 +16,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MyMatPaginatorIntl } from './shared/material-design/my-mat-paginator-intl';
-import { MAT_DATE_LOCALE} from '@angular/material/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
-registerLocaleData(localeEs);
+registerLocaleData(localeEs, 'es');
 
 @NgModule({
   declarations: [
@@ -43,8 +43,9 @@ registerLocaleData(localeEs);
     }),
   ],
   providers: [
+    {provide: LOCALE_ID, useValue: 'es'},
     {provide: MatPaginatorIntl, useClass: MyMatPaginatorIntl},
-    {provide: MAT_DATE_LOCALE, useValue: 'es-ES'}
+    {provide: MAT_DATE_LOCALE, useValue: 'es'}
   ],
   bootstrap: [AppComponent]
 })

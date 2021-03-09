@@ -148,19 +148,6 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
     });
   }
 
-  private getUsers(): void {
-    this.logger.debug(UserListComponent.name, 'getUsers()', 'start');
-    const options = new OptionsPage();
-    options.createOptionsSearch(this.paginator, this.sort);
-    this.users$ = this.userService.findAll(options, this.userFilter).pipe(
-      map((res) => {
-        this.totalElements = res.totalElements;
-        return res.content;
-      }),
-      tap(() => this.logger.debug(UserListComponent.name, 'getUsers()', 'end'))
-    );
-  }
-
   /**
    * Change user´s active
    *
@@ -187,6 +174,19 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
           this.showAlert(title, text, 'error');
         }
       )
+    );
+  }
+
+  private getUsers(): void {
+    this.logger.debug(UserListComponent.name, 'getUsers()', 'start');
+    const options = new OptionsPage();
+    options.createOptionsSearch(this.paginator, this.sort);
+    this.users$ = this.userService.findAll(options, this.userFilter).pipe(
+      map((res) => {
+        this.totalElements = res.totalElements;
+        return res.content;
+      }),
+      tap(() => this.logger.debug(UserListComponent.name, 'getUsers()', 'end'))
     );
   }
 }

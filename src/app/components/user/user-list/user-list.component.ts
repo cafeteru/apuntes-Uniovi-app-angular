@@ -20,6 +20,12 @@ import { IdentificationType } from '../../../core/models/enums/identification-ty
 import { Address } from '../../../core/models/address';
 
 const SUCCESS_ADD_USER = marker('user.add.successfully');
+const SUCCESS_DISABLE_USER = marker('user.disable.successfully');
+const ERROR_DISABLE_USER_TITLE = marker('user.disable.error.title');
+const ERROR_DISABLE_USER_TEXT = marker('user.disable.error.text');
+const SUCCESS_ENABLE_USER = marker('user.enable.successfully');
+const ERROR_ENABLE_USER_TITLE = marker('user.enable.error.title');
+const ERROR_ENABLE_USER_TEXT = marker('user.enable.error.text');
 
 @Component({
   selector: 'app-user-list',
@@ -59,6 +65,9 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
     this.logger.debug(UserListComponent.name, 'ngOnInit()', 'end');
   }
 
+  /**
+   * Filter the list of users
+   */
   filter(): void {
     this.logger.debug(UserListComponent.name, 'filter()', 'start');
     const namesFormGroups = Object.keys(this.formGroup.controls);
@@ -74,6 +83,9 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
     this.logger.debug(UserListComponent.name, 'filter()', 'end');
   }
 
+  /**
+   * Clean al filters and reload list
+   */
   cleanFilters(): void {
     this.logger.debug(UserListComponent.name, 'cleanFilters()', 'start');
     this.userFilter = new User();
@@ -98,11 +110,13 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
 
   ngAfterViewInit(): void {
     this.logger.debug(UserListComponent.name, 'ngAfterViewInit()', 'start');
-    merge(
-      this.paginator.page,
-      this.sort.sortChange
-    ).subscribe(
-      () => this.getUsers()
+    this.subscriptions.push(
+      merge(
+        this.paginator.page,
+        this.sort.sortChange
+      ).subscribe(
+        () => this.getUsers()
+      )
     );
     this.logger.debug(UserListComponent.name, 'ngAfterViewInit()', 'end');
   }
@@ -144,6 +158,35 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
         return res.content;
       }),
       tap(() => this.logger.debug(UserListComponent.name, 'getUsers()', 'end'))
+    );
+  }
+
+  /**
+   * Change user´s active
+   *
+   * @param id User´s id
+   * @param value Next value to user´s active
+   */
+  disable(id: number, value: boolean): void {
+    this.subscriptions.push(
+      this.userService.disable(id, value).subscribe(
+        () => {
+          this.getUsers();
+          const message = value ? SUCCESS_ENABLE_USER : SUCCESS_DISABLE_USER;
+          this.subscriptions.push(
+            this.translateService.get(message).subscribe(
+              res => {
+                this.snackBarService.showSuccess(res);
+              }
+            )
+          );
+        },
+        () => {
+          const title = value ? ERROR_ENABLE_USER_TITLE : ERROR_DISABLE_USER_TITLE;
+          const text = value ? ERROR_ENABLE_USER_TEXT : ERROR_DISABLE_USER_TEXT;
+          this.showAlert(title, text, 'error');
+        }
+      )
     );
   }
 }

@@ -98,6 +98,12 @@
     <th *matHeaderCellDef mat-header-cell></th>
     <td *matCellDef="let user; let i = index" [id]="'actions'+ (i + 1)" mat-cell>
       <mat-icon [routerLink]="[user.id]" color="primary" [id]="'details'+ (i + 1)">find_in_page</mat-icon>
+      <mat-icon *ngIf="user.active" color="warn" [id]="'disable'+ (i + 1)" (click)="disable(user.id, false)">
+        not_interested
+      </mat-icon>
+      <mat-icon *ngIf="!user.active" color="primary" [id]="'disable'+ (i + 1)" (click)="disable(user.id, true)">
+        restore
+      </mat-icon>
     </td>
   </ng-container>
 

@@ -54,7 +54,13 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
    * @param errorBack Error returned by the server
    * @param action Action to be taken after closing the message
    */
-  showAlertBack(title: string, text: string, icon: SweetAlertIcon, errorBack: string, action?: () => void): void {
+  showAlertBack(
+    title: string,
+    text: string,
+    icon: SweetAlertIcon,
+    errorBack?: string,
+    action?: () => void
+  ): void {
     this.subscriptions.push(
       this.translateService.get([title, text]).subscribe(
         res => {

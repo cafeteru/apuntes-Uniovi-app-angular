@@ -13,8 +13,8 @@ const ERROR_FORM_GROUP_TITLE = marker('error.form-group.title');
 const ERROR_FORM_GROUP_TEXT = marker('error.form-group.text');
 const ERROR_SERVICE_TITLE = marker('error.modal.service.title');
 const ERROR_SERVICE_TEXT = marker('error.modal.service.text');
-const BTN_ADD = marker('buttons.add');
-const BTN_UPDATE = marker('buttons.update');
+const BTN_ADD = marker('button.add');
+const BTN_UPDATE = marker('button.update');
 
 @Component({
   template: ''
@@ -74,14 +74,14 @@ export abstract class BaseModalComponent<T, U> extends BaseComponent implements 
             this.closeModal(res);
           },
           (res: ErrorResponse) => {
-            this.showAlertBack(ERROR_SERVICE_TITLE, ERROR_SERVICE_TEXT, 'error',
+            this.showAlertBack('error', ERROR_SERVICE_TITLE, ERROR_SERVICE_TEXT,
               res.error.error);
             this.logger.debug(BaseModalComponent.name, `saveOrUpdate()`, res);
           }
         )
       );
     } else {
-      this.showAlert(ERROR_FORM_GROUP_TITLE, ERROR_FORM_GROUP_TEXT, 'error');
+      this.showAlert('error', ERROR_FORM_GROUP_TITLE, ERROR_FORM_GROUP_TEXT);
     }
     this.logger.debug(BaseModalComponent.name, `saveOrUpdate()`, 'end');
   }

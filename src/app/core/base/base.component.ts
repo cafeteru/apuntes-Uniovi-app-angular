@@ -36,38 +36,39 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
   /**
    * Show a message using SweetAlert
    *
+   * @param icon Icon to show
    * @param title Title of message
    * @param text Content of message
-   * @param icon Icon to show
    * @param action Action to be taken after closing the message
    */
-  showAlert(title: string, text: string, icon: SweetAlertIcon, action?: () => void): void {
-    this.showAlertBack(title, text, icon, undefined, action);
+  showAlert(icon: SweetAlertIcon, title: string, text?: string, action?: () => void): void {
+    this.showAlertBack(icon, title, text, undefined, action);
   }
 
   /**
    * Show a error message from the server using SweetAlert
    *
+   * @param icon Icon to show
    * @param title Title of message
    * @param text Content of message
-   * @param icon Icon to show
    * @param errorBack Error returned by the server
    * @param action Action to be taken after closing the message
    */
   showAlertBack(
-    title: string,
-    text: string,
     icon: SweetAlertIcon,
+    title: string,
+    text?: string,
     errorBack?: string,
     action?: () => void
   ): void {
     this.subscriptions.push(
       this.translateService.get([title, text]).subscribe(
         res => {
+          const valTranslated = text ? res[text] : '';
           Swal.fire({
             icon,
             title: (res[title]),
-            html: errorBack ? `<div>${res[text]}<br/>${errorBack}</div>` : `<div>${res[text]}</div>`
+            html: errorBack ? `<div>${valTranslated}<br/>${errorBack}</div>` : `<div>${valTranslated}</div>`
           }).then(
             () => {
               if (action) {

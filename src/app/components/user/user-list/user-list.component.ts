@@ -20,12 +20,10 @@ import { IdentificationType } from '../../../core/models/enums/identification-ty
 import { Address } from '../../../core/models/address';
 
 const SUCCESS_ADD_USER = marker('user.add.successfully');
-const SUCCESS_DISABLE_USER = marker('user.disable.successfully');
-const ERROR_DISABLE_USER_TITLE = marker('user.disable.error.title');
-const ERROR_DISABLE_USER_TEXT = marker('user.disable.error.text');
-const SUCCESS_ENABLE_USER = marker('user.enable.successfully');
-const ERROR_ENABLE_USER_TITLE = marker('user.enable.error.title');
-const ERROR_ENABLE_USER_TEXT = marker('user.enable.error.text');
+const SUCCESS_DISABLE_USER = marker('user.disabled.successfully');
+const ERROR_DISABLE_USER_TITLE = marker('user.disabled.error.title');
+const SUCCESS_ENABLE_USER = marker('user.enabled.successfully');
+const ERROR_ENABLE_USER_TITLE = marker('user.enabled.error.title');
 
 @Component({
   selector: 'app-user-list',
@@ -170,8 +168,7 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
         },
         () => {
           const title = value ? ERROR_ENABLE_USER_TITLE : ERROR_DISABLE_USER_TITLE;
-          const text = value ? ERROR_ENABLE_USER_TEXT : ERROR_DISABLE_USER_TEXT;
-          this.showAlert(title, text, 'error');
+          this.showAlert('error', title);
         }
       )
     );

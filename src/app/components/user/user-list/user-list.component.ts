@@ -21,9 +21,9 @@ import { Address } from '../../../core/models/address';
 
 const SUCCESS_ADD_USER = marker('user.add.successfully');
 const SUCCESS_DISABLE_USER = marker('user.disabled.successfully');
-const ERROR_DISABLE_USER_TITLE = marker('user.disabled.error.title');
+const ERROR_DISABLE_USER = marker('user.disabled.error');
 const SUCCESS_ENABLE_USER = marker('user.enabled.successfully');
-const ERROR_ENABLE_USER_TITLE = marker('user.enabled.error.title');
+const ERROR_ENABLE_USER = marker('user.enabled.error');
 
 @Component({
   selector: 'app-user-list',
@@ -167,7 +167,7 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
           );
         },
         () => {
-          const title = value ? ERROR_ENABLE_USER_TITLE : ERROR_DISABLE_USER_TITLE;
+          const title = value ? ERROR_ENABLE_USER : ERROR_DISABLE_USER;
           this.showAlert('error', title);
         }
       )

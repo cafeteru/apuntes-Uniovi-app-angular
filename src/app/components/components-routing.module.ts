@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: MenuComponent,
-    canActivate: [CheckTokenGuard]
+    canLoad: [CheckTokenGuard]
   },
   {
     path: 'users',
@@ -15,7 +15,7 @@ const routes: Routes = [
       import('./user/user.module').then(
         (u) => u.UserModule
       ),
-    canActivate: [CheckTokenGuard]
+    canLoad: [CheckTokenGuard]
   }
 ];
 

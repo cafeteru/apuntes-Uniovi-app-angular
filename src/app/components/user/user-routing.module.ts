@@ -9,12 +9,10 @@ export const userRoutes: Routes = [
   {
     path: '',
     component: UserListComponent,
-    canActivate: [CheckTokenGuard]
   },
   {
     path: `:id`,
     component: UserDetailsComponent,
-    canActivate: [CheckTokenGuard],
     resolve: {
       user: UserResolver
     }

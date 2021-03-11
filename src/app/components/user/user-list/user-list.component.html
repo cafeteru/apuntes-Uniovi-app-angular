@@ -104,7 +104,7 @@
                 matTooltip="{{'button.disable' | translate}}">
         not_interested
       </mat-icon>
-      <mat-icon *ngIf="!user.active" color="primary" [id]="'disable'+ (i + 1)" (click)="disable(user.id, true)"
+      <mat-icon *ngIf="!user.active" color="primary" [id]="'enable'+ (i + 1)" (click)="disable(user.id, true)"
                 matTooltip="{{'button.enable' | translate}}">
         restore
       </mat-icon>

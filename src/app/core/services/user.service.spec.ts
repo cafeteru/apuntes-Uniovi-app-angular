@@ -103,4 +103,19 @@ describe('UserService', () => {
     req.flush(true);
   });
 
+  it('check disable', () => {
+    const user = new User();
+    user.id = 1;
+    user.active = true;
+    service.disable(1, true).subscribe(
+      (res) => {
+        expect(res.id).toBe(user.id);
+        expect(res.active).toBe(user.active);
+      }
+    );
+    const req = httpMock.expectOne(`${environment.urlApi}/users/disable/${user.id}/${user.active}`);
+    expect(req.request.method).toBe('PATCH');
+    req.flush(user);
+  });
+
 });

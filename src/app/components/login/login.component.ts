@@ -63,7 +63,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
             this.logger.debug(LoginComponent.name, 'login()', 'end');
           },
           () => {
-            this.showAlert(ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT, 'error',
+            this.showAlert('error', ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT,
               () => this.changeDisable());
             this.logger.error(LoginComponent.name, 'login()', 'error');
           },

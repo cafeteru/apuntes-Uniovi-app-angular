@@ -11,7 +11,6 @@ import { ModalUserComponent } from './modal-user/modal-user.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserPersonalDataComponent } from './tabs/user-personal-data/user-personal-data.component';
 import { UserResolver } from '../../core/resolvers/user-resolver.service';
-import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [

@@ -17,8 +17,8 @@ import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { of } from 'rxjs';
 import { RoleType } from '../../../core/models/enums/role-type';
 
-const BTN_ADD = marker('buttons.add');
-const BTN_UPDATE = marker('buttons.update');
+const BTN_ADD = marker('button.add');
+const BTN_UPDATE = marker('button.update');
 const TITLE_ADD = marker('modal.user.title.add');
 const TITLE_UPDATE = marker('modal.user.title.update');
 

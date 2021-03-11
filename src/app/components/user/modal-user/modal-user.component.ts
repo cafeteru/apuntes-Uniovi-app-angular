@@ -68,7 +68,7 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
       if (file.type.includes('image')) {
         this.formGroup.get('img').setValue(reader.result);
       } else {
-        this.showAlert(ERROR_TITLE_IMG, ERROR_TEXT_IMG, 'error');
+        this.showAlert('error', ERROR_TITLE_IMG, ERROR_TEXT_IMG);
       }
     };
     reader.readAsDataURL(file);

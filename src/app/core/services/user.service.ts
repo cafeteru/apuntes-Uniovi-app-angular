@@ -104,4 +104,19 @@ export class UserService {
       tap(() => this.logger.debug(UserService.name, `changeLanguage(lang: ${lang})`, 'end'))
     );
   }
+
+  /**
+   * Disable a user
+   *
+   * @param id
+   * @param value
+   */
+  disable(id: number, value: boolean): Observable<User> {
+    this.logger.debug(UserService.name, ` disable(id: ${id}, value: ${value})`, 'start');
+    return this.http.patch<User>(
+      `${this.url}/disable/${id}/${value}`, {}, UserService.getHttpOptions())
+      .pipe(
+        tap(() => this.logger.debug(UserService.name, `disable(id: ${id}, value: ${value})`, 'end'))
+      );
+  }
 }

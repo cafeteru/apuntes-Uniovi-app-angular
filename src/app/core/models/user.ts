@@ -7,26 +7,24 @@ import { IdentificationType } from './enums/identification-type';
  * Represents users
  */
 export class User {
-  id: number;
-  name: string;
-  surname: string;
-  email: string;
-  phone: string;
-  active: boolean;
-  img: string;
-  birthDate: Date;
-  username: string;
-  password: string;
-  role: RoleType;
-  identificationType: string;
-  numberIdentification: IdentificationType;
-  address: Address;
-  language: LanguageType;
 
-  constructor() {
-    this.active = true;
-    this.address = new Address();
-    this.language = LanguageType.ES;
+  constructor(
+    public id: number = undefined,
+    public name: string = undefined,
+    public surname: string = undefined,
+    public email: string = undefined,
+    public phone: string = undefined,
+    public active = true,
+    public img: string = undefined,
+    public birthDate: Date = undefined,
+    public username: string = undefined,
+    public password: string = undefined,
+    public role: RoleType = undefined,
+    public identificationType: string = undefined,
+    public numberIdentification: IdentificationType = undefined,
+    public address = new Address(),
+    public language = LanguageType.ES
+  ) {
   }
 
   /**

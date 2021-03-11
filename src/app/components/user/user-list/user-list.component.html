@@ -1,6 +1,6 @@
 <div class="form-group filter-buttons">
-  <button (click)="openModal()" class="btn btn-outline-success" id="addUser">{{'buttons.add' | translate}}</button>
-  <button (click)="cleanFilters()" class="btn btn-outline-secondary">{{'buttons.clean.filters' | translate}}</button>
+  <button (click)="openModal()" class="btn btn-outline-success" id="addUser">{{'button.add' | translate}}</button>
+  <button (click)="cleanFilters()" class="btn btn-outline-secondary">{{'button.clean.filters' | translate}}</button>
 </div>
 <mat-accordion multi>
   <mat-expansion-panel [formGroup]="formGroup">
@@ -63,7 +63,7 @@
     <section class="row form-group">
       <div class="col">
         <button class="btn btn-outline-primary" (click)="filter()"
-                id="filterButton">{{'buttons.filter' | translate}}</button>
+                id="filterButton">{{'button.filter' | translate}}</button>
       </div>
     </section>
   </mat-expansion-panel>
@@ -97,7 +97,17 @@
   <ng-container matColumnDef="actions">
     <th *matHeaderCellDef mat-header-cell></th>
     <td *matCellDef="let user; let i = index" [id]="'actions'+ (i + 1)" mat-cell>
-      <mat-icon [routerLink]="[user.id]" color="primary" [id]="'details'+ (i + 1)">find_in_page</mat-icon>
+      <mat-icon [routerLink]="[user.id]" color="primary" [id]="'details'+ (i + 1)"
+                matTooltip="{{'button.details' | translate}}">find_in_page
+      </mat-icon>
+      <mat-icon *ngIf="user.active" color="warn" [id]="'disable'+ (i + 1)" (click)="disable(user.id, false)"
+                matTooltip="{{'button.disable' | translate}}">
+        not_interested
+      </mat-icon>
+      <mat-icon *ngIf="!user.active" color="primary" [id]="'enable'+ (i + 1)" (click)="disable(user.id, true)"
+                matTooltip="{{'button.enable' | translate}}">
+        restore
+      </mat-icon>
     </td>
   </ng-container>
 

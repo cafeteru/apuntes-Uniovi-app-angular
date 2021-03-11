@@ -17,6 +17,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { MatListModule } from '@angular/material/list';
     MatSortModule,
     MatExpansionModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatTooltipModule,
+    MatButtonModule
   ]
 })
 export class MaterialDesignModule {

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CheckValidTokenGuard } from './check-valid-token.guard';
+import { CheckTokenGuard } from './check-token-guard.service';
 import { CoreModule } from '../core.module';
 import { SharedModule } from '../../shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -10,8 +10,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { userRoutes } from '../../components/user/user-routing.module';
 import { TestUtils } from '../utils/test-utils';
 
-describe('CheckValidTokenGuard', () => {
-  let guard: CheckValidTokenGuard;
+describe('CheckTokenGuard', () => {
+  let guard: CheckTokenGuard;
   let router: Router;
   let location: Location;
 
@@ -24,13 +24,13 @@ describe('CheckValidTokenGuard', () => {
         SharedModule
       ],
       providers: [
-        CheckValidTokenGuard
+        CheckTokenGuard
       ],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
       ]
     });
-    guard = TestBed.inject(CheckValidTokenGuard);
+    guard = TestBed.inject(CheckTokenGuard);
     router = TestBed.inject(Router);
     location = TestBed.inject(Location);
   });
@@ -47,18 +47,18 @@ describe('CheckValidTokenGuard', () => {
     guard.ngOnDestroy();
     const exp = new Date((new Date().getTime() / 1_000) + 30_000).getTime();
     localStorage.setItem('exp', exp.toString());
-    expect(guard.canActivate()).toBeTrue();
+    expect(guard.canLoad()).toBeTrue();
   });
 
   it('check with invalid token', () => {
     const exp = new Date((new Date().getTime() / 1_000) - 30_000).getTime();
     localStorage.setItem('exp', exp.toString());
-    expect(guard.canActivate()).toBeFalse();
+    expect(guard.canLoad()).toBeFalse();
   });
 
   it('check with null token', () => {
     localStorage.clear();
-    expect(guard.canActivate()).toBeFalse();
+    expect(guard.canLoad()).toBeFalse();
     guard.ngOnDestroy();
   });
 });

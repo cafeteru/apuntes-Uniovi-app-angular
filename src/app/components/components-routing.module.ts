@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CheckValidTokenGuard } from '../core/guards/check-valid-token.guard';
+import { CheckTokenGuard } from '../core/guards/check-token-guard.service';
 import { MenuComponent } from './menu/menu.component';
 
 const routes: Routes = [
   {
     path: '',
     component: MenuComponent,
-    canActivate: [CheckValidTokenGuard]
+    canActivate: [CheckTokenGuard]
   },
   {
     path: 'users',
@@ -15,7 +15,7 @@ const routes: Routes = [
       import('./user/user.module').then(
         (u) => u.UserModule
       ),
-    canActivate: [CheckValidTokenGuard]
+    canActivate: [CheckTokenGuard]
   }
 ];
 

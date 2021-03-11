@@ -14,7 +14,7 @@ export class User {
     public surname: string = undefined,
     public email: string = undefined,
     public phone: string = undefined,
-    public active: boolean = true,
+    public active = true,
     public img: string = undefined,
     public birthDate: Date = undefined,
     public username: string = undefined,
@@ -22,8 +22,8 @@ export class User {
     public role: RoleType = undefined,
     public identificationType: string = undefined,
     public numberIdentification: IdentificationType = undefined,
-    public address: Address = new Address(),
-    public language: LanguageType = LanguageType.ES
+    public address = new Address(),
+    public language = LanguageType.ES
   ) {
   }
 

@@ -1,10 +1,9 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { LoginService } from '../../core/services/login.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../core/services/user.service';
 import { BaseComponent } from '../../core/base/base.component';
 import { NGXLogger } from 'ngx-logger';
-import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-navbar',

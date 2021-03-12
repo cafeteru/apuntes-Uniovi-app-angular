@@ -5,7 +5,7 @@ import { LoggerTestingModule } from 'ngx-logger/testing';
 import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NavbarComponent } from '../navbar/navbar.component';
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { TestUtils } from '../../core/utils/test-utils';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

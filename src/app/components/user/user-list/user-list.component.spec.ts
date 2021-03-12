@@ -83,4 +83,45 @@ describe('UsersListComponent', () => {
       flush();
     })
   );
+
+  it('check delete with response yes', fakeAsync(() => {
+      const spy = spyOn(userService, 'delete').and.callFake(() => of(true));
+      component.askDelete(1);
+      tick();
+      const listButtons = document.getElementsByClassName('swal2-confirm');
+      expect(listButtons.length).toBe(1);
+      const confirmButton = listButtons[0] as HTMLButtonElement;
+      confirmButton.click();
+      tick();
+      expect(spy).toHaveBeenCalled();
+      flush();
+    })
+  );
+
+  it('check delete with response no', fakeAsync(() => {
+      const spy = spyOn(userService, 'delete');
+      component.askDelete(1);
+      tick();
+      const listButtons = document.getElementsByClassName('swal2-deny');
+      expect(listButtons.length).toBe(1);
+      const cancelButton = listButtons[0] as HTMLButtonElement;
+      cancelButton.click();
+      tick();
+      expect(spy).not.toHaveBeenCalled();
+      flush();
+    })
+  );
+
+  it('check error delete', fakeAsync(() => {
+      const spy = spyOn(userService, 'delete').and.returnValue(throwError({status: 404}));
+      component.askDelete(1);
+      tick();
+      const listButtons = document.getElementsByClassName('swal2-confirm');
+      const confirmButton = listButtons[0] as HTMLButtonElement;
+      confirmButton.click();
+      tick();
+      expect(spy).toHaveBeenCalled();
+      flush();
+    })
+  );
 });

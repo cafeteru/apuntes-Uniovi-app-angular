@@ -7,17 +7,11 @@ import { MaterialDesignModule } from '../shared/material-design/material-design.
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
 import { LoginComponent } from './login/login.component';
-import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     MenuComponent,
     LoginComponent,
-    NavbarComponent
-  ],
-  exports: [
-    LoginComponent,
-    NavbarComponent
   ],
   imports: [
     ComponentsRoutingModule,

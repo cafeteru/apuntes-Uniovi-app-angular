@@ -5,8 +5,6 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { registerLocaleData } from '@angular/common';
-import localeEs from '@angular/common/locales/es';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './components/components.module';
@@ -18,7 +16,6 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MyMatPaginatorIntl } from './shared/material-design/my-mat-paginator-intl';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 
-registerLocaleData(localeEs, 'es');
 
 @NgModule({
   declarations: [

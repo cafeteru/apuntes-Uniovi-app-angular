@@ -81,7 +81,7 @@ export class UserService {
    */
   update(user: User): Observable<User> {
     this.logger.debug(UserService.name, `update(user: ${user})`, 'start');
-    return this.http.put<User>(`${this.url}/update/${user.id}`, user, UserService.getHttpOptions()).pipe(
+    return this.http.put<User>(`${this.url}/${user.id}`, user, UserService.getHttpOptions()).pipe(
       tap(() => this.logger.debug(UserService.name, `update(user: ${user})`, 'end'))
     );
   }
@@ -108,15 +108,28 @@ export class UserService {
   /**
    * Disable a user
    *
-   * @param id
-   * @param value
+   * @param id User´s id
+   * @param active New value to user´s active
    */
-  disable(id: number, value: boolean): Observable<User> {
-    this.logger.debug(UserService.name, ` disable(id: ${id}, value: ${value})`, 'start');
+  disable(id: number, active: boolean): Observable<User> {
+    this.logger.debug(UserService.name, `disable(id: ${id}, value: ${active})`, 'start');
     return this.http.patch<User>(
-      `${this.url}/disable/${id}/${value}`, {}, UserService.getHttpOptions())
+      `${this.url}/disable/${id}/${active}`, {}, UserService.getHttpOptions())
       .pipe(
-        tap(() => this.logger.debug(UserService.name, `disable(id: ${id}, value: ${value})`, 'end'))
+        tap(() => this.logger.debug(UserService.name, `disable(id: ${id}, value: ${active})`, 'end'))
+      );
+  }
+
+  /**
+   * Delete a user
+   *
+   * @param id User´s id
+   */
+  delete(id: number): Observable<boolean> {
+    this.logger.debug(UserService.name, `delete(id: ${id})`, 'start');
+    return this.http.delete<boolean>(`${this.url}/${id}`, UserService.getHttpOptions())
+      .pipe(
+        tap(() => this.logger.debug(UserService.name, `delete(id: ${id})`, 'end'))
       );
   }
 }

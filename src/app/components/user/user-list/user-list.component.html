@@ -108,6 +108,10 @@
                 matTooltip="{{'button.enable' | translate}}">
         restore
       </mat-icon>
+      <mat-icon color="warn" [id]="'delete'+ (i + 1)" (click)="askDelete(user.id)"
+                matTooltip="{{'button.delete' | translate}}">
+        delete_forever
+      </mat-icon>
     </td>
   </ng-container>
 

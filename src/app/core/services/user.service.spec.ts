@@ -86,7 +86,7 @@ describe('UserService', () => {
         expect(res).toBe(user);
       }
     );
-    const req = httpMock.expectOne(`${environment.urlApi}/users/update/${user.id}`);
+    const req = httpMock.expectOne(`${environment.urlApi}/users/${user.id}`);
     expect(req.request.method).toBe('PUT');
     req.flush(user);
   });
@@ -116,6 +116,17 @@ describe('UserService', () => {
     const req = httpMock.expectOne(`${environment.urlApi}/users/disable/${user.id}/${user.active}`);
     expect(req.request.method).toBe('PATCH');
     req.flush(user);
+  });
+
+  it('check delete', () => {
+    service.delete(1).subscribe(
+      (res) => {
+        expect(res).toBeTrue();
+      }
+    );
+    const req = httpMock.expectOne(`${environment.urlApi}/users/${1}`);
+    expect(req.request.method).toBe('DELETE');
+    req.flush(true);
   });
 
 });

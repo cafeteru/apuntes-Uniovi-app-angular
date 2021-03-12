@@ -18,12 +18,18 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { RoleType } from '../../../core/models/enums/role-type';
 import { IdentificationType } from '../../../core/models/enums/identification-type';
 import { Address } from '../../../core/models/address';
+import Swal from 'sweetalert2';
 
 const SUCCESS_ADD_USER = marker('user.add.successfully');
 const SUCCESS_DISABLE_USER = marker('user.disabled.successfully');
 const ERROR_DISABLE_USER = marker('user.disabled.error');
 const SUCCESS_ENABLE_USER = marker('user.enabled.successfully');
 const ERROR_ENABLE_USER = marker('user.enabled.error');
+const SUCCESS_DELETE_USER = marker('user.delete.successfully');
+const ERROR_DELETE_USER = marker('user.delete.error');
+const ANSWER_DELETE_USER = marker('user.delete.answer');
+const BUTTON_DELETE = marker('button.delete');
+const BUTTON_CANCEL = marker('button.cancel');
 
 @Component({
   selector: 'app-user-list',
@@ -172,6 +178,52 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
         }
       )
     );
+  }
+
+  /**
+   * Delete a user
+   *
+   * @param id User´s id
+   */
+  askDelete(id: number): void {
+    const subscription = this.translateService.get([
+      ANSWER_DELETE_USER,
+      BUTTON_DELETE,
+      BUTTON_CANCEL
+    ]).subscribe(
+      res => {
+        Swal.fire({
+          title: res[ANSWER_DELETE_USER],
+          showDenyButton: true,
+          confirmButtonText: res[BUTTON_DELETE],
+          denyButtonText: res[BUTTON_CANCEL],
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.delete(id);
+          }
+        });
+      }
+    );
+    this.subscriptions.push(subscription);
+  }
+
+  private delete(id: number): void {
+    const subscription = this.userService.delete(id).subscribe(
+      () => {
+        this.getUsers();
+        this.subscriptions.push(
+          this.translateService.get(SUCCESS_DELETE_USER).subscribe(
+            res => {
+              this.snackBarService.showSuccess(res);
+            }
+          )
+        );
+      },
+      () => {
+        this.showAlert('error', ERROR_DELETE_USER);
+      }
+    );
+    this.subscriptions.push(subscription);
   }
 
   private getUsers(): void {

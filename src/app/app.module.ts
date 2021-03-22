@@ -15,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MyMatPaginatorIntl } from './shared/material-design/my-mat-paginator-intl';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -37,6 +39,10 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
         deps: [HttpClient]
       },
       defaultLanguage: 'es'
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
     }),
   ],
   providers: [

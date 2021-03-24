@@ -25,9 +25,12 @@
           </mat-error>
         </mat-form-field>
       </div>
-      <div class="submit">
-        <input [disabled]="disable" class="btn btn-outline-info" id="logIn" type="submit"
+      <div class="submit text-center">
+        <input *ngIf="!disable" class="btn btn-outline-info" id="logIn" type="submit"
                value="{{'login.button' | translate}}"/>
+        <div class="spinner-border" role="status" *ngIf="disable">
+          <span class="visually-hidden"></span>
+        </div>
       </div>
     </form>
   </fieldset>

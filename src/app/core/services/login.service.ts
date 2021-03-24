@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { NGXLogger } from 'ngx-logger';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import jwt_decode from 'jwt-decode';
+import { HttpClient } from '@angular/common/http';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.reducer';
+import * as userActions from '../../store/actions/user.actions';
 
 /**
  * Response to the login request
@@ -42,7 +45,8 @@ export class LoginService {
 
   constructor(
     private logger: NGXLogger,
-    private http: HttpClient
+    private http: HttpClient,
+    private store: Store<AppState>
   ) {
     this.logger.debug(LoginService.name, 'constructor()', 'start');
     this.logger.debug(LoginService.name, 'constructor()', 'end');
@@ -57,12 +61,10 @@ export class LoginService {
     this.logger.debug(LoginService.name, `login(user: ${loginData.toString()})`, 'start');
     return this.http.post<ResponseLogin>(this.url, loginData).pipe(
       map((res) => {
-        const result = jwt_decode<IToken>(res.authorization);
+        const iToken = jwt_decode<IToken>(res.authorization);
         localStorage.setItem('authorization', res.authorization);
-        localStorage.setItem('username', result.username);
-        localStorage.setItem('id', result.id.toString());
-        localStorage.setItem('role', result.role);
-        localStorage.setItem('exp', result.exp.toString());
+        localStorage.setItem('exp', iToken.exp.toString());
+        this.store.dispatch(userActions.loadUser({id: iToken.id}));
       }),
       tap(() => this.logger.debug(LoginService.name, `login(user: ${loginData.toString()})`, 'start'))
     );
@@ -74,6 +76,7 @@ export class LoginService {
   logout(): void {
     this.logger.debug(LoginService.name, `logout()`, 'start');
     localStorage.clear();
+    this.store.dispatch(userActions.logout());
     this.logger.debug(LoginService.name, `logout()`, 'end');
   }
 }

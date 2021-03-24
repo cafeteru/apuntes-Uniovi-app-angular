@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserListComponent } from './user-list/user-list.component';
-import { CheckTokenGuard } from '../../core/guards/check-token-guard.service';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserResolver } from '../../core/resolvers/user-resolver.service';
 

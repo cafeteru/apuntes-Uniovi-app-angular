@@ -9,14 +9,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './components/components.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MyMatPaginatorIntl } from './shared/material-design/my-mat-paginator-intl';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { StoreModule } from '@ngrx/store';
+import { appReducers } from './store/app.reducer';
+import { HttpClient } from '@angular/common/http';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './store/effects/user.effects';
+import es from '@angular/common/locales/es';
 
 
 @NgModule({
@@ -40,15 +45,16 @@ import { environment } from '../environments/environment';
       },
       defaultLanguage: 'es'
     }),
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([UserEffects]),
     StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
+      maxAge: 25,
+      logOnly: environment.production,
     }),
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'es'},
     {provide: MatPaginatorIntl, useClass: MyMatPaginatorIntl},
-    {provide: MAT_DATE_LOCALE, useValue: 'es'}
+    {provide: MAT_DATE_LOCALE, useValue: es}
   ],
   bootstrap: [AppComponent]
 })

@@ -1,13 +1,13 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <button *ngIf="localStorage.authorization" type="button" class="btn btn-outline-secondary" aria-label="menu-hamburger"
-    (click)="openSidenav()" id="openSidenav">
+          (click)="openSidenav()" id="openSidenav">
     <mat-icon>menu</mat-icon>
   </button>
-  <div class="navbar-collapse cdk-overlay-backdrop-showing collapse show" id="navbarNav">
+  <div class="navbar-collapse cdk-overlay-backdrop-showing collapse show float-right" id="navbarNav">
     <ul class="nav navbar-nav ml-auto">
       <li class="nav-item dropdown">
         <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
-          id="languages">
+           id="languages">
           <span [ngClass]="selectedLanguage"></span>
         </a>
         <div aria-labelledby="languages" class="dropdown-menu dropdown-menu-right">

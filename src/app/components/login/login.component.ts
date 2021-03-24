@@ -7,6 +7,10 @@ import { BaseComponent } from '../../core/base/base.component';
 import { LoginData, LoginService } from '../../core/services/login.service';
 import { FormGroupUtil } from '../../core/utils/form-group-util';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AppState } from '../../store/app.reducer';
+import { Store } from '@ngrx/store';
+import * as actions from '../../store/actions/loading.actions';
 
 const ERROR_LOGIN_TITLE = marker('error.login.title');
 const ERROR_LOGIN_TEXT = marker('error.login.text');
@@ -22,15 +26,20 @@ const ERROR_LOGIN_TEXT = marker('error.login.text');
 export class LoginComponent extends BaseComponent implements OnInit {
   formGroup: FormGroup;
   disable: boolean;
+  subscription: Subscription;
 
   constructor(
     protected logger: NGXLogger,
     protected translateService: TranslateService,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private store: Store<AppState>
   ) {
     super(logger, translateService);
     this.logger.debug(LoginComponent.name, 'constructor()', 'start');
+    this.subscription = this.store.select('loadingState').subscribe(
+      loadingState => this.disable = loadingState.isLoading
+    );
     this.logger.debug(LoginComponent.name, 'constructor()', 'end');
   }
 
@@ -51,7 +60,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
   login(): void {
     this.logger.debug(LoginComponent.name, 'login()', 'start');
     if (FormGroupUtil.valid(this.formGroup)) {
-      this.changeDisable();
+      this.store.dispatch(actions.initLoading());
       const loginData: LoginData = {
         username: this.formGroup.controls.username.value,
         password: this.formGroup.controls.password.value
@@ -60,11 +69,12 @@ export class LoginComponent extends BaseComponent implements OnInit {
         this.loginService.login(loginData).subscribe(
           () => {
             this.router.navigateByUrl('/menu').then();
+            this.store.dispatch(actions.stopLoading());
             this.logger.debug(LoginComponent.name, 'login()', 'end');
           },
           () => {
             this.showAlert('error', ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT,
-              () => this.changeDisable());
+              () => this.store.dispatch(actions.stopLoading()));
             this.logger.error(LoginComponent.name, 'login()', 'error');
           },
         )
@@ -72,12 +82,5 @@ export class LoginComponent extends BaseComponent implements OnInit {
       return;
     }
     this.logger.debug(LoginComponent.name, 'ngOnInit()', 'end');
-  }
-
-  /**
-   * Change input button disable
-   */
-  changeDisable(): void {
-    this.disable = !this.disable;
   }
 }

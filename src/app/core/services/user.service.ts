@@ -7,6 +7,7 @@ import { NGXLogger } from 'ngx-logger';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Page } from '../models/server/page';
 import { OptionsPage } from '../models/server/options-page';
+import { UserStatistics } from '../models/statitics/user-statistics';
 
 @Injectable({
   providedIn: 'root'
@@ -130,6 +131,17 @@ export class UserService {
     return this.http.delete<boolean>(`${this.url}/${id}`, UserService.getHttpOptions())
       .pipe(
         tap(() => this.logger.debug(UserService.name, `delete(id: ${id})`, 'end'))
+      );
+  }
+
+  /**
+   * Get user statistics
+   */
+  getStatistics(): Observable<UserStatistics> {
+    this.logger.debug(UserService.name, `getStatistics()`, 'start');
+    return this.http.get<UserStatistics>(`${this.url}/statistics`, UserService.getHttpOptions())
+      .pipe(
+        tap(() => this.logger.debug(UserService.name, `getStatistics()`, 'end'))
       );
   }
 }

@@ -38,6 +38,7 @@
 	"login.username": "Nombre de usuario",
 	"logo.login": "Logo de la Universidad de Oviedo",
 	"logout": "Cerrar sesión",
+	"menu": "Menú principal",
 	"modal.user.title.add": "Añadir usuario",
 	"modal.user.title.update": "Actualizar usuario",
 	"navbar.es": "Castellano",

@@ -5,7 +5,7 @@ export class Subject {
   constructor(
     public id: number = undefined,
     public name: string = undefined,
-    public subjectType: SubjectType = undefined,
+    public subjectType: SubjectType = SubjectType.BASIC,
     public active: boolean = true
   ) {
   }

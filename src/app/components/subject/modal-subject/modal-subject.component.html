@@ -1,1 +1,36 @@
-<p>modal-subject works!</p>
+<header class="modal-header-material">
+  <h1 mat-dialog-title>{{ title | translate}}
+    <button (click)="closeModal()" aria-label="Close" class="close" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </h1>
+</header>
+<form [formGroup]="formGroup">
+  <section class="form-group row">
+    <mat-form-field class="col">
+      <input cdkFocusInitial formControlName="name" id="name" matInput required
+             placeholder="{{'subject.name' | translate}}">
+      <mat-error *ngIf="formGroup.controls.name.errors?.required">
+        {{'error.subject.required.name' | translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col">
+      <mat-label>{{'subject.subjectType' | translate}}</mat-label>
+      <mat-select formControlName="subjectType" id="subjectType" required>
+        <mat-option *ngFor="let subjectType of subjectTypes" [id]="subjectType"
+                    [value]="subjectType">{{subjectType | subjectType}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formGroup.controls.subjectType.errors?.required">
+        {{'error.subject.required.subjectType' | translate}}
+      </mat-error>
+    </mat-form-field>
+  </section>
+  <section class="row form-group">
+    <mat-checkbox class="col" formControlName="active" id="active">{{'subject.active' | translate}}</mat-checkbox>
+  </section>
+  <section class="float-right modal-buttons">
+    <button (click)="saveOrUpdate()" class="btn btn-outline-success" id="add">{{'button.save'| translate}}</button>
+    <button (click)="closeModal()" class="btn btn-outline-danger" id="cancel"
+            type="button">{{'button.cancel'| translate}}</button>
+  </section>
+</form>

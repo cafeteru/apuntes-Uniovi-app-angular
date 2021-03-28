@@ -67,9 +67,9 @@ export abstract class BaseModalComponent<T, U> extends BaseComponent implements 
   saveOrUpdate(): void {
     this.logger.debug(BaseModalComponent.name, `saveOrUpdate()`, 'start');
     if (FormGroupUtil.valid(this.formGroup)) {
-      const data = this.getDataForm();
+      this.getDataForm();
       this.subscriptions.push(
-        this.saveOrUpdateService(data).subscribe(
+        this.saveOrUpdateService().subscribe(
           (res) => {
             this.closeModal(res);
           },
@@ -103,8 +103,6 @@ export abstract class BaseModalComponent<T, U> extends BaseComponent implements 
 
   /**
    * Call the service to update or save the data
-   *
-   * @param data Data of the modal
    */
-  protected abstract saveOrUpdateService(data: T): Observable<T>;
+  protected abstract saveOrUpdateService(): Observable<T>;
 }

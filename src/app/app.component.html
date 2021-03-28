@@ -4,8 +4,8 @@
     <mat-sidenav #drawer [mode]="'side'">
       <mat-nav-list>
         <a mat-list-item routerLink="/menu">{{'menu' | translate}}</a>
-        <a mat-list-item routerLink="/menu/users">{{'users' | translate}}</a>
-        <a mat-list-item routerLink="/menu/subjects">{{'subjects' | translate}}</a>
+        <a mat-list-item routerLink="/menu/users" id="usersNavList">{{'users' | translate}}</a>
+        <a mat-list-item routerLink="/menu/subjects" id="subjectsNavList">{{'subjects' | translate}}</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content class="sidenav-content" (click)="closeDrawer()">

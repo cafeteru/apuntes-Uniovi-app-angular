@@ -13,7 +13,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from '../../../core/models/subject';
 import { SubjectType } from '../../../core/models/enums/subject-type';
 import { map, tap } from 'rxjs/operators';
-import { Address } from '../../../core/models/address';
+import { GLOBAL_CONSTANTS } from '../../../core/utils/global-constants';
+import { marker } from '@biesbjerg/ngx-translate-extract-marker';
+import { ModalSubjectComponent } from '../modal-subject/modal-subject.component';
+
+const SUCCESS_ADD_SUBJECT = marker('subject.add.successfully');
 
 @Component({
   selector: 'app-subject-list',
@@ -88,6 +92,33 @@ export class SubjectListComponent extends BaseComponent implements OnInit, After
     });
     this.getSubjects();
     this.logger.debug(SubjectListComponent.name, 'filter()', 'end');
+  }
+
+  /**
+   * Open a modal window to create a Subject
+   */
+  openModal(): void {
+    this.logger.debug(SubjectListComponent.name, `openModal()`, 'start');
+    const data = new Subject();
+    const config = {
+      width: GLOBAL_CONSTANTS.maxWidthModal,
+      maxHeight: GLOBAL_CONSTANTS.maxHeightModal,
+      data
+    };
+    const dialogRef = this.dialog.open(ModalSubjectComponent, config);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getSubjects();
+        this.subscriptions.push(
+          this.translateService.get(SUCCESS_ADD_SUBJECT).subscribe(
+            res => {
+              this.snackBarService.showSuccess(res);
+            }
+          )
+        );
+      }
+      this.logger.debug(SubjectListComponent.name, `openModal()`, 'end');
+    });
   }
 
   disable(id: number, b: boolean): void {

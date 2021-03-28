@@ -20,16 +20,16 @@ import { IdentificationType } from '../../../core/models/enums/identification-ty
 import { Address } from '../../../core/models/address';
 import Swal from 'sweetalert2';
 
-const SUCCESS_ADD_USER = marker('user.add.successfully');
-const SUCCESS_DISABLE_USER = marker('user.disabled.successfully');
-const ERROR_DISABLE_USER = marker('user.disabled.error');
-const SUCCESS_ENABLE_USER = marker('user.enabled.successfully');
-const ERROR_ENABLE_USER = marker('user.enabled.error');
-const SUCCESS_DELETE_USER = marker('user.delete.successfully');
-const ERROR_DELETE_USER = marker('user.delete.error');
 const ANSWER_DELETE_USER = marker('user.delete.answer');
-const BUTTON_DELETE = marker('button.delete');
 const BUTTON_CANCEL = marker('button.cancel');
+const BUTTON_DELETE = marker('button.delete');
+const ERROR_DELETE_USER = marker('user.delete.error');
+const ERROR_DISABLE_USER = marker('user.disabled.error');
+const ERROR_ENABLE_USER = marker('user.enabled.error');
+const SUCCESS_ADD_USER = marker('user.add.successfully');
+const SUCCESS_DELETE_USER = marker('user.delete.successfully');
+const SUCCESS_DISABLE_USER = marker('user.disabled.successfully');
+const SUCCESS_ENABLE_USER = marker('user.enabled.successfully');
 
 @Component({
   selector: 'app-user-list',

@@ -7,10 +7,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialDesignModule } from '../../shared/material-design/material-design.module';
 import { SubjectRoutingModule } from './subject-routing.module';
 import { SubjectListComponent } from './subject-list/subject-list.component';
+import { ModalSubjectComponent } from './modal-subject/modal-subject.component';
 
 @NgModule({
   declarations: [
-    SubjectListComponent
+    SubjectListComponent,
+    ModalSubjectComponent
   ],
   imports: [
     SubjectRoutingModule,

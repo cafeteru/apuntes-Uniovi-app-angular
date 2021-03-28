@@ -16,6 +16,14 @@ const routes: Routes = [
         (u) => u.UserModule
       ),
     canLoad: [CheckTokenGuard]
+  },
+  {
+    path: 'subjects',
+    loadChildren: () =>
+      import('./subject/subject.module').then(
+        (s) => s.SubjectModule
+      ),
+    canLoad: [CheckTokenGuard]
   }
 ];
 

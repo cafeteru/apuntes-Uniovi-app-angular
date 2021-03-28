@@ -1,0 +1,74 @@
+<div class="form-group filter-buttons">
+  <!--  <button (click)="openModal()" class="btn btn-outline-success" id="addUser">{{'button.add' | translate}}</button>-->
+  <button (click)="cleanFilters()" class="btn btn-outline-secondary">{{'button.clean.filters' | translate}}</button>
+</div>
+<mat-accordion multi>
+  <mat-expansion-panel [formGroup]="formGroup">
+    <mat-expansion-panel-header>
+      <mat-panel-title id="userFilters">
+        {{'filters.title' | translate}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <section class="form-group row">
+      <mat-form-field class="col">
+        <input formControlName="name" id="nameFilter" matInput placeholder="{{'subject.name' | translate}}">
+      </mat-form-field>
+      <mat-form-field class="col">
+        <mat-label>{{'subject.subjectType' | translate}}</mat-label>
+        <mat-select formControlName="subjectType" id="subjectTypeFilter">
+          <mat-option [value]="undefined" id="undefinedRole">{{'enum.undefined' | translate}}</mat-option>
+          <mat-option *ngFor="let subjectType of subjectTypes" [id]="subjectType + 'Filter'"
+                      [value]="subjectType">{{subjectType}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </section>
+    <section class="row form-group">
+      <mat-checkbox class="col" formControlName="active" id="activeFilter">{{'subject.active' | translate}}</mat-checkbox>
+    </section>
+    <section class="row form-group">
+      <div class="col">
+        <button class="btn btn-outline-primary" (click)="filter()"
+                id="filterButton">{{'button.filter' | translate}}</button>
+      </div>
+    </section>
+  </mat-expansion-panel>
+</mat-accordion>
+<table [dataSource]="subjects$ | async" class="mat-elevation-z8" id="users-list" mat-table matSort>
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th *matHeaderCellDef id="nameColumn" mat-header-cell mat-sort-header>{{'subject.name' | translate}}</th>
+    <td *matCellDef="let subject; let i = index" [id]="'name'+ (i + 1)" mat-cell> {{subject.name}} </td>
+  </ng-container>
+
+  <!-- SubjectType Column -->
+  <ng-container matColumnDef="subjectType">
+    <th *matHeaderCellDef id="roleColumn" mat-header-cell mat-sort-header>{{'subject.subjectType' | translate}}</th>
+    <td *matCellDef="let subject; let i = index" [id]="'role'+ (i + 1)" mat-cell> {{subject.subjectType }} </td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th *matHeaderCellDef mat-header-cell></th>
+    <td *matCellDef="let user; let i = index" [id]="'actions'+ (i + 1)" mat-cell>
+      <mat-icon [routerLink]="[user.id]" color="primary" [id]="'details'+ (i + 1)"
+                matTooltip="{{'button.details' | translate}}">find_in_page
+      </mat-icon>
+      <mat-icon *ngIf="user.active" color="warn" [id]="'disable'+ (i + 1)" (click)="disable(user.id, false)"
+                matTooltip="{{'button.disable' | translate}}">
+        not_interested
+      </mat-icon>
+      <mat-icon *ngIf="!user.active" color="primary" [id]="'enable'+ (i + 1)" (click)="disable(user.id, true)"
+                matTooltip="{{'button.enable' | translate}}">
+        restore
+      </mat-icon>
+      <mat-icon color="warn" [id]="'delete'+ (i + 1)" (click)="askDelete(user.id)"
+                matTooltip="{{'button.delete' | translate}}">
+        delete_forever
+      </mat-icon>
+    </td>
+  </ng-container>
+
+  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: displayedColumns; let i = index" [id]="'user' + (i + 1)" mat-row></tr>
+</table>
+<mat-paginator [length]="totalElements" [pageSizeOptions]="elementsPage" showFirstLastButtons></mat-paginator>

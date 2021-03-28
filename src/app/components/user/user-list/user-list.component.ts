@@ -232,8 +232,8 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
     options.createOptionsSearch(this.paginator, this.sort);
     this.users$ = this.userService.findAll(options, this.userFilter).pipe(
       map((res) => {
-        this.totalElements = res.totalElements;
-        return res.content;
+        this.totalElements = res?.totalElements;
+        return res?.content;
       }),
       tap(() => this.logger.debug(UserListComponent.name, 'getUsers()', 'end'))
     );

@@ -39,14 +39,16 @@ export class CheckTokenGuard implements CanLoad, OnDestroy {
     const exp = localStorage.exp;
     if (exp && !isNaN(localStorage.exp) && Date.now() < (Number(exp) * 1_000)) {
       const iToken = jwt_decode<IToken>(localStorage.authorization);
-      this.store.select('loadingState').pipe(
-        take(1)
-      ).subscribe(
-        loadingState => {
-          if (!loadingState.loadedUser) {
-            this.store.dispatch(userActions.loadUser({id: iToken.id}));
+      this.subscriptions.push(
+        this.store.select('loadingState').pipe(
+          take(1)
+        ).subscribe(
+          loadingState => {
+            if (!loadingState.loadedUser) {
+              this.store.dispatch(userActions.loadUser({id: iToken.id}));
+            }
           }
-        }
+        )
       );
       this.logger.debug(CheckTokenGuard.name, 'canLoad()', 'end');
       return true;

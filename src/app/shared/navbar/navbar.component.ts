@@ -7,6 +7,8 @@ import { NGXLogger } from 'ngx-logger';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducer';
 import { User } from '../../core/models/user';
+import { tap } from 'rxjs/operators';
+import { changeLanguage } from '../../store/actions/user.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -60,7 +62,9 @@ export class NavbarComponent extends BaseComponent implements OnInit {
     this.translateService.use(language);
     if (localStorage.authorization) {
       this.subscriptions.push(
-        this.userService.changeLanguage(language).subscribe(
+        this.userService.changeLanguage(language).pipe(
+          tap(() => this.store.dispatch(changeLanguage({language})))
+        ).subscribe(
           () => {
             this.logger.debug(UserService.name, `useLanguage(language: ${language})`, 'end');
           },

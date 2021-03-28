@@ -8,13 +8,15 @@ import { IdentificationTypePipe } from './pipes/identification-type.pipe';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { SubjectTypePipe } from './pipes/subject-type.pipe';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     NoImagePipe,
     RoleTypePipe,
-    IdentificationTypePipe
+    IdentificationTypePipe,
+    SubjectTypePipe
   ],
   imports: [
     CommonModule,
@@ -31,6 +33,7 @@ import { RouterModule } from '@angular/router';
     TranslateModule,
     RoleTypePipe,
     IdentificationTypePipe,
+    SubjectTypePipe,
   ]
 })
 export class SharedModule {

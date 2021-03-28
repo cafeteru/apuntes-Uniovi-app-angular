@@ -23,7 +23,7 @@ const ERROR_TEXT_IMG = marker('error.user.invalid.img.text');
   templateUrl: './modal-user.component.html',
   styleUrls: ['./modal-user.component.scss']
 })
-export class ModalUserComponent extends BaseModalComponent<User, ModalUserComponent> implements OnInit {
+export class ModalUserComponent extends BaseModalComponent<User, ModalUserComponent> {
   roleType = Object.keys(RoleType);
   identificationType = Object.keys(IdentificationType);
 
@@ -35,8 +35,8 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
     private userService: UserService
   ) {
     super(logger, translateService, matDialogRef, user);
-    this.logger.debug(BaseModalComponent.name, 'constructor()', 'start');
-    this.logger.debug(BaseModalComponent.name, 'constructor()', 'end');
+    this.logger.debug(ModalUserComponent.name, 'constructor()', 'start');
+    this.logger.debug(ModalUserComponent.name, 'constructor()', 'end');
   }
 
   get title(): string {
@@ -75,7 +75,7 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
   }
 
   protected getDataForm(): User {
-    this.logger.debug(BaseModalComponent.name, 'getFormGroup()', 'start');
+    this.logger.debug(ModalUserComponent.name, 'getFormGroup()', 'start');
     this.user.name = this.formGroup.get('name').value;
     this.user.surname = this.formGroup.get('surname').value;
     this.user.email = this.formGroup.get('email').value;
@@ -92,12 +92,12 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
     this.user.address.street = this.formGroup.get('street').value;
     this.user.address.city = this.formGroup.get('city').value;
     this.user.address.postalCode = this.formGroup.get('postalCode').value;
-    this.logger.debug(BaseModalComponent.name, 'getFormGroup()', 'start');
+    this.logger.debug(ModalUserComponent.name, 'getFormGroup()', 'start');
     return this.user;
   }
 
   protected getFormGroup(): FormGroup {
-    this.logger.debug(BaseModalComponent.name, 'getFormGroup()', 'start');
+    this.logger.debug(ModalUserComponent.name, 'getFormGroup()', 'start');
     const formGroup = new FormGroup({
         surname: new FormControl(this.user.surname),
         name: new FormControl(this.user.name),
@@ -118,14 +118,13 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
       {
         validators: NumberIdentificationValidator.isValid()
       });
-    this.logger.debug(BaseModalComponent.name, 'getFormGroup()', 'end');
+    this.logger.debug(ModalUserComponent.name, 'getFormGroup()', 'end');
     return formGroup;
   }
 
-  protected saveOrUpdateService(data: User): Observable<User> {
-    if (this.isSaveOrUpdate()) {
-      return this.userService.update(this.user);
-    }
-    return this.userService.create(this.user);
+  protected saveOrUpdateService(): Observable<User> {
+    this.logger.debug(ModalUserComponent.name, 'saveOrUpdateService()', 'start');
+    this.logger.debug(ModalUserComponent.name, 'saveOrUpdateService()', 'end');
+    return this.isSaveOrUpdate() ? this.userService.update(this.user) : this.userService.create(this.user);
   }
 }

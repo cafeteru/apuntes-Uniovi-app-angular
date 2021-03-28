@@ -26,7 +26,7 @@ import es from '@angular/common/locales/es';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     AppRoutingModule,

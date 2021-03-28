@@ -6,6 +6,8 @@ import { UserService } from '../../core/services/user.service';
 import { ChartType } from 'chart.js';
 import { Label, MultiDataSet } from 'ng2-charts';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
+import { AppState } from '../../store/app.reducer';
+import { Store } from '@ngrx/store';
 
 const ROLE_TYPE_ADMIN = marker('role-type.admin');
 const ROLE_TYPE_STUDENT = marker('role-type.student');
@@ -29,10 +31,45 @@ export class MenuComponent extends BaseComponent implements OnInit {
   constructor(
     protected logger: NGXLogger,
     protected translateService: TranslateService,
-    private userService: UserService
+    private userService: UserService,
+    private store: Store<AppState>
   ) {
     super(logger, translateService);
     this.logger.debug(MenuComponent.name, 'constructor()', 'start');
+    this.loadI18nLabels();
+    this.logger.debug(MenuComponent.name, 'constructor()', 'end');
+  }
+
+  ngOnInit(): void {
+    this.logger.debug(MenuComponent.name, 'ngOnInit()', 'start');
+    this.getStatistics();
+    this.subscriptions.push(
+      this.store.select('userState').subscribe(
+        () => this.loadI18nLabels()
+      )
+    );
+    this.logger.debug(MenuComponent.name, 'ngOnInit()', 'end');
+  }
+
+  private getStatistics(): void {
+    this.logger.debug(MenuComponent.name, 'getStatistics()', 'start');
+    this.subscriptions.push(
+      this.userService.getStatistics().subscribe(
+        userStatistics => {
+          this.userActiveData = [
+            [userStatistics.active, userStatistics.inactive],
+          ];
+          this.userRoleData = [
+            [userStatistics.numAdmin, userStatistics.numStudents, userStatistics.numTeachers],
+          ];
+        }
+      )
+    );
+    this.logger.debug(MenuComponent.name, 'getStatistics()', 'end');
+  }
+
+  private loadI18nLabels(): void {
+    this.logger.debug(MenuComponent.name, 'loadI18nLabels()', 'start');
     const keys = [
       ROLE_TYPE_ADMIN,
       ROLE_TYPE_TEACHER,
@@ -40,34 +77,21 @@ export class MenuComponent extends BaseComponent implements OnInit {
       USER_ACTIVE,
       USER_INACTIVE
     ];
-    this.translateService.get(keys).subscribe(
-      res => {
-        this.userActiveLabel = [
-          res[USER_ACTIVE],
-          res[USER_INACTIVE],
-        ];
-        this.userRoleLabel = [
-          res[ROLE_TYPE_ADMIN],
-          res[ROLE_TYPE_STUDENT],
-          res[ROLE_TYPE_TEACHER]
-        ];
-      }
+    this.subscriptions.push(
+      this.translateService.get(keys).subscribe(
+        res => {
+          this.userActiveLabel = [
+            res[USER_ACTIVE],
+            res[USER_INACTIVE],
+          ];
+          this.userRoleLabel = [
+            res[ROLE_TYPE_ADMIN],
+            res[ROLE_TYPE_STUDENT],
+            res[ROLE_TYPE_TEACHER]
+          ];
+        }
+      )
     );
-    this.logger.debug(MenuComponent.name, 'constructor()', 'end');
-  }
-
-  ngOnInit(): void {
-    this.logger.debug(MenuComponent.name, 'ngOnInit()', 'start');
-    this.userService.getStatistics().subscribe(
-      userStatistics => {
-        this.userActiveData = [
-          [userStatistics.active, userStatistics.inactive],
-        ];
-        this.userRoleData = [
-          [userStatistics.numAdmin, userStatistics.numStudents, userStatistics.numTeachers],
-        ];
-      }
-    );
-    this.logger.debug(MenuComponent.name, 'ngOnInit()', 'end');
+    this.logger.debug(MenuComponent.name, 'loadI18nLabels()', 'end');
   }
 }

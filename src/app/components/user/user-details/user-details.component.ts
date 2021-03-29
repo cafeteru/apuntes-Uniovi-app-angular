@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../../../core/base/base.component';
-import { NGXLogger } from 'ngx-logger';
+
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -14,12 +14,9 @@ import { TranslateService } from '@ngx-translate/core';
 export class UserDetailsComponent extends BaseComponent implements OnInit {
 
   constructor(
-    protected logger: NGXLogger,
     protected translateService: TranslateService
   ) {
-    super(logger, translateService);
-    this.logger.debug(UserDetailsComponent.name, 'constructor()', 'start');
-    this.logger.debug(UserDetailsComponent.name, 'constructor()', 'end');
+    super(translateService);
   }
 
   ngOnInit(): void {

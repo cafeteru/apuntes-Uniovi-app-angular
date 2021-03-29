@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { NGXLogger } from 'ngx-logger';
+
 import { User } from '../../../core/models/user';
 import { BaseModalComponent } from '../../../core/base/base-modal.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -28,15 +28,12 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
   identificationType = Object.keys(IdentificationType);
 
   constructor(
-    protected logger: NGXLogger,
     protected translateService: TranslateService,
     protected matDialogRef: MatDialogRef<ModalUserComponent>,
     @Inject(MAT_DIALOG_DATA) private user: User,
     private userService: UserService
   ) {
-    super(logger, translateService, matDialogRef, user);
-    this.logger.debug(ModalUserComponent.name, 'constructor()', 'start');
-    this.logger.debug(ModalUserComponent.name, 'constructor()', 'end');
+    super(translateService, matDialogRef, user);
   }
 
   get title(): string {
@@ -75,7 +72,6 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
   }
 
   protected getDataForm(): User {
-    this.logger.debug(ModalUserComponent.name, 'getFormGroup()', 'start');
     this.user.name = this.formGroup.get('name').value;
     this.user.surname = this.formGroup.get('surname').value;
     this.user.email = this.formGroup.get('email').value;
@@ -92,13 +88,11 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
     this.user.address.street = this.formGroup.get('street').value;
     this.user.address.city = this.formGroup.get('city').value;
     this.user.address.postalCode = this.formGroup.get('postalCode').value;
-    this.logger.debug(ModalUserComponent.name, 'getFormGroup()', 'start');
     return this.user;
   }
 
   protected getFormGroup(): FormGroup {
-    this.logger.debug(ModalUserComponent.name, 'getFormGroup()', 'start');
-    const formGroup = new FormGroup({
+    return new FormGroup({
         surname: new FormControl(this.user.surname),
         name: new FormControl(this.user.name),
         email: new FormControl(this.user.email),
@@ -118,13 +112,10 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
       {
         validators: NumberIdentificationValidator.isValid()
       });
-    this.logger.debug(ModalUserComponent.name, 'getFormGroup()', 'end');
-    return formGroup;
   }
 
   protected saveOrUpdateService(): Observable<User> {
-    this.logger.debug(ModalUserComponent.name, 'saveOrUpdateService()', 'start');
-    this.logger.debug(ModalUserComponent.name, 'saveOrUpdateService()', 'end');
-    return this.isSaveOrUpdate() ? this.userService.update(this.user) : this.userService.create(this.user);
+    return this.isSaveOrUpdate() ? this.userService.update(this.user) :
+      this.userService.create(this.user);
   }
 }

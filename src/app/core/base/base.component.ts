@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { NGXLogger } from 'ngx-logger';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -14,23 +13,16 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
   protected subscriptions: Subscription[] = [];
 
   protected constructor(
-    protected logger: NGXLogger,
     protected translateService: TranslateService,
   ) {
-    this.logger.debug(BaseComponent.name, 'constructor()', 'start');
-    this.logger.debug(BaseComponent.name, 'constructor()', 'end');
   }
 
   ngOnInit(): void {
-    this.logger.debug(this.constructor.name, 'ngOnInit()', 'start');
     this.subscriptions = [];
-    this.logger.debug(this.constructor.name, 'ngOnInit()', 'end');
   }
 
   ngOnDestroy(): void {
-    this.logger.debug(this.constructor.name, 'ngOnDestroy()', 'start');
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
-    this.logger.debug(this.constructor.name, 'ngOnDestroy()', 'end');
   }
 
   /**

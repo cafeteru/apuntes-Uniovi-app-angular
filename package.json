@@ -39,7 +39,6 @@
     "jwt-decode": "^3.1.2",
     "jwt-simple": "^0.5.6",
     "ng2-charts": "^2.4.2",
-    "ngx-logger": "^4.2.1",
     "ngx-show-hide-password": "^2.3.0",
     "rxjs": "~6.6.6",
     "sass-loader": "^11.0.1",

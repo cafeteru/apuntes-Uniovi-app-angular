@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from '../../../../core/models/user';
 import { ActivatedRoute } from '@angular/router';
-import { NGXLogger } from 'ngx-logger';
+
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../../../core/base/base.component';
 import { GLOBAL_CONSTANTS } from '../../../../core/utils/global-constants';
@@ -24,25 +24,21 @@ export class UserPersonalDataComponent extends BaseComponent {
   user: User;
 
   constructor(
-    protected logger: NGXLogger,
     protected translateService: TranslateService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private snackBarService: SnackBarService,
   ) {
-    super(logger, translateService);
-    this.logger.debug(UserPersonalDataComponent.name, 'constructor()', 'start');
+    super(translateService);
     if (this.route.snapshot.data.user) {
       this.user = this.route.snapshot.data.user;
     }
-    this.logger.debug(UserPersonalDataComponent.name, 'constructor()', 'end');
   }
 
   /**
    * Update user´s information
    */
   updateUser(): void {
-    this.logger.debug(UserPersonalDataComponent.name, `updateUser()`, 'start');
     const config = {
       width: GLOBAL_CONSTANTS.maxWidthModal,
       maxHeight: GLOBAL_CONSTANTS.maxHeightModal,
@@ -60,7 +56,6 @@ export class UserPersonalDataComponent extends BaseComponent {
             )
           );
         }
-        this.logger.debug(UserPersonalDataComponent.name, `updateUser()`, 'end');
       }
     );
   }

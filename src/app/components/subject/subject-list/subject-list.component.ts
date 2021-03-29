@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from '../../../core/base/base.component';
-import { NGXLogger } from 'ngx-logger';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackBarService } from '../../../core/services/snack-bar.service';
@@ -12,7 +11,7 @@ import { merge, Observable, of } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from '../../../core/models/subject';
 import { SubjectType } from '../../../core/models/enums/subject-type';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { GLOBAL_CONSTANTS } from '../../../core/utils/global-constants';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { ModalSubjectComponent } from '../modal-subject/modal-subject.component';
@@ -36,28 +35,22 @@ export class SubjectListComponent extends BaseComponent implements OnInit, After
   private subjectFilter = new Subject();
 
   constructor(
-    protected logger: NGXLogger,
     protected translateService: TranslateService,
     private subjectService: SubjectService,
     private dialog: MatDialog,
     private snackBarService: SnackBarService,
   ) {
-    super(logger, translateService);
-    this.logger.debug(SubjectListComponent.name, 'constructor()', 'start');
-    this.logger.debug(SubjectListComponent.name, 'constructor()', 'end');
+    super(translateService);
   }
 
   ngOnInit(): void {
-    this.logger.debug(SubjectListComponent.name, 'ngOnInit()', 'start');
     this.cleanFilters();
-    this.logger.debug(SubjectListComponent.name, 'ngOnInit()', 'end');
   }
 
   /**
    * Clean al filters and reload list
    */
   cleanFilters(): void {
-    this.logger.debug(SubjectListComponent.name, 'cleanFilters()', 'start');
     this.subjectFilter = new Subject();
     this.formGroup = new FormGroup({
       name: new FormControl(this.subjectFilter.name),
@@ -65,11 +58,9 @@ export class SubjectListComponent extends BaseComponent implements OnInit, After
       active: new FormControl(this.subjectFilter.active),
     });
     this.getSubjects();
-    this.logger.debug(SubjectListComponent.name, 'cleanFilters()', 'end');
   }
 
   ngAfterViewInit(): void {
-    this.logger.debug(SubjectListComponent.name, 'ngAfterViewInit()', 'start');
     this.subscriptions.push(
       merge(
         this.paginator.page,
@@ -78,27 +69,23 @@ export class SubjectListComponent extends BaseComponent implements OnInit, After
         () => this.getSubjects()
       )
     );
-    this.logger.debug(SubjectListComponent.name, 'ngAfterViewInit()', 'end');
   }
 
   /**
    * Filter the list of users
    */
   filter(): void {
-    this.logger.debug(SubjectListComponent.name, 'filter()', 'start');
     const namesFormGroups = Object.keys(this.formGroup.controls);
     namesFormGroups.forEach(name => {
       this.subjectFilter[name] = this.formGroup.get(name).value;
     });
     this.getSubjects();
-    this.logger.debug(SubjectListComponent.name, 'filter()', 'end');
   }
 
   /**
    * Open a modal window to create a Subject
    */
   openModal(): void {
-    this.logger.debug(SubjectListComponent.name, `openModal()`, 'start');
     const data = new Subject();
     const config = {
       width: GLOBAL_CONSTANTS.maxWidthModal,
@@ -117,7 +104,6 @@ export class SubjectListComponent extends BaseComponent implements OnInit, After
           )
         );
       }
-      this.logger.debug(SubjectListComponent.name, `openModal()`, 'end');
     });
   }
 
@@ -130,15 +116,13 @@ export class SubjectListComponent extends BaseComponent implements OnInit, After
   }
 
   private getSubjects(): void {
-    this.logger.debug(SubjectListComponent.name, 'getUsers()', 'start');
     const options = new OptionsPage();
     options.createOptionsSearch(this.paginator, this.sort);
     this.subjects$ = this.subjectService.findAll(options, this.subjectFilter).pipe(
       map((res) => {
         this.totalElements = res?.totalElements;
         return res?.content;
-      }),
-      tap(() => this.logger.debug(SubjectListComponent.name, 'getUsers()', 'end'))
+      })
     );
   }
 }

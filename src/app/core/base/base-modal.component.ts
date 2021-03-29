@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
-import { NGXLogger } from 'ngx-logger';
 import { Observable, Subscription } from 'rxjs';
 import { FormGroupUtil } from '../utils/form-group-util';
 import { BaseComponent } from './base.component';
@@ -28,14 +27,11 @@ export abstract class BaseModalComponent<T, U> extends BaseComponent implements 
   protected subscriptions: Subscription[] = [];
 
   protected constructor(
-    protected logger: NGXLogger,
     protected translateService: TranslateService,
     protected matDialogRef: MatDialogRef<U>,
     @Inject(MAT_DIALOG_DATA) public entity: T
   ) {
-    super(logger, translateService);
-    this.logger.debug(BaseModalComponent.name, 'constructor()', 'start');
-    this.logger.debug(BaseModalComponent.name, 'constructor()', 'end');
+    super(translateService);
   }
 
   /**
@@ -44,10 +40,8 @@ export abstract class BaseModalComponent<T, U> extends BaseComponent implements 
   abstract get title(): string;
 
   ngOnInit(): void {
-    this.logger.debug(BaseModalComponent.name, 'ngOnInit()', 'start');
     this.formGroup = this.getFormGroup();
     this.textSaveOrUpdate = this.isSaveOrUpdate() ? BTN_UPDATE : BTN_ADD;
-    this.logger.debug(BaseModalComponent.name, 'ngOnInit()', 'end');
   }
 
   /**
@@ -56,16 +50,13 @@ export abstract class BaseModalComponent<T, U> extends BaseComponent implements 
    * @param entity Entity
    */
   closeModal(entity?: T): void {
-    this.logger.debug(BaseModalComponent.name, `closeModal(entity : ${entity})`, 'start');
     this.matDialogRef.close(entity);
-    this.logger.debug(BaseModalComponent.name, `closeModal(entity : ${entity})`, 'end');
   }
 
   /**
    * Checks the formGroup, returns the entered data and closes the modal
    */
   saveOrUpdate(): void {
-    this.logger.debug(BaseModalComponent.name, `saveOrUpdate()`, 'start');
     if (FormGroupUtil.valid(this.formGroup)) {
       this.getDataForm();
       this.subscriptions.push(
@@ -76,14 +67,12 @@ export abstract class BaseModalComponent<T, U> extends BaseComponent implements 
           (res: ErrorResponse) => {
             this.showAlertBack('error', ERROR_SERVICE_TITLE, ERROR_SERVICE_TEXT,
               res.error.error);
-            this.logger.debug(BaseModalComponent.name, `saveOrUpdate()`, res);
           }
         )
       );
     } else {
       this.showAlert('error', ERROR_FORM_GROUP_TITLE, ERROR_FORM_GROUP_TEXT);
     }
-    this.logger.debug(BaseModalComponent.name, `saveOrUpdate()`, 'end');
   }
 
   /**

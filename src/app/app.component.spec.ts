@@ -1,7 +1,6 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { LoggerTestingModule } from 'ngx-logger/testing';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
@@ -13,7 +12,6 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        LoggerTestingModule,
         BrowserAnimationsModule,
         CoreModule,
         SharedModule,

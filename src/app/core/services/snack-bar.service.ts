@@ -9,7 +9,7 @@ export class SnackBarService {
   private readonly snackBarConfig: MatSnackBarConfig;
 
   constructor(
-    private snackBar: MatSnackBar,
+    private matSnackBar: MatSnackBar,
   ) {
     this.snackBarConfig = new MatSnackBarConfig();
     this.snackBarConfig.duration = 2500;
@@ -19,7 +19,7 @@ export class SnackBarService {
 
   showSuccess(msg: string): void {
     const data: SnackBarData = {msg};
-    this.snackBar.openFromComponent(SnackBarComponent, {
+    this.matSnackBar.openFromComponent(SnackBarComponent, {
       ...this.snackBarConfig,
       data,
       panelClass: 'success-snack-bar'

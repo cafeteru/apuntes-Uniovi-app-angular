@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
 import { IToken, LoginData, LoginService, ResponseLogin } from './login.service';
-import { LoggerTestingModule } from 'ngx-logger/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { environment } from '../../../environments/environment';
@@ -15,7 +14,6 @@ describe('LoginService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        LoggerTestingModule,
         HttpClientTestingModule
       ],
       providers: [

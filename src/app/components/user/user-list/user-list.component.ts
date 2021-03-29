@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from '../../../core/base/base.component';
-import { NGXLogger } from 'ngx-logger';
+
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../core/models/user';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,7 +12,7 @@ import { SnackBarService } from '../../../core/services/snack-bar.service';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { OptionsPage } from '../../../core/models/server/options-page';
 import { FormControl, FormGroup } from '@angular/forms';
 import { RoleType } from '../../../core/models/enums/role-type';
@@ -52,28 +52,22 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
   private userFilter = new User();
 
   constructor(
-    protected logger: NGXLogger,
     protected translateService: TranslateService,
     private userService: UserService,
     private dialog: MatDialog,
     private snackBarService: SnackBarService,
   ) {
-    super(logger, translateService);
-    this.logger.debug(UserListComponent.name, 'constructor()', 'start');
-    this.logger.debug(UserListComponent.name, 'constructor()', 'end');
+    super(translateService);
   }
 
   ngOnInit(): void {
-    this.logger.debug(UserListComponent.name, 'ngOnInit()', 'start');
     this.cleanFilters();
-    this.logger.debug(UserListComponent.name, 'ngOnInit()', 'end');
   }
 
   /**
    * Filter the list of users
    */
   filter(): void {
-    this.logger.debug(UserListComponent.name, 'filter()', 'start');
     const namesFormGroups = Object.keys(this.formGroup.controls);
     namesFormGroups.forEach(name => {
       this.userFilter[name] = this.formGroup.get(name).value;
@@ -84,14 +78,12 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
     address.postalCode = this.formGroup.get('postalCode').value;
     this.userFilter.address = address;
     this.getUsers();
-    this.logger.debug(UserListComponent.name, 'filter()', 'end');
   }
 
   /**
    * Clean al filters and reload list
    */
   cleanFilters(): void {
-    this.logger.debug(UserListComponent.name, 'cleanFilters()', 'start');
     this.userFilter = new User();
     this.formGroup = new FormGroup({
       surname: new FormControl(this.userFilter.surname),
@@ -109,11 +101,9 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
       active: new FormControl(this.userFilter.active),
     });
     this.getUsers();
-    this.logger.debug(UserListComponent.name, 'cleanFilters()', 'end');
   }
 
   ngAfterViewInit(): void {
-    this.logger.debug(UserListComponent.name, 'ngAfterViewInit()', 'start');
     this.subscriptions.push(
       merge(
         this.paginator.page,
@@ -122,14 +112,12 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
         () => this.getUsers()
       )
     );
-    this.logger.debug(UserListComponent.name, 'ngAfterViewInit()', 'end');
   }
 
   /**
    * Open a modal window to create a user
    */
   openModal(): void {
-    this.logger.debug(UserListComponent.name, `openModal()`, 'start');
     const data = new User();
     const config = {
       width: GLOBAL_CONSTANTS.maxWidthModal,
@@ -148,7 +136,6 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
           )
         );
       }
-      this.logger.debug(UserListComponent.name, `openModal()`, 'end');
     });
   }
 
@@ -227,15 +214,13 @@ export class UserListComponent extends BaseComponent implements OnInit, AfterVie
   }
 
   private getUsers(): void {
-    this.logger.debug(UserListComponent.name, 'getUsers()', 'start');
     const options = new OptionsPage();
     options.createOptionsSearch(this.paginator, this.sort);
     this.users$ = this.userService.findAll(options, this.userFilter).pipe(
       map((res) => {
         this.totalElements = res?.totalElements;
         return res?.content;
-      }),
-      tap(() => this.logger.debug(UserListComponent.name, 'getUsers()', 'end'))
+      })
     );
   }
 }

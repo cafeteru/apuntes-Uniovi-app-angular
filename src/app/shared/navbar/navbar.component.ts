@@ -3,7 +3,6 @@ import { LoginService } from '../../core/services/login.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../core/services/user.service';
 import { BaseComponent } from '../../core/base/base.component';
-import { NGXLogger } from 'ngx-logger';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducer';
 import { User } from '../../core/models/user';
@@ -26,13 +25,12 @@ export class NavbarComponent extends BaseComponent implements OnInit {
   user: User;
 
   constructor(
-    protected logger: NGXLogger,
     protected translateService: TranslateService,
     private loginService: LoginService,
     private userService: UserService,
     private store: Store<AppState>
   ) {
-    super(logger, translateService);
+    super(translateService);
   }
 
   ngOnInit() {
@@ -57,21 +55,11 @@ export class NavbarComponent extends BaseComponent implements OnInit {
    * @param language Selected language
    */
   useLanguage(language: string): void {
-    this.logger.debug(UserService.name, `useLanguage(language: ${language})`, 'start');
     this.language = language;
     this.translateService.use(language);
     if (localStorage.authorization) {
       this.subscriptions.push(
-        this.userService.changeLanguage(language).pipe(
-          tap(() => this.store.dispatch(changeLanguage({language})))
-        ).subscribe(
-          () => {
-            this.logger.debug(UserService.name, `useLanguage(language: ${language})`, 'end');
-          },
-          (error) => {
-            this.logger.error(UserService.name, `useLanguage(language: ${language})`, error);
-          }
-        )
+        this.userService.changeLanguage(language).subscribe()
       );
     }
   }

@@ -3,7 +3,6 @@ import { TestBed } from '@angular/core/testing';
 import { SubjectService } from './subject.service';
 import { UserService } from './user.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { LoggerTestingModule } from 'ngx-logger/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('SubjectService', () => {
@@ -13,7 +12,6 @@ describe('SubjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        LoggerTestingModule,
         HttpClientTestingModule
       ],
       providers: [
@@ -23,7 +21,7 @@ describe('SubjectService', () => {
         CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
       ]
     });
-    service = TestBed.inject(UserService);
+    service = TestBed.inject(SubjectService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 

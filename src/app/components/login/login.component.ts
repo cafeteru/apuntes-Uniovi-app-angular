@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NGXLogger } from 'ngx-logger';
+
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { TranslateService } from '@ngx-translate/core';
@@ -29,36 +29,30 @@ export class LoginComponent extends BaseComponent implements OnInit {
   subscription: Subscription;
 
   constructor(
-    protected logger: NGXLogger,
     protected translateService: TranslateService,
     private router: Router,
     private loginService: LoginService,
     private store: Store<AppState>
   ) {
-    super(logger, translateService);
-    this.logger.debug(LoginComponent.name, 'constructor()', 'start');
+    super(translateService);
     this.subscription = this.store.select('loadingState').subscribe(
       loadingState => this.disable = loadingState.isLoading
     );
-    this.logger.debug(LoginComponent.name, 'constructor()', 'end');
   }
 
   ngOnInit(): void {
-    this.logger.debug(LoginComponent.name, 'ngOnInit()', 'start');
     localStorage.clear();
     this.disable = false;
     this.formGroup = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     });
-    this.logger.debug(LoginComponent.name, 'ngOnInit()', 'end');
   }
 
   /**
    * Submit request to login.
    */
   login(): void {
-    this.logger.debug(LoginComponent.name, 'login()', 'start');
     if (FormGroupUtil.valid(this.formGroup)) {
       this.store.dispatch(actions.initLoading());
       const loginData: LoginData = {
@@ -70,17 +64,13 @@ export class LoginComponent extends BaseComponent implements OnInit {
           () => {
             this.router.navigateByUrl('/menu').then();
             this.store.dispatch(actions.stopLoading());
-            this.logger.debug(LoginComponent.name, 'login()', 'end');
           },
           () => {
             this.showAlert('error', ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT,
               () => this.store.dispatch(actions.stopLoading()));
-            this.logger.error(LoginComponent.name, 'login()', 'error');
           },
         )
       );
-      return;
     }
-    this.logger.debug(LoginComponent.name, 'ngOnInit()', 'end');
   }
 }

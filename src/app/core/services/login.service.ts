@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { NGXLogger } from 'ngx-logger';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import jwt_decode from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
@@ -44,12 +43,9 @@ export class LoginService {
   private url = `${environment.urlApi}/login`;
 
   constructor(
-    private logger: NGXLogger,
-    private http: HttpClient,
+    private httpClient: HttpClient,
     private store: Store<AppState>
   ) {
-    this.logger.debug(LoginService.name, 'constructor()', 'start');
-    this.logger.debug(LoginService.name, 'constructor()', 'end');
   }
 
   /**
@@ -58,15 +54,13 @@ export class LoginService {
    * @param loginData User with username and password
    */
   login(loginData: LoginData): Observable<void> {
-    this.logger.debug(LoginService.name, `login(user: ${loginData.toString()})`, 'start');
-    return this.http.post<ResponseLogin>(this.url, loginData).pipe(
+    return this.httpClient.post<ResponseLogin>(this.url, loginData).pipe(
       map((res) => {
         const iToken = jwt_decode<IToken>(res.authorization);
         localStorage.setItem('authorization', res.authorization);
         localStorage.setItem('exp', iToken.exp.toString());
         this.store.dispatch(userActions.loadUser({id: iToken.id}));
-      }),
-      tap(() => this.logger.debug(LoginService.name, `login(user: ${loginData.toString()})`, 'start'))
+      })
     );
   }
 
@@ -74,9 +68,7 @@ export class LoginService {
    * Delete logged user data
    */
   logout(): void {
-    this.logger.debug(LoginService.name, `logout()`, 'start');
     localStorage.clear();
     this.store.dispatch(userActions.logout());
-    this.logger.debug(LoginService.name, `logout()`, 'end');
   }
 }

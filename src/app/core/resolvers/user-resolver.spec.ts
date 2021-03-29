@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
 import { UserResolver } from './user-resolver.service';
-import { LoggerTestingModule } from 'ngx-logger/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from '../services/user.service';
@@ -24,7 +23,6 @@ describe('UserResolver', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        LoggerTestingModule,
         HttpClientTestingModule,
         RouterTestingModule.withRoutes(userRoutes),
         TestUtils.getLanguages()

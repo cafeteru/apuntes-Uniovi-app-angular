@@ -34,7 +34,7 @@ export class CheckTokenGuard implements CanLoad, OnDestroy {
   canLoad(): boolean {
     const exp = localStorage.exp;
     if (exp && !isNaN(localStorage.exp) && Date.now() < (Number(exp) * 1_000)) {
-      const iToken = jwt_decode<IToken>(localStorage.authorization);
+      const iToken = jwt_decode<IToken>(localStorage?.authorization);
       this.subscriptions.push(
         this.store.select('loadingState').pipe(
           take(1)

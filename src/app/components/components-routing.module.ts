@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CheckTokenGuard } from '../core/guards/check-token-guard.service';
+import { CheckTokenGuard } from '../core/guards/check-token.guard.service';
 import { MenuComponent } from './menu/menu.component';
 
 const routes: Routes = [

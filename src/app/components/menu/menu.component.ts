@@ -6,8 +6,6 @@ import { UserService } from '../../core/services/user.service';
 import { ChartType } from 'chart.js';
 import { Label, MultiDataSet } from 'ng2-charts';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
-import { AppState } from '../../store/app.reducer';
-import { Store } from '@ngrx/store';
 
 const ROLE_TYPE_ADMIN = marker('role-type.admin');
 const ROLE_TYPE_STUDENT = marker('role-type.student');
@@ -31,7 +29,6 @@ export class MenuComponent extends BaseComponent implements OnInit {
   constructor(
     protected translateService: TranslateService,
     private userService: UserService,
-    private store: Store<AppState>
   ) {
     super(translateService);
     const keys = [
@@ -59,15 +56,17 @@ export class MenuComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getStatistics().subscribe(
-      userStatistics => {
-        this.userActiveData = [
-          [userStatistics.active, userStatistics.inactive],
-        ];
-        this.userRoleData = [
-          [userStatistics.numAdmin, userStatistics.numStudents, userStatistics.numTeachers],
-        ];
-      }
+    this.subscriptions.push(
+      this.userService.getStatistics().subscribe(
+        userStatistics => {
+          this.userActiveData = [
+            [userStatistics.active, userStatistics.inactive],
+          ];
+          this.userRoleData = [
+            [userStatistics.numAdmin, userStatistics.numStudents, userStatistics.numTeachers],
+          ];
+        }
+      )
     );
   }
 }

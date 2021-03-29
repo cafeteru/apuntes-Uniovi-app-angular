@@ -15,6 +15,10 @@ import { UserService } from '../../../core/services/user.service';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { of } from 'rxjs';
 import { RoleType } from '../../../core/models/enums/role-type';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { LoadingState } from '../../../store/reducers/loading.reducer';
+import { UserState } from '../../../store/reducers/user.reducer';
+import { AppState } from '../../../store/app.reducer';
 
 const BTN_ADD = marker('button.add');
 const BTN_UPDATE = marker('button.update');
@@ -30,6 +34,20 @@ describe('ModalUserComponent', () => {
   let fixture: ComponentFixture<ModalUserComponent>;
   let userService: UserService;
   let user: User;
+  let store: MockStore;
+  const loadingState: LoadingState = {
+    isLoading: false,
+    loadedUser: false
+  };
+
+  const userState: UserState = {
+    user: new User()
+  };
+
+  const initialState: AppState = {
+    loadingState,
+    userState
+  };
 
   beforeEach(waitForAsync(() => {
       const address: Address = {
@@ -76,11 +94,13 @@ describe('ModalUserComponent', () => {
             provide: MAT_DIALOG_DATA,
             useValue: user
           },
+          provideMockStore({initialState}),
         ],
         schemas: [
           CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
         ]
       }).compileComponents();
+      store = TestBed.inject(MockStore);
     })
   );
 

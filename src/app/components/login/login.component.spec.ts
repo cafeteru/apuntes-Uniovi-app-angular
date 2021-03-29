@@ -16,6 +16,11 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { of, throwError } from 'rxjs';
 import { rootRoutes } from '../../app-routing.module';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { AppState } from '../../store/app.reducer';
+import { LoadingState } from '../../store/reducers/loading.reducer';
+import { UserState } from '../../store/reducers/user.reducer';
+import { User } from '../../core/models/user';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -23,6 +28,21 @@ describe('LoginComponent', () => {
   let router: Router;
   let location: Location;
   let loginService: LoginService;
+  let store: MockStore;
+
+  const loadingState: LoadingState = {
+    isLoading: false,
+    loadedUser: false
+  };
+
+  const userState: UserState = {
+    user: new User()
+  };
+
+  const initialState: AppState = {
+    loadingState,
+    userState
+  };
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -41,12 +61,14 @@ describe('LoginComponent', () => {
         HttpClientTestingModule,
       ],
       providers: [
-        LoginService
+        LoginService,
+        provideMockStore({initialState}),
       ],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
       ]
     }).compileComponents();
+    store = TestBed.inject(MockStore);
   }));
 
   beforeEach(() => {
@@ -110,6 +132,5 @@ describe('LoginComponent', () => {
     component.formGroup.controls.password.setValue('password');
     expect(component.formGroup.valid).toBeTrue();
     component.login();
-    expect(component.disable).toBeTrue();
   });
 });

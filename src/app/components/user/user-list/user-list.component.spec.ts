@@ -11,11 +11,29 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../core/models/user';
 import { of, throwError } from 'rxjs';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { LoadingState } from '../../../store/reducers/loading.reducer';
+import { UserState } from '../../../store/reducers/user.reducer';
+import { AppState } from '../../../store/app.reducer';
 
 describe('UsersListComponent', () => {
   let component: UserListComponent;
   let fixture: ComponentFixture<UserListComponent>;
   let userService: UserService;
+  let store: MockStore;
+  const loadingState: LoadingState = {
+    isLoading: false,
+    loadedUser: false
+  };
+
+  const userState: UserState = {
+    user: new User()
+  };
+
+  const initialState: AppState = {
+    loadingState,
+    userState
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -29,24 +47,23 @@ describe('UsersListComponent', () => {
         SharedModule,
         BrowserAnimationsModule,
         FormsModule,
-        ReactiveFormsModule,
-        HttpClientTestingModule,
+        ReactiveFormsModule
       ],
       providers: [
-        UserService
+        UserService,
+        provideMockStore({initialState}),
       ],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
+    store = TestBed.inject(MockStore);
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UserListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    userService = fixture.debugElement.injector.get(UserService);
     userService = fixture.debugElement.injector.get(UserService);
   });
 

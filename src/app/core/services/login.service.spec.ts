@@ -6,10 +6,32 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { RoleType } from '../models/enums/role-type';
 import * as jwt from 'jwt-simple';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { LoadingState } from '../../store/reducers/loading.reducer';
+import { UserState } from '../../store/reducers/user.reducer';
+import { User } from '../models/user';
+import { AppState } from '../../store/app.reducer';
+import { encode } from 'jwt-simple';
 
 describe('LoginService', () => {
   let service: LoginService;
   let httpMock: HttpTestingController;
+  let store: MockStore;
+  const loadingState: LoadingState = {
+    isLoading: false,
+    loadedUser: false
+  };
+
+  const user = new User();
+  user.username = 'username';
+  const userState: UserState = {
+    user: new User()
+  };
+
+  const initialState: AppState = {
+    loadingState,
+    userState
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -17,7 +39,8 @@ describe('LoginService', () => {
         HttpClientTestingModule
       ],
       providers: [
-        LoginService
+        LoginService,
+        provideMockStore({initialState})
       ],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
@@ -25,6 +48,7 @@ describe('LoginService', () => {
     });
     service = TestBed.inject(LoginService);
     httpMock = TestBed.inject(HttpTestingController);
+    store = TestBed.inject(MockStore);
   });
 
   afterEach(() => {
@@ -48,12 +72,10 @@ describe('LoginService', () => {
       id: 1,
       role: RoleType.ADMIN
     };
+    localStorage.setItem('authorization', encode(content, 'test'));
     service.login(loginData).subscribe(
       () => {
         expect(localStorage.getItem('authorization')).not.toBeNull();
-        expect(localStorage.getItem('username')).toBe(content.username);
-        expect(localStorage.getItem('id')).toBe(content.id.toString());
-        expect(localStorage.getItem('role')).toBe(content.role);
         expect(localStorage.getItem('exp')).toBe(content.exp.toString());
       }
     );

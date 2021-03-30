@@ -61,7 +61,7 @@ describe('MenuComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     userService = fixture.debugElement.injector.get(UserService);
-    spyOn(userService, "getStatistics").and.callFake(() => of(new UserStatistics()));
+    spyOn(userService, 'getStatistics').and.callFake(() => of(new UserStatistics()));
   });
 
   it('should create', () => {

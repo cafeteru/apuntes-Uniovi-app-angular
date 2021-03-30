@@ -1,0 +1,17 @@
+<section>
+  <div class="row form-group">
+    <div class="col">
+      <label class="col-form-label">{{'subject.name' | translate}}</label>
+      <div class="form-control">{{subject?.name }}</div>
+    </div>
+    <div class="col">
+      <label class="col-form-label">{{'subject.subjectType' | translate}}</label>
+      <div class="form-control">{{subject?.subjectType | subjectType}}</div>
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col">
+      <mat-checkbox [checked]="subject?.active" disabled>{{'subject.active' | translate}}</mat-checkbox>
+    </div>
+  </div>
+</section>

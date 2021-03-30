@@ -1,20 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UserResolver } from './user-resolver.service';
+import { SubjectResolver } from './subject.resolver';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { UserService } from '../services/user.service';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { User } from '../models/user';
-import { environment } from '../../../environments/environment';
 import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
-import { userRoutes } from '../../components/user/user-routing.module';
 import { Location } from '@angular/common';
+import { SubjectService } from '../services/subject.service';
+import { RouterTestingModule } from '@angular/router/testing';
 import { TestUtils } from '../utils/test-utils';
+import { subjectRoutes } from '../../components/subject/subject-routing.module';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { Subject } from '../models/subject';
 
-describe('UserResolver', () => {
-  let resolver: UserResolver;
-  let service: UserService;
+describe('SubjectResolver', () => {
+  let resolver: SubjectResolver;
+  let service: SubjectService;
   let httpMock: HttpTestingController;
   let route: ActivatedRoute;
   let router: Router;
@@ -24,11 +24,11 @@ describe('UserResolver', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes(userRoutes),
+        RouterTestingModule.withRoutes(subjectRoutes),
         TestUtils.getLanguages()
       ],
       providers: [
-        UserService,
+        SubjectService,
         {
           provide: ActivatedRoute,
           useValue: {snapshot: {paramMap: convertToParamMap({id: 1})}}
@@ -38,8 +38,8 @@ describe('UserResolver', () => {
         CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
       ]
     });
-    resolver = TestBed.inject(UserResolver);
-    service = TestBed.inject(UserService);
+    resolver = TestBed.inject(SubjectResolver);
+    service = TestBed.inject(SubjectService);
     httpMock = TestBed.inject(HttpTestingController);
     route = TestBed.inject(ActivatedRoute);
     router = TestBed.inject(Router);
@@ -48,9 +48,6 @@ describe('UserResolver', () => {
 
   afterEach(() => {
     httpMock.verify();
-  });
-
-  afterEach(() => {
     TestUtils.cleanSweetAlert();
   });
 
@@ -58,31 +55,31 @@ describe('UserResolver', () => {
     expect(resolver).toBeTruthy();
   });
 
-  it('check with existed user', () => {
+  it('check with existed subject', () => {
     const id = 1;
-    const user = new User();
+    const subject = new Subject();
     resolver.resolve(route.snapshot).subscribe(
       (res) => {
         expect(res).toBeTruthy();
-        expect(res).toBe(user);
+        expect(res).toBe(subject);
       }
     );
-    const req = httpMock.expectOne(`${environment.urlApi}/users/${id}`);
+    const req = httpMock.expectOne(`${environment.urlApi}/subjects/${id}`);
     expect(req.request.method).toBe('GET');
-    req.flush(user);
+    req.flush(subject);
   });
 
-  it('check with no existed user', () => {
+  it('check with no existed subject', () => {
     const id = 1;
     spyOn(service, 'findById').and.callThrough();
     resolver.resolve(route.snapshot).subscribe(
       () => {
       },
       () => {
-        expect(location.path()).toBe('/users');
+        expect(location.path()).toBe('/subjects');
       }
     );
-    const req = httpMock.expectOne(`${environment.urlApi}/users/${id}`);
+    const req = httpMock.expectOne(`${environment.urlApi}/subjects/${id}`);
     expect(req.request.method).toBe('GET');
     req.error(new ErrorEvent('error'));
   });

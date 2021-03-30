@@ -23,7 +23,7 @@ describe('ModalSubjectComponent', () => {
   let component: ModalSubjectComponent;
   let fixture: ComponentFixture<ModalSubjectComponent>;
   let store: MockStore;
-  let subject = new Subject();
+  const subject = new Subject();
   const loadingState: LoadingState = {
     isLoading: false,
     loadedUser: false

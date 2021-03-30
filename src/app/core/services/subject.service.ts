@@ -13,7 +13,7 @@ export class SubjectService {
   private url = `${environment.urlApi}/subjects`;
 
   constructor(
-    private http: HttpClient
+    private httpClient: HttpClient
   ) {
   }
 
@@ -34,7 +34,7 @@ export class SubjectService {
    * @param subject User
    */
   findAll(options: OptionsPage, subject?: Subject): Observable<Page<Subject>> {
-    return this.http.post<Page<Subject>>(`${this.url}${options.toApi()}`, subject,
+    return this.httpClient.post<Page<Subject>>(`${this.url}${options.toApi()}`, subject,
       SubjectService.getHttpOptions());
   }
 
@@ -44,6 +44,17 @@ export class SubjectService {
    * @param subject Subject to create
    */
   create(subject: Subject): Observable<Subject> {
-    return this.http.post<Subject>(`${this.url}/create`, subject, SubjectService.getHttpOptions());
+    return this.httpClient.post<Subject>(`${this.url}/create`,
+      subject, SubjectService.getHttpOptions());
+  }
+
+  /**
+   * Returns a subject by id
+   *
+   * @param id Subject´s id
+   */
+  findById(id: number): Observable<Subject> {
+    return this.httpClient.get<Subject>(`${this.url}/${id}`,
+      SubjectService.getHttpOptions());
   }
 }

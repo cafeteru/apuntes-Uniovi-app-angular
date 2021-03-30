@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { BaseComponent } from '../../../core/base/base.component';
-
-import { TranslateService } from '@ngx-translate/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-user-details',
@@ -11,15 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 /**
  * Component to display details of a user
  */
-export class UserDetailsComponent extends BaseComponent implements OnInit {
+export class UserDetailsComponent {
 
-  constructor(
-    protected translateService: TranslateService
-  ) {
-    super(translateService);
+  constructor() {
   }
-
-  ngOnInit(): void {
-  }
-
 }

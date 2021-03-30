@@ -8,11 +8,15 @@ import { MaterialDesignModule } from '../../shared/material-design/material-desi
 import { SubjectRoutingModule } from './subject-routing.module';
 import { SubjectListComponent } from './subject-list/subject-list.component';
 import { ModalSubjectComponent } from './modal-subject/modal-subject.component';
+import { SubjectDetailsComponent } from './subject-details/subject-details.component';
+import { SubjectDataComponent } from './tabs/subject-data/subject-data.component';
 
 @NgModule({
   declarations: [
     SubjectListComponent,
-    ModalSubjectComponent
+    ModalSubjectComponent,
+    SubjectDetailsComponent,
+    SubjectDataComponent
   ],
   imports: [
     SubjectRoutingModule,

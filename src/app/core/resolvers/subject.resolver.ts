@@ -1,28 +1,26 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { UserService } from '../services/user.service';
-import { User } from '../models/user';
+import { SubjectService } from '../services/subject.service';
+import { Subject } from '../models/subject';
 import { catchError } from 'rxjs/operators';
 
-/**
- * Resolver to load user´s data
- */
 @Injectable({
   providedIn: 'root'
 })
-export class UserResolver implements Resolve<User> {
+export class SubjectResolver implements Resolve<Subject> {
+
   constructor(
-    private userService: UserService,
+    private subjectService: SubjectService,
     private router: Router,
   ) {
   }
 
-  resolve(route: ActivatedRouteSnapshot): Observable<User> {
+  resolve(route: ActivatedRouteSnapshot): Observable<Subject> {
     const id = Number(route.paramMap.get('id'));
-    return this.userService.findById(id).pipe(
+    return this.subjectService.findById(id).pipe(
       catchError(() => {
-        this.router.navigateByUrl('/users').then();
+        this.router.navigateByUrl('/subjects').then();
         return of(null);
       })
     );

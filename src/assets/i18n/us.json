@@ -67,6 +67,7 @@
 	"subject.data": "Data",
 	"subject.name": "Name",
 	"subject.subjectType": "Subject type",
+	"subject.update.successfully": "Subject updated successfully",
 	"subjects": "Subjects",
 	"user.active": "Active",
 	"user.add.successfully": "User created successfully",

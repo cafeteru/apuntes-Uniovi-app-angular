@@ -68,4 +68,13 @@ export class SubjectService {
     return this.httpClient.patch<Subject>(
       `${this.url}/disable/${id}/${active}`, {}, SubjectService.getHttpOptions());
   }
+
+  /**
+   * Delete a subject
+   *
+   * @param id Subject´s id
+   */
+  delete(id: number): Observable<boolean> {
+    return this.httpClient.delete<boolean>(`${this.url}/${id}`, SubjectService.getHttpOptions());
+  }
 }

@@ -57,4 +57,15 @@ export class SubjectService {
     return this.httpClient.get<Subject>(`${this.url}/${id}`,
       SubjectService.getHttpOptions());
   }
+
+  /**
+   * Disable a subject
+   *
+   * @param id Subject´s id
+   * @param active New value to subject´s active
+   */
+  disable(id: number, active: boolean): Observable<Subject> {
+    return this.httpClient.patch<Subject>(
+      `${this.url}/disable/${id}/${active}`, {}, SubjectService.getHttpOptions());
+  }
 }

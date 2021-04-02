@@ -16,7 +16,16 @@ import { GLOBAL_CONSTANTS } from '../../../core/utils/global-constants';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { ModalSubjectComponent } from '../modal-subject/modal-subject.component';
 
+const ANSWER_DELETE_SUBJECT = marker('subject.delete.answer');
+const BUTTON_CANCEL = marker('button.cancel');
+const BUTTON_DELETE = marker('button.delete');
+const ERROR_DELETE_SUBJECT = marker('subject.delete.error');
+const ERROR_DISABLE_SUBJECT = marker('subject.disabled.error');
+const ERROR_ENABLE_SUBJECT = marker('subject.enabled.error');
 const SUCCESS_ADD_SUBJECT = marker('subject.add.successfully');
+const SUCCESS_DELETE_SUBJECT = marker('subject.delete.successfully');
+const SUCCESS_DISABLE_SUBJECT = marker('subject.disabled.successfully');
+const SUCCESS_ENABLE_SUBJECT = marker('subject.enabled.successfully');
 
 @Component({
   selector: 'app-subject-list',
@@ -107,8 +116,26 @@ export class SubjectListComponent extends BaseComponent implements OnInit, After
     });
   }
 
-  disable(id: number, b: boolean): void {
-
+  disable(id: number, value: boolean): void {
+    this.subscriptions.push(
+      this.subjectService.disable(id, value).subscribe(
+        () => {
+          this.getSubjects();
+          const message = value ? SUCCESS_ENABLE_SUBJECT : SUCCESS_DISABLE_SUBJECT;
+          this.subscriptions.push(
+            this.translateService.get(message).subscribe(
+              res => {
+                this.snackBarService.showSuccess(res);
+              }
+            )
+          );
+        },
+        () => {
+          const title = value ? ERROR_ENABLE_SUBJECT : ERROR_DISABLE_SUBJECT;
+          this.showAlert('error', title);
+        }
+      )
+    );
   }
 
   askDelete(id: number): void {

@@ -1,18 +1,5 @@
 <div class="card-columns">
-  <div class="card">
-    <div class="card-header">{{'user.statistics.active'| translate}}</div>
-    <div class="card-body">
-      <canvas baseChart [data]="userActiveData" [labels]="userActiveLabel"
-              [chartType]="statisticsType">
-      </canvas>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header">{{'user.statistics.role'| translate}}</div>
-    <div class="card-body">
-      <canvas baseChart [data]="userRoleData" [labels]="userRoleLabel"
-              [chartType]="statisticsType">
-      </canvas>
-    </div>
-  </div>
+  <app-user-active-statistics></app-user-active-statistics>
+  <app-user-type-statistics></app-user-type-statistics>
+  <app-subject-statistics></app-subject-statistics>
 </div>

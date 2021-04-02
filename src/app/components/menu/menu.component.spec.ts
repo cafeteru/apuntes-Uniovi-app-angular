@@ -12,7 +12,7 @@ import { User } from '../../core/models/user';
 import { AppState } from '../../store/app.reducer';
 import { ChartsModule } from 'ng2-charts';
 import { UserService } from '../../core/services/user.service';
-import { UserStatistics } from '../../core/models/statitics/user-statistics';
+import { UserStatistics } from '../../core/models/statistics/user-statistics';
 import { of } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 

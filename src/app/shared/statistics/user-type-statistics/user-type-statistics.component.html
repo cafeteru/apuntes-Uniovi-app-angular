@@ -1,0 +1,8 @@
+<div class="card">
+  <div class="card-header">{{'user.statistics.role'| translate}}</div>
+  <div class="card-body">
+    <canvas baseChart [data]="userRoleData" [labels]="userRoleLabel"
+            [chartType]="statisticsType">
+    </canvas>
+  </div>
+</div>

@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Page } from '../models/server/page';
 import { OptionsPage } from '../models/server/options-page';
-import { UserStatistics } from '../models/statitics/user-statistics';
+import { UserStatistics } from '../models/statistics/user-statistics';
 
 @Injectable({
   providedIn: 'root'

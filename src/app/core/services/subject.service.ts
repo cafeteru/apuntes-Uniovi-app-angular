@@ -5,6 +5,7 @@ import { OptionsPage } from '../models/server/options-page';
 import { Observable } from 'rxjs';
 import { Page } from '../models/server/page';
 import { Subject } from '../models/subject';
+import { SubjectStatistics } from '../models/statistics/subject-statistics';
 
 @Injectable({
   providedIn: 'root'
@@ -76,5 +77,13 @@ export class SubjectService {
    */
   delete(id: number): Observable<boolean> {
     return this.httpClient.delete<boolean>(`${this.url}/${id}`, SubjectService.getHttpOptions());
+  }
+
+  /**
+   * Get subject statistics
+   */
+  getStatistics(): Observable<SubjectStatistics> {
+    return this.httpClient.get<SubjectStatistics>(`${this.url}/statistics`,
+      SubjectService.getHttpOptions());
   }
 }

@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SubjectTypePipe } from './pipes/subject-type.pipe';
+import { StatisticsModule } from './statistics/statistics.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SubjectTypePipe } from './pipes/subject-type.pipe';
     MaterialDesignModule,
     ShowHidePasswordModule,
     RouterModule,
+    StatisticsModule
   ],
   exports: [
     NavbarComponent,
@@ -34,6 +36,7 @@ import { SubjectTypePipe } from './pipes/subject-type.pipe';
     RoleTypePipe,
     IdentificationTypePipe,
     SubjectTypePipe,
+    StatisticsModule
   ]
 })
 export class SharedModule {

@@ -15,6 +15,7 @@ import { map } from 'rxjs/operators';
 import { GLOBAL_CONSTANTS } from '../../../core/utils/global-constants';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { ModalSubjectComponent } from '../modal-subject/modal-subject.component';
+import Swal from 'sweetalert2';
 
 const ANSWER_DELETE_SUBJECT = marker('subject.delete.answer');
 const BUTTON_CANCEL = marker('button.cancel');
@@ -139,7 +140,44 @@ export class SubjectListComponent extends BaseComponent implements OnInit, After
   }
 
   askDelete(id: number): void {
+    const subscription = this.translateService.get([
+      ANSWER_DELETE_SUBJECT,
+      BUTTON_DELETE,
+      BUTTON_CANCEL
+    ]).subscribe(
+      res => {
+        Swal.fire({
+          title: res[ANSWER_DELETE_SUBJECT],
+          showDenyButton: true,
+          confirmButtonText: res[BUTTON_DELETE],
+          denyButtonText: res[BUTTON_CANCEL],
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.delete(id);
+          }
+        });
+      }
+    );
+    this.subscriptions.push(subscription);
+  }
 
+  private delete(id: number): void {
+    const subscription = this.subjectService.delete(id).subscribe(
+      () => {
+        this.getSubjects();
+        this.subscriptions.push(
+          this.translateService.get(SUCCESS_DELETE_SUBJECT).subscribe(
+            res => {
+              this.snackBarService.showSuccess(res);
+            }
+          )
+        );
+      },
+      () => {
+        this.showAlert('error', ERROR_DELETE_SUBJECT);
+      }
+    );
+    this.subscriptions.push(subscription);
   }
 
   private getSubjects(): void {

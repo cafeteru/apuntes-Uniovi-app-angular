@@ -6,13 +6,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SubjectService } from '../../../core/services/subject.service';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { from, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { SubjectType } from '../../../core/models/enums/subject-type';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../core/models/user';
 import { RoleType } from '../../../core/models/enums/role-type';
 import { TeachSubject } from '../../../core/models/teach-subject';
-import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
+import { TeachSubjectService } from '../../../core/services/teach-subject.service';
 
 const TITLE_ADD = marker('modal.subject.title.add');
 const TITLE_UPDATE = marker('modal.subject.title.update');
@@ -31,7 +32,8 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
     protected matDialogRef: MatDialogRef<ModalSubjectComponent>,
     @Inject(MAT_DIALOG_DATA) private subject: Subject,
     private subjectService: SubjectService,
-    private userService: UserService
+    private userService: UserService,
+    private teachSubjectService: TeachSubjectService
   ) {
     super(translateService, matDialogRef, subject);
     this.teachers$ = this.userService.findAllByRole(RoleType.TEACHER);
@@ -63,25 +65,21 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
 
   protected saveOrUpdateService(): Observable<Subject> {
     return this.isSaveOrUpdate() ? this.subjectService.create(this.subject) :
-      this.subjectService.create(this.subject);
+      this.create();
   }
 
   private create(): Observable<Subject> {
-    const a = this.subjectService.create(this.subject).pipe(
+    return this.subjectService.create(this.subject).pipe(
       map((subject) => {
         this.subject = subject;
         const teachers: User[] = this.formGroup.get('teachers').value;
         return teachers.map(teacher => new TeachSubject(this.subject.id, teacher.id));
       }),
-      // TODO Terminar
-      switchMap((x) => from(x).pipe(
-        mergeMap((y) => {
-          console.warn(y);
-          return of(y);
-        })),
+      switchMap((teachSubjects) =>
+        this.teachSubjectService.create(teachSubjects).pipe(
+          map(() => this.subject)
+        )
       ),
-      tap(() => of(this.subject))
     );
-    return of();
   }
 }

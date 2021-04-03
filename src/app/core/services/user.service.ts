@@ -46,7 +46,7 @@ export class UserService {
 
   findAllByRole(role: RoleType): Observable<User[]> {
     return this.httpClient.get<Page<User>>(`${this.url}/role/${role}`, UserService.getHttpOptions())
-      .pipe(map((page) => page.content));
+      .pipe(map((page) => page?.content));
   }
 
   /**

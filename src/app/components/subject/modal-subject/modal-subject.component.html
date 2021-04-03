@@ -28,6 +28,19 @@
   <section class="row form-group">
     <mat-checkbox class="col" formControlName="active" id="active">{{'subject.active' | translate}}</mat-checkbox>
   </section>
+  <section class="row form-group">
+    <p-listbox class="col" [options]="teachers$ | async" formControlName="teachers" [metaKeySelection]="false"
+               [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="name"
+               [listStyle]="{'max-height':'250px'}">
+      <ng-template let-teacher pTemplate="item">
+        <div>
+          <div>
+            {{teacher.name}} {{teacher.surname}} - {{'user.username' | translate}} : {{teacher.username}}
+          </div>
+        </div>
+      </ng-template>
+    </p-listbox>
+  </section>
   <section class="float-right modal-buttons">
     <button (click)="saveOrUpdate()" class="btn btn-outline-success" id="add">{{'button.save'| translate}}</button>
     <button (click)="closeModal()" class="btn btn-outline-danger" id="cancel"

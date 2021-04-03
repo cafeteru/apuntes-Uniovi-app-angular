@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Page } from '../models/server/page';
 import { OptionsPage } from '../models/server/options-page';
 import { UserStatistics } from '../models/statistics/user-statistics';
+import { RoleType } from '../models/enums/role-type';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,6 @@ export class UserService {
     };
   }
 
-
   /**
    * Returns all user
    *
@@ -43,6 +43,11 @@ export class UserService {
   findAll(options: OptionsPage, user?: User): Observable<Page<User>> {
     return this.httpClient.post<Page<User>>(
       `${this.url}${options.toApi()}`, user, UserService.getHttpOptions());
+  }
+
+  findAllByRole(role: RoleType): Observable<User[]> {
+    return this.httpClient.get<Page<User>>(`${this.url}/role/${role}`, UserService.getHttpOptions())
+      .pipe(map((page) => page.content));
   }
 
   /**

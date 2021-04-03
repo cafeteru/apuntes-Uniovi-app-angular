@@ -40,6 +40,8 @@
     "jwt-simple": "^0.5.6",
     "ng2-charts": "^2.4.2",
     "ngx-show-hide-password": "^2.3.0",
+    "primeicons": "^4.1.0",
+    "primeng": "^11.3.1",
     "rxjs": "~6.6.6",
     "sass-loader": "^11.0.1",
     "sweetalert2": "^10.15.7",

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { User } from '../../../core/models/user';
@@ -93,6 +93,7 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
 
   protected getFormGroup(): FormGroup {
     return new FormGroup({
+        // TODO Cambiar a required
         surname: new FormControl(this.user.surname),
         name: new FormControl(this.user.name),
         email: new FormControl(this.user.email),

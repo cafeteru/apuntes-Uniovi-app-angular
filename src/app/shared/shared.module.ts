@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SubjectTypePipe } from './pipes/subject-type.pipe';
 import { StatisticsModule } from './statistics/statistics.module';
+import { ListboxModule } from 'primeng/listbox';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { StatisticsModule } from './statistics/statistics.module';
     MaterialDesignModule,
     ShowHidePasswordModule,
     RouterModule,
-    StatisticsModule
+    StatisticsModule,
+    ListboxModule,
+    FormsModule
   ],
   exports: [
     NavbarComponent,
@@ -36,7 +40,9 @@ import { StatisticsModule } from './statistics/statistics.module';
     RoleTypePipe,
     IdentificationTypePipe,
     SubjectTypePipe,
-    StatisticsModule
+    StatisticsModule,
+    ListboxModule,
+    FormsModule
   ]
 })
 export class SharedModule {

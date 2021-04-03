@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModalUserComponent } from './modal-user.component';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -19,6 +19,8 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { LoadingState } from '../../../store/reducers/loading.reducer';
 import { UserState } from '../../../store/reducers/user.reducer';
 import { AppState } from '../../../store/app.reducer';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 const BTN_ADD = marker('button.add');
 const BTN_UPDATE = marker('button.update');
@@ -49,60 +51,62 @@ describe('ModalUserComponent', () => {
     userState
   };
 
-  beforeEach(waitForAsync(() => {
-      const address: Address = {
-        city: undefined,
-        id: undefined,
-        postalCode: undefined,
-        street: undefined
-      };
-      user = {
-        address,
-        role: undefined,
-        active: undefined,
-        birthDate: undefined,
-        email: undefined,
-        id: undefined,
-        identificationType: undefined,
-        img: undefined,
-        name: undefined,
-        numberIdentification: undefined,
-        password: undefined,
-        phone: undefined,
-        surname: undefined,
-        username: undefined,
-        language: LanguageType.ES
-      };
-      TestBed.configureTestingModule({
-        declarations: [
-          ModalUserComponent
-        ],
-        imports: [
-          RouterTestingModule,
-          CoreModule,
-          SharedModule,
-          TestUtils.getLanguages(),
-          BrowserAnimationsModule
-        ],
-        providers: [
-          UserService,
-          {
-            provide: MatDialogRef,
-            useValue: matDialogRefMock
-          },
-          {
-            provide: MAT_DIALOG_DATA,
-            useValue: user
-          },
-          provideMockStore({initialState}),
-        ],
-        schemas: [
-          CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-        ]
-      }).compileComponents();
-      store = TestBed.inject(MockStore);
-    })
-  );
+  beforeEach(async () => {
+    const address: Address = {
+      city: undefined,
+      id: undefined,
+      postalCode: undefined,
+      street: undefined
+    };
+    user = {
+      address,
+      role: undefined,
+      active: undefined,
+      birthDate: undefined,
+      email: undefined,
+      id: undefined,
+      identificationType: undefined,
+      img: undefined,
+      name: undefined,
+      numberIdentification: undefined,
+      password: undefined,
+      phone: undefined,
+      surname: undefined,
+      username: undefined,
+      language: LanguageType.ES
+    };
+    await TestBed.configureTestingModule({
+      declarations: [
+        ModalUserComponent
+      ],
+      imports: [
+        FormsModule,
+        RouterTestingModule,
+        CoreModule,
+        SharedModule,
+        TestUtils.getLanguages(),
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        HttpClientTestingModule,
+      ],
+      providers: [
+        UserService,
+        {
+          provide: MatDialogRef,
+          useValue: matDialogRefMock
+        },
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: user
+        },
+        provideMockStore({initialState}),
+      ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
+      ]
+    }).compileComponents();
+    store = TestBed.inject(MockStore);
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ModalUserComponent);

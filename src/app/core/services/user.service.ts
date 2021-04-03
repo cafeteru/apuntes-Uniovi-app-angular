@@ -12,7 +12,6 @@ import { RoleType } from '../models/enums/role-type';
 @Injectable({
   providedIn: 'root'
 })
-
 /**
  * Service to manage user
  */

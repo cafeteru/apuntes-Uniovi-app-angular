@@ -14,6 +14,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { Subject } from '../../../core/models/subject';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { SubjectService } from '../../../core/services/subject.service';
 
 const matDialogRefMock = {
   close: () => of()
@@ -22,6 +26,7 @@ const matDialogRefMock = {
 describe('ModalSubjectComponent', () => {
   let component: ModalSubjectComponent;
   let fixture: ComponentFixture<ModalSubjectComponent>;
+  let subjectService: SubjectService;
   let store: MockStore;
   const subject = new Subject();
   const loadingState: LoadingState = {
@@ -44,12 +49,17 @@ describe('ModalSubjectComponent', () => {
         ModalSubjectComponent
       ],
       imports: [
+        FormsModule,
+        RouterTestingModule,
         CoreModule,
         SharedModule,
         TestUtils.getLanguages(),
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        HttpClientTestingModule,
       ],
       providers: [
+        SubjectService,
         {
           provide: MatDialogRef,
           useValue: matDialogRefMock
@@ -71,6 +81,7 @@ describe('ModalSubjectComponent', () => {
     fixture = TestBed.createComponent(ModalSubjectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    subjectService = fixture.debugElement.injector.get(SubjectService);
   });
 
   it('should create', () => {

@@ -6,7 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SubjectService } from '../../../core/services/subject.service';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { SubjectType } from '../../../core/models/enums/subject-type';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../core/models/user';
@@ -64,19 +64,15 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
   }
 
   protected saveOrUpdateService(): Observable<Subject> {
-    return this.isSaveOrUpdate() ? this.subjectService.create(this.subject) :
-      this.create();
-  }
-
-  private create(): Observable<Subject> {
-    return this.subjectService.create(this.subject).pipe(
+    const observable$ = this.isSaveOrUpdate() ? this.subjectService.update(this.subject)
+      : this.subjectService.create(this.subject);
+    return observable$.pipe(
       map((subject) => {
-        this.subject = subject;
         const teachers: User[] = this.formGroup.get('teachers').value;
-        return teachers.map(teacher => new TeachSubject(this.subject.id, teacher.id));
+        return teachers.map(teacher => new TeachSubject(subject.id, teacher.id));
       }),
       switchMap((teachSubjects) =>
-        this.teachSubjectService.create(teachSubjects).pipe(
+        this.isSaveOrUpdate() ? of(this.subject) : this.teachSubjectService.create(teachSubjects).pipe(
           map(() => this.subject)
         )
       ),

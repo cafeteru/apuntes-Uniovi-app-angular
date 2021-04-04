@@ -9,11 +9,17 @@
   <section class="form-group row">
     <mat-form-field class="col">
       <input cdkFocusInitial formControlName="surname" id="surname" matInput
-             placeholder="{{'user.surname' | translate}}">
+             placeholder="{{'user.surname' | translate}}" required>
+      <mat-error *ngIf="formGroup.controls.surname.errors?.required">
+        {{'error.user.required.surname' | translate}}
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
       <input formControlName="name" id="name" matInput
-             placeholder="{{'user.name' | translate}}">
+             placeholder="{{'user.name' | translate}}" required>
+      <mat-error *ngIf="formGroup.controls.name.errors?.required">
+        {{'error.user.required.name' | translate}}
+      </mat-error>
     </mat-form-field>
   </section>
   <section class="form-group row">

@@ -69,12 +69,16 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
     return observable$.pipe(
       map((subject) => {
         const teachers: User[] = this.formGroup.get('teachers').value;
-        return teachers.map(teacher => new TeachSubject(subject.id, teacher.id));
+        return teachers ? teachers.map(teacher => new TeachSubject(subject.id, teacher.id)) : [];
       }),
-      switchMap((teachSubjects) =>
-        this.isSaveOrUpdate() ? of(this.subject) : this.teachSubjectService.create(teachSubjects).pipe(
-          map(() => this.subject)
-        )
+      switchMap((teachSubjects) => {
+          if (teachSubjects.length == 0) {
+            return of(this.subject);
+          }
+          this.isSaveOrUpdate() ? of(this.subject) : this.teachSubjectService.create(teachSubjects).pipe(
+            map(() => this.subject)
+          );
+        }
       ),
     );
   }

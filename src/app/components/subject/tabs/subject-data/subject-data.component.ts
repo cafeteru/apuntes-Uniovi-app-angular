@@ -8,6 +8,8 @@ import { Subject } from '../../../../core/models/subject';
 import { GLOBAL_CONSTANTS } from '../../../../core/utils/global-constants';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { ModalSubjectComponent } from '../../modal-subject/modal-subject.component';
+import { User } from '../../../../core/models/user';
+import { TeachSubjectService } from '../../../../core/services/teach-subject.service';
 
 const SUCCESS_UPDATE_SUBJECT = marker('subject.update.successfully');
 
@@ -18,12 +20,14 @@ const SUCCESS_UPDATE_SUBJECT = marker('subject.update.successfully');
 })
 export class SubjectDataComponent extends BaseComponent implements OnInit {
   subject: Subject;
+  teachers: User[] = [];
 
   constructor(
     protected translateService: TranslateService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private snackBarService: SnackBarService,
+    private teachSubjectService: TeachSubjectService
   ) {
     super(translateService);
   }
@@ -33,6 +37,10 @@ export class SubjectDataComponent extends BaseComponent implements OnInit {
     if (this.route.snapshot.data.subject) {
       this.subject = this.route.snapshot.data.subject;
     }
+    this.teachSubjectService.findTeachersBySubjectId(this.subject.id)
+      .subscribe(
+        res => this.teachers = res
+      );
   }
 
   updateSubject(): void {

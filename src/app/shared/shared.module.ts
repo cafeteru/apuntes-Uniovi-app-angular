@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
-import { MaterialDesignModule } from './material-design/material-design.module';
-import { ShowHidePasswordModule } from 'ngx-show-hide-password';
-import { NoImagePipe } from './pipes/no-image.pipe';
-import { TranslateModule } from '@ngx-translate/core';
-import { RoleTypePipe } from './pipes/role-type.pipe';
-import { IdentificationTypePipe } from './pipes/identification-type.pipe';
-import { NavbarComponent } from './navbar/navbar.component';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { SubjectTypePipe } from './pipes/subject-type.pipe';
-import { StatisticsModule } from './statistics/statistics.module';
-import { ListboxModule } from 'primeng/listbox';
 import { FormsModule } from '@angular/forms';
+import { IdentificationTypePipe } from './pipes/identification-type.pipe';
+import { ListboxModule } from 'primeng/listbox';
+import { MaterialDesignModule } from './material-design/material-design.module';
+import { NavbarComponent } from './navbar/navbar.component';
+import { NoImagePipe } from './pipes/no-image.pipe';
+import { OrderListModule } from 'primeng/orderlist';
+import { RoleTypePipe } from './pipes/role-type.pipe';
+import { RouterModule } from '@angular/router';
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
+import { StatisticsModule } from './statistics/statistics.module';
+import { SubjectTypePipe } from './pipes/subject-type.pipe';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FormsModule } from '@angular/forms';
     RouterModule,
     StatisticsModule,
     ListboxModule,
-    FormsModule
+    FormsModule,
+    OrderListModule
   ],
   exports: [
     NavbarComponent,
@@ -42,7 +44,8 @@ import { FormsModule } from '@angular/forms';
     SubjectTypePipe,
     StatisticsModule,
     ListboxModule,
-    FormsModule
+    FormsModule,
+    OrderListModule
   ]
 })
 export class SharedModule {

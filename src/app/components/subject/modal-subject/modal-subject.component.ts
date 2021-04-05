@@ -6,7 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SubjectService } from '../../../core/services/subject.service';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { SubjectType } from '../../../core/models/enums/subject-type';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../core/models/user';
@@ -14,6 +14,7 @@ import { RoleType } from '../../../core/models/enums/role-type';
 import { TeachSubject } from '../../../core/models/teach-subject';
 import { map, switchMap } from 'rxjs/operators';
 import { TeachSubjectService } from '../../../core/services/teach-subject.service';
+import { SubjectLimits } from '../../../core/limits/subject-limits';
 
 const TITLE_ADD = marker('modal.subject.title.add');
 const TITLE_UPDATE = marker('modal.subject.title.update');
@@ -56,7 +57,10 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
 
   protected getFormGroup(): FormGroup {
     return new FormGroup({
-      name: new FormControl(this.subject.name, Validators.required),
+      name: new FormControl(this.subject.name, [
+        Validators.required,
+        Validators.maxLength(SubjectLimits.NAME)
+      ]),
       subjectType: new FormControl(this.subject.subjectType, Validators.required),
       active: new FormControl(this.subject.active),
       teachers: new FormControl()
@@ -64,21 +68,24 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
   }
 
   protected saveOrUpdateService(): Observable<Subject> {
-    return this.isSaveOrUpdate() ? this.subjectService.create(this.subject) :
-      this.create();
-  }
-
-  private create(): Observable<Subject> {
-    return this.subjectService.create(this.subject).pipe(
+    const observable$ = this.isSaveOrUpdate() ? this.subjectService.update(this.subject)
+      : this.subjectService.create(this.subject);
+    return observable$.pipe(
       map((subject) => {
-        this.subject = subject;
         const teachers: User[] = this.formGroup.get('teachers').value;
-        return teachers.map(teacher => new TeachSubject(this.subject.id, teacher.id));
+        return teachers ? teachers.map(teacher => new TeachSubject(subject.id, teacher.id)) : [];
       }),
-      switchMap((teachSubjects) =>
-        this.teachSubjectService.create(teachSubjects).pipe(
-          map(() => this.subject)
-        )
+      switchMap((teachSubjects) => {
+          if (teachSubjects.length == 0) {
+            return of(this.subject);
+          }
+          if (this.isSaveOrUpdate()) {
+            return of(this.subject);
+          }
+          return this.teachSubjectService.create(teachSubjects).pipe(
+            switchMap(() => of(this.subject))
+          );
+        }
       ),
     );
   }

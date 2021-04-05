@@ -14,5 +14,18 @@
       <mat-checkbox [checked]="subject?.active" disabled>{{'subject.active' | translate}}</mat-checkbox>
     </div>
   </div>
+  <div class="row form-group">
+    <div class="col">
+      <p-orderList [value]="teachers">
+        <ng-template let-teacher pTemplate="item">
+          <div>
+            <div>
+              {{teacher.name}} {{teacher.surname}} - {{'user.username' | translate}} : {{teacher.username}}
+            </div>
+          </div>
+        </ng-template>
+      </p-orderList>
+    </div>
+  </div>
 </section>
 <button class="btn btn-outline-info table-button" (click)="updateSubject()" id="updateSubject">Modificar</button>

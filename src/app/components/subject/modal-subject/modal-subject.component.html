@@ -13,6 +13,9 @@
       <mat-error *ngIf="formGroup.controls.name.errors?.required">
         {{'error.subject.required.name' | translate}}
       </mat-error>
+      <mat-error *ngIf="formGroup.controls.name.errors?.maxlength">
+        {{'error.subject.maxlength.name' | translate}}
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
       <mat-label>{{'subject.subjectType' | translate}}</mat-label>

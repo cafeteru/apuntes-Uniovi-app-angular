@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TeachSubject } from '../models/teach-subject';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,10 @@ export class TeachSubjectService {
   create(teachSubjects: TeachSubject[]): Observable<TeachSubject[]> {
     return this.httpClient.post<TeachSubject[]>(`${this.url}/create`,
       teachSubjects, TeachSubjectService.getHttpOptions());
+  }
+
+  findTeachersBySubjectId(id: number): Observable<User[]> {
+    return this.httpClient.get<User[]>(
+      `${this.url}/subject/${id}`, TeachSubjectService.getHttpOptions());
   }
 }

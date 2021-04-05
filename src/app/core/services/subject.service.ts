@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Page } from '../models/server/page';
 import { Subject } from '../models/subject';
 import { SubjectStatistics } from '../models/statistics/subject-statistics';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,16 @@ export class SubjectService {
   findById(id: number): Observable<Subject> {
     return this.httpClient.get<Subject>(`${this.url}/${id}`,
       SubjectService.getHttpOptions());
+  }
+
+  /**
+   * Update a subject
+   *
+   * @param subject Subject to create
+   */
+  update(subject: Subject): Observable<Subject> {
+    return this.httpClient.put<Subject>(
+      `${this.url}/${subject.id}`, subject, SubjectService.getHttpOptions());
   }
 
   /**

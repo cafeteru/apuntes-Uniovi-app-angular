@@ -13,12 +13,18 @@
       <mat-error *ngIf="formGroup.controls.surname.errors?.required">
         {{'error.user.required.surname' | translate}}
       </mat-error>
+      <mat-error *ngIf="formGroup.controls.surname.errors?.maxlength">
+        {{'error.user.maxlength.surname' | translate}}
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
       <input formControlName="name" id="name" matInput
              placeholder="{{'user.name' | translate}}" required>
       <mat-error *ngIf="formGroup.controls.name.errors?.required">
         {{'error.user.required.name' | translate}}
+      </mat-error>
+      <mat-error *ngIf="formGroup.controls.name.errors?.maxlength">
+        {{'error.user.maxlength.name' | translate}}
       </mat-error>
     </mat-form-field>
   </section>
@@ -28,6 +34,9 @@
              placeholder="{{'user.email' | translate}}" type="email">
       <mat-error *ngIf="formGroup.controls.email.errors?.email">
         {{'error.user.invalid.email' | translate}}
+      </mat-error>
+      <mat-error *ngIf="formGroup.controls.email.errors?.maxlength">
+        {{'error.user.maxlength.email' | translate}}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
@@ -95,6 +104,9 @@
       <mat-error *ngIf="formGroup.controls.username.errors?.required">
         {{'error.user.required.username' | translate}}
       </mat-error>
+      <mat-error *ngIf="formGroup.controls.username.errors?.maxlength">
+        {{'error.user.maxlength.username' | translate}}
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
       <input formControlName="password" id="password" matInput placeholder="{{'user.password' | translate}}"
@@ -104,22 +116,34 @@
       <mat-error *ngIf="formGroup.controls.password.errors?.required">
         {{'error.user.required.password' | translate}}
       </mat-error>
+      <mat-error *ngIf="formGroup.controls.password.errors?.maxlength">
+        {{'error.user.maxlength.password' | translate}}
+      </mat-error>
     </mat-form-field>
   </section>
   <section class="row form-group">
     <mat-form-field class="col">
       <input formControlName="street" id="street" matInput name="street"
              placeholder="{{'user.address.street' | translate}}"/>
+      <mat-error *ngIf="formGroup.controls.street.errors?.maxlength">
+        {{'error.user.maxlength.street' | translate}}
+      </mat-error>
     </mat-form-field>
   </section>
   <section class="row form-group">
     <mat-form-field class="col">
       <input formControlName="city" id="city" matInput name="city"
              placeholder="{{'user.address.city' | translate}}"/>
+      <mat-error *ngIf="formGroup.controls.city.errors?.maxlength">
+        {{'error.user.maxlength.city' | translate}}
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
       <input formControlName="postalCode" id="postalCode" matInput name="postalCode"
              placeholder="{{'user.address.postalCode' | translate}}"/>
+      <mat-error *ngIf="formGroup.controls.postalCode.errors?.maxlength">
+        {{'error.user.maxlength.postalCode' | translate}}
+      </mat-error>
     </mat-form-field>
   </section>
   <section class="row form-group">

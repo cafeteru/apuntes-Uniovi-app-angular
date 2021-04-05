@@ -14,6 +14,7 @@ import { RoleType } from '../../../core/models/enums/role-type';
 import { TeachSubject } from '../../../core/models/teach-subject';
 import { map, switchMap } from 'rxjs/operators';
 import { TeachSubjectService } from '../../../core/services/teach-subject.service';
+import { SubjectLimits } from '../../../core/limits/subject-limits';
 
 const TITLE_ADD = marker('modal.subject.title.add');
 const TITLE_UPDATE = marker('modal.subject.title.update');
@@ -56,7 +57,10 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
 
   protected getFormGroup(): FormGroup {
     return new FormGroup({
-      name: new FormControl(this.subject.name, Validators.required),
+      name: new FormControl(this.subject.name, [
+        Validators.required,
+        Validators.maxLength(SubjectLimits.NAME)
+      ]),
       subjectType: new FormControl(this.subject.subjectType, Validators.required),
       active: new FormControl(this.subject.active),
       teachers: new FormControl()
@@ -75,8 +79,11 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
           if (teachSubjects.length == 0) {
             return of(this.subject);
           }
-          this.isSaveOrUpdate() ? of(this.subject) : this.teachSubjectService.create(teachSubjects).pipe(
-            map(() => this.subject)
+          if (this.isSaveOrUpdate()) {
+            return of(this.subject);
+          }
+          return this.teachSubjectService.create(teachSubjects).pipe(
+            switchMap(() => of(this.subject))
           );
         }
       ),

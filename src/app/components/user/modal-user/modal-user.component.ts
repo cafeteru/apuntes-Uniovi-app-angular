@@ -13,6 +13,8 @@ import { IdentificationType } from '../../../core/models/enums/identification-ty
 import { PhoneValidator } from '../../../core/validators/phone-validator';
 import { DateValidator } from '../../../core/validators/date-validator';
 import { NumberIdentificationValidator } from '../../../core/validators/number-identification-validator';
+import { UserLimits } from '../../../core/limits/user-limits';
+import { AddressLimits } from '../../../core/limits/address-limits';
 
 const TITLE_ADD = marker('modal.user.title.add');
 const TITLE_UPDATE = marker('modal.user.title.update');
@@ -93,21 +95,33 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
 
   protected getFormGroup(): FormGroup {
     return new FormGroup({
-        // TODO Cambiar a required
-        surname: new FormControl(this.user.surname),
-        name: new FormControl(this.user.name),
-        email: new FormControl(this.user.email),
-        phone: new FormControl(this.user.phone, PhoneValidator.isValid()),
-        birthDate: new FormControl(this.user.birthDate, DateValidator.maxDate(new Date())),
+        surname: new FormControl(this.user.surname,
+          Validators.maxLength(UserLimits.SURNAME)),
+        name: new FormControl(this.user.name,
+          Validators.maxLength(UserLimits.NAME)),
+        email: new FormControl(this.user.email,
+          Validators.maxLength(UserLimits.EMAIL)),
+        phone: new FormControl(this.user.phone,
+          PhoneValidator.isValid()),
+        birthDate: new FormControl(this.user.birthDate,
+          DateValidator.maxDate(new Date())),
         role: new FormControl(this.user.role, Validators.required),
-        username: new FormControl(this.user.username, Validators.required),
-        password: new FormControl(this.user.password),
+        username: new FormControl(this.user.username, [
+          Validators.required,
+          Validators.maxLength(UserLimits.USERNAME)
+        ]),
+        password: new FormControl(this.user.password,
+          Validators.maxLength(UserLimits.PASSWORD)),
         identificationType: new FormControl(this.user.identificationType),
         numberIdentification: new FormControl(this.user.numberIdentification),
-        street: new FormControl(this.user.address.street),
-        city: new FormControl(this.user.address.city),
-        postalCode: new FormControl(this.user.address.postalCode),
-        img: new FormControl(this.user.img),
+        street: new FormControl(this.user.address.street,
+          Validators.maxLength(AddressLimits.STREET)),
+        city: new FormControl(this.user.address.city,
+          Validators.maxLength(AddressLimits.CITY)),
+        postalCode: new FormControl(this.user.address.postalCode,
+          Validators.maxLength(AddressLimits.POSTAL_CODE)),
+        img: new FormControl(this.user.img,
+          Validators.maxLength(UserLimits.IMG)),
         active: new FormControl(this.user.active),
       },
       {

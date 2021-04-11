@@ -36,4 +36,6 @@ export class User {
     delete user.img;
     return JSON.stringify(user);
   }
+
+
 }

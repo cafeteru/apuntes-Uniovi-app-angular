@@ -37,10 +37,7 @@ export class SubjectDataComponent extends BaseComponent implements OnInit {
     if (this.route.snapshot.data.subject) {
       this.subject = this.route.snapshot.data.subject;
     }
-    this.teachSubjectService.findTeachersBySubjectId(this.subject.id)
-      .subscribe(
-        res => this.teachers = res
-      );
+    this.loadTeachers();
   }
 
   updateSubject(): void {
@@ -57,11 +54,21 @@ export class SubjectDataComponent extends BaseComponent implements OnInit {
             this.translateService.get(SUCCESS_UPDATE_SUBJECT).subscribe(
               res => {
                 this.snackBarService.showSuccess(res);
+                this.loadTeachers();
               }
             )
           );
         }
       }
+    );
+  }
+
+  private loadTeachers(): void {
+    this.subscriptions.push(
+      this.teachSubjectService.findTeachersBySubjectId(this.subject.id)
+        .subscribe(
+          res => this.teachers = res
+        )
     );
   }
 }

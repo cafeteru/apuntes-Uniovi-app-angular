@@ -22,7 +22,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './store/effects/user.effects';
 import es from '@angular/common/locales/es';
-import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({

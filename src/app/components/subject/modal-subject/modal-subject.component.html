@@ -32,7 +32,7 @@
     <mat-checkbox class="col" formControlName="active" id="active">{{'subject.active' | translate}}</mat-checkbox>
   </section>
   <section class="row form-group">
-    <p-listbox class="col" [options]="teachers$ | async" formControlName="teachers" [metaKeySelection]="false"
+    <p-listbox class="col" [options]="teachers" formControlName="teachers" [metaKeySelection]="false"
                [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="name"
                [listStyle]="{'max-height':'250px'}">
       <ng-template let-teacher pTemplate="item">

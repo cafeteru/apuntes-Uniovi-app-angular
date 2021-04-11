@@ -26,8 +26,8 @@ export class TeachSubjectService {
     };
   }
 
-  create(teachSubjects: TeachSubject[]): Observable<TeachSubject[]> {
-    return this.httpClient.post<TeachSubject[]>(`${this.url}/create`,
+  create(id: number, teachSubjects: TeachSubject[]): Observable<TeachSubject[]> {
+    return this.httpClient.post<TeachSubject[]>(`${this.url}/create/${id}`,
       teachSubjects, TeachSubjectService.getHttpOptions());
   }
 

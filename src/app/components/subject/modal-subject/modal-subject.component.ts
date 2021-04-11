@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { BaseModalComponent } from '../../../core/base/base-modal.component';
 import { Subject } from '../../../core/models/subject';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,6 +15,7 @@ import { TeachSubject } from '../../../core/models/teach-subject';
 import { map, switchMap } from 'rxjs/operators';
 import { TeachSubjectService } from '../../../core/services/teach-subject.service';
 import { SubjectLimits } from '../../../core/limits/subject-limits';
+import { FormGroupUtil } from '../../../core/utils/form-group-util';
 
 const TITLE_ADD = marker('modal.subject.title.add');
 const TITLE_UPDATE = marker('modal.subject.title.update');
@@ -24,9 +25,10 @@ const TITLE_UPDATE = marker('modal.subject.title.update');
   templateUrl: './modal-subject.component.html',
   styleUrls: ['./modal-subject.component.scss']
 })
-export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubjectComponent> {
+export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubjectComponent>
+  implements OnInit {
   subjectTypes = Object.keys(SubjectType);
-  teachers$: Observable<User[]>;
+  teachers: User[] = [];
 
   constructor(
     protected translateService: TranslateService,
@@ -37,7 +39,19 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
     private teachSubjectService: TeachSubjectService
   ) {
     super(translateService, matDialogRef, subject);
-    this.teachers$ = this.userService.findAllByRole(RoleType.TEACHER);
+  }
+
+  ngOnInit() {
+    super.ngOnInit();
+    this.userService.findAllByRole(RoleType.TEACHER).pipe(
+      switchMap(teachers => {
+        this.teachers = teachers;
+        return this.isSaveOrUpdate() ?
+          this.teachSubjectService.findTeachersBySubjectId(this.subject.id) : of([]);
+      })
+    ).subscribe(
+      teachers => FormGroupUtil.setValue(this.formGroup, 'teachers', teachers)
+    );
   }
 
   get title(): string {
@@ -68,24 +82,18 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
   }
 
   protected saveOrUpdateService(): Observable<Subject> {
-    const observable$ = this.isSaveOrUpdate() ? this.subjectService.update(this.subject)
+    let id: number = undefined;
+    const subject$ = this.isSaveOrUpdate() ? this.subjectService.update(this.subject)
       : this.subjectService.create(this.subject);
-    return observable$.pipe(
+    return subject$.pipe(
       map((subject) => {
+        id = subject.id;
         const teachers: User[] = this.formGroup.get('teachers').value;
         return teachers ? teachers.map(teacher => new TeachSubject(subject.id, teacher.id)) : [];
       }),
-      switchMap((teachSubjects) => {
-          if (teachSubjects.length == 0) {
-            return of(this.subject);
-          }
-          if (this.isSaveOrUpdate()) {
-            return of(this.subject);
-          }
-          return this.teachSubjectService.create(teachSubjects).pipe(
-            switchMap(() => of(this.subject))
-          );
-        }
+      switchMap((teachSubjects) =>
+        this.teachSubjectService.create(id, teachSubjects).pipe(
+          switchMap(() => of(this.subject)))
       ),
     );
   }

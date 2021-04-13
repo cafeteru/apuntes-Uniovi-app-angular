@@ -31,7 +31,6 @@ export abstract class BaseTableComponent<T> extends BaseComponent implements OnI
   ngOnInit() {
     super.ngOnInit();
     this.cleanFilters();
-    this.data$ = this.loadData();
   }
 
   ngAfterViewInit(): void {
@@ -40,20 +39,11 @@ export abstract class BaseTableComponent<T> extends BaseComponent implements OnI
         this.paginator?.page,
         this.sort?.sortChange
       ).subscribe(res => {
-        this.loadData(this.getOptions());
+        this.loadData();
       })
     );
+    this.loadData();
   }
-
-  protected abstract initColumns(): String[];
-
-  protected abstract loadData(options?: OptionsPage): Observable<T[]>;
-
-  protected abstract initFilter(): T;
-
-  protected abstract filter(): void;
-
-  protected abstract initFormGroup(): FormGroup;
 
   protected getOptions(): OptionsPage {
     const options = new OptionsPage();
@@ -64,6 +54,25 @@ export abstract class BaseTableComponent<T> extends BaseComponent implements OnI
   cleanFilters(): void {
     this.entityFilter = this.initFilter();
     this.formGroup = this.initFormGroup();
-    this.data$ = this.loadData();
+    this.loadData();
   }
+
+  filter(): void {
+    this.entityFilter = this.configFilter();
+    this.loadData();
+  }
+
+  private loadData(): void {
+    this.data$ = this.getData(this.getOptions());
+  }
+
+  protected abstract initColumns(): String[];
+
+  protected abstract getData(options?: OptionsPage): Observable<T[]>;
+
+  protected abstract initFilter(): T;
+
+  protected abstract configFilter(): T;
+
+  protected abstract initFormGroup(): FormGroup;
 }

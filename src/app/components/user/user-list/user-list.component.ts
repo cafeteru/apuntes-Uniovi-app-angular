@@ -53,7 +53,7 @@ export class UserListComponent extends BaseTableComponent<User> implements After
   /**
    * Filter the list of users
    */
-  filter(): void {
+  configFilter(): User {
     const namesFormGroups = Object.keys(this.formGroup.controls);
     namesFormGroups.forEach(name => {
       this.entityFilter[name] = this.formGroup.get(name).value;
@@ -63,7 +63,7 @@ export class UserListComponent extends BaseTableComponent<User> implements After
     address.city = this.formGroup.get('city').value;
     address.postalCode = this.formGroup.get('postalCode').value;
     this.entityFilter.address = address;
-    this.loadData();
+    return this.entityFilter;
   }
 
   /**
@@ -79,7 +79,7 @@ export class UserListComponent extends BaseTableComponent<User> implements After
     const dialogRef = this.dialog.open(ModalUserComponent, config);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.loadData();
+        this.cleanFilters();
         this.subscriptions.push(
           this.translateService.get(SUCCESS_ADD_USER).subscribe(
             res => {
@@ -101,7 +101,7 @@ export class UserListComponent extends BaseTableComponent<User> implements After
     this.subscriptions.push(
       this.userService.disable(id, value).subscribe(
         () => {
-          this.loadData();
+          this.cleanFilters();
           const message = value ? SUCCESS_ENABLE_USER : SUCCESS_DISABLE_USER;
           this.subscriptions.push(
             this.translateService.get(message).subscribe(
@@ -149,7 +149,7 @@ export class UserListComponent extends BaseTableComponent<User> implements After
   private delete(id: number): void {
     const subscription = this.userService.delete(id).subscribe(
       () => {
-        this.loadData();
+        this.cleanFilters();
         this.subscriptions.push(
           this.translateService.get(SUCCESS_DELETE_USER).subscribe(
             res => {
@@ -173,7 +173,7 @@ export class UserListComponent extends BaseTableComponent<User> implements After
     return new User();
   }
 
-  protected loadData(options?: OptionsPage): Observable<User[]> {
+  protected getData(options?: OptionsPage): Observable<User[]> {
     return this.userService.findAll(options, this.entityFilter).pipe(
       map((res) => {
         this.totalElements = res?.totalElements;

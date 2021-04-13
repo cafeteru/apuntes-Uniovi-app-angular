@@ -39,9 +39,9 @@ export class UserService {
    * @param options Options
    * @param user User
    */
-  findAll(options: OptionsPage, user?: User): Observable<Page<User>> {
+  findAll(options?: OptionsPage, user?: User): Observable<Page<User>> {
     return this.httpClient.post<Page<User>>(
-      `${this.url}${options.toApi()}`, user, UserService.getHttpOptions());
+      `${this.url}${options ? options.toApi() : ''}`, user, UserService.getHttpOptions());
   }
 
   findAllByRole(role: RoleType): Observable<User[]> {

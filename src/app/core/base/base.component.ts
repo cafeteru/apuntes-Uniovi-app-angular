@@ -13,7 +13,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
   protected subscriptions: Subscription[] = [];
 
   protected constructor(
-    protected translateService: TranslateService,
+    protected translateService: TranslateService
   ) {
   }
 

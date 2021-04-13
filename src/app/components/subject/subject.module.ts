@@ -11,13 +11,15 @@ import { ModalSubjectComponent } from './modal-subject/modal-subject.component';
 import { SubjectDetailsComponent } from './subject-details/subject-details.component';
 import { SubjectDataComponent } from './tabs/subject-data/subject-data.component';
 import { ListboxModule } from 'primeng/listbox';
+import { LearnSubjectComponent } from './tabs/learn-subject/learn-subject.component';
 
 @NgModule({
   declarations: [
     SubjectListComponent,
     ModalSubjectComponent,
     SubjectDetailsComponent,
-    SubjectDataComponent
+    SubjectDataComponent,
+    LearnSubjectComponent
   ],
   imports: [
     SubjectRoutingModule,

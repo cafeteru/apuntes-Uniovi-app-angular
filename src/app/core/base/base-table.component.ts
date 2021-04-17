@@ -6,6 +6,8 @@ import { FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { merge, Observable, of } from 'rxjs';
 import { OptionsPage } from '../models/server/options-page';
+import { map } from 'rxjs/operators';
+import { Page } from '../models/server/page';
 
 @Component({
   template: ''
@@ -63,12 +65,17 @@ export abstract class BaseTableComponent<T> extends BaseComponent implements OnI
   }
 
   private loadData(): void {
-    this.data$ = this.getData(this.getOptions());
+    this.data$ = this.getData(this.getOptions()).pipe(
+      map((res: Page<T>) => {
+        this.totalElements = res?.totalElements;
+        return res?.content;
+      })
+    );
   }
 
   protected abstract initColumns(): string[];
 
-  protected abstract getData(options?: OptionsPage): Observable<T[]>;
+  protected abstract getData(options?: OptionsPage): Observable<Page<T>>;
 
   protected abstract initFilter(): T;
 

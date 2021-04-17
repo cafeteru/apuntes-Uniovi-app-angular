@@ -1,6 +1,6 @@
 export class AddressLimits {
-  static CITY = 100;
-  static COUNTRY = 50;
-  static POSTAL_CODE = 10;
-  static STREET = 100;
+  static city = 100;
+  static country = 50;
+  static postalCode = 10;
+  static street = 100;
 }

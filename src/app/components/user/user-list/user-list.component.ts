@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../core/models/user';
@@ -9,7 +9,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { SnackBarService } from '../../../core/services/snack-bar.service';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
-import { map } from 'rxjs/operators';
 import { OptionsPage } from '../../../core/models/server/options-page';
 import { FormControl, FormGroup } from '@angular/forms';
 import { RoleType } from '../../../core/models/enums/role-type';
@@ -17,6 +16,7 @@ import { IdentificationType } from '../../../core/models/enums/identification-ty
 import { Address } from '../../../core/models/address';
 import Swal from 'sweetalert2';
 import { BaseTableComponent } from '../../../core/base/base-table.component';
+import { Page } from '../../../core/models/server/page';
 
 const ANSWER_DELETE_USER = marker('user.delete.answer');
 const BUTTON_CANCEL = marker('button.cancel');
@@ -37,7 +37,7 @@ const SUCCESS_ENABLE_USER = marker('user.enabled.successfully');
 /**
  * Component to display the list of users
  */
-export class UserListComponent extends BaseTableComponent<User> implements AfterViewInit {
+export class UserListComponent extends BaseTableComponent<User> {
   roleType = Object.keys(RoleType);
   identificationType = Object.keys(IdentificationType);
 
@@ -138,17 +138,11 @@ export class UserListComponent extends BaseTableComponent<User> implements After
     return new User();
   }
 
-  protected getData(options?: OptionsPage): Observable<User[]> {
-    return this.userService.findAll(options, this.entityFilter).pipe(
-      map((res) => {
-        this.totalElements = res?.totalElements;
-        return res?.content;
-      })
-    );
+  protected getData(options?: OptionsPage): Observable<Page<User>> {
+    return this.userService.findAll(options, this.entityFilter);
   }
 
   protected initFormGroup(): FormGroup {
-    this.entityFilter = new User();
     return new FormGroup({
       surname: new FormControl(this.entityFilter.surname),
       name: new FormControl(this.entityFilter.name),

@@ -1,3 +1,3 @@
 export class SubjectLimits {
-  static NAME = 50;
+  static nameLimit = 50;
 }

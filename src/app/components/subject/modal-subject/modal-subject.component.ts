@@ -73,7 +73,7 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
     return new FormGroup({
       name: new FormControl(this.subject.name, [
         Validators.required,
-        Validators.maxLength(SubjectLimits.NAME)
+        Validators.maxLength(SubjectLimits.nameLimit)
       ]),
       subjectType: new FormControl(this.subject.subjectType, Validators.required),
       active: new FormControl(this.subject.active),

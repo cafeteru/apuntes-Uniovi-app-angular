@@ -51,22 +51,6 @@ export class UserListComponent extends BaseTableComponent<User> implements After
   }
 
   /**
-   * Filter the list of users
-   */
-  configFilter(): User {
-    const namesFormGroups = Object.keys(this.formGroup.controls);
-    namesFormGroups.forEach(name => {
-      this.entityFilter[name] = this.formGroup.get(name).value;
-    });
-    const address = new Address();
-    address.street = this.formGroup.get('street').value;
-    address.city = this.formGroup.get('city').value;
-    address.postalCode = this.formGroup.get('postalCode').value;
-    this.entityFilter.address = address;
-    return this.entityFilter;
-  }
-
-  /**
    * Open a modal window to create a user
    */
   openModal(): void {
@@ -146,26 +130,7 @@ export class UserListComponent extends BaseTableComponent<User> implements After
     this.subscriptions.push(subscription);
   }
 
-  private delete(id: number): void {
-    const subscription = this.userService.delete(id).subscribe(
-      () => {
-        this.cleanFilters();
-        this.subscriptions.push(
-          this.translateService.get(SUCCESS_DELETE_USER).subscribe(
-            res => {
-              this.snackBarService.showSuccess(res);
-            }
-          )
-        );
-      },
-      () => {
-        this.showAlert('error', ERROR_DELETE_USER);
-      }
-    );
-    this.subscriptions.push(subscription);
-  }
-
-  protected initColumns(): String[] {
+  protected initColumns(): string[] {
     return ['username', 'name', 'surname', 'role', 'actions'];
   }
 
@@ -199,5 +164,40 @@ export class UserListComponent extends BaseTableComponent<User> implements After
       postalCode: new FormControl(this.entityFilter.address.postalCode),
       active: new FormControl(this.entityFilter.active),
     });
+  }
+
+  /**
+   * Filter the list of users
+   */
+  protected configFilter(): User {
+    const namesFormGroups = Object.keys(this.formGroup.controls);
+    namesFormGroups.forEach(name => {
+      this.entityFilter[name] = this.formGroup.get(name).value;
+    });
+    const address = new Address();
+    address.street = this.formGroup.get('street').value;
+    address.city = this.formGroup.get('city').value;
+    address.postalCode = this.formGroup.get('postalCode').value;
+    this.entityFilter.address = address;
+    return this.entityFilter;
+  }
+
+  private delete(id: number): void {
+    const subscription = this.userService.delete(id).subscribe(
+      () => {
+        this.cleanFilters();
+        this.subscriptions.push(
+          this.translateService.get(SUCCESS_DELETE_USER).subscribe(
+            res => {
+              this.snackBarService.showSuccess(res);
+            }
+          )
+        );
+      },
+      () => {
+        this.showAlert('error', ERROR_DELETE_USER);
+      }
+    );
+    this.subscriptions.push(subscription);
   }
 }

@@ -82,7 +82,7 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
   }
 
   protected saveOrUpdateService(): Observable<Subject> {
-    let id: number = undefined;
+    let id: number;
     const subject$ = this.isSaveOrUpdate() ? this.subjectService.update(this.subject)
       : this.subjectService.create(this.subject);
     return subject$.pipe(

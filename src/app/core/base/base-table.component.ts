@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { BaseComponent } from './base.component';
@@ -10,16 +10,16 @@ import { OptionsPage } from '../models/server/options-page';
 @Component({
   template: ''
 })
-export abstract class BaseTableComponent<T> extends BaseComponent implements OnInit {
+export abstract class BaseTableComponent<T> extends BaseComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
   elementsPage = [5, 10, 25, 100];
   totalElements = 0;
-  displayedColumns: String[];
+  displayedColumns: string[];
   formGroup: FormGroup;
   data$: Observable<T[]> = of([]);
   protected entityFilter: T;
-
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   protected constructor(
     protected translateService: TranslateService
@@ -45,12 +45,6 @@ export abstract class BaseTableComponent<T> extends BaseComponent implements OnI
     this.loadData();
   }
 
-  protected getOptions(): OptionsPage {
-    const options = new OptionsPage();
-    options.createOptionsSearch(this.paginator, this.sort);
-    return options;
-  }
-
   cleanFilters(): void {
     this.entityFilter = this.initFilter();
     this.formGroup = this.initFormGroup();
@@ -62,11 +56,17 @@ export abstract class BaseTableComponent<T> extends BaseComponent implements OnI
     this.loadData();
   }
 
+  protected getOptions(): OptionsPage {
+    const options = new OptionsPage();
+    options.createOptionsSearch(this.paginator, this.sort);
+    return options;
+  }
+
   private loadData(): void {
     this.data$ = this.getData(this.getOptions());
   }
 
-  protected abstract initColumns(): String[];
+  protected abstract initColumns(): string[];
 
   protected abstract getData(options?: OptionsPage): Observable<T[]>;
 

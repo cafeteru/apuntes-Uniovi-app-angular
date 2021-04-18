@@ -5,6 +5,8 @@ import { ChartType } from 'chart.js';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../core/services/user.service';
 import { BaseComponent } from '../../../core/base/base.component';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../store/app.reducer';
 
 const USER_ACTIVE = marker('user.active');
 const USER_INACTIVE = marker('user.inactive');
@@ -22,8 +24,27 @@ export class UserActiveStatisticsComponent extends BaseComponent implements OnIn
   constructor(
     protected translateService: TranslateService,
     private userService: UserService,
+    private store: Store<AppState>
   ) {
     super(translateService);
+    this.subscriptions.push(this.store.select('userState').subscribe(
+      () => this.getLabels())
+    );
+  }
+
+  ngOnInit(): void {
+    this.subscriptions.push(
+      this.userService.getStatistics().subscribe(
+        userStatistics => {
+          this.data = [
+            [userStatistics.active, userStatistics.inactive],
+          ];
+        }
+      )
+    );
+  }
+
+  private getLabels() {
     const keys = [
       USER_ACTIVE,
       USER_INACTIVE
@@ -34,18 +55,6 @@ export class UserActiveStatisticsComponent extends BaseComponent implements OnIn
           this.labels = [
             res[USER_ACTIVE],
             res[USER_INACTIVE],
-          ];
-        }
-      )
-    );
-  }
-
-  ngOnInit(): void {
-    this.subscriptions.push(
-      this.userService.getStatistics().subscribe(
-        userStatistics => {
-          this.data = [
-            [userStatistics.active, userStatistics.inactive],
           ];
         }
       )

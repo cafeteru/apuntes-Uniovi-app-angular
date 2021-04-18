@@ -6,7 +6,6 @@ import { BaseComponent } from '../../core/base/base.component';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducer';
 import { User } from '../../core/models/user';
-import { tap } from 'rxjs/operators';
 import { changeLanguage } from '../../store/actions/user.actions';
 
 @Component({
@@ -57,6 +56,7 @@ export class NavbarComponent extends BaseComponent implements OnInit {
   useLanguage(language: string): void {
     this.language = language;
     this.translateService.use(language);
+    this.store.dispatch(changeLanguage({language}));
     if (localStorage.authorization) {
       this.subscriptions.push(
         this.userService.changeLanguage(language).subscribe()

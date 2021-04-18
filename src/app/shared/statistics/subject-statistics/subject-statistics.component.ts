@@ -5,6 +5,8 @@ import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { BaseComponent } from '../../../core/base/base.component';
 import { TranslateService } from '@ngx-translate/core';
 import { SubjectService } from '../../../core/services/subject.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../store/app.reducer';
 
 const SUBJECT_ACTIVE = marker('subject.active');
 const SUBJECT_INACTIVE = marker('subject.inactive');
@@ -22,21 +24,11 @@ export class SubjectStatisticsComponent extends BaseComponent implements OnInit 
   constructor(
     protected translateService: TranslateService,
     private subjectService: SubjectService,
+    private store: Store<AppState>
   ) {
     super(translateService);
-    const keys = [
-      SUBJECT_ACTIVE,
-      SUBJECT_INACTIVE
-    ];
-    this.subscriptions.push(
-      this.translateService.get(keys).subscribe(
-        res => {
-          this.labels = [
-            res[SUBJECT_ACTIVE],
-            res[SUBJECT_INACTIVE],
-          ];
-        }
-      )
+    this.subscriptions.push(this.store.select('userState').subscribe(
+      () => this.getLabels())
     );
   }
 
@@ -52,4 +44,20 @@ export class SubjectStatisticsComponent extends BaseComponent implements OnInit 
     );
   }
 
+  private getLabels() {
+    const keys = [
+      SUBJECT_ACTIVE,
+      SUBJECT_INACTIVE
+    ];
+    this.subscriptions.push(
+      this.translateService.get(keys).subscribe(
+        res => {
+          this.labels = [
+            res[SUBJECT_ACTIVE],
+            res[SUBJECT_INACTIVE],
+          ];
+        }
+      )
+    );
+  }
 }

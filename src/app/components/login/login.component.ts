@@ -4,13 +4,15 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../core/base/base.component';
-import { LoginData, LoginService } from '../../core/services/login.service';
+import { IToken, LoginData, LoginService } from '../../core/services/login.service';
 import { FormGroupUtil } from '../../core/utils/form-group-util';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AppState } from '../../store/app.reducer';
 import { Store } from '@ngrx/store';
 import * as actions from '../../store/actions/loading.actions';
+import jwt_decode from 'jwt-decode';
+import { RoleType } from '../../core/models/enums/role-type';
 
 const ERROR_LOGIN_TITLE = marker('error.login.title');
 const ERROR_LOGIN_TEXT = marker('error.login.text');
@@ -21,7 +23,7 @@ const ERROR_LOGIN_TEXT = marker('error.login.text');
   styleUrls: ['./login.component.scss']
 })
 /**
- * Component to display the login menu
+ * Component to display the login admin-menu
  */
 export class LoginComponent extends BaseComponent implements OnInit {
   formGroup: FormGroup;
@@ -62,7 +64,17 @@ export class LoginComponent extends BaseComponent implements OnInit {
       this.subscriptions.push(
         this.loginService.login(loginData).subscribe(
           () => {
-            this.router.navigateByUrl('/menu').then();
+            const iToken = jwt_decode<IToken>(localStorage?.authorization);
+            let url = '/menu';
+            switch (RoleType[iToken.role]) {
+              case RoleType.ROLE_STUDENT:
+                url += '/student';
+                break;
+              case RoleType.ROLE_TEACHER:
+                url += '/teacher';
+                break;
+            }
+            this.router.navigateByUrl(url).then();
             this.store.dispatch(actions.stopLoading());
           },
           () => {

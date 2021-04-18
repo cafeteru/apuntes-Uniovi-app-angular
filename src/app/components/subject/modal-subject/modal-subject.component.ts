@@ -43,7 +43,7 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
 
   ngOnInit() {
     super.ngOnInit();
-    this.userService.findAllByRole(RoleType.TEACHER).pipe(
+    this.userService.findAllByRole(RoleType.ROLE_TEACHER).pipe(
       switchMap(teachers => {
         this.teachers = teachers;
         return this.isSaveOrUpdate() ?

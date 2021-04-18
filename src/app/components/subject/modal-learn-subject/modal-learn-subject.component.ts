@@ -43,7 +43,7 @@ export class ModalLearnSubjectComponent extends BaseModalComponent<Subject, Moda
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.userService.findAllByRole(RoleType.STUDENT).pipe(
+    this.userService.findAllByRole(RoleType.ROLE_STUDENT).pipe(
       switchMap(students => {
         this.students = students;
         return this.isSaveOrUpdate() ? of([]) :

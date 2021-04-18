@@ -2,7 +2,7 @@
  * Represents types of roles
  */
 export enum RoleType {
-  STUDENT = 'STUDENT',
-  TEACHER = 'TEACHER',
-  ADMIN = 'ADMIN'
+  ROLE_STUDENT = 'ROLE_STUDENT',
+  ROLE_TEACHER = 'ROLE_TEACHER',
+  ROLE_ADMIN = 'ROLE_ADMIN'
 }

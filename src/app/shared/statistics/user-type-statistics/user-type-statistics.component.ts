@@ -5,6 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../core/services/user.service';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { BaseComponent } from '../../../core/base/base.component';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../store/app.reducer';
 
 const ROLE_TYPE_ADMIN = marker('role-type.admin');
 const ROLE_TYPE_STUDENT = marker('role-type.student');
@@ -23,8 +25,27 @@ export class UserTypeStatisticsComponent extends BaseComponent implements OnInit
   constructor(
     protected translateService: TranslateService,
     private userService: UserService,
+    private store: Store<AppState>
   ) {
     super(translateService);
+    this.subscriptions.push(this.store.select('userState').subscribe(
+      () => this.getLabels())
+    );
+  }
+
+  ngOnInit(): void {
+    this.subscriptions.push(
+      this.userService.getStatistics().subscribe(
+        userStatistics => {
+          this.userRoleData = [
+            [userStatistics.numAdmin, userStatistics.numStudents, userStatistics.numTeachers],
+          ];
+        }
+      )
+    );
+  }
+
+  private getLabels() {
     const keys = [
       ROLE_TYPE_ADMIN,
       ROLE_TYPE_TEACHER,
@@ -37,18 +58,6 @@ export class UserTypeStatisticsComponent extends BaseComponent implements OnInit
             res[ROLE_TYPE_ADMIN],
             res[ROLE_TYPE_STUDENT],
             res[ROLE_TYPE_TEACHER]
-          ];
-        }
-      )
-    );
-  }
-
-  ngOnInit(): void {
-    this.subscriptions.push(
-      this.userService.getStatistics().subscribe(
-        userStatistics => {
-          this.userRoleData = [
-            [userStatistics.numAdmin, userStatistics.numStudents, userStatistics.numTeachers],
           ];
         }
       )

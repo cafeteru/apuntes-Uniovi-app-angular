@@ -141,6 +141,8 @@ describe('ModalUserComponent', () => {
   it('check saveOrUpdateService', () => {
     const spyAdd = spyOn(userService, 'create').and.callFake(() => of(user));
     const spyUpdate = spyOn(userService, 'update').and.callFake(() => of(user));
+    component.formGroup.controls.name.setValue('name');
+    component.formGroup.controls.surname.setValue('surname');
     component.formGroup.controls.username.setValue('username');
     component.formGroup.controls.password.setValue('password');
     component.formGroup.controls.role.setValue(RoleType.STUDENT.toString());

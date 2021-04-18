@@ -73,7 +73,7 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
     return new FormGroup({
       name: new FormControl(this.subject.name, [
         Validators.required,
-        Validators.maxLength(SubjectLimits.NAME)
+        Validators.maxLength(SubjectLimits.nameLimit)
       ]),
       subjectType: new FormControl(this.subject.subjectType, Validators.required),
       active: new FormControl(this.subject.active),
@@ -82,7 +82,7 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
   }
 
   protected saveOrUpdateService(): Observable<Subject> {
-    let id: number = undefined;
+    let id: number;
     const subject$ = this.isSaveOrUpdate() ? this.subjectService.update(this.subject)
       : this.subjectService.create(this.subject);
     return subject$.pipe(

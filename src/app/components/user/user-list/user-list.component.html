@@ -68,7 +68,7 @@
     </section>
   </mat-expansion-panel>
 </mat-accordion>
-<table [dataSource]="users$ | async" class="mat-elevation-z8" id="users-list" mat-table matSort>
+<table [dataSource]="data$ | async" class="mat-elevation-z8" id="users-list" mat-table matSort>
   <!-- Username Column -->
   <ng-container matColumnDef="username">
     <th *matHeaderCellDef id="usernameColumn" mat-header-cell mat-sort-header>{{'user.username' | translate}}</th>

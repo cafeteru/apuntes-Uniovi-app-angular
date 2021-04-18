@@ -1,21 +1,19 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { BaseComponent } from '../../../core/base/base.component';
+import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackBarService } from '../../../core/services/snack-bar.service';
 import { SubjectService } from '../../../core/services/subject.service';
 import { OptionsPage } from '../../../core/models/server/options-page';
-import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
-import { merge, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from '../../../core/models/subject';
 import { SubjectType } from '../../../core/models/enums/subject-type';
-import { map } from 'rxjs/operators';
 import { GLOBAL_CONSTANTS } from '../../../core/utils/global-constants';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { ModalSubjectComponent } from '../modal-subject/modal-subject.component';
 import Swal from 'sweetalert2';
+import { BaseTableComponent } from '../../../core/base/base-table.component';
+import { Page } from '../../../core/models/server/page';
 
 const ANSWER_DELETE_SUBJECT = marker('subject.delete.answer');
 const BUTTON_CANCEL = marker('button.cancel');
@@ -33,16 +31,8 @@ const SUCCESS_ENABLE_SUBJECT = marker('subject.enabled.successfully');
   templateUrl: './subject-list.component.html',
   styleUrls: ['./subject-list.component.scss']
 })
-export class SubjectListComponent extends BaseComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  elementsPage = [5, 10, 25, 100];
-  displayedColumns = ['name', 'subjectType', 'actions'];
-  subjects$: Observable<Subject[]> = of([]);
-  totalElements = 0;
-  formGroup: FormGroup;
+export class SubjectListComponent extends BaseTableComponent<Subject> {
   subjectTypes = Object.keys(SubjectType);
-  private subjectFilter = new Subject();
 
   constructor(
     protected translateService: TranslateService,
@@ -51,45 +41,6 @@ export class SubjectListComponent extends BaseComponent implements OnInit, After
     private snackBarService: SnackBarService,
   ) {
     super(translateService);
-  }
-
-  ngOnInit(): void {
-    this.cleanFilters();
-  }
-
-  /**
-   * Clean al filters and reload list
-   */
-  cleanFilters(): void {
-    this.subjectFilter = new Subject();
-    this.formGroup = new FormGroup({
-      name: new FormControl(this.subjectFilter.name),
-      subjectType: new FormControl(this.subjectFilter.subjectType),
-      active: new FormControl(this.subjectFilter.active),
-    });
-    this.getSubjects();
-  }
-
-  ngAfterViewInit(): void {
-    this.subscriptions.push(
-      merge(
-        this.paginator.page,
-        this.sort.sortChange
-      ).subscribe(
-        () => this.getSubjects()
-      )
-    );
-  }
-
-  /**
-   * Filter the list of users
-   */
-  filter(): void {
-    const namesFormGroups = Object.keys(this.formGroup.controls);
-    namesFormGroups.forEach(name => {
-      this.subjectFilter[name] = this.formGroup.get(name).value;
-    });
-    this.getSubjects();
   }
 
   /**
@@ -105,7 +56,7 @@ export class SubjectListComponent extends BaseComponent implements OnInit, After
     const dialogRef = this.dialog.open(ModalSubjectComponent, config);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getSubjects();
+        this.cleanFilters();
         this.subscriptions.push(
           this.translateService.get(SUCCESS_ADD_SUBJECT).subscribe(
             res => {
@@ -121,7 +72,7 @@ export class SubjectListComponent extends BaseComponent implements OnInit, After
     this.subscriptions.push(
       this.subjectService.disable(id, value).subscribe(
         () => {
-          this.getSubjects();
+          this.cleanFilters();
           const message = value ? SUCCESS_ENABLE_SUBJECT : SUCCESS_DISABLE_SUBJECT;
           this.subscriptions.push(
             this.translateService.get(message).subscribe(
@@ -161,10 +112,38 @@ export class SubjectListComponent extends BaseComponent implements OnInit, After
     this.subscriptions.push(subscription);
   }
 
+  protected initColumns(): string[] {
+    return ['name', 'subjectType', 'actions'];
+  }
+
+  protected getData(options?: OptionsPage): Observable<Page<Subject>> {
+    return this.subjectService.findAll(options, this.entityFilter);
+  }
+
+  protected initFilter(): Subject {
+    return new Subject();
+  }
+
+  protected configFilter(): Subject {
+    const namesFormGroups = Object.keys(this.formGroup.controls);
+    namesFormGroups.forEach(name => {
+      this.entityFilter[name] = this.formGroup.get(name).value;
+    });
+    return this.entityFilter;
+  }
+
+  protected initFormGroup(): FormGroup {
+    return new FormGroup({
+      name: new FormControl(this.entityFilter.name),
+      subjectType: new FormControl(this.entityFilter.subjectType),
+      active: new FormControl(this.entityFilter.active),
+    });
+  }
+
   private delete(id: number): void {
     const subscription = this.subjectService.delete(id).subscribe(
       () => {
-        this.getSubjects();
+        this.cleanFilters();
         this.subscriptions.push(
           this.translateService.get(SUCCESS_DELETE_SUBJECT).subscribe(
             res => {
@@ -178,16 +157,5 @@ export class SubjectListComponent extends BaseComponent implements OnInit, After
       }
     );
     this.subscriptions.push(subscription);
-  }
-
-  private getSubjects(): void {
-    const options = new OptionsPage();
-    options.createOptionsSearch(this.paginator, this.sort);
-    this.subjects$ = this.subjectService.findAll(options, this.subjectFilter).pipe(
-      map((res) => {
-        this.totalElements = res?.totalElements;
-        return res?.content;
-      })
-    );
   }
 }

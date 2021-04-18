@@ -34,7 +34,7 @@
     </section>
   </mat-expansion-panel>
 </mat-accordion>
-<table [dataSource]="subjects$ | async" class="mat-elevation-z8" id="subjects-list" mat-table matSort>
+<table [dataSource]="data$ | async" class="mat-elevation-z8" id="subjects-list" mat-table matSort>
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th *matHeaderCellDef id="nameColumn" mat-header-cell mat-sort-header>{{'subject.name' | translate}}</th>
@@ -44,7 +44,8 @@
   <!-- SubjectType Column -->
   <ng-container matColumnDef="subjectType">
     <th *matHeaderCellDef id="roleColumn" mat-header-cell mat-sort-header>{{'subject.subjectType' | translate}}</th>
-    <td *matCellDef="let subject; let i = index" [id]="'role'+ (i + 1)" mat-cell> {{subject.subjectType | subjectType}} </td>
+    <td *matCellDef="let subject; let i = index" [id]="'role'+ (i + 1)"
+        mat-cell> {{subject.subjectType | subjectType}} </td>
   </ng-container>
 
   <!-- Actions Column -->

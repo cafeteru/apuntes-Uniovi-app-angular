@@ -96,11 +96,11 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
   protected getFormGroup(): FormGroup {
     return new FormGroup({
         surname: new FormControl(this.user.surname,
-          Validators.maxLength(UserLimits.SURNAME)),
+          Validators.maxLength(UserLimits.surname)),
         name: new FormControl(this.user.name,
-          Validators.maxLength(UserLimits.NAME)),
+          Validators.maxLength(UserLimits.nameLimit)),
         email: new FormControl(this.user.email,
-          Validators.maxLength(UserLimits.EMAIL)),
+          Validators.maxLength(UserLimits.email)),
         phone: new FormControl(this.user.phone,
           PhoneValidator.isValid()),
         birthDate: new FormControl(this.user.birthDate,
@@ -108,20 +108,20 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
         role: new FormControl(this.user.role, Validators.required),
         username: new FormControl(this.user.username, [
           Validators.required,
-          Validators.maxLength(UserLimits.USERNAME)
+          Validators.maxLength(UserLimits.username)
         ]),
         password: new FormControl(this.user.password,
-          Validators.maxLength(UserLimits.PASSWORD)),
+          Validators.maxLength(UserLimits.password)),
         identificationType: new FormControl(this.user.identificationType),
         numberIdentification: new FormControl(this.user.numberIdentification),
         street: new FormControl(this.user.address.street,
-          Validators.maxLength(AddressLimits.STREET)),
+          Validators.maxLength(AddressLimits.street)),
         city: new FormControl(this.user.address.city,
-          Validators.maxLength(AddressLimits.CITY)),
+          Validators.maxLength(AddressLimits.city)),
         postalCode: new FormControl(this.user.address.postalCode,
-          Validators.maxLength(AddressLimits.POSTAL_CODE)),
+          Validators.maxLength(AddressLimits.postalCode)),
         img: new FormControl(this.user.img,
-          Validators.maxLength(UserLimits.IMG)),
+          Validators.maxLength(UserLimits.img)),
         active: new FormControl(this.user.active),
       },
       {

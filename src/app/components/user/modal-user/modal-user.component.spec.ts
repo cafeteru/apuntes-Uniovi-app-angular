@@ -145,7 +145,7 @@ describe('ModalUserComponent', () => {
     component.formGroup.controls.surname.setValue('surname');
     component.formGroup.controls.username.setValue('username');
     component.formGroup.controls.password.setValue('password');
-    component.formGroup.controls.role.setValue(RoleType.STUDENT.toString());
+    component.formGroup.controls.role.setValue(RoleType.ROLE_STUDENT.toString());
     component.saveOrUpdate();
     expect(spyAdd).toHaveBeenCalled();
     user.id = 1;

@@ -50,7 +50,7 @@ describe('RoleTypePipe', () => {
       const pipe = new RoleTypePipe(translateService);
       translateService.get('role-type.admin').subscribe(
         res => {
-          const value = pipe.transform(RoleType.ADMIN);
+          const value = pipe.transform(RoleType.ROLE_ADMIN);
           expect(value).toBe(res);
         }
       );
@@ -62,7 +62,7 @@ describe('RoleTypePipe', () => {
       const pipe = new RoleTypePipe(translateService);
       translateService.get('role-type.student').subscribe(
         res => {
-          const value = pipe.transform(RoleType.STUDENT);
+          const value = pipe.transform(RoleType.ROLE_STUDENT);
           expect(value).toBe(res);
         }
       );
@@ -74,7 +74,7 @@ describe('RoleTypePipe', () => {
       const pipe = new RoleTypePipe(translateService);
       translateService.get('role-type.teacher').subscribe(
         res => {
-          const value = pipe.transform(RoleType.TEACHER);
+          const value = pipe.transform(RoleType.ROLE_TEACHER);
           expect(value).toBe(res);
         }
       );

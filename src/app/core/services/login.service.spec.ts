@@ -70,7 +70,7 @@ describe('LoginService', () => {
       username: loginData.username,
       exp: 120,
       id: 1,
-      role: RoleType.ADMIN
+      role: RoleType.ROLE_ADMIN
     };
     localStorage.setItem('authorization', encode(content, 'test'));
     service.login(loginData).subscribe(

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CheckTokenGuard } from './check-token.guard.service';
+import { CheckTokenGuard } from './check-token.guard';
 import { CoreModule } from '../core.module';
 import { SharedModule } from '../../shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';

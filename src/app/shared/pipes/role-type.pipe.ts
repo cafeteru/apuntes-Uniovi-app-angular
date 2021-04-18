@@ -38,11 +38,11 @@ export class RoleTypePipe implements PipeTransform, OnDestroy {
 
   transform(value: RoleType | string): string {
     switch (value) {
-      case RoleType.ADMIN:
+      case RoleType.ROLE_ADMIN:
         return this.map['role-type.admin'];
-      case RoleType.STUDENT:
+      case RoleType.ROLE_STUDENT:
         return this.map['role-type.student'];
-      case RoleType.TEACHER:
+      case RoleType.ROLE_TEACHER:
         return this.map['role-type.teacher'];
     }
     return '';

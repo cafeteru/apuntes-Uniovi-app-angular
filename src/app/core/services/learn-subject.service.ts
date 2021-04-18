@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { LearnSubject } from '../models/learn-subject';
 import { Page } from '../models/server/page';
+import { OptionsPage } from '../models/server/options-page';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class LearnSubjectService {
       learnSubjects, LearnSubjectService.getHttpOptions());
   }
 
-  findStudentsBySubjectId(id: number): Observable<Page<User>> {
+  findStudentsBySubjectId(id: number, options?: OptionsPage): Observable<Page<User>> {
     return this.httpClient.get<Page<User>>(
       `${this.url}/subject/${id}`, LearnSubjectService.getHttpOptions());
   }

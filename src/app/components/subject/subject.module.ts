@@ -12,6 +12,7 @@ import { SubjectDetailsComponent } from './subject-details/subject-details.compo
 import { SubjectDataComponent } from './tabs/subject-data/subject-data.component';
 import { ListboxModule } from 'primeng/listbox';
 import { LearnSubjectComponent } from './tabs/learn-subject/learn-subject.component';
+import { ModalLearnSubjectComponent } from './modal-learn-subject/modal-learn-subject.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { LearnSubjectComponent } from './tabs/learn-subject/learn-subject.compon
     ModalSubjectComponent,
     SubjectDetailsComponent,
     SubjectDataComponent,
-    LearnSubjectComponent
+    LearnSubjectComponent,
+    ModalLearnSubjectComponent
   ],
   imports: [
     SubjectRoutingModule,

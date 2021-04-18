@@ -64,7 +64,7 @@ export abstract class BaseTableComponent<T> extends BaseComponent implements OnI
     return options;
   }
 
-  private loadData(): void {
+  protected loadData(): void {
     this.data$ = this.getData(this.getOptions()).pipe(
       map((res: Page<T>) => {
         this.totalElements = res?.totalElements;

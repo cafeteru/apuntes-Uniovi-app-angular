@@ -4,22 +4,30 @@ import { CheckTokenGuard } from '../core/guards/check-token.guard';
 import { AdminMenuComponent } from './menu/admin-menu/admin-menu.component';
 import { TeacherMenuComponent } from './menu/teacher-menu/teacher-menu.component';
 import { StudentMenuComponent } from './menu/student-menu/student-menu.component';
+import { RoleTypeGuard } from '../core/guards/role-type-guard.service';
+import { RoleType } from '../core/models/enums/role-type';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminMenuComponent,
-    canLoad: [CheckTokenGuard]
+    canLoad: [CheckTokenGuard],
+    canActivate: [RoleTypeGuard],
+    data: {role: [RoleType.ROLE_ADMIN]}
   },
   {
     path: 'teacher',
     component: TeacherMenuComponent,
-    canLoad: [CheckTokenGuard]
+    canLoad: [CheckTokenGuard],
+    canActivate: [RoleTypeGuard],
+    data: {role: [RoleType.ROLE_TEACHER]}
   },
   {
     path: 'student',
     component: StudentMenuComponent,
-    canLoad: [CheckTokenGuard]
+    canLoad: [CheckTokenGuard],
+    canActivate: [RoleTypeGuard],
+    data: {role: [RoleType.ROLE_STUDENT]}
   },
   {
     path: 'users',

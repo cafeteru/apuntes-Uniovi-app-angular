@@ -20,6 +20,7 @@
 	"error.subject.required.name": "El nombre de la asignatura es requerido",
 	"error.subject.required.subjectType": "El tipo de la asignatura es requerido",
 	"error.token.invalid": "Sesión caducada. Por favor identifíquese otra vez",
+	"error.token.role.invalid": "error.token.role.invalid",
 	"error.user.formatNoValid.numberIdentification": "El formato del número de identificación es inválido",
 	"error.user.invalid.email": "El email no es válido",
 	"error.user.invalid.img": "Imagen inválida",

@@ -20,6 +20,7 @@
 	"error.subject.required.name": "Subject´s name is required",
 	"error.subject.required.subjectType": "Subject´s type is required",
 	"error.token.invalid": "Expired Session. Please login again",
+	"error.token.role.invalid": "error.token.role.invalid",
 	"error.user.formatNoValid.numberIdentification": "The format of the identification number is invalid",
 	"error.user.invalid.email": "Invalid email",
 	"error.user.invalid.img": "Invalid img",

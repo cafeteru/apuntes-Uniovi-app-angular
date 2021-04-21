@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TeachSubject } from '../models/teach-subject';
 import { User } from '../models/user';
+import { Subject } from '../models/subject';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,10 @@ export class TeachSubjectService {
   findTeachersBySubjectId(id: number): Observable<User[]> {
     return this.httpClient.get<User[]>(
       `${this.url}/subject/${id}`, TeachSubjectService.getHttpOptions());
+  }
+
+  findSubjectsByTeacherId(id: number): Observable<Subject[]> {
+    return this.httpClient.get<Subject[]>(
+      `${this.url}/teacher/${id}`, TeachSubjectService.getHttpOptions());
   }
 }

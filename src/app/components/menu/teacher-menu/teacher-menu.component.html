@@ -2,6 +2,6 @@
 <div *ngFor="let subject of subjects; let i = index" class="subject btn-lg"
      [class.btn-outline-primary]="i % 2 === 0"
      [class.btn-outline-secondary]="i % 2 !== 0"
-     [routerLink]="'/subject/'+ subject.id">
+     [routerLink]="'../../subjects/teacher/'+ subject.id">
   <h2>{{subject.name}}</h2>
 </div>

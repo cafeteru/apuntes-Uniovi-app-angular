@@ -44,6 +44,14 @@ const routes: Routes = [
         (s) => s.SubjectModule
       ),
     canLoad: [CheckTokenGuard]
+  },
+  {
+    path: 'unitSubjects',
+    loadChildren: () =>
+      import('./unitSubject/unit-subject.module').then(
+        (u) => u.UnitSubjectModule
+      ),
+    canLoad: [CheckTokenGuard]
   }
 ];
 

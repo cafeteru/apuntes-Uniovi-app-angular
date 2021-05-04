@@ -5,6 +5,7 @@ import { SubjectDetailsComponent } from './subject-details/subject-details.compo
 import { SubjectResolver } from '../../core/resolvers/subject.resolver';
 import { RoleTypeGuard } from '../../core/guards/role-type-guard.service';
 import { RoleType } from '../../core/models/enums/role-type';
+import { ListUnitSubjectComponent } from '../unitSubject/list-unit-subject/list-unit-subject.component';
 
 export const subjectRoutes: Routes = [
   {
@@ -21,6 +22,11 @@ export const subjectRoutes: Routes = [
     resolve: {
       subject: SubjectResolver
     }
+  },
+  {
+    // todo Separar por rol
+    path: 'teacher/:id',
+    component: ListUnitSubjectComponent,
   }
 ];
 

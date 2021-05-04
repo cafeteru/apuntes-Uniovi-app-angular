@@ -2,7 +2,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 export class ServiceUtils {
 
-  static getHttpOptions(responseType: string = 'json'): any {
+  static getHttpOptions(responseType: string = 'json'): unknown {
     return {
       responseType,
       headers: new HttpHeaders({

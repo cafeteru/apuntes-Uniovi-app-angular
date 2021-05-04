@@ -3,7 +3,7 @@ import { User } from '../models/user';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Page } from '../models/server/page';
 import { OptionsPage } from '../models/server/options-page';
 import { UserStatistics } from '../models/statistics/user-statistics';
@@ -79,8 +79,12 @@ export class UserService {
    */
   changeLanguage(lang: string): Observable<boolean> {
     return this.httpClient.head(`${this.url}/lang/${lang}`, {
-      ...ServiceUtils.getHttpOptions(),
-      observe: 'response'
+      observe: 'response',
+      responseType: 'json',
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        authorization: localStorage.authorization,
+      })
     }).pipe(
       map((x) => x.status === 200)
     );

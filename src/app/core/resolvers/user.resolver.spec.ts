@@ -8,7 +8,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { User } from '../models/user';
 import { environment } from '../../../environments/environment';
 import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
-import { userRoutes } from '../../components/user/user-routing.module';
+import { userRoutes } from '../../components/admin/user/user-routing.module';
 import { Location } from '@angular/common';
 import { TestUtils } from '../utils/test-utils';
 

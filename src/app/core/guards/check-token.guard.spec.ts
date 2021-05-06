@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { userRoutes } from '../../components/user/user-routing.module';
+import { userRoutes } from '../../components/admin/user/user-routing.module';
 import { TestUtils } from '../utils/test-utils';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { IToken } from '../services/login.service';

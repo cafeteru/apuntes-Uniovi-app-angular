@@ -23,7 +23,7 @@ const ERROR_LOGIN_TEXT = marker('error.login.text');
   styleUrls: ['./login.component.scss']
 })
 /**
- * Component to display the login admin-menu
+ * Component to display the login menu
  */
 export class LoginComponent extends BaseComponent implements OnInit {
   formGroup: FormGroup;
@@ -65,13 +65,13 @@ export class LoginComponent extends BaseComponent implements OnInit {
         this.loginService.login(loginData).subscribe(
           () => {
             const iToken = jwt_decode<IToken>(localStorage?.authorization);
-            let url = '/menu';
+            let url = '/admin';
             switch (RoleType[iToken.role]) {
               case RoleType.ROLE_STUDENT:
-                url += '/student';
+                url = '/student';
                 break;
               case RoleType.ROLE_TEACHER:
-                url += '/teacher';
+                url = '/teacher';
                 break;
             }
             this.router.navigateByUrl(url).then();

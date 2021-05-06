@@ -23,6 +23,7 @@ import { TranslateModule } from '@ngx-translate/core';
     SubjectTypePipe
   ],
   imports: [
+    StatisticsModule,
     CommonModule,
     TranslateModule,
     MaterialDesignModule,

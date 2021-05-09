@@ -10,15 +10,30 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { userRoutes } from '../../components/admin/user/user-routing.module';
 import { TestUtils } from '../utils/test-utils';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { IToken } from '../services/login.service';
-import { encode } from 'jwt-simple';
+import { LoadingState } from '../../store/reducers/loading.reducer';
+import { UserState } from '../../store/reducers/user.reducer';
+import { User } from '../models/user';
+import { AppState } from '../../store/app.reducer';
 
 describe('CheckTokenGuard', () => {
   let guard: CheckTokenGuard;
   let router: Router;
   let location: Location;
   let store: MockStore;
-  const initialState = {loggedIn: false};
+
+  const loadingState: LoadingState = {
+    isLoading: false,
+    loadedUser: false
+  };
+
+  const userState: UserState = {
+    user: new User()
+  };
+
+  const initialState: AppState = {
+    loadingState,
+    userState
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -55,13 +70,9 @@ describe('CheckTokenGuard', () => {
   it('check with valid token', () => {
     const exp = new Date((new Date().getTime() / 1_000) + 30_000).getTime();
     localStorage.setItem('exp', exp.toString());
-    const token: IToken = {
-      exp,
-      id: 1,
-      role: undefined,
-      username: undefined
-    };
-    localStorage.setItem('authorization', encode(token, 'test'));
+    localStorage.setItem('authorization', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzd' +
+      'WIiOiJhZG1pbiIsInJvbGUiOiJST0xFX0FETUlOIiwiaWQiOjEsImV4cCI6MTYyMDYxMzYwMn0.cQw7n' +
+      'oVDHVTqhiLdrdFDVS1iT9aFYuTa625pO8GSlXgfXdb-buvWJlmLKfM1nb2rf0wb5IE6cg3aw2WvCwdxDQ');
     expect(guard.canLoad()).toBeTrue();
   });
 

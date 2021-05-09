@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SubjectListComponent } from './subject-list/subject-list.component';
 import { SubjectDetailsComponent } from './subject-details/subject-details.component';
 import { SubjectResolver } from '../../../core/resolvers/subject.resolver';
-import { RoleTypeGuard } from '../../../core/guards/role-type-guard.service';
+import { RoleTypeGuard } from '../../../core/guards/role-type.guard';
 import { RoleType } from '../../../core/models/enums/role-type';
 import { ListUnitSubjectComponent } from '../../teacher/unitSubject/list-unit-subject/list-unit-subject.component';
 

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { CheckTokenGuard } from './core/guards/check-token.guard';
-import { RoleTypeGuard } from './core/guards/role-type-guard.service';
+import { RoleTypeGuard } from './core/guards/role-type.guard';
 import { RoleType } from './core/models/enums/role-type';
 
 export const rootRoutes: Routes = [

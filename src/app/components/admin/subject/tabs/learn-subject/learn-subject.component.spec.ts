@@ -1,6 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LearnSubjectComponent } from './learn-subject.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { CoreModule } from '../../../../../core/core.module';
+import { SharedModule } from '../../../../../shared/shared.module';
+import { TestUtils } from '../../../../../core/utils/test-utils';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('LearnSubjectComponent', () => {
   let component: LearnSubjectComponent;
@@ -8,9 +14,17 @@ describe('LearnSubjectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LearnSubjectComponent ]
+      declarations: [LearnSubjectComponent],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        CoreModule,
+        SharedModule,
+        TestUtils.getLanguages(),
+        BrowserAnimationsModule
+      ],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

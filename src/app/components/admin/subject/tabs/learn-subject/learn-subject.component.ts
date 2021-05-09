@@ -105,7 +105,7 @@ export class LearnSubjectComponent extends BaseTableComponent<User> implements O
   }
 
   protected getData(options: OptionsPage | undefined): Observable<Page<User>> {
-    return this.learnSubjectService.findStudentsBySubjectId(this.subject.id, options).pipe(
+    return this.learnSubjectService.findStudentsBySubjectId(this.subject?.id, options).pipe(
       tap(page => this.isEmpty = page ? page.empty : true),
     );
   }

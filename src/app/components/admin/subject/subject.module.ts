@@ -21,6 +21,10 @@ import { ModalLearnSubjectComponent } from './modal-learn-subject/modal-learn-su
     LearnSubjectComponent,
     ModalLearnSubjectComponent
   ],
+  exports: [
+    SubjectDataComponent,
+    LearnSubjectComponent
+  ],
   imports: [
     SubjectRoutingModule,
     CommonModule,

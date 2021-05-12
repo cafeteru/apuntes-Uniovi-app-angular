@@ -3,7 +3,7 @@
   <mat-sidenav-container id="mat-drawer-container" autosize>
     <mat-sidenav #drawer [mode]="'side'">
       <mat-nav-list>
-        <a mat-list-item [routerLink]="'/admin'  + getMenuUrl()">{{'menu' | translate}}</a>
+        <a mat-list-item [routerLink]="getMenuUrl()">{{'menu' | translate}}</a>
         <a mat-list-item *ngIf="user?.role === roleType.ROLE_ADMIN" routerLink="/admin/users"
            id="usersNavList">{{'users' | translate}}</a>
         <a mat-list-item *ngIf="user?.role === roleType.ROLE_ADMIN" routerLink="/admin/subjects"

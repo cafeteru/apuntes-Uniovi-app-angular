@@ -67,7 +67,7 @@ describe('LoginComponent', () => {
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
       ]
-    }).compileComponents();
+    }).compileComponents().then();
     store = TestBed.inject(MockStore);
   }));
 
@@ -114,14 +114,19 @@ describe('LoginComponent', () => {
   it('check login with valid values and valid user', fakeAsync(
     () => {
       spyOn(loginService, 'login').and.returnValue(of(void 0));
-      const spyRoute = spyOn(router, 'navigateByUrl').and.callFake(() => new Promise(void 0));
+      const spyRoute = spyOn(router, 'navigateByUrl').and
+        .callFake(() => new Promise(void 0));
       FormGroupUtil.clean(component.formGroup);
       component.formGroup.controls.username.setValue('username');
       component.formGroup.controls.password.setValue('password');
       expect(component.formGroup.valid).toBeTrue();
+      localStorage.setItem('authorization', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzd' +
+        'WIiOiJhZG1pbiIsInJvbGUiOiJST0xFX0FETUlOIiwiaWQiOjEsImV4cCI6MTYyMDYxMzYwMn0.cQw7n' +
+        'oVDHVTqhiLdrdFDVS1iT9aFYuTa625pO8GSlXgfXdb-buvWJlmLKfM1nb2rf0wb5IE6cg3aw2WvCwdxDQ');
       component.login();
       tick();
       expect(spyRoute).toHaveBeenCalled();
+      localStorage.clear();
     })
   );
 

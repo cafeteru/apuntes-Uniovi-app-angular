@@ -1,0 +1,38 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { TeacherSubjectDetailsComponent } from './teacher-subject-details.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { CoreModule } from '../../../../core/core.module';
+import { SharedModule } from '../../../../shared/shared.module';
+import { TestUtils } from '../../../../core/utils/test-utils';
+
+describe('TeacherSubjectDetailsComponent', () => {
+  let component: TeacherSubjectDetailsComponent;
+  let fixture: ComponentFixture<TeacherSubjectDetailsComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [TeacherSubjectDetailsComponent],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        CoreModule,
+        SharedModule,
+        TestUtils.getLanguages(),
+      ],
+      providers: []
+    })
+      .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TeacherSubjectDetailsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

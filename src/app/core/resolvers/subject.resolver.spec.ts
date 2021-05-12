@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
 import { SubjectService } from '../services/subject.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TestUtils } from '../utils/test-utils';
-import { subjectRoutes } from '../../components/subject/subject-routing.module';
+import { subjectRoutes } from '../../components/admin/subject/subject-routing.module';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Subject } from '../models/subject';

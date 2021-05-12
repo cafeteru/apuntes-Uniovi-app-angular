@@ -23,7 +23,7 @@ const ERROR_LOGIN_TEXT = marker('error.login.text');
   styleUrls: ['./login.component.scss']
 })
 /**
- * Component to display the login admin-menu
+ * Component to display the login menu
  */
 export class LoginComponent extends BaseComponent implements OnInit {
   formGroup: FormGroup;
@@ -64,18 +64,23 @@ export class LoginComponent extends BaseComponent implements OnInit {
       this.subscriptions.push(
         this.loginService.login(loginData).subscribe(
           () => {
-            const iToken = jwt_decode<IToken>(localStorage?.authorization);
-            let url = '/menu';
-            switch (RoleType[iToken.role]) {
-              case RoleType.ROLE_STUDENT:
-                url += '/student';
-                break;
-              case RoleType.ROLE_TEACHER:
-                url += '/teacher';
-                break;
+            if (localStorage.authorization) {
+              const iToken = jwt_decode<IToken>(localStorage.authorization);
+              let url = '/admin';
+              switch (RoleType[iToken.role]) {
+                case RoleType.ROLE_STUDENT:
+                  url = '/student';
+                  break;
+                case RoleType.ROLE_TEACHER:
+                  url = '/teacher';
+                  break;
+              }
+              this.router.navigateByUrl(url).then();
+              this.store.dispatch(actions.stopLoading());
+            } else {
+              this.showAlert('error', ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT,
+                () => this.store.dispatch(actions.stopLoading()));
             }
-            this.router.navigateByUrl(url).then();
-            this.store.dispatch(actions.stopLoading());
           },
           () => {
             this.showAlert('error', ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT,

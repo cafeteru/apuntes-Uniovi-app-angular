@@ -1,0 +1,12 @@
+<mat-tab-group dynamicHeight>
+  <mat-tab label="{{'subject.data' | translate}}">
+    <ng-template matTabContent>
+      <app-subject-data></app-subject-data>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="{{'subject.students' | translate}}">
+    <ng-template matTabContent>
+      <app-learn-subject></app-learn-subject>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

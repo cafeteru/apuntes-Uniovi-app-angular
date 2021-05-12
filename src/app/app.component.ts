@@ -43,13 +43,17 @@ export class AppComponent extends BaseComponent {
   }
 
   getMenuUrl(): string {
-    switch (this.user?.role) {
-      case RoleType.ROLE_STUDENT:
-        return '/student';
-      case RoleType.ROLE_TEACHER:
-        return '/teacher';
-      default:
-        return '';
+    if (!this.user || !this.user.role) {
+      return '/login';
+    } else {
+      switch (this.user.role) {
+        case RoleType.ROLE_STUDENT:
+          return '/student';
+        case RoleType.ROLE_TEACHER:
+          return '/teacher';
+        default:
+          return '/admin';
+      }
     }
   }
 }

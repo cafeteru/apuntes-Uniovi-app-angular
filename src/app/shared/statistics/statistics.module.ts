@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreModule } from '../../core/core.module';
-import { ComponentsRoutingModule } from '../../components/components-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialDesignModule } from '../material-design/material-design.module';
 import { ChartsModule } from 'ng2-charts';
@@ -11,9 +10,12 @@ import { UserTypeStatisticsComponent } from './user-type-statistics/user-type-st
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [SubjectStatisticsComponent, UserActiveStatisticsComponent, UserTypeStatisticsComponent],
+  declarations: [
+    SubjectStatisticsComponent,
+    UserActiveStatisticsComponent,
+    UserTypeStatisticsComponent
+  ],
   imports: [
-    ComponentsRoutingModule,
     CommonModule,
     ReactiveFormsModule,
     MaterialDesignModule,

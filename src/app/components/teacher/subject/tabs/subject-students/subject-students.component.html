@@ -21,13 +21,6 @@
   <ng-container matColumnDef="actions">
     <th *matHeaderCellDef mat-header-cell></th>
     <td *matCellDef="let user; let i = index" [id]="'actions'+ (i + 1)" mat-cell>
-      <mat-icon color="primary" [id]="'details'+ (i + 1)" matTooltip="{{'button.details' | translate}}"
-                (click)="showStudentDetails(user.id)">find_in_page
-      </mat-icon>
-      <mat-icon color="warn" [id]="'delete'+ (i + 1)" (click)="askDelete(user.id)"
-                matTooltip="{{'button.delete' | translate}}">
-        delete_forever
-      </mat-icon>
     </td>
   </ng-container>
 

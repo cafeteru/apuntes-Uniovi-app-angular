@@ -1,1 +1,5 @@
-<p>units-subject works!</p>
+<div *ngFor="let unitSubject of unitSubjects; let i = index" class="subject btn-lg"
+     [class.btn-outline-primary]="i % 2 === 0"
+     [class.btn-outline-secondary]="i % 2 !== 0">
+  <h2>{{ 'unit-subject.unit' | translate}} {{unitSubject.position}}: {{unitSubject.name}}</h2>
+</div>

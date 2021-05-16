@@ -8,8 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackBarService } from '../../../../../core/services/snack-bar.service';
 import { LearnSubjectService } from '../../../../../core/services/learn-subject.service';
-import { switchMap, tap } from 'rxjs/operators';
-import { LearnSubject } from '../../../../../core/models/learn-subject';
+import { tap } from 'rxjs/operators';
 import { OptionsPage } from '../../../../../core/models/server/options-page';
 import { Observable } from 'rxjs';
 import { Page } from '../../../../../core/models/server/page';
@@ -44,25 +43,7 @@ export class SubjectStudentsComponent extends BaseTableComponent<User> implement
     super.ngOnInit();
 
   }
-
-  showStudentDetails(id: number): void {
-    this.router.navigateByUrl(`/menu/users/${id}`).then();
-  }
-
-  askDelete(id): void {
-    this.subscriptions.push(
-      this.data$.pipe(
-        switchMap(students => {
-          const learnSubjects = students.filter(x => x.id !== id).map(
-            student => new LearnSubject(this.subject.id, student.id));
-          return this.learnSubjectService.create(this.subject.id, learnSubjects);
-        })
-      ).subscribe(
-        () => this.cleanFilters()
-      )
-    );
-  }
-
+  
   protected configFilter(): User {
     const namesFormGroups = Object.keys(this.formGroup.controls);
     namesFormGroups.forEach(name => {

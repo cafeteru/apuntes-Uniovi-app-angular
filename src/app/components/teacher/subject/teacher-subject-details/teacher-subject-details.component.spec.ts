@@ -6,6 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { CoreModule } from '../../../../core/core.module';
 import { SharedModule } from '../../../../shared/shared.module';
 import { TestUtils } from '../../../../core/utils/test-utils';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('TeacherSubjectDetailsComponent', () => {
   let component: TeacherSubjectDetailsComponent;
@@ -20,6 +21,7 @@ describe('TeacherSubjectDetailsComponent', () => {
         CoreModule,
         SharedModule,
         TestUtils.getLanguages(),
+        BrowserAnimationsModule
       ],
       providers: []
     })

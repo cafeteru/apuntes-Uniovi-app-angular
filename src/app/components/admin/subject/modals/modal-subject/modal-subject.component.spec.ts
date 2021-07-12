@@ -1,23 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModalSubjectComponent } from './modal-subject.component';
-import { CoreModule } from '../../../../core/core.module';
-import { SharedModule } from '../../../../shared/shared.module';
-import { TestUtils } from '../../../../core/utils/test-utils';
+import { CoreModule } from '../../../../../core/core.module';
+import { SharedModule } from '../../../../../shared/shared.module';
+import { TestUtils } from '../../../../../core/utils/test-utils';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { LoadingState } from '../../../../store/reducers/loading.reducer';
-import { UserState } from '../../../../store/reducers/user.reducer';
-import { User } from '../../../../core/models/user';
-import { AppState } from '../../../../store/app.reducer';
+import { LoadingState } from '../../../../../store/reducers/loading.reducer';
+import { UserState } from '../../../../../store/reducers/user.reducer';
+import { User } from '../../../../../core/models/user';
+import { AppState } from '../../../../../store/app.reducer';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { of } from 'rxjs';
-import { Subject } from '../../../../core/models/subject';
+import { Subject } from '../../../../../core/models/subject';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { SubjectService } from '../../../../core/services/subject.service';
+import { SubjectService } from '../../../../../core/services/subject.service';
 
 const matDialogRefMock = {
   close: () => of()

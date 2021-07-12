@@ -9,13 +9,15 @@ import { TeacherSubjectDetailsComponent } from './teacher-subject-details/teache
 import { SubjectDataComponent } from './tabs/subject-data/subject-data.component';
 import { SubjectStudentsComponent } from './tabs/subject-students/subject-students.component';
 import { UnitsSubjectComponent } from './tabs/units-subject/units-subject.component';
+import { ModalUnitSubjectComponent } from './modal-add-unit-subject/modal-unit-subject.component';
 
 @NgModule({
   declarations: [
     TeacherSubjectDetailsComponent,
     SubjectDataComponent,
     SubjectStudentsComponent,
-    UnitsSubjectComponent
+    UnitsSubjectComponent,
+    ModalUnitSubjectComponent
   ],
   imports: [
     SubjectRoutingModule,

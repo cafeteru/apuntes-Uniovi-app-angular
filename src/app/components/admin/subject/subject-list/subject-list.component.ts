@@ -10,7 +10,7 @@ import { Subject } from '../../../../core/models/subject';
 import { SubjectType } from '../../../../core/models/enums/subject-type';
 import { GLOBAL_CONSTANTS } from '../../../../core/utils/global-constants';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
-import { ModalSubjectComponent } from '../modal-subject/modal-subject.component';
+import { ModalSubjectComponent } from '../modals/modal-subject/modal-subject.component';
 import Swal from 'sweetalert2';
 import { BaseTableComponent } from '../../../../core/base/base-table.component';
 import { Page } from '../../../../core/models/server/page';

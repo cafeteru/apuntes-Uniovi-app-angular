@@ -3,15 +3,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModalLearnSubjectComponent, ModalLearnSubjectData } from './modal-learn-subject.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { CoreModule } from '../../../../core/core.module';
-import { SharedModule } from '../../../../shared/shared.module';
-import { TestUtils } from '../../../../core/utils/test-utils';
+import { CoreModule } from '../../../../../core/core.module';
+import { SharedModule } from '../../../../../shared/shared.module';
+import { TestUtils } from '../../../../../core/utils/test-utils';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LearnSubjectService } from '../../../../core/services/learn-subject.service';
+import { LearnSubjectService } from '../../../../../core/services/learn-subject.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { of } from 'rxjs';
-import { Subject } from '../../../../core/models/subject';
+import { Subject } from '../../../../../core/models/subject';
 
 const matDialogRefMock = {
   close: () => of()

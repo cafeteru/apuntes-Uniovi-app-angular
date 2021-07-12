@@ -1,18 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { BaseModalComponent } from '../../../../core/base/base-modal.component';
+import { BaseModalComponent } from '../../../../../core/base/base-modal.component';
 import { TranslateService } from '@ngx-translate/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { UserService } from '../../../../core/services/user.service';
-import { Subject } from '../../../../core/models/subject';
+import { UserService } from '../../../../../core/services/user.service';
+import { Subject } from '../../../../../core/models/subject';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import { RoleType } from '../../../../core/models/enums/role-type';
+import { RoleType } from '../../../../../core/models/enums/role-type';
 import { map, switchMap } from 'rxjs/operators';
-import { FormGroupUtil } from '../../../../core/utils/form-group-util';
-import { User } from '../../../../core/models/user';
-import { LearnSubjectService } from '../../../../core/services/learn-subject.service';
+import { FormGroupUtil } from '../../../../../core/utils/form-group-util';
+import { User } from '../../../../../core/models/user';
+import { LearnSubjectService } from '../../../../../core/services/learn-subject.service';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
-import { LearnSubject } from '../../../../core/models/learn-subject';
+import { LearnSubject } from '../../../../../core/models/learn-subject';
 
 const TITLE_ADD = marker('modal.learn-subject.title.add');
 const TITLE_UPDATE = marker('modal.learn-subject.title.update');

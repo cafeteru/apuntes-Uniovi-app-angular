@@ -17,13 +17,18 @@ export class UnitSubjectService {
   ) {
   }
 
-  create(unitSubject: UnitSubject, subjectId: number): Observable<UnitSubject> {
+  create(unitSubject: UnitSubject): Observable<UnitSubject> {
     return this.httpClient.post<UnitSubject>(
-      `${this.url}/create/${subjectId}`, unitSubject, ServiceUtils.getHttpOptions());
+      `${this.url}/create`, unitSubject, ServiceUtils.getHttpOptions());
   }
 
   findBySubjectId(id: number): Observable<Page<UnitSubject>> {
     return this.httpClient.get<Page<UnitSubject>>(
       `${this.url}/subject/${id}`, ServiceUtils.getHttpOptions());
+  }
+
+  update(unitSubject: UnitSubject): Observable<UnitSubject> {
+    return this.httpClient.post<UnitSubject>(
+      `${this.url}/create`, unitSubject, ServiceUtils.getHttpOptions());
   }
 }

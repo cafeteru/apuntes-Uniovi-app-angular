@@ -15,7 +15,7 @@ import { GLOBAL_CONSTANTS } from '../../../../../core/utils/global-constants';
 import {
   ModalLearnSubjectComponent,
   ModalLearnSubjectData
-} from '../../modal-learn-subject/modal-learn-subject.component';
+} from '../../modals/modal-learn-subject/modal-learn-subject.component';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { LearnSubject } from '../../../../../core/models/learn-subject';
 import { switchMap, tap } from 'rxjs/operators';

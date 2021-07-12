@@ -5,6 +5,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { UnitSubjectService } from '../../../../../core/services/unit-subject.service';
 import { UnitSubject } from '../../../../../core/models/unit-subject';
+import { GLOBAL_CONSTANTS } from '../../../../../core/utils/global-constants';
+import { marker } from '@biesbjerg/ngx-translate-extract-marker';
+import { SnackBarService } from '../../../../../core/services/snack-bar.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalUnitSubjectComponent } from '../../modal-add-unit-subject/modal-unit-subject.component';
+
+const SUCCESS_ADD_UNIT_SUBJECT = marker('user.add.successfully');
 
 @Component({
   selector: 'app-units-subject',
@@ -17,8 +24,10 @@ export class UnitsSubjectComponent extends BaseComponent implements OnInit {
 
   constructor(
     protected translateService: TranslateService,
+    private dialog: MatDialog,
     private route: ActivatedRoute,
-    private unitSubjectService: UnitSubjectService
+    private snackBarService: SnackBarService,
+    private unitSubjectService: UnitSubjectService,
   ) {
     super(translateService);
   }
@@ -29,6 +38,29 @@ export class UnitsSubjectComponent extends BaseComponent implements OnInit {
       this.subject = this.route.snapshot.data.subject;
     }
     this.loadUnits();
+  }
+
+  openModal(): void {
+    const data = new UnitSubject();
+    data.subjectId = this.subject.id;
+    const config = {
+      width: GLOBAL_CONSTANTS.maxWidthModal,
+      maxHeight: GLOBAL_CONSTANTS.maxHeightModal,
+      data
+    };
+    const dialogRef = this.dialog.open(ModalUnitSubjectComponent, config);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadUnits();
+        this.subscriptions.push(
+          this.translateService.get(SUCCESS_ADD_UNIT_SUBJECT).subscribe(
+            res => {
+              this.snackBarService.showSuccess(res);
+            }
+          )
+        );
+      }
+    });
   }
 
   private loadUnits(): void {

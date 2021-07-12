@@ -7,7 +7,7 @@ import { SnackBarService } from '../../../../../core/services/snack-bar.service'
 import { Subject } from '../../../../../core/models/subject';
 import { GLOBAL_CONSTANTS } from '../../../../../core/utils/global-constants';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
-import { ModalSubjectComponent } from '../../modal-subject/modal-subject.component';
+import { ModalSubjectComponent } from '../../modals/modal-subject/modal-subject.component';
 import { User } from '../../../../../core/models/user';
 import { TeachSubjectService } from '../../../../../core/services/teach-subject.service';
 

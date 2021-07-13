@@ -11,7 +11,7 @@ import { SnackBarService } from '../../../../../core/services/snack-bar.service'
 import { MatDialog } from '@angular/material/dialog';
 import { ModalUnitSubjectComponent } from '../../modal-add-unit-subject/modal-unit-subject.component';
 
-const SUCCESS_ADD_UNIT_SUBJECT = marker('user.add.successfully');
+const SUCCESS_ADD_UNIT_SUBJECT = marker('unit-subject.add.successfully');
 
 @Component({
   selector: 'app-units-subject',

@@ -1,34 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { BaseTableComponent } from '../../../../../core/base/base-table.component';
 import { User } from '../../../../../core/models/user';
+import { MatTableDataSource } from '@angular/material/table';
+import { Subject } from '../../../../../core/models/subject';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackBarService } from '../../../../../core/services/snack-bar.service';
 import { LearnSubjectService } from '../../../../../core/services/learn-subject.service';
-import { Subject } from '../../../../../core/models/subject';
-import { BaseTableComponent } from '../../../../../core/base/base-table.component';
-import { Page } from '../../../../../core/models/server/page';
-import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { OptionsPage } from '../../../../../core/models/server/options-page';
+import { Observable } from 'rxjs';
+import { Page } from '../../../../../core/models/server/page';
 import { FormControl, FormGroup } from '@angular/forms';
-import { GLOBAL_CONSTANTS } from '../../../../../core/utils/global-constants';
-import {
-  ModalLearnSubjectComponent,
-  ModalLearnSubjectData
-} from '../../modals/modal-learn-subject/modal-learn-subject.component';
-import { marker } from '@biesbjerg/ngx-translate-extract-marker';
-import { LearnSubject } from '../../../../../core/models/learn-subject';
-import { switchMap, tap } from 'rxjs/operators';
-import { MatTableDataSource } from '@angular/material/table';
-
-const SUCCESS_ADD = marker('learn-subject.add.successfully');
 
 @Component({
-  selector: 'app-learn-subject',
-  templateUrl: './learn-subject.component.html',
-  styleUrls: ['./learn-subject.component.scss']
+  selector: 'app-subject-students',
+  templateUrl: './subject-students.component.html',
+  styleUrls: ['./subject-students.component.scss']
 })
-export class LearnSubjectComponent extends BaseTableComponent<User> implements OnInit {
+export class SubjectStudentsComponent extends BaseTableComponent<User> implements OnInit {
   students = new MatTableDataSource<User>();
 
   private subject: Subject;
@@ -52,50 +43,7 @@ export class LearnSubjectComponent extends BaseTableComponent<User> implements O
     super.ngOnInit();
 
   }
-
-  openModal(): void {
-    const data: ModalLearnSubjectData = {
-      subject: this.subject,
-      isEmpty: this.isEmpty
-    };
-    const config = {
-      width: GLOBAL_CONSTANTS.maxWidthModal,
-      maxHeight: GLOBAL_CONSTANTS.maxHeightModal,
-      data
-    };
-    const dialogRef = this.dialog.open(ModalLearnSubjectComponent, config);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.cleanFilters();
-        this.subscriptions.push(
-          this.translateService.get(SUCCESS_ADD).subscribe(
-            res => {
-              this.snackBarService.showSuccess(res);
-            }
-          )
-        );
-      }
-    });
-  }
-
-  showStudentDetails(id: number): void {
-    this.router.navigateByUrl(`/menu/users/${id}`).then();
-  }
-
-  askDelete(id): void {
-    this.subscriptions.push(
-      this.data$.pipe(
-        switchMap(students => {
-          const learnSubjects = students.filter(x => x.id !== id).map(
-            student => new LearnSubject(this.subject.id, student.id));
-          return this.learnSubjectService.create(this.subject.id, learnSubjects);
-        })
-      ).subscribe(
-        () => this.cleanFilters()
-      )
-    );
-  }
-
+  
   protected configFilter(): User {
     const namesFormGroups = Object.keys(this.formGroup.controls);
     namesFormGroups.forEach(name => {

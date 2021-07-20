@@ -5,6 +5,8 @@ import { CoreModule } from '../../../../core/core.module';
 import { SharedModule } from '../../../../shared/shared.module';
 import { TestUtils } from '../../../../core/utils/test-utils';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SubjectDataComponent } from '../tabs/subject-data/subject-data.component';
+import { LearnSubjectComponent } from '../tabs/learn-subject/learn-subject.component';
 
 describe('SubjectDetailsComponent', () => {
   let component: SubjectDetailsComponent;
@@ -12,7 +14,11 @@ describe('SubjectDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SubjectDetailsComponent],
+      declarations: [
+        SubjectDetailsComponent,
+        SubjectDataComponent,
+        LearnSubjectComponent
+      ],
       imports: [
         CoreModule,
         SharedModule,

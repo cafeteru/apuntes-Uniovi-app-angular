@@ -1,7 +1,7 @@
 /**
  * Represent paged server information
  */
-export interface Page<T> {
+export interface  Page<T> {
   content: T[];
   pageable: Pageable;
   last: boolean;

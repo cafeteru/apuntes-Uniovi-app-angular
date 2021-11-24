@@ -23,10 +23,12 @@ const TITLE_UPDATE = marker('modal.subject.title.update');
 @Component({
   selector: 'app-modal-subject',
   templateUrl: './modal-subject.component.html',
-  styleUrls: ['./modal-subject.component.scss']
+  styleUrls: ['./modal-subject.component.scss'],
 })
-export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubjectComponent>
-  implements OnInit {
+export class ModalSubjectComponent
+  extends BaseModalComponent<Subject, ModalSubjectComponent>
+  implements OnInit
+{
   subjectTypes = Object.keys(SubjectType);
   teachers: User[] = [];
 
@@ -41,21 +43,25 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
     super(translateService, matDialogRef, subject);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-    this.userService.findAllByRole(RoleType.ROLE_TEACHER).pipe(
-      switchMap(teachers => {
-        this.teachers = teachers;
-        return this.isSaveOrUpdate() ?
-          this.teachSubjectService.findTeachersBySubjectId(this.subject.id) : of([]);
-      })
-    ).subscribe(
-      teachers => FormGroupUtil.setValue(this.formGroup, 'teachers', teachers)
-    );
-  }
-
   get title(): string {
     return this.isSaveOrUpdate() ? TITLE_UPDATE : TITLE_ADD;
+  }
+
+  ngOnInit() {
+    super.ngOnInit();
+    this.userService
+      .findAllByRole(RoleType.ROLE_TEACHER)
+      .pipe(
+        switchMap((teachers) => {
+          this.teachers = teachers;
+          return this.isSaveOrUpdate()
+            ? this.teachSubjectService.findTeachersBySubjectId(this.subject.id)
+            : of([]);
+        })
+      )
+      .subscribe((teachers) =>
+        FormGroupUtil.setValue(this.formGroup, 'teachers', teachers)
+      );
   }
 
   isSaveOrUpdate(): boolean {
@@ -73,28 +79,35 @@ export class ModalSubjectComponent extends BaseModalComponent<Subject, ModalSubj
     return new FormGroup({
       name: new FormControl(this.subject.name, [
         Validators.required,
-        Validators.maxLength(SubjectLimits.nameLimit)
+        Validators.maxLength(SubjectLimits.nameLimit),
       ]),
-      subjectType: new FormControl(this.subject.subjectType, Validators.required),
+      subjectType: new FormControl(
+        this.subject.subjectType,
+        Validators.required
+      ),
       active: new FormControl(this.subject.active),
-      teachers: new FormControl()
+      teachers: new FormControl(),
     });
   }
 
   protected saveOrUpdateService(): Observable<Subject> {
     let id: number;
-    const subject$ = this.isSaveOrUpdate() ? this.subjectService.update(this.subject)
+    const subject$ = this.isSaveOrUpdate()
+      ? this.subjectService.update(this.subject)
       : this.subjectService.create(this.subject);
     return subject$.pipe(
       map((subject) => {
         id = subject.id;
         const teachers: User[] = this.formGroup.get('teachers').value;
-        return teachers ? teachers.map(teacher => new TeachSubject(subject.id, teacher.id)) : [];
+        return teachers
+          ? teachers.map((teacher) => new TeachSubject(subject.id, teacher.id))
+          : [];
       }),
       switchMap((teachSubjects) =>
-        this.teachSubjectService.create(id, teachSubjects).pipe(
-          switchMap(() => of(this.subject)))
-      ),
+        this.teachSubjectService
+          .create(id, teachSubjects)
+          .pipe(switchMap(() => of(this.subject)))
+      )
     );
   }
 }

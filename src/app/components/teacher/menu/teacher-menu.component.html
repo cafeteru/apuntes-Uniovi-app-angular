@@ -1,7 +1,10 @@
-<h1>{{'subjects' | translate}}</h1>
-<div *ngFor="let subject of subjects; let i = index" class="subject btn-lg"
-     [class.btn-outline-primary]="i % 2 === 0"
-     [class.btn-outline-secondary]="i % 2 !== 0"
-     [routerLink]="'subjects/'+ subject.id">
-  <h2>{{subject.name}}</h2>
+<h1>{{ "subjects" | translate }}</h1>
+<div
+  *ngFor="let subject of subjects; let i = index"
+  [class.btn-outline-primary]="i % 2 === 0"
+  [class.btn-outline-secondary]="i % 2 !== 0"
+  [routerLink]="'subjects/' + subject.id"
+  class="subject btn-lg"
+>
+  <h2>{{ subject.name }}</h2>
 </div>

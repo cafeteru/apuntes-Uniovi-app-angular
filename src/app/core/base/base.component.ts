@@ -4,7 +4,7 @@ import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  template: ''
+  template: '',
 })
 /**
  * Basic component that has the common properties
@@ -12,17 +12,14 @@ import { TranslateService } from '@ngx-translate/core';
 export abstract class BaseComponent implements OnInit, OnDestroy {
   protected subscriptions: Subscription[] = [];
 
-  protected constructor(
-    protected translateService: TranslateService
-  ) {
-  }
+  protected constructor(protected translateService: TranslateService) {}
 
   ngOnInit(): void {
     this.subscriptions = [];
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   /**
@@ -33,7 +30,12 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
    * @param text Content of message
    * @param action Action to be taken after closing the message
    */
-  showAlert(icon: SweetAlertIcon, title: string, text?: string, action?: () => void): void {
+  showAlert(
+    icon: SweetAlertIcon,
+    title: string,
+    text?: string,
+    action?: () => void
+  ): void {
     this.showAlertBack(icon, title, text, undefined, action);
   }
 
@@ -54,22 +56,20 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
     action?: () => void
   ): void {
     this.subscriptions.push(
-      this.translateService.get([title, text]).subscribe(
-        res => {
-          const valTranslated = text ? res[text] : '';
-          Swal.fire({
-            icon,
-            title: (res[title]),
-            html: errorBack ? `<div>${valTranslated}<br/>${errorBack}</div>` : `<div>${valTranslated}</div>`
-          }).then(
-            () => {
-              if (action) {
-                action();
-              }
-            }
-          );
-        }
-      )
+      this.translateService.get([title, text]).subscribe((res) => {
+        const valTranslated = text ? res[text] : '';
+        Swal.fire({
+          icon,
+          title: res[title],
+          html: errorBack
+            ? `<div>${valTranslated}<br/>${errorBack}</div>`
+            : `<div>${valTranslated}</div>`,
+        }).then(() => {
+          if (action) {
+            action();
+          }
+        });
+      })
     );
   }
 }

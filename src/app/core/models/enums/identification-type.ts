@@ -3,6 +3,5 @@
  */
 export enum IdentificationType {
   DNI = 'DNI',
-  NIE = 'NIE'
+  NIE = 'NIE',
 }
-

@@ -28,7 +28,7 @@ const TITLE_ADD = marker('modal.user.title.add');
 const TITLE_UPDATE = marker('modal.user.title.update');
 
 const matDialogRefMock = {
-  close: () => of()
+  close: () => of(),
 };
 
 describe('ModalUserComponent', () => {
@@ -39,16 +39,16 @@ describe('ModalUserComponent', () => {
   let store: MockStore;
   const loadingState: LoadingState = {
     isLoading: false,
-    loadedUser: false
+    loadedUser: false,
   };
 
   const userState: UserState = {
-    user: new User()
+    user: new User(),
   };
 
   const initialState: AppState = {
     loadingState,
-    userState
+    userState,
   };
 
   beforeEach(async () => {
@@ -56,7 +56,7 @@ describe('ModalUserComponent', () => {
       city: undefined,
       id: undefined,
       postalCode: undefined,
-      street: undefined
+      street: undefined,
     };
     user = {
       address,
@@ -73,12 +73,10 @@ describe('ModalUserComponent', () => {
       phone: undefined,
       surname: undefined,
       username: undefined,
-      language: LanguageType.ES
+      language: LanguageType.ES,
     };
     await TestBed.configureTestingModule({
-      declarations: [
-        ModalUserComponent
-      ],
+      declarations: [ModalUserComponent],
       imports: [
         FormsModule,
         RouterTestingModule,
@@ -93,17 +91,15 @@ describe('ModalUserComponent', () => {
         UserService,
         {
           provide: MatDialogRef,
-          useValue: matDialogRefMock
+          useValue: matDialogRefMock,
         },
         {
           provide: MAT_DIALOG_DATA,
-          useValue: user
+          useValue: user,
         },
-        provideMockStore({initialState}),
+        provideMockStore({ initialState }),
       ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     }).compileComponents();
     store = TestBed.inject(MockStore);
   });
@@ -145,7 +141,9 @@ describe('ModalUserComponent', () => {
     component.formGroup.controls.surname.setValue('surname');
     component.formGroup.controls.username.setValue('username');
     component.formGroup.controls.password.setValue('password');
-    component.formGroup.controls.role.setValue(RoleType.ROLE_STUDENT.toString());
+    component.formGroup.controls.role.setValue(
+      RoleType.ROLE_STUDENT.toString()
+    );
     component.saveOrUpdate();
     expect(spyAdd).toHaveBeenCalled();
     user.id = 1;

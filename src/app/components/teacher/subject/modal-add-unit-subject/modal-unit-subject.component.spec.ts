@@ -14,7 +14,7 @@ import { of } from 'rxjs';
 import { UnitSubject } from '../../../../core/models/unit-subject';
 
 const matDialogRefMock = {
-  close: () => of()
+  close: () => of(),
 };
 
 describe('ModalAddUnitSubjectComponent', () => {
@@ -32,21 +32,20 @@ describe('ModalAddUnitSubjectComponent', () => {
         TestUtils.getLanguages(),
         BrowserAnimationsModule,
         ReactiveFormsModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
       ],
       providers: [
         LearnSubjectService,
         {
           provide: MatDialogRef,
-          useValue: matDialogRefMock
+          useValue: matDialogRefMock,
         },
         {
           provide: MAT_DIALOG_DATA,
-          useValue: new UnitSubject()
+          useValue: new UnitSubject(),
         },
-      ]
-    })
-      .compileComponents();
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

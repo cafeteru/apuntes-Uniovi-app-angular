@@ -11,22 +11,21 @@ export const subjectRoutes: Routes = [
     path: '',
     component: SubjectListComponent,
     canActivate: [RoleTypeGuard],
-    data: {role: [RoleType.ROLE_ADMIN]},
+    data: { role: [RoleType.ROLE_ADMIN] },
   },
   {
     path: `:id`,
     component: SubjectDetailsComponent,
     canActivate: [RoleTypeGuard],
-    data: {role: [RoleType.ROLE_ADMIN]},
+    data: { role: [RoleType.ROLE_ADMIN] },
     resolve: {
-      subject: SubjectResolver
-    }
-  }
+      subject: SubjectResolver,
+    },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(subjectRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class SubjectRoutingModule {
-}
+export class SubjectRoutingModule {}

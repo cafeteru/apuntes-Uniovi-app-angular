@@ -8,9 +8,7 @@ export class MyMatPaginatorIntl extends MatPaginatorIntl implements OnDestroy {
   private ofLabel = '';
   private subscription: Subscription;
 
-  constructor(
-    private translateService: TranslateService
-  ) {
+  constructor(private translateService: TranslateService) {
     super();
     translateService.onLangChange.subscribe(() => {
       this.load();
@@ -31,27 +29,31 @@ export class MyMatPaginatorIntl extends MatPaginatorIntl implements OnDestroy {
       }
       length = Math.max(length, 0);
       const startIndex = page * pageSize;
-      const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
+      const endIndex =
+        startIndex < length
+          ? Math.min(startIndex + pageSize, length)
+          : startIndex + pageSize;
       return `${startIndex + 1} – ${endIndex} ${this.ofLabel} ${length}`;
     };
   }
 
   private load(): void {
-    this.subscription = this.translateService.get(
-      [
+    this.subscription = this.translateService
+      .get([
         'paginator.itemsPerPageLabel',
         'paginator.nextPageLabel',
         'paginator.previousPageLabel',
         'paginator.firstPageLabel',
         'paginator.lastPageLabel',
-        'paginator.of']
-    ).subscribe((res) => {
-      this.itemsPerPageLabel = res['paginator.itemsPerPageLabel'];
-      this.nextPageLabel = res['paginator.nextPageLabel'];
-      this.previousPageLabel = res['paginator.previousPageLabel'];
-      this.firstPageLabel = res['paginator.firstPageLabel'];
-      this.lastPageLabel = res['paginator.lastPageLabel'];
-      this.ofLabel = res['paginator.of'];
-    });
+        'paginator.of',
+      ])
+      .subscribe((res) => {
+        this.itemsPerPageLabel = res['paginator.itemsPerPageLabel'];
+        this.nextPageLabel = res['paginator.nextPageLabel'];
+        this.previousPageLabel = res['paginator.previousPageLabel'];
+        this.firstPageLabel = res['paginator.firstPageLabel'];
+        this.lastPageLabel = res['paginator.lastPageLabel'];
+        this.ofLabel = res['paginator.of'];
+      });
   }
 }

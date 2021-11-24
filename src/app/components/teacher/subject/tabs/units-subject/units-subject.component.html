@@ -1,6 +1,18 @@
-<button (click)="openModal()" class="btn btn-outline-success" id="AddUnitSubject">{{'button.add' | translate}}</button>
-<div *ngFor="let unitSubject of unitSubjects; let i = index" class="subject btn-lg"
-     [class.btn-outline-primary]="i % 2 === 0"
-     [class.btn-outline-secondary]="i % 2 !== 0">
-  <h2>{{ 'unit-subject.unit' | translate}} {{unitSubject.position}}: {{unitSubject.name}}</h2>
+<button
+  (click)="openModal()"
+  class="btn btn-outline-success"
+  id="AddUnitSubject"
+>
+  {{ "button.add" | translate }}
+</button>
+<div
+  *ngFor="let unitSubject of unitSubjects; let i = index"
+  [class.btn-outline-primary]="i % 2 === 0"
+  [class.btn-outline-secondary]="i % 2 !== 0"
+  class="subject btn-lg"
+>
+  <h2>
+    {{ "unit-subject.unit" | translate }} {{ unitSubject.position }}:
+    {{ unitSubject.name }}
+  </h2>
 </div>

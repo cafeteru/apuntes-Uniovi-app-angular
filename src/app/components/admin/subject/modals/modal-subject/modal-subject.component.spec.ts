@@ -20,7 +20,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { SubjectService } from '../../../../../core/services/subject.service';
 
 const matDialogRefMock = {
-  close: () => of()
+  close: () => of(),
 };
 
 describe('ModalSubjectComponent', () => {
@@ -31,23 +31,21 @@ describe('ModalSubjectComponent', () => {
   const subject = new Subject();
   const loadingState: LoadingState = {
     isLoading: false,
-    loadedUser: false
+    loadedUser: false,
   };
 
   const userState: UserState = {
-    user: new User()
+    user: new User(),
   };
 
   const initialState: AppState = {
     loadingState,
-    userState
+    userState,
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ModalSubjectComponent
-      ],
+      declarations: [ModalSubjectComponent],
       imports: [
         FormsModule,
         RouterTestingModule,
@@ -62,17 +60,15 @@ describe('ModalSubjectComponent', () => {
         SubjectService,
         {
           provide: MatDialogRef,
-          useValue: matDialogRefMock
+          useValue: matDialogRefMock,
         },
         {
           provide: MAT_DIALOG_DATA,
-          useValue: subject
+          useValue: subject,
         },
-        provideMockStore({initialState})
+        provideMockStore({ initialState }),
       ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     }).compileComponents();
     store = TestBed.inject(MockStore);
   });

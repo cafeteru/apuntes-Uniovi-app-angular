@@ -2,16 +2,17 @@
   "name": "apuntes-uniovi-app-angular",
   "version": "0.0.1",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
-    "prod": "ng build --prod",
-    "test": "ng test",
-    "lint": "ng lint",
     "e2e": "ng e2e",
-    "test-once": "ng test --no-watch",
+    "format": "prettier --write src/**/*.{ts,html,scss}",
+    "lint": "ng lint",
+    "load-i18n": "ngx-translate-extract --input ./src --output ./src/assets/i18n/es.json src/assets/i18n/us.json --clean --sort --key-as-default-value --format json",
+    "ng": "ng",
+    "prod": "ng build --prod",
+    "start": "ng serve",
+    "test": "ng test",
     "test-coverage": "ng test --no-watch --code-coverage",
-    "load-i18n": "ngx-translate-extract --input ./src --output ./src/assets/i18n/es.json src/assets/i18n/us.json --clean --sort --key-as-default-value --format json"
+    "test-once": "ng test --no-watch"
   },
   "private": true,
   "dependencies": {
@@ -78,6 +79,7 @@
     "karma-jasmine": "~4.0.1",
     "karma-jasmine-html-reporter": "^1.5.4",
     "ngx-translate-testing": "^5.1.0",
+    "prettier": "2.4.1",
     "protractor": "~7.0.0",
     "ts-node": "~9.1.1",
     "tslint": "~6.1.3",

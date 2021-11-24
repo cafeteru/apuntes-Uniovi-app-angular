@@ -16,7 +16,7 @@ export class DateValidator {
       }
       const date = new Date(control.value);
       if (date > maxDate) {
-        return {maxDate: true};
+        return { maxDate: true };
       }
       return null;
     };

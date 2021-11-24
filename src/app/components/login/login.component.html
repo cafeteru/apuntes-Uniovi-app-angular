@@ -1,34 +1,53 @@
 <article>
   <fieldset>
-    <h1>{{'login.title' | translate}}</h1>
+    <h1>{{ "login.title" | translate }}</h1>
     <header class="head">
-      <img [alt]="'logo.login' | translate" [src]="'assets/img/logo-uniovi.png' | noImage"/>
+      <img
+        [alt]="'logo.login' | translate"
+        [src]="'assets/img/logo-uniovi.png' | noImage"
+      />
     </header>
     <form (ngSubmit)="login()" [formGroup]="formGroup">
       <div class="form-group">
         <mat-form-field>
-          <mat-label>{{'login.username' | translate}}</mat-label>
-          <input formControlName="username" id="username" matInput required>
+          <mat-label>{{ "login.username" | translate }}</mat-label>
+          <input formControlName="username" id="username" matInput required />
           <mat-error *ngIf="formGroup.controls.username.errors?.required">
-            {{'username.error.required' | translate}}
+            {{ "username.error.required" | translate }}
           </mat-error>
         </mat-form-field>
       </div>
       <div class="form-group">
         <mat-form-field>
-          <input [placeholder]="'login.password' | translate" formControlName="password" id="password"
-                 matInput required showHideInput type="password"/>
-          <i [showHideStatus]="{ materialIcon: true, id: 'password' }" class="material-icons material-design" matSuffix
-             showHideTrigger="password"></i>
+          <input
+            [placeholder]="'login.password' | translate"
+            formControlName="password"
+            id="password"
+            matInput
+            required
+            showHideInput
+            type="password"
+          />
+          <i
+            [showHideStatus]="{ materialIcon: true, id: 'password' }"
+            class="material-icons material-design"
+            matSuffix
+            showHideTrigger="password"
+          ></i>
           <mat-error *ngIf="formGroup.controls.password.errors?.required">
-            {{'password.error.required' | translate}}
+            {{ "password.error.required" | translate }}
           </mat-error>
         </mat-form-field>
       </div>
       <div class="submit text-center">
-        <input *ngIf="!disable" class="btn btn-outline-info" id="logIn" type="submit"
-               value="{{'login.button' | translate}}"/>
-        <div class="spinner-border" role="status" *ngIf="disable">
+        <input
+          *ngIf="!disable"
+          class="btn btn-outline-info"
+          id="logIn"
+          type="submit"
+          value="{{ 'login.button' | translate }}"
+        />
+        <div *ngIf="disable" class="spinner-border" role="status">
           <span class="visually-hidden"></span>
         </div>
       </div>

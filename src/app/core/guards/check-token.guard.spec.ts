@@ -23,16 +23,16 @@ describe('CheckTokenGuard', () => {
 
   const loadingState: LoadingState = {
     isLoading: false,
-    loadedUser: false
+    loadedUser: false,
   };
 
   const userState: UserState = {
-    user: new User()
+    user: new User(),
   };
 
   const initialState: AppState = {
     loadingState,
-    userState
+    userState,
   };
 
   beforeEach(() => {
@@ -41,15 +41,10 @@ describe('CheckTokenGuard', () => {
         CoreModule,
         RouterTestingModule.withRoutes(userRoutes),
         TestUtils.getLanguages(),
-        SharedModule
+        SharedModule,
       ],
-      providers: [
-        CheckTokenGuard,
-        provideMockStore({initialState}),
-      ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
+      providers: [CheckTokenGuard, provideMockStore({ initialState })],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     });
     guard = TestBed.inject(CheckTokenGuard);
     router = TestBed.inject(Router);
@@ -68,16 +63,19 @@ describe('CheckTokenGuard', () => {
   });
 
   it('check with valid token', () => {
-    const exp = new Date((new Date().getTime() / 1_000) + 30_000).getTime();
+    const exp = new Date(new Date().getTime() / 1_000 + 30_000).getTime();
     localStorage.setItem('exp', exp.toString());
-    localStorage.setItem('authorization', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzd' +
-      'WIiOiJhZG1pbiIsInJvbGUiOiJST0xFX0FETUlOIiwiaWQiOjEsImV4cCI6MTYyMDYxMzYwMn0.cQw7n' +
-      'oVDHVTqhiLdrdFDVS1iT9aFYuTa625pO8GSlXgfXdb-buvWJlmLKfM1nb2rf0wb5IE6cg3aw2WvCwdxDQ');
+    localStorage.setItem(
+      'authorization',
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzd' +
+        'WIiOiJhZG1pbiIsInJvbGUiOiJST0xFX0FETUlOIiwiaWQiOjEsImV4cCI6MTYyMDYxMzYwMn0.cQw7n' +
+        'oVDHVTqhiLdrdFDVS1iT9aFYuTa625pO8GSlXgfXdb-buvWJlmLKfM1nb2rf0wb5IE6cg3aw2WvCwdxDQ'
+    );
     expect(guard.canLoad()).toBeTrue();
   });
 
   it('check with invalid token', () => {
-    const exp = new Date((new Date().getTime() / 1_000) - 30_000).getTime();
+    const exp = new Date(new Date().getTime() / 1_000 - 30_000).getTime();
     localStorage.setItem('exp', exp.toString());
     expect(guard.canLoad()).toBeFalse();
   });

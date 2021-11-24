@@ -19,23 +19,21 @@ describe('AdminMenuComponent', () => {
 
   const loadingState: LoadingState = {
     isLoading: false,
-    loadedUser: false
+    loadedUser: false,
   };
 
   const userState: UserState = {
-    user: new User()
+    user: new User(),
   };
 
   const initialState: AppState = {
     loadingState,
-    userState
+    userState,
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        AdminMenuComponent
-      ],
+      declarations: [AdminMenuComponent],
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
@@ -43,9 +41,7 @@ describe('AdminMenuComponent', () => {
         SharedModule,
         TestUtils.getLanguages(),
       ],
-      providers: [
-        provideMockStore({initialState}),
-      ],
+      providers: [provideMockStore({ initialState })],
     }).compileComponents();
     store = TestBed.inject(MockStore);
   });

@@ -7,13 +7,12 @@ export const studentRoutes: Routes = [
   {
     path: '',
     component: StudentMenuComponent,
-    canLoad: [CheckTokenGuard]
+    canLoad: [CheckTokenGuard],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(studentRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class StudentRoutingModule {
-}
+export class StudentRoutingModule {}

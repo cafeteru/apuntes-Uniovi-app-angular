@@ -11,7 +11,7 @@ import { RoleType } from '../models/enums/role-type';
 import { ServiceUtils } from './service-utils';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 /**
  * Service to manage user
@@ -19,10 +19,7 @@ import { ServiceUtils } from './service-utils';
 export class UserService {
   private url = `${environment.urlApi}/users`;
 
-  constructor(
-    private httpClient: HttpClient
-  ) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
   /**
    * Returns all user
@@ -32,13 +29,18 @@ export class UserService {
    */
   findAll(options?: OptionsPage, user?: User): Observable<Page<User>> {
     return this.httpClient.post<Page<User>>(
-      `${this.url}${options ? options.toApi() : ''}`, user,
-      ServiceUtils.getHttpOptions());
+      `${this.url}${options ? options.toApi() : ''}`,
+      user,
+      ServiceUtils.getHttpOptions()
+    );
   }
 
   findAllByRole(role: RoleType): Observable<User[]> {
-    return this.httpClient.get<Page<User>>(`${this.url}/role/${role}`,
-      ServiceUtils.getHttpOptions())
+    return this.httpClient
+      .get<Page<User>>(
+        `${this.url}/role/${role}`,
+        ServiceUtils.getHttpOptions()
+      )
       .pipe(map((page) => page?.content));
   }
 
@@ -48,8 +50,10 @@ export class UserService {
    * @param id User´s id
    */
   findById(id: number): Observable<User> {
-    return this.httpClient.get<User>(`${this.url}/${id}`,
-      ServiceUtils.getHttpOptions());
+    return this.httpClient.get<User>(
+      `${this.url}/${id}`,
+      ServiceUtils.getHttpOptions()
+    );
   }
 
   /**
@@ -58,8 +62,11 @@ export class UserService {
    * @param user User to create
    */
   create(user: User): Observable<User> {
-    return this.httpClient.post<User>(`${this.url}/create`, user,
-      ServiceUtils.getHttpOptions());
+    return this.httpClient.post<User>(
+      `${this.url}/create`,
+      user,
+      ServiceUtils.getHttpOptions()
+    );
   }
 
   /**
@@ -68,8 +75,11 @@ export class UserService {
    * @param user User to create
    */
   update(user: User): Observable<User> {
-    return this.httpClient.put<User>(`${this.url}/${user.id}`, user,
-      ServiceUtils.getHttpOptions());
+    return this.httpClient.put<User>(
+      `${this.url}/${user.id}`,
+      user,
+      ServiceUtils.getHttpOptions()
+    );
   }
 
   /**
@@ -78,16 +88,16 @@ export class UserService {
    * @param lang Selected language
    */
   changeLanguage(lang: string): Observable<boolean> {
-    return this.httpClient.head(`${this.url}/lang/${lang}`, {
-      observe: 'response',
-      responseType: 'json',
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        authorization: localStorage.authorization,
+    return this.httpClient
+      .head(`${this.url}/lang/${lang}`, {
+        observe: 'response',
+        responseType: 'json',
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          authorization: localStorage.authorization,
+        }),
       })
-    }).pipe(
-      map((x) => x.status === 200)
-    );
+      .pipe(map((x) => x.status === 200));
   }
 
   /**
@@ -98,8 +108,10 @@ export class UserService {
    */
   disable(id: number, active: boolean): Observable<User> {
     return this.httpClient.patch<User>(
-      `${this.url}/disable/${id}/${active}`, {},
-      ServiceUtils.getHttpOptions());
+      `${this.url}/disable/${id}/${active}`,
+      {},
+      ServiceUtils.getHttpOptions()
+    );
   }
 
   /**
@@ -108,15 +120,19 @@ export class UserService {
    * @param id User´s id
    */
   delete(id: number): Observable<boolean> {
-    return this.httpClient.delete<boolean>(`${this.url}/${id}`,
-      ServiceUtils.getHttpOptions());
+    return this.httpClient.delete<boolean>(
+      `${this.url}/${id}`,
+      ServiceUtils.getHttpOptions()
+    );
   }
 
   /**
    * Get user statistics
    */
   getStatistics(): Observable<UserStatistics> {
-    return this.httpClient.get<UserStatistics>(`${this.url}/statistics`,
-      ServiceUtils.getHttpOptions());
+    return this.httpClient.get<UserStatistics>(
+      `${this.url}/statistics`,
+      ServiceUtils.getHttpOptions()
+    );
   }
 }

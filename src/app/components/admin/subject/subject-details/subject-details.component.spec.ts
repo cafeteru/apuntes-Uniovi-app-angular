@@ -17,16 +17,15 @@ describe('SubjectDetailsComponent', () => {
       declarations: [
         SubjectDetailsComponent,
         SubjectDataComponent,
-        LearnSubjectComponent
+        LearnSubjectComponent,
       ],
       imports: [
         CoreModule,
         SharedModule,
         TestUtils.getLanguages(),
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
       ],
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

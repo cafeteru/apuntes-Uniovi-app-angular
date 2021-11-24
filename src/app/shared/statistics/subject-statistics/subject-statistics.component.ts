@@ -14,9 +14,12 @@ const SUBJECT_INACTIVE = marker('subject.inactive');
 @Component({
   selector: 'app-subject-statistics',
   templateUrl: './subject-statistics.component.html',
-  styleUrls: ['./subject-statistics.component.scss']
+  styleUrls: ['./subject-statistics.component.scss'],
 })
-export class SubjectStatisticsComponent extends BaseComponent implements OnInit {
+export class SubjectStatisticsComponent
+  extends BaseComponent
+  implements OnInit
+{
   labels: Label[] = [];
   data: MultiDataSet = [[0, 0]];
   statisticsType: ChartType = 'pie';
@@ -27,37 +30,25 @@ export class SubjectStatisticsComponent extends BaseComponent implements OnInit 
     private store: Store<AppState>
   ) {
     super(translateService);
-    this.subscriptions.push(this.store.select('userState').subscribe(
-      () => this.getLabels())
+    this.subscriptions.push(
+      this.store.select('userState').subscribe(() => this.getLabels())
     );
   }
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.subjectService.getStatistics().subscribe(
-        userStatistics => {
-          this.data = [
-            [userStatistics.active, userStatistics.inactive],
-          ];
-        }
-      )
+      this.subjectService.getStatistics().subscribe((userStatistics) => {
+        this.data = [[userStatistics.active, userStatistics.inactive]];
+      })
     );
   }
 
   private getLabels() {
-    const keys = [
-      SUBJECT_ACTIVE,
-      SUBJECT_INACTIVE
-    ];
+    const keys = [SUBJECT_ACTIVE, SUBJECT_INACTIVE];
     this.subscriptions.push(
-      this.translateService.get(keys).subscribe(
-        res => {
-          this.labels = [
-            res[SUBJECT_ACTIVE],
-            res[SUBJECT_INACTIVE],
-          ];
-        }
-      )
+      this.translateService.get(keys).subscribe((res) => {
+        this.labels = [res[SUBJECT_ACTIVE], res[SUBJECT_INACTIVE]];
+      })
     );
   }
 }

@@ -16,12 +16,15 @@ const BTN_ADD = marker('button.add');
 const BTN_UPDATE = marker('button.update');
 
 @Component({
-  template: ''
+  template: '',
 })
 /**
  * Basic component that has the common properties of modal components
  */
-export abstract class BaseModalComponent<T, U> extends BaseComponent implements OnInit {
+export abstract class BaseModalComponent<T, U>
+  extends BaseComponent
+  implements OnInit
+{
   formGroup: FormGroup;
   textSaveOrUpdate: string;
   protected subscriptions: Subscription[] = [];
@@ -65,8 +68,12 @@ export abstract class BaseModalComponent<T, U> extends BaseComponent implements 
             this.closeModal(res);
           },
           (res: ErrorResponse) => {
-            this.showAlertBack('error', ERROR_SERVICE_TITLE, ERROR_SERVICE_TEXT,
-              res.error.error);
+            this.showAlertBack(
+              'error',
+              ERROR_SERVICE_TITLE,
+              ERROR_SERVICE_TEXT,
+              res.error.error
+            );
           }
         )
       );

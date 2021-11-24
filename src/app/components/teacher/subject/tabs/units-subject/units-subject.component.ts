@@ -16,7 +16,7 @@ const SUCCESS_ADD_UNIT_SUBJECT = marker('unit-subject.add.successfully');
 @Component({
   selector: 'app-units-subject',
   templateUrl: './units-subject.component.html',
-  styleUrls: ['./units-subject.component.scss']
+  styleUrls: ['./units-subject.component.scss'],
 })
 export class UnitsSubjectComponent extends BaseComponent implements OnInit {
   subject: Subject;
@@ -27,7 +27,7 @@ export class UnitsSubjectComponent extends BaseComponent implements OnInit {
     private dialog: MatDialog,
     private route: ActivatedRoute,
     private snackBarService: SnackBarService,
-    private unitSubjectService: UnitSubjectService,
+    private unitSubjectService: UnitSubjectService
   ) {
     super(translateService);
   }
@@ -46,18 +46,18 @@ export class UnitsSubjectComponent extends BaseComponent implements OnInit {
     const config = {
       width: GLOBAL_CONSTANTS.maxWidthModal,
       maxHeight: GLOBAL_CONSTANTS.maxHeightModal,
-      data
+      data,
     };
     const dialogRef = this.dialog.open(ModalUnitSubjectComponent, config);
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.loadUnits();
         this.subscriptions.push(
-          this.translateService.get(SUCCESS_ADD_UNIT_SUBJECT).subscribe(
-            res => {
+          this.translateService
+            .get(SUCCESS_ADD_UNIT_SUBJECT)
+            .subscribe((res) => {
               this.snackBarService.showSuccess(res);
-            }
-          )
+            })
         );
       }
     });
@@ -66,8 +66,9 @@ export class UnitsSubjectComponent extends BaseComponent implements OnInit {
   private loadUnits(): void {
     if (this.subject) {
       this.subscriptions.push(
-        this.unitSubjectService.findBySubjectId(this.subject.id)
-          .subscribe(res => this.unitSubjects = res.content)
+        this.unitSubjectService
+          .findBySubjectId(this.subject.id)
+          .subscribe((res) => (this.unitSubjects = res.content))
       );
     }
   }

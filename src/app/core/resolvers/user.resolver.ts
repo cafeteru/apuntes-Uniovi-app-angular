@@ -9,15 +9,10 @@ import { catchError } from 'rxjs/operators';
  * Resolver to load user´s data
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserResolver implements Resolve<User> {
-
-  constructor(
-    private userService: UserService,
-    private router: Router,
-  ) {
-  }
+  constructor(private userService: UserService, private router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<User> {
     const id = Number(route.paramMap.get('id'));

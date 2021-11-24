@@ -1,4 +1,10 @@
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
 
 /**
  * Class to handle the formGroups of the forms
@@ -31,7 +37,7 @@ export class FormGroupUtil {
     let errors = 0;
     if (formGroup) {
       const list = Object.keys(formGroup.controls);
-      list.forEach(key => {
+      list.forEach((key) => {
         if (this.getError(formGroup, key)) {
           errors++;
           formGroup.get(key).markAllAsTouched();
@@ -136,7 +142,12 @@ export class FormGroupUtil {
    * @param validator List of validators
    * @param initValue Initial value of the data
    */
-  static changeValidator(formGroup: FormGroup, key: string, validator: ValidatorFn[], initValue?: any): void {
+  static changeValidator(
+    formGroup: FormGroup,
+    key: string,
+    validator: ValidatorFn[],
+    initValue?: any
+  ): void {
     if (formGroup) {
       const abstractControl = formGroup.get(key);
       if (abstractControl) {
@@ -156,7 +167,11 @@ export class FormGroupUtil {
    * @param key Identifier of the data
    * @param formControl New value
    */
-  static addFormControl(formGroup: FormGroup, key: string, formControl: FormControl): void {
+  static addFormControl(
+    formGroup: FormGroup,
+    key: string,
+    formControl: FormControl
+  ): void {
     if (formGroup) {
       if (formControl) {
         formGroup.addControl(key, formControl);
@@ -167,7 +182,6 @@ export class FormGroupUtil {
       throw new Error(this.errorFormGroup);
     }
   }
-
 
   /**
    * Clear all fields from the formGroup

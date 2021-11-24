@@ -17,9 +17,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-subject-students',
   templateUrl: './subject-students.component.html',
-  styleUrls: ['./subject-students.component.scss']
+  styleUrls: ['./subject-students.component.scss'],
 })
-export class SubjectStudentsComponent extends BaseTableComponent<User> implements OnInit {
+export class SubjectStudentsComponent
+  extends BaseTableComponent<User>
+  implements OnInit
+{
   students = new MatTableDataSource<User>();
 
   private subject: Subject;
@@ -41,21 +44,20 @@ export class SubjectStudentsComponent extends BaseTableComponent<User> implement
       this.subject = this.route.snapshot.data.subject;
     }
     super.ngOnInit();
-
   }
-  
+
   protected configFilter(): User {
     const namesFormGroups = Object.keys(this.formGroup.controls);
-    namesFormGroups.forEach(name => {
+    namesFormGroups.forEach((name) => {
       this.entityFilter[name] = this.formGroup.get(name).value;
     });
     return this.entityFilter;
   }
 
   protected getData(options: OptionsPage | undefined): Observable<Page<User>> {
-    return this.learnSubjectService.findStudentsBySubjectId(this.subject?.id, options).pipe(
-      tap(page => this.isEmpty = page ? page.empty : true),
-    );
+    return this.learnSubjectService
+      .findStudentsBySubjectId(this.subject?.id, options)
+      .pipe(tap((page) => (this.isEmpty = page ? page.empty : true)));
   }
 
   protected initColumns(): string[] {
@@ -75,7 +77,9 @@ export class SubjectStudentsComponent extends BaseTableComponent<User> implement
       birthDate: new FormControl(this.entityFilter.birthDate),
       username: new FormControl(this.entityFilter.username),
       identificationType: new FormControl(this.entityFilter.identificationType),
-      numberIdentification: new FormControl(this.entityFilter.numberIdentification),
+      numberIdentification: new FormControl(
+        this.entityFilter.numberIdentification
+      ),
       street: new FormControl(this.entityFilter.address.street),
       city: new FormControl(this.entityFilter.address.city),
       postalCode: new FormControl(this.entityFilter.address.postalCode),
@@ -86,22 +90,22 @@ export class SubjectStudentsComponent extends BaseTableComponent<User> implement
   protected loadData(): void {
     super.loadData();
     const subscription = this.data$.subscribe(
-      students => this.students.data = students ? students : []);
+      (students) => (this.students.data = students ? students : [])
+    );
     this.subscriptions.push(subscription);
     this.students.paginator = this.paginator;
-    this.students.sortingDataAccessor =
-      (user: User, property: string) => {
-        switch (property) {
-          case 'username':
-            return user.username;
-          case 'name':
-            return user.name;
-          case 'surname':
-            return user.surname;
-          default:
-            return user[property];
-        }
-      };
+    this.students.sortingDataAccessor = (user: User, property: string) => {
+      switch (property) {
+        case 'username':
+          return user.username;
+        case 'name':
+          return user.name;
+        case 'surname':
+          return user.surname;
+        default:
+          return user[property];
+      }
+    };
     this.students.sort = this.sort;
   }
 }

@@ -1,13 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'noImage'
+  name: 'noImage',
 })
 /**
  * Pipe to handle image loading and always show one even if it fails
  */
 export class NoImagePipe implements PipeTransform {
-
   /**
    * Check if src is valid
    *
@@ -19,5 +18,4 @@ export class NoImagePipe implements PipeTransform {
     }
     return image;
   }
-
 }

@@ -3,5 +3,5 @@ export enum SubjectType {
   REQUIRED = 'REQUIRED',
   OPTIONAL = 'OPTIONAL',
   EXTERN_PRACTICES = 'EXTERN_PRACTICES',
-  TFG = 'TFG'
+  TFG = 'TFG',
 }

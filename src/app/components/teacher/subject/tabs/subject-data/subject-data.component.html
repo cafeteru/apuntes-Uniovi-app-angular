@@ -1,17 +1,21 @@
 <section>
   <div class="row form-group">
     <div class="col">
-      <label class="col-form-label">{{'subject.name' | translate}}</label>
-      <div class="form-control">{{subject?.name }}</div>
+      <label class="col-form-label">{{ "subject.name" | translate }}</label>
+      <div class="form-control">{{ subject?.name }}</div>
     </div>
     <div class="col">
-      <label class="col-form-label">{{'subject.subjectType' | translate}}</label>
-      <div class="form-control">{{subject?.subjectType | subjectType}}</div>
+      <label class="col-form-label">{{
+        "subject.subjectType" | translate
+      }}</label>
+      <div class="form-control">{{ subject?.subjectType | subjectType }}</div>
     </div>
   </div>
   <div class="row form-group">
     <div class="col">
-      <mat-checkbox [checked]="subject?.active" disabled>{{'subject.active' | translate}}</mat-checkbox>
+      <mat-checkbox [checked]="subject?.active" disabled>{{
+        "subject.active" | translate
+      }}</mat-checkbox>
     </div>
   </div>
   <div class="row form-group">
@@ -20,7 +24,8 @@
         <ng-template let-teacher pTemplate="item">
           <div>
             <div>
-              {{teacher.name}} {{teacher.surname}} - {{'user.username' | translate}} : {{teacher.username}}
+              {{ teacher.name }} {{ teacher.surname }} -
+              {{ "user.username" | translate }} : {{ teacher.username }}
             </div>
           </div>
         </ng-template>

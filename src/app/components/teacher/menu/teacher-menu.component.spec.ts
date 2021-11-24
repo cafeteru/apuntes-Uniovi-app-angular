@@ -19,16 +19,16 @@ describe('TeacherMenuComponent', () => {
 
   const loadingState: LoadingState = {
     isLoading: false,
-    loadedUser: false
+    loadedUser: false,
   };
 
   const userState: UserState = {
-    user: new User()
+    user: new User(),
   };
 
   const initialState: AppState = {
     loadingState,
-    userState
+    userState,
   };
 
   beforeEach(async () => {
@@ -41,9 +41,7 @@ describe('TeacherMenuComponent', () => {
         SharedModule,
         TestUtils.getLanguages(),
       ],
-      providers: [
-        provideMockStore({initialState}),
-      ]
+      providers: [provideMockStore({ initialState })],
     }).compileComponents();
     store = TestBed.inject(MockStore);
   });

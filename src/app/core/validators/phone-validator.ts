@@ -16,7 +16,7 @@ export class PhoneValidator {
       if (str.length === 9 && /^[679][0-9]{8}$/.test(str)) {
         return null;
       } else {
-        return {phone: true};
+        return { phone: true };
       }
     };
   }

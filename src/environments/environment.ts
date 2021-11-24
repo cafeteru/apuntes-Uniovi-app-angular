@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlApi: 'https://app-apuntes-uniovi.herokuapp.com'
+  urlApi: 'https://app-apuntes-uniovi.herokuapp.com',
 };
 
 /*

@@ -1,4 +1,10 @@
-import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  flush,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 
 import { UserListComponent } from './user-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -23,23 +29,21 @@ describe('UsersListComponent', () => {
   let store: MockStore;
   const loadingState: LoadingState = {
     isLoading: false,
-    loadedUser: false
+    loadedUser: false,
   };
 
   const userState: UserState = {
-    user: new User()
+    user: new User(),
   };
 
   const initialState: AppState = {
     loadingState,
-    userState
+    userState,
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        UserListComponent
-      ],
+      declarations: [UserListComponent],
       imports: [
         HttpClientTestingModule,
         TestUtils.getLanguages(),
@@ -47,15 +51,10 @@ describe('UsersListComponent', () => {
         SharedModule,
         BrowserAnimationsModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
       ],
-      providers: [
-        UserService,
-        provideMockStore({initialState}),
-      ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
+      providers: [UserService, provideMockStore({ initialState })],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     }).compileComponents();
     store = TestBed.inject(MockStore);
   });
@@ -76,67 +75,68 @@ describe('UsersListComponent', () => {
   });
 
   it('check disable', fakeAsync(() => {
-      const spy = spyOn(userService, 'disable').and.callFake(() => of(new User()));
-      component.disable(1, true);
-      tick();
-      expect(spy).toHaveBeenCalled();
-      component.disable(1, false);
-      tick();
-      expect(spy).toHaveBeenCalled();
-      flush();
-    })
-  );
+    const spy = spyOn(userService, 'disable').and.callFake(() =>
+      of(new User())
+    );
+    component.disable(1, true);
+    tick();
+    expect(spy).toHaveBeenCalled();
+    component.disable(1, false);
+    tick();
+    expect(spy).toHaveBeenCalled();
+    flush();
+  }));
 
   it('check error disable', fakeAsync(() => {
-      const spy = spyOn(userService, 'disable').and.returnValue(throwError({status: 404}));
-      component.disable(1, true);
-      tick();
-      expect(spy).toHaveBeenCalled();
-      component.disable(1, false);
-      tick();
-      expect(spy).toHaveBeenCalled();
-      flush();
-    })
-  );
+    const spy = spyOn(userService, 'disable').and.returnValue(
+      throwError({ status: 404 })
+    );
+    component.disable(1, true);
+    tick();
+    expect(spy).toHaveBeenCalled();
+    component.disable(1, false);
+    tick();
+    expect(spy).toHaveBeenCalled();
+    flush();
+  }));
 
   it('check delete with response yes', fakeAsync(() => {
-      const spy = spyOn(userService, 'delete').and.callFake(() => of(true));
-      component.askDelete(1);
-      tick();
-      const listButtons = document.getElementsByClassName('swal2-confirm');
-      expect(listButtons.length).toBe(1);
-      const confirmButton = listButtons[0] as HTMLButtonElement;
-      confirmButton.click();
-      tick();
-      expect(spy).toHaveBeenCalled();
-      flush();
-    })
-  );
+    const spy = spyOn(userService, 'delete').and.callFake(() => of(true));
+    component.askDelete(1);
+    tick();
+    const listButtons = document.getElementsByClassName('swal2-confirm');
+    expect(listButtons.length).toBe(1);
+    const confirmButton = listButtons[0] as HTMLButtonElement;
+    confirmButton.click();
+    tick();
+    expect(spy).toHaveBeenCalled();
+    flush();
+  }));
 
   it('check delete with response no', fakeAsync(() => {
-      const spy = spyOn(userService, 'delete');
-      component.askDelete(1);
-      tick();
-      const listButtons = document.getElementsByClassName('swal2-deny');
-      expect(listButtons.length).toBe(1);
-      const cancelButton = listButtons[0] as HTMLButtonElement;
-      cancelButton.click();
-      tick();
-      expect(spy).not.toHaveBeenCalled();
-      flush();
-    })
-  );
+    const spy = spyOn(userService, 'delete');
+    component.askDelete(1);
+    tick();
+    const listButtons = document.getElementsByClassName('swal2-deny');
+    expect(listButtons.length).toBe(1);
+    const cancelButton = listButtons[0] as HTMLButtonElement;
+    cancelButton.click();
+    tick();
+    expect(spy).not.toHaveBeenCalled();
+    flush();
+  }));
 
   it('check error delete', fakeAsync(() => {
-      const spy = spyOn(userService, 'delete').and.returnValue(throwError({status: 404}));
-      component.askDelete(1);
-      tick();
-      const listButtons = document.getElementsByClassName('swal2-confirm');
-      const confirmButton = listButtons[0] as HTMLButtonElement;
-      confirmButton.click();
-      tick();
-      expect(spy).toHaveBeenCalled();
-      flush();
-    })
-  );
+    const spy = spyOn(userService, 'delete').and.returnValue(
+      throwError({ status: 404 })
+    );
+    component.askDelete(1);
+    tick();
+    const listButtons = document.getElementsByClassName('swal2-confirm');
+    const confirmButton = listButtons[0] as HTMLButtonElement;
+    confirmButton.click();
+    tick();
+    expect(spy).toHaveBeenCalled();
+    flush();
+  }));
 });

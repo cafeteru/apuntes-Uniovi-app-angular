@@ -32,7 +32,7 @@ const SUCCESS_ENABLE_USER = marker('user.enabled.successfully');
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss']
+  styleUrls: ['./user-list.component.scss'],
 })
 /**
  * Component to display the list of users
@@ -45,7 +45,7 @@ export class UserListComponent extends BaseTableComponent<User> {
     protected translateService: TranslateService,
     private userService: UserService,
     private dialog: MatDialog,
-    private snackBarService: SnackBarService,
+    private snackBarService: SnackBarService
   ) {
     super(translateService);
   }
@@ -58,18 +58,16 @@ export class UserListComponent extends BaseTableComponent<User> {
     const config = {
       width: GLOBAL_CONSTANTS.maxWidthModal,
       maxHeight: GLOBAL_CONSTANTS.maxHeightModal,
-      data
+      data,
     };
     const dialogRef = this.dialog.open(ModalUserComponent, config);
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.cleanFilters();
         this.subscriptions.push(
-          this.translateService.get(SUCCESS_ADD_USER).subscribe(
-            res => {
-              this.snackBarService.showSuccess(res);
-            }
-          )
+          this.translateService.get(SUCCESS_ADD_USER).subscribe((res) => {
+            this.snackBarService.showSuccess(res);
+          })
         );
       }
     });
@@ -88,11 +86,9 @@ export class UserListComponent extends BaseTableComponent<User> {
           this.cleanFilters();
           const message = value ? SUCCESS_ENABLE_USER : SUCCESS_DISABLE_USER;
           this.subscriptions.push(
-            this.translateService.get(message).subscribe(
-              res => {
-                this.snackBarService.showSuccess(res);
-              }
-            )
+            this.translateService.get(message).subscribe((res) => {
+              this.snackBarService.showSuccess(res);
+            })
           );
         },
         () => {
@@ -109,12 +105,9 @@ export class UserListComponent extends BaseTableComponent<User> {
    * @param id User´s id
    */
   askDelete(id: number): void {
-    const subscription = this.translateService.get([
-      ANSWER_DELETE_USER,
-      BUTTON_DELETE,
-      BUTTON_CANCEL
-    ]).subscribe(
-      res => {
+    const subscription = this.translateService
+      .get([ANSWER_DELETE_USER, BUTTON_DELETE, BUTTON_CANCEL])
+      .subscribe((res) => {
         Swal.fire({
           title: res[ANSWER_DELETE_USER],
           showDenyButton: true,
@@ -125,8 +118,7 @@ export class UserListComponent extends BaseTableComponent<User> {
             this.delete(id);
           }
         });
-      }
-    );
+      });
     this.subscriptions.push(subscription);
   }
 
@@ -152,7 +144,9 @@ export class UserListComponent extends BaseTableComponent<User> {
       role: new FormControl(this.entityFilter.role),
       username: new FormControl(this.entityFilter.username),
       identificationType: new FormControl(this.entityFilter.identificationType),
-      numberIdentification: new FormControl(this.entityFilter.numberIdentification),
+      numberIdentification: new FormControl(
+        this.entityFilter.numberIdentification
+      ),
       street: new FormControl(this.entityFilter.address.street),
       city: new FormControl(this.entityFilter.address.city),
       postalCode: new FormControl(this.entityFilter.address.postalCode),
@@ -165,7 +159,7 @@ export class UserListComponent extends BaseTableComponent<User> {
    */
   protected configFilter(): User {
     const namesFormGroups = Object.keys(this.formGroup.controls);
-    namesFormGroups.forEach(name => {
+    namesFormGroups.forEach((name) => {
       this.entityFilter[name] = this.formGroup.get(name).value;
     });
     const address = new Address();
@@ -181,11 +175,9 @@ export class UserListComponent extends BaseTableComponent<User> {
       () => {
         this.cleanFilters();
         this.subscriptions.push(
-          this.translateService.get(SUCCESS_DELETE_USER).subscribe(
-            res => {
-              this.snackBarService.showSuccess(res);
-            }
-          )
+          this.translateService.get(SUCCESS_DELETE_USER).subscribe((res) => {
+            this.snackBarService.showSuccess(res);
+          })
         );
       },
       () => {

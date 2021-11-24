@@ -23,9 +23,12 @@ const ERROR_TEXT_IMG = marker('error.user.invalid.img.text');
 
 @Component({
   templateUrl: './modal-user.component.html',
-  styleUrls: ['./modal-user.component.scss']
+  styleUrls: ['./modal-user.component.scss'],
 })
-export class ModalUserComponent extends BaseModalComponent<User, ModalUserComponent> {
+export class ModalUserComponent extends BaseModalComponent<
+  User,
+  ModalUserComponent
+> {
   roleType = Object.keys(RoleType);
   identificationType = Object.keys(IdentificationType);
 
@@ -85,8 +88,11 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
     this.user.username = this.formGroup.get('username').value;
     this.user.password = this.formGroup.get('password').value;
     this.user.role = this.formGroup.get('role').value;
-    this.user.identificationType = this.formGroup.get('identificationType').value;
-    this.user.numberIdentification = this.formGroup.get('numberIdentification').value;
+    this.user.identificationType =
+      this.formGroup.get('identificationType').value;
+    this.user.numberIdentification = this.formGroup.get(
+      'numberIdentification'
+    ).value;
     this.user.address.street = this.formGroup.get('street').value;
     this.user.address.city = this.formGroup.get('city').value;
     this.user.address.postalCode = this.formGroup.get('postalCode').value;
@@ -94,43 +100,63 @@ export class ModalUserComponent extends BaseModalComponent<User, ModalUserCompon
   }
 
   protected getFormGroup(): FormGroup {
-    return new FormGroup({
-        surname: new FormControl(this.user.surname,
-          Validators.maxLength(UserLimits.surname)),
-        name: new FormControl(this.user.name,
-          Validators.maxLength(UserLimits.nameLimit)),
-        email: new FormControl(this.user.email,
-          Validators.maxLength(UserLimits.email)),
-        phone: new FormControl(this.user.phone,
-          PhoneValidator.isValid()),
-        birthDate: new FormControl(this.user.birthDate,
-          DateValidator.maxDate(new Date())),
+    return new FormGroup(
+      {
+        surname: new FormControl(
+          this.user.surname,
+          Validators.maxLength(UserLimits.surname)
+        ),
+        name: new FormControl(
+          this.user.name,
+          Validators.maxLength(UserLimits.nameLimit)
+        ),
+        email: new FormControl(
+          this.user.email,
+          Validators.maxLength(UserLimits.email)
+        ),
+        phone: new FormControl(this.user.phone, PhoneValidator.isValid()),
+        birthDate: new FormControl(
+          this.user.birthDate,
+          DateValidator.maxDate(new Date())
+        ),
         role: new FormControl(this.user.role, Validators.required),
         username: new FormControl(this.user.username, [
           Validators.required,
-          Validators.maxLength(UserLimits.username)
+          Validators.maxLength(UserLimits.username),
         ]),
-        password: new FormControl(this.user.password,
-          Validators.maxLength(UserLimits.password)),
+        password: new FormControl(
+          this.user.password,
+          Validators.maxLength(UserLimits.password)
+        ),
         identificationType: new FormControl(this.user.identificationType),
         numberIdentification: new FormControl(this.user.numberIdentification),
-        street: new FormControl(this.user.address.street,
-          Validators.maxLength(AddressLimits.street)),
-        city: new FormControl(this.user.address.city,
-          Validators.maxLength(AddressLimits.city)),
-        postalCode: new FormControl(this.user.address.postalCode,
-          Validators.maxLength(AddressLimits.postalCode)),
-        img: new FormControl(this.user.img,
-          Validators.maxLength(UserLimits.img)),
+        street: new FormControl(
+          this.user.address.street,
+          Validators.maxLength(AddressLimits.street)
+        ),
+        city: new FormControl(
+          this.user.address.city,
+          Validators.maxLength(AddressLimits.city)
+        ),
+        postalCode: new FormControl(
+          this.user.address.postalCode,
+          Validators.maxLength(AddressLimits.postalCode)
+        ),
+        img: new FormControl(
+          this.user.img,
+          Validators.maxLength(UserLimits.img)
+        ),
         active: new FormControl(this.user.active),
       },
       {
-        validators: NumberIdentificationValidator.isValid()
-      });
+        validators: NumberIdentificationValidator.isValid(),
+      }
+    );
   }
 
   protected saveOrUpdateService(): Observable<User> {
-    return this.isSaveOrUpdate() ? this.userService.update(this.user) :
-      this.userService.create(this.user);
+    return this.isSaveOrUpdate()
+      ? this.userService.update(this.user)
+      : this.userService.create(this.user);
   }
 }

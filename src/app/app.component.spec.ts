@@ -16,37 +16,34 @@ describe('AppComponent', () => {
   let store: MockStore;
   const loadingState: LoadingState = {
     isLoading: false,
-    loadedUser: false
+    loadedUser: false,
   };
 
   const userState: UserState = {
-    user: new User()
+    user: new User(),
   };
 
   const initialState: AppState = {
     loadingState,
-    userState
+    userState,
   };
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        BrowserAnimationsModule,
-        CoreModule,
-        SharedModule,
-        TranslateModule.forRoot(),
-      ],
-      declarations: [
-        AppComponent,
-        NavbarComponent
-      ],
-      providers: [
-        provideMockStore({initialState}),
-      ]
-    }).compileComponents();
-    store = TestBed.inject(MockStore);
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          RouterTestingModule,
+          BrowserAnimationsModule,
+          CoreModule,
+          SharedModule,
+          TranslateModule.forRoot(),
+        ],
+        declarations: [AppComponent, NavbarComponent],
+        providers: [provideMockStore({ initialState })],
+      }).compileComponents();
+      store = TestBed.inject(MockStore);
+    })
+  );
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);

@@ -10,14 +10,13 @@ export const subjectRoutes: Routes = [
     component: TeacherSubjectDetailsComponent,
     canActivate: [RoleTypeGuard],
     resolve: {
-      subject: SubjectResolver
-    }
-  }
+      subject: SubjectResolver,
+    },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(subjectRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class SubjectRoutingModule {
-}
+export class SubjectRoutingModule {}

@@ -11,22 +11,21 @@ export const userRoutes: Routes = [
     path: '',
     component: UserListComponent,
     canActivate: [RoleTypeGuard],
-    data: {role: [RoleType.ROLE_ADMIN]}
+    data: { role: [RoleType.ROLE_ADMIN] },
   },
   {
     path: `:id`,
     component: UserDetailsComponent,
     canActivate: [RoleTypeGuard],
-    data: {role: [RoleType.ROLE_ADMIN]},
+    data: { role: [RoleType.ROLE_ADMIN] },
     resolve: {
-      user: UserResolver
-    }
-  }
+      user: UserResolver,
+    },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(userRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class UserRoutingModule {
-}
+export class UserRoutingModule {}

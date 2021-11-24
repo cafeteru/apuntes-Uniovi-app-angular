@@ -1,30 +1,67 @@
-<table [dataSource]="students" class="mat-elevation-z8" id="users-list" mat-table matSort>
+<table
+  [dataSource]="students"
+  class="mat-elevation-z8"
+  id="users-list"
+  mat-table
+  matSort
+>
   <!-- Username Column -->
   <ng-container matColumnDef="username">
-    <th *matHeaderCellDef id="usernameColumn" mat-header-cell mat-sort-header>{{'user.username' | translate}}</th>
-    <td *matCellDef="let user; let i = index" [id]="'username'+ (i + 1)" mat-cell> {{user.username}} </td>
+    <th *matHeaderCellDef id="usernameColumn" mat-header-cell mat-sort-header>
+      {{ "user.username" | translate }}
+    </th>
+    <td
+      *matCellDef="let user; let i = index"
+      [id]="'username' + (i + 1)"
+      mat-cell
+    >
+      {{ user.username }}
+    </td>
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="name">
-    <th *matHeaderCellDef id="nameColumn" mat-header-cell mat-sort-header>{{'user.name' | translate}}</th>
-    <td *matCellDef="let user; let i = index" [id]="'name'+ (i + 1)" mat-cell> {{user.name}} </td>
+    <th *matHeaderCellDef id="nameColumn" mat-header-cell mat-sort-header>
+      {{ "user.name" | translate }}
+    </th>
+    <td *matCellDef="let user; let i = index" [id]="'name' + (i + 1)" mat-cell>
+      {{ user.name }}
+    </td>
   </ng-container>
 
   <!-- Surname Column -->
   <ng-container matColumnDef="surname">
-    <th *matHeaderCellDef id="surnameColumn" mat-header-cell mat-sort-header>{{'user.surname' | translate}}</th>
-    <td *matCellDef="let user; let i = index" [id]="'surname'+ (i + 1)" mat-cell> {{user.surname}} </td>
+    <th *matHeaderCellDef id="surnameColumn" mat-header-cell mat-sort-header>
+      {{ "user.surname" | translate }}
+    </th>
+    <td
+      *matCellDef="let user; let i = index"
+      [id]="'surname' + (i + 1)"
+      mat-cell
+    >
+      {{ user.surname }}
+    </td>
   </ng-container>
 
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">
     <th *matHeaderCellDef mat-header-cell></th>
-    <td *matCellDef="let user; let i = index" [id]="'actions'+ (i + 1)" mat-cell>
-    </td>
+    <td
+      *matCellDef="let user; let i = index"
+      [id]="'actions' + (i + 1)"
+      mat-cell
+    ></td>
   </ng-container>
 
   <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-  <tr *matRowDef="let row; columns: displayedColumns; let i = index" [id]="'user' + (i + 1)" mat-row></tr>
+  <tr
+    *matRowDef="let row; columns: displayedColumns; let i = index"
+    [id]="'user' + (i + 1)"
+    mat-row
+  ></tr>
 </table>
-<mat-paginator [length]="totalElements" [pageSizeOptions]="elementsPage" showFirstLastButtons></mat-paginator>
+<mat-paginator
+  [length]="totalElements"
+  [pageSizeOptions]="elementsPage"
+  showFirstLastButtons
+></mat-paginator>

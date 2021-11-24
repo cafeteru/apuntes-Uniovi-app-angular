@@ -6,15 +6,10 @@ import { Subject } from '../models/subject';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SubjectResolver implements Resolve<Subject> {
-
-  constructor(
-    private subjectService: SubjectService,
-    private router: Router,
-  ) {
-  }
+  constructor(private subjectService: SubjectService, private router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<Subject> {
     const id = Number(route.paramMap.get('id'));

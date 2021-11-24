@@ -7,7 +7,6 @@ import { IdentificationType } from './enums/identification-type';
  * Represents users
  */
 export class User {
-
   constructor(
     public id: number = undefined,
     public name: string = undefined,
@@ -24,18 +23,15 @@ export class User {
     public numberIdentification: IdentificationType = undefined,
     public address = new Address(),
     public language = LanguageType.ES
-  ) {
-  }
+  ) {}
 
   /**
    * Create string from user data
    */
   toString(): string {
-    const user = {...this};
+    const user = { ...this };
     delete user.password;
     delete user.img;
     return JSON.stringify(user);
   }
-
-
 }

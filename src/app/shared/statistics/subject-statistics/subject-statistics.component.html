@@ -1,8 +1,12 @@
 <div class="card">
-  <div class="card-header">{{'subject.statistics.active'| translate}}</div>
+  <div class="card-header">{{ "subject.statistics.active" | translate }}</div>
   <div class="card-body">
-    <canvas baseChart [data]="data" [labels]="labels"
-            [chartType]="statisticsType">
+    <canvas
+      [chartType]="statisticsType"
+      [data]="data"
+      [labels]="labels"
+      baseChart
+    >
     </canvas>
   </div>
 </div>

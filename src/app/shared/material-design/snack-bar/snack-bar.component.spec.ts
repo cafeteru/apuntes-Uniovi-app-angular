@@ -6,7 +6,7 @@ import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 import { TestUtils } from '../../../core/utils/test-utils';
 
 const message: SnackBarData = {
-  msg: ''
+  msg: '',
 };
 
 describe('SnackBarComponent', () => {
@@ -15,22 +15,15 @@ describe('SnackBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        SnackBarComponent
-      ],
-      imports: [
-        MaterialDesignModule,
-        TestUtils.getLanguages()
-      ],
+      declarations: [SnackBarComponent],
+      imports: [MaterialDesignModule, TestUtils.getLanguages()],
       providers: [
         {
           provide: MAT_SNACK_BAR_DATA,
-          useValue: message
+          useValue: message,
         },
       ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 

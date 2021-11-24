@@ -1,7 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
 import { UserResolver } from './user.resolver';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from '../services/user.service';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -25,18 +28,16 @@ describe('UserResolver', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule.withRoutes(userRoutes),
-        TestUtils.getLanguages()
+        TestUtils.getLanguages(),
       ],
       providers: [
         UserService,
         {
           provide: ActivatedRoute,
-          useValue: {snapshot: {paramMap: convertToParamMap({id: 1})}}
+          useValue: { snapshot: { paramMap: convertToParamMap({ id: 1 }) } },
         },
       ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     });
     resolver = TestBed.inject(UserResolver);
     service = TestBed.inject(UserService);
@@ -58,12 +59,10 @@ describe('UserResolver', () => {
   it('check with existed user', () => {
     const id = 1;
     const user = new User();
-    resolver.resolve(route.snapshot).subscribe(
-      (res) => {
-        expect(res).toBeTruthy();
-        expect(res).toBe(user);
-      }
-    );
+    resolver.resolve(route.snapshot).subscribe((res) => {
+      expect(res).toBeTruthy();
+      expect(res).toBe(user);
+    });
     const req = httpMock.expectOne(`${environment.urlApi}/users/${id}`);
     expect(req.request.method).toBe('GET');
     req.flush(user);
@@ -73,8 +72,7 @@ describe('UserResolver', () => {
     const id = 1;
     spyOn(service, 'findById').and.callThrough();
     resolver.resolve(route.snapshot).subscribe(
-      () => {
-      },
+      () => {},
       () => {
         expect(location.path()).toBe('/users');
       }

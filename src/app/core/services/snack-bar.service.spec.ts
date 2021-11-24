@@ -11,17 +11,13 @@ describe('SnackBarService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        SnackBarComponent,
-      ],
-      providers: [
-        SnackBarService
-      ],
+      declarations: [SnackBarComponent],
+      providers: [SnackBarService],
       imports: [
         SharedModule,
         BrowserAnimationsModule,
-        TestUtils.getLanguages()
-      ]
+        TestUtils.getLanguages(),
+      ],
     });
     service = TestBed.inject(SnackBarService);
   });
@@ -32,5 +28,4 @@ describe('SnackBarService', () => {
     const list = document.getElementsByTagName('snack-bar-container');
     list[0]?.remove();
   });
-
 });

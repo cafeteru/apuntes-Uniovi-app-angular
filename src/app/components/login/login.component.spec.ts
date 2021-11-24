@@ -1,4 +1,10 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+  waitForAsync,
+} from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
 import { CoreModule } from '../../core/core.module';
@@ -32,44 +38,40 @@ describe('LoginComponent', () => {
 
   const loadingState: LoadingState = {
     isLoading: false,
-    loadedUser: false
+    loadedUser: false,
   };
 
   const userState: UserState = {
-    user: new User()
+    user: new User(),
   };
 
   const initialState: AppState = {
     loadingState,
-    userState
+    userState,
   };
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        LoginComponent,
-        NavbarComponent
-      ],
-      imports: [
-        RouterTestingModule.withRoutes(rootRoutes),
-        CoreModule,
-        SharedModule,
-        TestUtils.getLanguages(),
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientTestingModule,
-      ],
-      providers: [
-        LoginService,
-        provideMockStore({initialState}),
-      ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
-    }).compileComponents().then();
-    store = TestBed.inject(MockStore);
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [LoginComponent, NavbarComponent],
+        imports: [
+          RouterTestingModule.withRoutes(rootRoutes),
+          CoreModule,
+          SharedModule,
+          TestUtils.getLanguages(),
+          BrowserAnimationsModule,
+          FormsModule,
+          ReactiveFormsModule,
+          HttpClientTestingModule,
+        ],
+        providers: [LoginService, provideMockStore({ initialState })],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+      })
+        .compileComponents()
+        .then();
+      store = TestBed.inject(MockStore);
+    })
+  );
 
   beforeEach(() => {
     router = TestBed.inject(Router);
@@ -111,27 +113,29 @@ describe('LoginComponent', () => {
     expect(component.disable).toBeFalse();
   });
 
-  it('check login with valid values and valid user', fakeAsync(
-    () => {
-      spyOn(loginService, 'login').and.returnValue(of(void 0));
-      const spyRoute = spyOn(router, 'navigateByUrl').and
-        .callFake(() => new Promise(void 0));
-      FormGroupUtil.clean(component.formGroup);
-      component.formGroup.controls.username.setValue('username');
-      component.formGroup.controls.password.setValue('password');
-      expect(component.formGroup.valid).toBeTrue();
-      localStorage.setItem('authorization', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzd' +
+  it('check login with valid values and valid user', fakeAsync(() => {
+    spyOn(loginService, 'login').and.returnValue(of(void 0));
+    const spyRoute = spyOn(router, 'navigateByUrl').and.callFake(
+      () => new Promise(void 0)
+    );
+    FormGroupUtil.clean(component.formGroup);
+    component.formGroup.controls.username.setValue('username');
+    component.formGroup.controls.password.setValue('password');
+    expect(component.formGroup.valid).toBeTrue();
+    localStorage.setItem(
+      'authorization',
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzd' +
         'WIiOiJhZG1pbiIsInJvbGUiOiJST0xFX0FETUlOIiwiaWQiOjEsImV4cCI6MTYyMDYxMzYwMn0.cQw7n' +
-        'oVDHVTqhiLdrdFDVS1iT9aFYuTa625pO8GSlXgfXdb-buvWJlmLKfM1nb2rf0wb5IE6cg3aw2WvCwdxDQ');
-      component.login();
-      tick();
-      expect(spyRoute).toHaveBeenCalled();
-      localStorage.clear();
-    })
-  );
+        'oVDHVTqhiLdrdFDVS1iT9aFYuTa625pO8GSlXgfXdb-buvWJlmLKfM1nb2rf0wb5IE6cg3aw2WvCwdxDQ'
+    );
+    component.login();
+    tick();
+    expect(spyRoute).toHaveBeenCalled();
+    localStorage.clear();
+  }));
 
   it('check login with valid values and invalid user', () => {
-    spyOn(loginService, 'login').and.returnValue(throwError({status: 404}));
+    spyOn(loginService, 'login').and.returnValue(throwError({ status: 404 }));
     FormGroupUtil.clean(component.formGroup);
     component.formGroup.controls.username.setValue('username');
     component.formGroup.controls.password.setValue('password');

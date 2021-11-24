@@ -22,23 +22,21 @@ describe('SubjectListComponent', () => {
   let store: MockStore;
   const loadingState: LoadingState = {
     isLoading: false,
-    loadedUser: false
+    loadedUser: false,
   };
 
   const userState: UserState = {
-    user: new User()
+    user: new User(),
   };
 
   const initialState: AppState = {
     loadingState,
-    userState
+    userState,
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        SubjectListComponent
-      ],
+      declarations: [SubjectListComponent],
       imports: [
         HttpClientTestingModule,
         TestUtils.getLanguages(),
@@ -46,15 +44,10 @@ describe('SubjectListComponent', () => {
         SharedModule,
         BrowserAnimationsModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
       ],
-      providers: [
-        SubjectService,
-        provideMockStore({initialState}),
-      ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
+      providers: [SubjectService, provideMockStore({ initialState })],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     }).compileComponents();
     store = TestBed.inject(MockStore);
   });

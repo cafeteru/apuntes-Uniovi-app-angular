@@ -1,67 +1,87 @@
 <section>
   <div class="row form-group">
     <div class="col" id="img">
-      <img [src]="user?.img | noImage" alt="{{'user.img' | translate}}"/>
-      <mat-checkbox [checked]="user?.active" class="col" disabled>{{'user.active' | translate}}</mat-checkbox>
+      <img [src]="user?.img | noImage" alt="{{ 'user.img' | translate }}" />
+      <mat-checkbox [checked]="user?.active" class="col" disabled>{{
+        "user.active" | translate
+      }}</mat-checkbox>
     </div>
     <div class="col">
       <div class="col">
-        <label class="col-form-label">{{'user.username' | translate}}</label>
-        <div class="form-control">{{user?.username}}</div>
+        <label class="col-form-label">{{ "user.username" | translate }}</label>
+        <div class="form-control">{{ user?.username }}</div>
       </div>
       <div class="col">
-        <label class="col-form-label">{{'user.surname' | translate}}</label>
-        <div class="form-control">{{user?.surname}}</div>
+        <label class="col-form-label">{{ "user.surname" | translate }}</label>
+        <div class="form-control">{{ user?.surname }}</div>
       </div>
       <div class="col">
-        <label class="col-form-label">{{'user.name' | translate}}</label>
-        <div class="form-control">{{user?.name}}</div>
+        <label class="col-form-label">{{ "user.name" | translate }}</label>
+        <div class="form-control">{{ user?.name }}</div>
       </div>
     </div>
   </div>
   <div class="row form-group">
     <div class="col">
-      <label class="col-form-label">{{'user.birthDate' | translate}}</label>
-      <div class="form-control">{{user?.birthDate | date: 'dd/MM/yyyy'}}</div>
+      <label class="col-form-label">{{ "user.birthDate" | translate }}</label>
+      <div class="form-control">{{ user?.birthDate | date: "dd/MM/yyyy" }}</div>
     </div>
     <div class="col">
-      <label class="col-form-label">{{'user.role' | translate}}</label>
-      <div class="form-control">{{user?.role | roleType}}</div>
-    </div>
-  </div>
-  <div class="row form-group">
-    <div class="col">
-      <label class="col-form-label">{{'user.email' | translate}}</label>
-      <div class="form-control">{{user?.email}}</div>
-    </div>
-    <div class="col">
-      <label class="col-form-label">{{'user.phone' | translate}}</label>
-      <div class="form-control">{{user?.phone}}</div>
+      <label class="col-form-label">{{ "user.role" | translate }}</label>
+      <div class="form-control">{{ user?.role | roleType }}</div>
     </div>
   </div>
   <div class="row form-group">
     <div class="col">
-      <label class="col-form-label">{{'user.identificationType' | translate}}</label>
-      <div class="form-control">{{user?.identificationType | identificationType}}</div>
+      <label class="col-form-label">{{ "user.email" | translate }}</label>
+      <div class="form-control">{{ user?.email }}</div>
     </div>
     <div class="col">
-      <label class="col-form-label">{{'user.numberIdentification' | translate}}</label>
-      <div class="form-control">{{user?.numberIdentification}}</div>
+      <label class="col-form-label">{{ "user.phone" | translate }}</label>
+      <div class="form-control">{{ user?.phone }}</div>
     </div>
   </div>
   <div class="row form-group">
     <div class="col">
-      <label class="col-form-label">{{'user.address.street' | translate}}</label>
-      <div class="form-control">{{user?.address?.street}}</div>
+      <label class="col-form-label">{{
+        "user.identificationType" | translate
+      }}</label>
+      <div class="form-control">
+        {{ user?.identificationType | identificationType }}
+      </div>
     </div>
     <div class="col">
-      <label class="col-form-label">{{'user.address.city' | translate}}</label>
-      <div class="form-control">{{user?.address?.city}}</div>
+      <label class="col-form-label">{{
+        "user.numberIdentification" | translate
+      }}</label>
+      <div class="form-control">{{ user?.numberIdentification }}</div>
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col">
+      <label class="col-form-label">{{
+        "user.address.street" | translate
+      }}</label>
+      <div class="form-control">{{ user?.address?.street }}</div>
     </div>
     <div class="col">
-      <label class="col-form-label">{{'user.address.postalCode' | translate}}</label>
-      <div class="form-control">{{user?.address?.postalCode}}</div>
+      <label class="col-form-label">{{
+        "user.address.city" | translate
+      }}</label>
+      <div class="form-control">{{ user?.address?.city }}</div>
+    </div>
+    <div class="col">
+      <label class="col-form-label">{{
+        "user.address.postalCode" | translate
+      }}</label>
+      <div class="form-control">{{ user?.address?.postalCode }}</div>
     </div>
   </div>
 </section>
-<button class="btn btn-outline-info table-button" (click)="updateUser()" id="updateUser">Modificar</button>
+<button
+  (click)="updateUser()"
+  class="btn btn-outline-info table-button"
+  id="updateUser"
+>
+  Modificar
+</button>

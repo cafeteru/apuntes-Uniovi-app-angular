@@ -21,10 +21,9 @@ describe('SubjectStudentsComponent', () => {
         CoreModule,
         SharedModule,
         TestUtils.getLanguages(),
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
       ],
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

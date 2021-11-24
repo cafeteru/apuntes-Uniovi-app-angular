@@ -29,7 +29,7 @@ const SUCCESS_ENABLE_SUBJECT = marker('subject.enabled.successfully');
 @Component({
   selector: 'app-subject-list',
   templateUrl: './subject-list.component.html',
-  styleUrls: ['./subject-list.component.scss']
+  styleUrls: ['./subject-list.component.scss'],
 })
 export class SubjectListComponent extends BaseTableComponent<Subject> {
   subjectTypes = Object.keys(SubjectType);
@@ -38,7 +38,7 @@ export class SubjectListComponent extends BaseTableComponent<Subject> {
     protected translateService: TranslateService,
     private subjectService: SubjectService,
     private dialog: MatDialog,
-    private snackBarService: SnackBarService,
+    private snackBarService: SnackBarService
   ) {
     super(translateService);
   }
@@ -51,18 +51,16 @@ export class SubjectListComponent extends BaseTableComponent<Subject> {
     const config = {
       width: GLOBAL_CONSTANTS.maxWidthModal,
       maxHeight: GLOBAL_CONSTANTS.maxHeightModal,
-      data
+      data,
     };
     const dialogRef = this.dialog.open(ModalSubjectComponent, config);
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.cleanFilters();
         this.subscriptions.push(
-          this.translateService.get(SUCCESS_ADD_SUBJECT).subscribe(
-            res => {
-              this.snackBarService.showSuccess(res);
-            }
-          )
+          this.translateService.get(SUCCESS_ADD_SUBJECT).subscribe((res) => {
+            this.snackBarService.showSuccess(res);
+          })
         );
       }
     });
@@ -73,13 +71,13 @@ export class SubjectListComponent extends BaseTableComponent<Subject> {
       this.subjectService.disable(id, value).subscribe(
         () => {
           this.cleanFilters();
-          const message = value ? SUCCESS_ENABLE_SUBJECT : SUCCESS_DISABLE_SUBJECT;
+          const message = value
+            ? SUCCESS_ENABLE_SUBJECT
+            : SUCCESS_DISABLE_SUBJECT;
           this.subscriptions.push(
-            this.translateService.get(message).subscribe(
-              res => {
-                this.snackBarService.showSuccess(res);
-              }
-            )
+            this.translateService.get(message).subscribe((res) => {
+              this.snackBarService.showSuccess(res);
+            })
           );
         },
         () => {
@@ -91,12 +89,9 @@ export class SubjectListComponent extends BaseTableComponent<Subject> {
   }
 
   askDelete(id: number): void {
-    const subscription = this.translateService.get([
-      ANSWER_DELETE_SUBJECT,
-      BUTTON_DELETE,
-      BUTTON_CANCEL
-    ]).subscribe(
-      res => {
+    const subscription = this.translateService
+      .get([ANSWER_DELETE_SUBJECT, BUTTON_DELETE, BUTTON_CANCEL])
+      .subscribe((res) => {
         Swal.fire({
           title: res[ANSWER_DELETE_SUBJECT],
           showDenyButton: true,
@@ -107,8 +102,7 @@ export class SubjectListComponent extends BaseTableComponent<Subject> {
             this.delete(id);
           }
         });
-      }
-    );
+      });
     this.subscriptions.push(subscription);
   }
 
@@ -126,7 +120,7 @@ export class SubjectListComponent extends BaseTableComponent<Subject> {
 
   protected configFilter(): Subject {
     const namesFormGroups = Object.keys(this.formGroup.controls);
-    namesFormGroups.forEach(name => {
+    namesFormGroups.forEach((name) => {
       this.entityFilter[name] = this.formGroup.get(name).value;
     });
     return this.entityFilter;
@@ -145,11 +139,9 @@ export class SubjectListComponent extends BaseTableComponent<Subject> {
       () => {
         this.cleanFilters();
         this.subscriptions.push(
-          this.translateService.get(SUCCESS_DELETE_SUBJECT).subscribe(
-            res => {
-              this.snackBarService.showSuccess(res);
-            }
-          )
+          this.translateService.get(SUCCESS_DELETE_SUBJECT).subscribe((res) => {
+            this.snackBarService.showSuccess(res);
+          })
         );
       },
       () => {

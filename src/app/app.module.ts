@@ -23,11 +23,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './store/effects/user.effects';
 import es from '@angular/common/locales/es';
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -41,22 +38,21 @@ import es from '@angular/common/locales/es';
       loader: {
         provide: TranslateLoader,
         useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
-        deps: [HttpClient]
+        deps: [HttpClient],
       },
-      defaultLanguage: 'es'
+      defaultLanguage: 'es',
     }),
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([UserEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
-    })
+    }),
   ],
   providers: [
-    {provide: MatPaginatorIntl, useClass: MyMatPaginatorIntl},
-    {provide: MAT_DATE_LOCALE, useValue: es}
+    { provide: MatPaginatorIntl, useClass: MyMatPaginatorIntl },
+    { provide: MAT_DATE_LOCALE, useValue: es },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

@@ -16,7 +16,7 @@ const SUCCESS_UPDATE_SUBJECT = marker('subject.update.successfully');
 @Component({
   selector: 'app-subject-data',
   templateUrl: './subject-data.component.html',
-  styleUrls: ['./subject-data.component.scss']
+  styleUrls: ['./subject-data.component.scss'],
 })
 export class SubjectDataComponent extends BaseComponent implements OnInit {
   subject: Subject;
@@ -44,30 +44,27 @@ export class SubjectDataComponent extends BaseComponent implements OnInit {
     const config = {
       width: GLOBAL_CONSTANTS.maxWidthModal,
       maxHeight: GLOBAL_CONSTANTS.maxHeightModal,
-      data: this.subject
+      data: this.subject,
     };
     const dialogRef = this.dialog.open(ModalSubjectComponent, config);
-    dialogRef.afterClosed().subscribe(
-      (subject: Subject) => {
-        if (subject) {
-          this.subscriptions.push(
-            this.translateService.get(SUCCESS_UPDATE_SUBJECT).subscribe(
-              res => {
-                this.snackBarService.showSuccess(res);
-                this.loadTeachers();
-              }
-            )
-          );
-        }
+    dialogRef.afterClosed().subscribe((subject: Subject) => {
+      if (subject) {
+        this.subscriptions.push(
+          this.translateService.get(SUCCESS_UPDATE_SUBJECT).subscribe((res) => {
+            this.snackBarService.showSuccess(res);
+            this.loadTeachers();
+          })
+        );
       }
-    );
+    });
   }
 
   private loadTeachers(): void {
     if (this.subject) {
       this.subscriptions.push(
-        this.teachSubjectService.findTeachersBySubjectId(this.subject.id)
-          .subscribe(res => this.teachers = res)
+        this.teachSubjectService
+          .findTeachersBySubjectId(this.subject.id)
+          .subscribe((res) => (this.teachers = res))
       );
     }
   }

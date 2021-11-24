@@ -8,12 +8,13 @@ describe('NumberIdentificationValidator', () => {
   let numberIdentification: AbstractControl;
 
   beforeEach(() => {
-    formGroup = new FormGroup({
+    formGroup = new FormGroup(
+      {
         identificationType: new FormControl(''),
         numberIdentification: new FormControl(''),
       },
       {
-        validators: [NumberIdentificationValidator.isValid()]
+        validators: [NumberIdentificationValidator.isValid()],
       }
     );
     identificationType = formGroup.controls.identificationType;

@@ -15,7 +15,7 @@ const SUCCESS_UPDATE_USER = marker('user.update.successfully');
 @Component({
   selector: 'app-user-personal-data',
   templateUrl: './user-personal-data.component.html',
-  styleUrls: ['./user-personal-data.component.scss']
+  styleUrls: ['./user-personal-data.component.scss'],
 })
 /**
  * Component to display personal information of a user
@@ -27,7 +27,7 @@ export class UserPersonalDataComponent extends BaseComponent {
     protected translateService: TranslateService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private snackBarService: SnackBarService,
+    private snackBarService: SnackBarService
   ) {
     super(translateService);
     if (this.route.snapshot.data.user) {
@@ -42,21 +42,17 @@ export class UserPersonalDataComponent extends BaseComponent {
     const config = {
       width: GLOBAL_CONSTANTS.maxWidthModal,
       maxHeight: GLOBAL_CONSTANTS.maxHeightModal,
-      data: this.user
+      data: this.user,
     };
     const dialogRef = this.dialog.open(ModalUserComponent, config);
-    dialogRef.afterClosed().subscribe(
-      (user: User) => {
-        if (user) {
-          this.subscriptions.push(
-            this.translateService.get(SUCCESS_UPDATE_USER).subscribe(
-              res => {
-                this.snackBarService.showSuccess(res);
-              }
-            )
-          );
-        }
+    dialogRef.afterClosed().subscribe((user: User) => {
+      if (user) {
+        this.subscriptions.push(
+          this.translateService.get(SUCCESS_UPDATE_USER).subscribe((res) => {
+            this.snackBarService.showSuccess(res);
+          })
+        );
       }
-    );
+    });
   }
 }

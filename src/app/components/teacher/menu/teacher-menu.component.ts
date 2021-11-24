@@ -12,7 +12,7 @@ import { ErrorResponse } from '../../../core/models/server/error-response';
 @Component({
   selector: 'app-teacher-menu',
   templateUrl: './teacher-menu.component.html',
-  styleUrls: ['./teacher-menu.component.scss']
+  styleUrls: ['./teacher-menu.component.scss'],
 })
 export class TeacherMenuComponent extends BaseComponent implements OnInit {
   subjects: Subject[] = [];
@@ -28,17 +28,21 @@ export class TeacherMenuComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     super.ngOnInit();
     this.subscriptions.push(
-      this.store.select('userState').pipe(
-        switchMap(state => state.user ?
-          this.teachSubjectService.findSubjectsByTeacherId(state.user.id) : of([])
-        ),
-      ).subscribe(
-        subjects => this.subjects = subjects,
-        (errorResponse: ErrorResponse) => {
-          this.showAlert('error', '' + errorResponse.error.error);
-        }
-      )
+      this.store
+        .select('userState')
+        .pipe(
+          switchMap((state) =>
+            state.user
+              ? this.teachSubjectService.findSubjectsByTeacherId(state.user.id)
+              : of([])
+          )
+        )
+        .subscribe(
+          (subjects) => (this.subjects = subjects),
+          (errorResponse: ErrorResponse) => {
+            this.showAlert('error', '' + errorResponse.error.error);
+          }
+        )
     );
   }
-
 }

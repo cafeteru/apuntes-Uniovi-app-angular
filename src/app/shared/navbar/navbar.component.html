@@ -1,28 +1,66 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <button *ngIf="localStorage.authorization" type="button" class="btn btn-outline-secondary" aria-label="menu-hamburger"
-          (click)="openSidenav()" id="openSidenav">
+  <button
+    (click)="openSidenav()"
+    *ngIf="localStorage.authorization"
+    aria-label="menu-hamburger"
+    class="btn btn-outline-secondary"
+    id="openSidenav"
+    type="button"
+  >
     <mat-icon>menu</mat-icon>
   </button>
-  <div class="navbar-collapse cdk-overlay-backdrop-showing collapse show float-right" id="navbarNav">
+  <div
+    class="
+      navbar-collapse
+      cdk-overlay-backdrop-showing
+      collapse
+      show
+      float-right
+    "
+    id="navbarNav"
+  >
     <ul class="nav navbar-nav ml-auto">
       <li class="nav-item dropdown">
-        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
-           id="languages">
+        <a
+          aria-expanded="false"
+          aria-haspopup="true"
+          class="nav-link dropdown-toggle"
+          data-toggle="dropdown"
+          id="languages"
+        >
           <span [ngClass]="selectedLanguage"></span>
         </a>
-        <div aria-labelledby="languages" class="dropdown-menu dropdown-menu-right">
-          <button (click)="useLanguage('es')" class="btn btn-outline-primary dropdown-item" id="es">
-            <span class="flag-icon flag-icon-es"> </span> {{'navbar.es' | translate}}
+        <div
+          aria-labelledby="languages"
+          class="dropdown-menu dropdown-menu-right"
+        >
+          <button
+            (click)="useLanguage('es')"
+            class="btn btn-outline-primary dropdown-item"
+            id="es"
+          >
+            <span class="flag-icon flag-icon-es"> </span>
+            {{ "navbar.es" | translate }}
           </button>
           <div class="dropdown-divider"></div>
-          <button (click)="useLanguage('us')" class="btn btn-outline-primary dropdown-item" id="us">
-            <span class="flag-icon flag-icon-us"> </span> {{'navbar.us' | translate}}
+          <button
+            (click)="useLanguage('us')"
+            class="btn btn-outline-primary dropdown-item"
+            id="us"
+          >
+            <span class="flag-icon flag-icon-us"> </span>
+            {{ "navbar.us" | translate }}
           </button>
         </div>
       </li>
       <li *ngIf="localStorage.authorization" class="nav-item">
-        <button (click)="logout()" class="btn btn-outline-secondary" id="logout" routerLink="/">
-          {{'logout' | translate}}
+        <button
+          (click)="logout()"
+          class="btn btn-outline-secondary"
+          id="logout"
+          routerLink="/"
+        >
+          {{ "logout" | translate }}
         </button>
       </li>
     </ul>

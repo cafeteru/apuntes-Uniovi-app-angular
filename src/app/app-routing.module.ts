@@ -8,17 +8,15 @@ import { RoleType } from './core/models/enums/role-type';
 export const rootRoutes: Routes = [
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'admin',
     loadChildren: () =>
-      import('./components/admin/admin.module').then(
-        (a) => a.AdminModule
-      ),
+      import('./components/admin/admin.module').then((a) => a.AdminModule),
     canLoad: [CheckTokenGuard],
     canActivate: [RoleTypeGuard],
-    data: {role: [RoleType.ROLE_ADMIN]}
+    data: { role: [RoleType.ROLE_ADMIN] },
   },
   {
     path: 'teacher',
@@ -28,7 +26,7 @@ export const rootRoutes: Routes = [
       ),
     canLoad: [CheckTokenGuard],
     canActivate: [RoleTypeGuard],
-    data: {role: [RoleType.ROLE_TEACHER]}
+    data: { role: [RoleType.ROLE_TEACHER] },
   },
   {
     path: 'student',
@@ -38,17 +36,16 @@ export const rootRoutes: Routes = [
       ),
     canLoad: [CheckTokenGuard],
     canActivate: [RoleTypeGuard],
-    data: {role: [RoleType.ROLE_STUDENT]}
+    data: { role: [RoleType.ROLE_STUDENT] },
   },
   {
     path: '**',
-    redirectTo: 'login'
-  }
+    redirectTo: 'login',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(rootRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

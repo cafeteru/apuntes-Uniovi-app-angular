@@ -7,21 +7,17 @@ import * as userActions from '../actions/user.actions';
 
 @Injectable()
 export class UserEffects {
-  loadUsers$ = createEffect(
-    () => this.actions$.pipe(
+  loadUsers$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(userActions.loadUser),
-      mergeMap(
-        (action) => this.userService.findById(action.id).pipe(
-          map(user => userActions.loadUserSuccess({user})),
+      mergeMap((action) =>
+        this.userService.findById(action.id).pipe(
+          map((user) => userActions.loadUserSuccess({ user })),
           catchError(() => of(userActions.logout()))
         )
       )
     )
   );
 
-  constructor(
-    private actions$: Actions,
-    private userService: UserService
-  ) {
-  }
+  constructor(private actions$: Actions, private userService: UserService) {}
 }

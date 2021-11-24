@@ -1,16 +1,32 @@
-<app-navbar id="navbar" (changeSidenavEmitter)="changeDrawerState()" (closeEmitter)="closeDrawer()"></app-navbar>
+<app-navbar
+  (changeSidenavEmitter)="changeDrawerState()"
+  (closeEmitter)="closeDrawer()"
+  id="navbar"
+></app-navbar>
 <main>
-  <mat-sidenav-container id="mat-drawer-container" autosize>
+  <mat-sidenav-container autosize id="mat-drawer-container">
     <mat-sidenav #drawer [mode]="'side'">
       <mat-nav-list>
-        <a mat-list-item [routerLink]="getMenuUrl()">{{'menu' | translate}}</a>
-        <a mat-list-item *ngIf="user?.role === roleType.ROLE_ADMIN" routerLink="/admin/users"
-           id="usersNavList">{{'users' | translate}}</a>
-        <a mat-list-item *ngIf="user?.role === roleType.ROLE_ADMIN" routerLink="/admin/subjects"
-           id="subjectsNavList">{{'subjects' | translate}}</a>
+        <a [routerLink]="getMenuUrl()" mat-list-item>{{
+          "menu" | translate
+        }}</a>
+        <a
+          *ngIf="user?.role === roleType.ROLE_ADMIN"
+          id="usersNavList"
+          mat-list-item
+          routerLink="/admin/users"
+          >{{ "users" | translate }}</a
+        >
+        <a
+          *ngIf="user?.role === roleType.ROLE_ADMIN"
+          id="subjectsNavList"
+          mat-list-item
+          routerLink="/admin/subjects"
+          >{{ "subjects" | translate }}</a
+        >
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content class="sidenav-content" (click)="closeDrawer()">
+    <mat-sidenav-content (click)="closeDrawer()" class="sidenav-content">
       <section class="content">
         <router-outlet></router-outlet>
       </section>

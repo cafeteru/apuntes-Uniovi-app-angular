@@ -11,7 +11,7 @@ import { BaseComponent } from '../../../../../core/base/base.component';
 @Component({
   selector: 'app-subject-data',
   templateUrl: './subject-data.component.html',
-  styleUrls: ['./subject-data.component.scss']
+  styleUrls: ['./subject-data.component.scss'],
 })
 export class SubjectDataComponent extends BaseComponent implements OnInit {
   subject: Subject;
@@ -38,10 +38,10 @@ export class SubjectDataComponent extends BaseComponent implements OnInit {
   private loadTeachers(): void {
     if (this.subject) {
       this.subscriptions.push(
-        this.teachSubjectService.findTeachersBySubjectId(this.subject.id)
-          .subscribe(res => this.teachers = res)
+        this.teachSubjectService
+          .findTeachersBySubjectId(this.subject.id)
+          .subscribe((res) => (this.teachers = res))
       );
     }
   }
-
 }

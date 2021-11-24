@@ -10,11 +10,14 @@ import { map } from 'rxjs/operators';
 import { Page } from '../models/server/page';
 
 @Component({
-  template: ''
+  template: '',
 })
-export abstract class BaseTableComponent<T> extends BaseComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+export abstract class BaseTableComponent<T>
+  extends BaseComponent
+  implements OnInit, AfterViewInit
+{
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   elementsPage = [5, 10, 25, 100];
   totalElements = 0;
@@ -23,9 +26,7 @@ export abstract class BaseTableComponent<T> extends BaseComponent implements OnI
   data$: Observable<T[]> = of([]);
   protected entityFilter: T;
 
-  protected constructor(
-    protected translateService: TranslateService
-  ) {
+  protected constructor(protected translateService: TranslateService) {
     super(translateService);
     this.displayedColumns = this.initColumns();
   }
@@ -37,10 +38,7 @@ export abstract class BaseTableComponent<T> extends BaseComponent implements OnI
 
   ngAfterViewInit(): void {
     this.subscriptions.push(
-      merge(
-        this.paginator?.page,
-        this.sort?.sortChange
-      ).subscribe(res => {
+      merge(this.paginator?.page, this.sort?.sortChange).subscribe((res) => {
         this.loadData();
       })
     );

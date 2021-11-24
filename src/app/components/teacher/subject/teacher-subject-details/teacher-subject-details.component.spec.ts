@@ -15,21 +15,17 @@ describe('TeacherSubjectDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        TeacherSubjectDetailsComponent,
-        UnitsSubjectComponent
-      ],
+      declarations: [TeacherSubjectDetailsComponent, UnitsSubjectComponent],
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
         CoreModule,
         SharedModule,
         TestUtils.getLanguages(),
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
       ],
-      providers: []
-    })
-      .compileComponents();
+      providers: [],
+    }).compileComponents();
   });
 
   beforeEach(() => {

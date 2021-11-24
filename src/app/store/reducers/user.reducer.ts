@@ -17,16 +17,20 @@ const _userReducer = createReducer(
   initialState,
   on(userActions.loadUserSuccess, (state, action) => ({
     ...state,
-    user: {...action.user}
+    user: { ...action.user },
   })),
   on(userActions.logout, (state) => ({
     ...state,
-    user: null
+    user: null,
   })),
   on(userActions.changeLanguage, (state, action) => ({
     ...state,
-    user: {...state.user, language: LanguageType[action.language.toLocaleUpperCase()]}
-  })),
+    user: {
+      ...state.user,
+      language: LanguageType[action.language.toLocaleUpperCase()],
+    },
+  }))
 );
 
-export const userReducer = (state: UserState, action: Action) => _userReducer(state, action);
+export const userReducer = (state: UserState, action: Action) =>
+  _userReducer(state, action);

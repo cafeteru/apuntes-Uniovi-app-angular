@@ -9,12 +9,16 @@ export class TestUtils {
    * Returns test module to load i18n
    */
   static getLanguages(): TranslateTestingModule {
-    return TranslateTestingModule.withTranslations({es, us})
-      .withDefaultLanguage('es');
+    return TranslateTestingModule.withTranslations({
+      es,
+      us,
+    }).withDefaultLanguage('es');
   }
 
   static cleanSweetAlert(): void {
-    const list = document.getElementsByClassName('swal2-container swal2-center swal2-backdrop-show');
+    const list = document.getElementsByClassName(
+      'swal2-container swal2-center swal2-backdrop-show'
+    );
     for (const listElement of list) {
       listElement.remove();
     }

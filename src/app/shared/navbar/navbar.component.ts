@@ -11,7 +11,7 @@ import { changeLanguage } from '../../store/actions/user.actions';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 /**
  * Component to display the navbar
@@ -32,20 +32,20 @@ export class NavbarComponent extends BaseComponent implements OnInit {
     super(translateService);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-    this.subscriptions.push(this.store.select('userState').subscribe(
-      userState => {
-        this.user = userState.user;
-      })
-    );
-  }
-
   /**
    * Get class to show flag of selected language
    */
   get selectedLanguage(): string {
     return 'flag-icon flag-icon-' + this.language;
+  }
+
+  ngOnInit() {
+    super.ngOnInit();
+    this.subscriptions.push(
+      this.store.select('userState').subscribe((userState) => {
+        this.user = userState.user;
+      })
+    );
   }
 
   /**
@@ -56,7 +56,7 @@ export class NavbarComponent extends BaseComponent implements OnInit {
   useLanguage(language: string): void {
     this.language = language;
     this.translateService.use(language);
-    this.store.dispatch(changeLanguage({language}));
+    this.store.dispatch(changeLanguage({ language }));
     if (localStorage.authorization) {
       this.subscriptions.push(
         this.userService.changeLanguage(language).subscribe()

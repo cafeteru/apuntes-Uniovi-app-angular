@@ -9,23 +9,31 @@ import { OptionsPage } from '../models/server/options-page';
 import { ServiceUtils } from './service-utils';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LearnSubjectService {
   private url = `${environment.urlApi}/learnSubjects`;
 
-  constructor(
-    private httpClient: HttpClient
-  ) {
+  constructor(private httpClient: HttpClient) {}
+
+  create(
+    id: number,
+    learnSubjects: LearnSubject[]
+  ): Observable<LearnSubject[]> {
+    return this.httpClient.post<LearnSubject[]>(
+      `${this.url}/create/${id}`,
+      learnSubjects,
+      ServiceUtils.getHttpOptions()
+    );
   }
 
-  create(id: number, learnSubjects: LearnSubject[]): Observable<LearnSubject[]> {
-    return this.httpClient.post<LearnSubject[]>(`${this.url}/create/${id}`,
-      learnSubjects, ServiceUtils.getHttpOptions());
-  }
-
-  findStudentsBySubjectId(id: number, options?: OptionsPage): Observable<Page<User>> {
+  findStudentsBySubjectId(
+    id: number,
+    options?: OptionsPage
+  ): Observable<Page<User>> {
     return this.httpClient.get<Page<User>>(
-      `${this.url}/subject/${id}`, ServiceUtils.getHttpOptions());
+      `${this.url}/subject/${id}`,
+      ServiceUtils.getHttpOptions()
+    );
   }
 }

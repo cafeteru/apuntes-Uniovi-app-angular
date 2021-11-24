@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalLearnSubjectComponent, ModalLearnSubjectData } from './modal-learn-subject.component';
+import {
+  ModalLearnSubjectComponent,
+  ModalLearnSubjectData,
+} from './modal-learn-subject.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CoreModule } from '../../../../../core/core.module';
@@ -14,7 +17,7 @@ import { of } from 'rxjs';
 import { Subject } from '../../../../../core/models/subject';
 
 const matDialogRefMock = {
-  close: () => of()
+  close: () => of(),
 };
 
 describe('ModalLearnSubjectComponent', () => {
@@ -22,7 +25,7 @@ describe('ModalLearnSubjectComponent', () => {
   let fixture: ComponentFixture<ModalLearnSubjectComponent>;
   const matData: ModalLearnSubjectData = {
     subject: new Subject(),
-    isEmpty: false
+    isEmpty: false,
   };
 
   beforeEach(async () => {
@@ -36,19 +39,19 @@ describe('ModalLearnSubjectComponent', () => {
         TestUtils.getLanguages(),
         BrowserAnimationsModule,
         ReactiveFormsModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
       ],
       providers: [
         LearnSubjectService,
         {
           provide: MatDialogRef,
-          useValue: matDialogRefMock
+          useValue: matDialogRefMock,
         },
         {
           provide: MAT_DIALOG_DATA,
-          useValue: matData
+          useValue: matData,
         },
-      ]
+      ],
     }).compileComponents();
   });
 

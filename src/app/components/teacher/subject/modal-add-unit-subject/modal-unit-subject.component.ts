@@ -15,10 +15,12 @@ const TITLE_UPDATE = marker('modal.unit-subject.title.update');
 @Component({
   selector: 'app-modal-unit-subject',
   templateUrl: './modal-unit-subject.component.html',
-  styleUrls: ['./modal-unit-subject.component.scss']
+  styleUrls: ['./modal-unit-subject.component.scss'],
 })
-export class ModalUnitSubjectComponent extends BaseModalComponent<UnitSubject, ModalUnitSubjectComponent> {
-
+export class ModalUnitSubjectComponent extends BaseModalComponent<
+  UnitSubject,
+  ModalUnitSubjectComponent
+> {
   constructor(
     protected matDialogRef: MatDialogRef<ModalUnitSubjectComponent>,
     protected translateService: TranslateService,
@@ -26,6 +28,10 @@ export class ModalUnitSubjectComponent extends BaseModalComponent<UnitSubject, M
     private unitSubjectService: UnitSubjectService
   ) {
     super(translateService, matDialogRef, unitSubject);
+  }
+
+  get title(): string {
+    return this.isSaveOrUpdate() ? TITLE_UPDATE : TITLE_ADD;
   }
 
   isSaveOrUpdate(): boolean {
@@ -40,18 +46,17 @@ export class ModalUnitSubjectComponent extends BaseModalComponent<UnitSubject, M
 
   protected getFormGroup(): FormGroup {
     return new FormGroup({
-      name: new FormControl(this.unitSubject.name, Validators.maxLength(UnitSubjectLimits.nameLength)),
-      position: new FormControl(this.unitSubject.position, Validators.min(0))
+      name: new FormControl(
+        this.unitSubject.name,
+        Validators.maxLength(UnitSubjectLimits.nameLength)
+      ),
+      position: new FormControl(this.unitSubject.position, Validators.min(0)),
     });
   }
 
   protected saveOrUpdateService(): Observable<UnitSubject> {
-    return this.isSaveOrUpdate() ? this.unitSubjectService.update(this.unitSubject) :
-      this.unitSubjectService.create(this.unitSubject);
+    return this.isSaveOrUpdate()
+      ? this.unitSubjectService.update(this.unitSubject)
+      : this.unitSubjectService.create(this.unitSubject);
   }
-
-  get title(): string {
-    return this.isSaveOrUpdate() ? TITLE_UPDATE : TITLE_ADD;
-  }
-
 }

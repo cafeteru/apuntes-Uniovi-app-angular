@@ -23,16 +23,16 @@ describe('UserActiveStatisticsComponent', () => {
   let store: MockStore;
   const loadingState: LoadingState = {
     isLoading: false,
-    loadedUser: false
+    loadedUser: false,
   };
 
   const userState: UserState = {
-    user: new User()
+    user: new User(),
   };
 
   const initialState: AppState = {
     loadingState,
-    userState
+    userState,
   };
 
   beforeEach(async () => {
@@ -44,12 +44,9 @@ describe('UserActiveStatisticsComponent', () => {
         CoreModule,
         SharedModule,
         TestUtils.getLanguages(),
-        ChartsModule
+        ChartsModule,
       ],
-      providers: [
-        UserService,
-        provideMockStore({initialState})
-      ]
+      providers: [UserService, provideMockStore({ initialState })],
     }).compileComponents();
     store = TestBed.inject(MockStore);
   });
@@ -59,11 +56,12 @@ describe('UserActiveStatisticsComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     userService = fixture.debugElement.injector.get(UserService);
-    spyOn(userService, 'getStatistics').and.callFake(() => of(new UserStatistics()));
+    spyOn(userService, 'getStatistics').and.callFake(() =>
+      of(new UserStatistics())
+    );
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-})
-;
+});

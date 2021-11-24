@@ -1,7 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
 import { UnitSubjectService } from './unit-subject.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('UnitSubjectService', () => {
@@ -10,15 +13,9 @@ describe('UnitSubjectService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule
-      ],
-      providers: [
-        UnitSubjectService
-      ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
+      imports: [HttpClientTestingModule],
+      providers: [UnitSubjectService],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     });
     service = TestBed.inject(UnitSubjectService);
     httpMock = TestBed.inject(HttpTestingController);

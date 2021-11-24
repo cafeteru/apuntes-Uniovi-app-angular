@@ -15,7 +15,7 @@ import { take } from 'rxjs/operators';
 const ERROR_TOKEN_INVALID = marker('error.token.invalid');
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 /**
  * Guard to verify that the user is registering and is validated
@@ -33,40 +33,35 @@ export class CheckTokenGuard implements CanLoad, OnDestroy {
 
   canLoad(): boolean {
     const exp = localStorage.exp;
-    if (exp && !isNaN(localStorage.exp) && Date.now() < (Number(exp) * 1_000)) {
+    if (exp && !isNaN(localStorage.exp) && Date.now() < Number(exp) * 1_000) {
       const iToken = jwt_decode<IToken>(localStorage?.authorization);
       this.subscriptions.push(
-        this.store.select('loadingState').pipe(
-          take(1)
-        ).subscribe(
-          loadingState => {
+        this.store
+          .select('loadingState')
+          .pipe(take(1))
+          .subscribe((loadingState) => {
             if (!loadingState.loadedUser) {
-              this.store.dispatch(userActions.loadUser({id: iToken.id}));
+              this.store.dispatch(userActions.loadUser({ id: iToken.id }));
             }
-          }
-        )
+          })
       );
       return true;
     }
-    this.router.navigate(['/']).then(
-      () => {
-        this.store.dispatch(userActions.logout());
-        this.subscriptions.push(this.translateService.get(ERROR_TOKEN_INVALID).subscribe(
-          res => {
-            Swal.fire({
-              icon: 'warning',
-              title: (res),
-            }).then();
-          }
-          )
-        );
-      }
-    );
+    this.router.navigate(['/']).then(() => {
+      this.store.dispatch(userActions.logout());
+      this.subscriptions.push(
+        this.translateService.get(ERROR_TOKEN_INVALID).subscribe((res) => {
+          Swal.fire({
+            icon: 'warning',
+            title: res,
+          }).then();
+        })
+      );
+    });
     return false;
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.map(subscription => subscription.unsubscribe());
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
-
 }

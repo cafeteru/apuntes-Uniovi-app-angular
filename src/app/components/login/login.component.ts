@@ -4,7 +4,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../core/base/base.component';
-import { IToken, LoginData, LoginService } from '../../core/services/login.service';
+import {
+  IToken,
+  LoginData,
+  LoginService,
+} from '../../core/services/login.service';
 import { FormGroupUtil } from '../../core/utils/form-group-util';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -20,7 +24,7 @@ const ERROR_LOGIN_TEXT = marker('error.login.text');
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 /**
  * Component to display the login menu
@@ -37,9 +41,9 @@ export class LoginComponent extends BaseComponent implements OnInit {
     private store: Store<AppState>
   ) {
     super(translateService);
-    this.subscription = this.store.select('loadingState').subscribe(
-      loadingState => this.disable = loadingState.isLoading
-    );
+    this.subscription = this.store
+      .select('loadingState')
+      .subscribe((loadingState) => (this.disable = loadingState.isLoading));
   }
 
   ngOnInit(): void {
@@ -47,7 +51,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
     this.disable = false;
     this.formGroup = new FormGroup({
       username: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required)
+      password: new FormControl('', Validators.required),
     });
   }
 
@@ -59,7 +63,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
       this.store.dispatch(actions.initLoading());
       const loginData: LoginData = {
         username: this.formGroup.controls.username.value,
-        password: this.formGroup.controls.password.value
+        password: this.formGroup.controls.password.value,
       };
       this.subscriptions.push(
         this.loginService.login(loginData).subscribe(
@@ -78,14 +82,16 @@ export class LoginComponent extends BaseComponent implements OnInit {
               this.router.navigateByUrl(url).then();
               this.store.dispatch(actions.stopLoading());
             } else {
-              this.showAlert('error', ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT,
-                () => this.store.dispatch(actions.stopLoading()));
+              this.showAlert('error', ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT, () =>
+                this.store.dispatch(actions.stopLoading())
+              );
             }
           },
           () => {
-            this.showAlert('error', ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT,
-              () => this.store.dispatch(actions.stopLoading()));
-          },
+            this.showAlert('error', ERROR_LOGIN_TITLE, ERROR_LOGIN_TEXT, () =>
+              this.store.dispatch(actions.stopLoading())
+            );
+          }
         )
       );
     }

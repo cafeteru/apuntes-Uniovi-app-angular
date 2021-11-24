@@ -16,9 +16,7 @@ describe('UserPersonalDataComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        UserPersonalDataComponent,
-      ],
+      declarations: [UserPersonalDataComponent],
       imports: [
         CoreModule,
         SharedModule,
@@ -33,15 +31,13 @@ describe('UserPersonalDataComponent', () => {
           useValue: {
             snapshot: {
               data: {
-                user: new User()
-              }
-            }
-          }
-        }
+                user: new User(),
+              },
+            },
+          },
+        },
       ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 

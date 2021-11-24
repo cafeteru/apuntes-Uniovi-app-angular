@@ -1,6 +1,12 @@
 <header class="modal-header-material">
-  <h1 mat-dialog-title>{{ title | translate}}
-    <button (click)="closeModal()" aria-label="Close" class="close" type="button">
+  <h1 mat-dialog-title>
+    {{ title | translate }}
+    <button
+      (click)="closeModal()"
+      aria-label="Close"
+      class="close"
+      type="button"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </h1>
@@ -8,158 +14,251 @@
 <form [formGroup]="formGroup">
   <section class="form-group row">
     <mat-form-field class="col">
-      <input cdkFocusInitial formControlName="surname" id="surname" matInput
-             placeholder="{{'user.surname' | translate}}" required>
+      <input
+        cdkFocusInitial
+        formControlName="surname"
+        id="surname"
+        matInput
+        placeholder="{{ 'user.surname' | translate }}"
+        required
+      />
       <mat-error *ngIf="formGroup.controls.surname.errors?.required">
-        {{'error.user.required.surname' | translate}}
+        {{ "error.user.required.surname" | translate }}
       </mat-error>
       <mat-error *ngIf="formGroup.controls.surname.errors?.maxlength">
-        {{'error.user.maxlength.surname' | translate}}
+        {{ "error.user.maxlength.surname" | translate }}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
-      <input formControlName="name" id="name" matInput
-             placeholder="{{'user.name' | translate}}" required>
+      <input
+        formControlName="name"
+        id="name"
+        matInput
+        placeholder="{{ 'user.name' | translate }}"
+        required
+      />
       <mat-error *ngIf="formGroup.controls.name.errors?.required">
-        {{'error.user.required.name' | translate}}
+        {{ "error.user.required.name" | translate }}
       </mat-error>
       <mat-error *ngIf="formGroup.controls.name.errors?.maxlength">
-        {{'error.user.maxlength.name' | translate}}
+        {{ "error.user.maxlength.name" | translate }}
       </mat-error>
     </mat-form-field>
   </section>
   <section class="form-group row">
     <mat-form-field class="col">
-      <input email formControlName="email" id="email" matInput
-             placeholder="{{'user.email' | translate}}" type="email">
+      <input
+        email
+        formControlName="email"
+        id="email"
+        matInput
+        placeholder="{{ 'user.email' | translate }}"
+        type="email"
+      />
       <mat-error *ngIf="formGroup.controls.email.errors?.email">
-        {{'error.user.invalid.email' | translate}}
+        {{ "error.user.invalid.email" | translate }}
       </mat-error>
       <mat-error *ngIf="formGroup.controls.email.errors?.maxlength">
-        {{'error.user.maxlength.email' | translate}}
+        {{ "error.user.maxlength.email" | translate }}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
-      <input #phone formControlName="phone" id="phone" matInput
-             placeholder="{{'user.phone' | translate}}">
-      <mat-hint align="end">{{phone.value.length}} / 9</mat-hint>
+      <input
+        #phone
+        formControlName="phone"
+        id="phone"
+        matInput
+        placeholder="{{ 'user.phone' | translate }}"
+      />
+      <mat-hint align="end">{{ phone.value.length }} / 9</mat-hint>
       <mat-error *ngIf="formGroup.controls.phone.errors?.phone">
-        {{'error.user.invalid.phone' | translate}}
+        {{ "error.user.invalid.phone" | translate }}
       </mat-error>
     </mat-form-field>
   </section>
   <section class="form-group row">
     <mat-form-field class="col">
-      <mat-label>{{'user.birthDate' | translate}}</mat-label>
-      <input type="date" formControlName="birthDate" id="birthDate" matInput>
+      <mat-label>{{ "user.birthDate" | translate }}</mat-label>
+      <input formControlName="birthDate" id="birthDate" matInput type="date" />
       <mat-error *ngIf="formGroup.controls.birthDate.errors?.maxDate">
-        {{'error.user.limit.birth.date' | translate}}
+        {{ "error.user.limit.birth.date" | translate }}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
-      <mat-label>{{'user.role' | translate}}</mat-label>
+      <mat-label>{{ "user.role" | translate }}</mat-label>
       <mat-select formControlName="role" id="role" required>
-        <mat-option [value]="undefined" id="undefinedRole">{{'enum.undefined' | translate}}</mat-option>
-        <mat-option *ngFor="let role of roleType" [id]="role" [value]="role">{{role | roleType}}</mat-option>
+        <mat-option [value]="undefined" id="undefinedRole">{{
+          "enum.undefined" | translate
+        }}</mat-option>
+        <mat-option *ngFor="let role of roleType" [id]="role" [value]="role">{{
+          role | roleType
+        }}</mat-option>
       </mat-select>
       <mat-error *ngIf="formGroup.controls.role.errors?.required">
-        {{'error.user.required.role' | translate}}
+        {{ "error.user.required.role" | translate }}
       </mat-error>
     </mat-form-field>
   </section>
   <section class="row form-group">
     <mat-form-field class="col">
-      <mat-label>{{'user.identificationType' | translate}}</mat-label>
-      <mat-select [required]="isRequiredIdentificationType()" formControlName="identificationType"
-                  id="identificationType">
-        <mat-option [value]="undefined" id="undefinedRol">{{'enum.undefined' | translate}}</mat-option>
-        <mat-option *ngFor="let type of identificationType" [id]="type"
-                    [value]="type">{{type | identificationType}}</mat-option>
+      <mat-label>{{ "user.identificationType" | translate }}</mat-label>
+      <mat-select
+        [required]="isRequiredIdentificationType()"
+        formControlName="identificationType"
+        id="identificationType"
+      >
+        <mat-option [value]="undefined" id="undefinedRol">{{
+          "enum.undefined" | translate
+        }}</mat-option>
+        <mat-option
+          *ngFor="let type of identificationType"
+          [id]="type"
+          [value]="type"
+          >{{ type | identificationType }}</mat-option
+        >
       </mat-select>
       <mat-error *ngIf="formGroup.controls.identificationType.errors?.required">
-        {{'error.user.required.identificationType' | translate}}
+        {{ "error.user.required.identificationType" | translate }}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
-      <input #numberIdentification [placeholder]="'user.numberIdentification' | translate"
-             [required]="formGroup.controls.identificationType.value" formControlName="numberIdentification"
-             id="numberIdentification"
-             matInput>
-      <mat-hint align="end">{{numberIdentification.value.length}} / 9</mat-hint>
-      <mat-error *ngIf="formGroup.controls.numberIdentification.errors?.required">
-        {{'error.user.required.numberIdentification' | translate}}
+      <input
+        #numberIdentification
+        [placeholder]="'user.numberIdentification' | translate"
+        [required]="formGroup.controls.identificationType.value"
+        formControlName="numberIdentification"
+        id="numberIdentification"
+        matInput
+      />
+      <mat-hint align="end"
+        >{{ numberIdentification.value.length }} / 9
+      </mat-hint>
+      <mat-error
+        *ngIf="formGroup.controls.numberIdentification.errors?.required"
+      >
+        {{ "error.user.required.numberIdentification" | translate }}
       </mat-error>
-      <mat-error *ngIf="formGroup.controls.numberIdentification.errors?.wrongLetter">
-        {{'error.user.wrongLetter.numberIdentification' | translate}}
+      <mat-error
+        *ngIf="formGroup.controls.numberIdentification.errors?.wrongLetter"
+      >
+        {{ "error.user.wrongLetter.numberIdentification" | translate }}
       </mat-error>
-      <mat-error *ngIf="formGroup.controls.numberIdentification.errors?.formatNoValid">
-        {{'error.user.formatNoValid.numberIdentification' | translate}}
+      <mat-error
+        *ngIf="formGroup.controls.numberIdentification.errors?.formatNoValid"
+      >
+        {{ "error.user.formatNoValid.numberIdentification" | translate }}
       </mat-error>
     </mat-form-field>
   </section>
   <section class="form-group row">
     <mat-form-field class="col">
-      <input formControlName="username" id="username" matInput
-             placeholder="{{'user.username' | translate}}" required/>
+      <input
+        formControlName="username"
+        id="username"
+        matInput
+        placeholder="{{ 'user.username' | translate }}"
+        required
+      />
       <mat-error *ngIf="formGroup.controls.username.errors?.required">
-        {{'error.user.required.username' | translate}}
+        {{ "error.user.required.username" | translate }}
       </mat-error>
       <mat-error *ngIf="formGroup.controls.username.errors?.maxlength">
-        {{'error.user.maxlength.username' | translate}}
+        {{ "error.user.maxlength.username" | translate }}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
-      <input formControlName="password" id="password" matInput placeholder="{{'user.password' | translate}}"
-             [required]="!isSaveOrUpdate()" showHideInput type="password"/>
-      <i [showHideStatus]="{ materialIcon: true, id: 'password' }" class="material-icons" matSuffix
-         showHideTrigger="password"></i>
+      <input
+        [required]="!isSaveOrUpdate()"
+        formControlName="password"
+        id="password"
+        matInput
+        placeholder="{{ 'user.password' | translate }}"
+        showHideInput
+        type="password"
+      />
+      <i
+        [showHideStatus]="{ materialIcon: true, id: 'password' }"
+        class="material-icons"
+        matSuffix
+        showHideTrigger="password"
+      ></i>
       <mat-error *ngIf="formGroup.controls.password.errors?.required">
-        {{'error.user.required.password' | translate}}
+        {{ "error.user.required.password" | translate }}
       </mat-error>
       <mat-error *ngIf="formGroup.controls.password.errors?.maxlength">
-        {{'error.user.maxlength.password' | translate}}
+        {{ "error.user.maxlength.password" | translate }}
       </mat-error>
     </mat-form-field>
   </section>
   <section class="row form-group">
     <mat-form-field class="col">
-      <input formControlName="street" id="street" matInput name="street"
-             placeholder="{{'user.address.street' | translate}}"/>
+      <input
+        formControlName="street"
+        id="street"
+        matInput
+        name="street"
+        placeholder="{{ 'user.address.street' | translate }}"
+      />
       <mat-error *ngIf="formGroup.controls.street.errors?.maxlength">
-        {{'error.user.maxlength.street' | translate}}
+        {{ "error.user.maxlength.street" | translate }}
       </mat-error>
     </mat-form-field>
   </section>
   <section class="row form-group">
     <mat-form-field class="col">
-      <input formControlName="city" id="city" matInput name="city"
-             placeholder="{{'user.address.city' | translate}}"/>
+      <input
+        formControlName="city"
+        id="city"
+        matInput
+        name="city"
+        placeholder="{{ 'user.address.city' | translate }}"
+      />
       <mat-error *ngIf="formGroup.controls.city.errors?.maxlength">
-        {{'error.user.maxlength.city' | translate}}
+        {{ "error.user.maxlength.city" | translate }}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="col">
-      <input formControlName="postalCode" id="postalCode" matInput name="postalCode"
-             placeholder="{{'user.address.postalCode' | translate}}"/>
+      <input
+        formControlName="postalCode"
+        id="postalCode"
+        matInput
+        name="postalCode"
+        placeholder="{{ 'user.address.postalCode' | translate }}"
+      />
       <mat-error *ngIf="formGroup.controls.postalCode.errors?.maxlength">
-        {{'error.user.maxlength.postalCode' | translate}}
+        {{ "error.user.maxlength.postalCode" | translate }}
       </mat-error>
     </mat-form-field>
   </section>
   <section class="row form-group">
     <div class="col">
-      <label for="img">{{'user.img' | translate}}</label>
-      <input (change)="readPhoto($event)" accept="image/x-png,image/gif,image/jpeg" class="form-control-file" id="img"
-             name="img"
-             type="file">
+      <label for="img">{{ "user.img" | translate }}</label>
+      <input
+        (change)="readPhoto($event)"
+        accept="image/x-png,image/gif,image/jpeg"
+        class="form-control-file"
+        id="img"
+        name="img"
+        type="file"
+      />
     </div>
   </section>
   <section class="row form-group">
-    <mat-checkbox class="col" formControlName="active" id="active">{{'user.active' | translate}}</mat-checkbox>
+    <mat-checkbox class="col" formControlName="active" id="active">{{
+      "user.active" | translate
+    }}</mat-checkbox>
   </section>
   <section class="float-right modal-buttons">
-    <button (click)="saveOrUpdate()" class="btn btn-outline-success" id="add">{{'button.save'| translate}}</button>
-    <button (click)="closeModal()" class="btn btn-outline-danger" id="cancel"
-            type="button">{{'button.cancel'| translate}}</button>
+    <button (click)="saveOrUpdate()" class="btn btn-outline-success" id="add">
+      {{ "button.save" | translate }}
+    </button>
+    <button
+      (click)="closeModal()"
+      class="btn btn-outline-danger"
+      id="cancel"
+      type="button"
+    >
+      {{ "button.cancel" | translate }}
+    </button>
   </section>
 </form>

@@ -20,16 +20,13 @@ import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 
-
 @NgModule({
-  declarations: [
-    SnackBarComponent
-  ],
+  declarations: [SnackBarComponent],
   imports: [
     FormsModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    TranslateModule
+    TranslateModule,
   ],
   exports: [
     SnackBarComponent,
@@ -48,8 +45,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatSidenavModule,
     MatListModule,
     MatTooltipModule,
-    MatButtonModule
-  ]
+    MatButtonModule,
+  ],
 })
-export class MaterialDesignModule {
-}
+export class MaterialDesignModule {}

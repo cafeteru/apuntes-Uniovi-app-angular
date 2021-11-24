@@ -7,29 +7,23 @@ export const adminRoutes: Routes = [
   {
     path: '',
     component: AdminMenuComponent,
-    canLoad: [CheckTokenGuard]
+    canLoad: [CheckTokenGuard],
   },
   {
     path: 'users',
-    loadChildren: () =>
-      import('./user/user.module').then(
-        (u) => u.UserModule
-      ),
-    canLoad: [CheckTokenGuard]
+    loadChildren: () => import('./user/user.module').then((u) => u.UserModule),
+    canLoad: [CheckTokenGuard],
   },
   {
     path: 'subjects',
     loadChildren: () =>
-      import('./subject/subject.module').then(
-        (s) => s.SubjectModule
-      ),
-    canLoad: [CheckTokenGuard]
-  }
+      import('./subject/subject.module').then((s) => s.SubjectModule),
+    canLoad: [CheckTokenGuard],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(adminRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule {
-}
+export class AdminRoutingModule {}

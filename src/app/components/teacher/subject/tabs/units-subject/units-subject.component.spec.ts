@@ -22,10 +22,8 @@ describe('UnitsSubjectComponent', () => {
         SharedModule,
         TestUtils.getLanguages(),
         BrowserAnimationsModule,
-
       ],
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

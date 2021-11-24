@@ -17,8 +17,8 @@ export class NumberIdentificationValidator {
       FormGroupUtil.deleteError(numberIdentification, 'formatNoValid');
       if (!identificationType.value) {
         if (numberIdentification.value) {
-          identificationType.setErrors({required: true});
-          identificationType.markAsTouched({onlySelf: true});
+          identificationType.setErrors({ required: true });
+          identificationType.markAsTouched({ onlySelf: true });
         }
         return;
       }
@@ -31,19 +31,22 @@ export class NumberIdentificationValidator {
         expression = /^[XYZ]\d{7,8}[A-Z]$/;
       }
       if (expression.test(str) === true) {
-        str = str.replace(/^[X]/, '0').replace(/^[Y]/, '1').replace(/^[Z]/, '2');
+        str = str
+          .replace(/^[X]/, '0')
+          .replace(/^[Y]/, '1')
+          .replace(/^[Z]/, '2');
         const myNumber = str.substr(0, str.length - 1);
         const letterDni = str.substr(str.length - 1, 1);
         const myNumberConver = Number(myNumber) % 23;
         let letter = 'TRWAGMYFPDXBNJZSQVHLCKET';
         letter = letter.substring(myNumberConver, myNumberConver + 1);
         if (letter !== letterDni.toUpperCase()) {
-          numberIdentification.setErrors({wrongLetter: true});
-          numberIdentification.markAsTouched({onlySelf: true});
+          numberIdentification.setErrors({ wrongLetter: true });
+          numberIdentification.markAsTouched({ onlySelf: true });
         }
       } else {
-        numberIdentification.setErrors({formatNoValid: true});
-        numberIdentification.markAsTouched({onlySelf: true});
+        numberIdentification.setErrors({ formatNoValid: true });
+        numberIdentification.markAsTouched({ onlySelf: true });
       }
       return;
     };

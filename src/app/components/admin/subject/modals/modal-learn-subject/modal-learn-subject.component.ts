@@ -25,10 +25,12 @@ export interface ModalLearnSubjectData {
 @Component({
   selector: 'app-modal-learn-subject',
   templateUrl: './modal-learn-subject.component.html',
-  styleUrls: ['./modal-learn-subject.component.scss']
+  styleUrls: ['./modal-learn-subject.component.scss'],
 })
-export class ModalLearnSubjectComponent extends BaseModalComponent<Subject, ModalLearnSubjectComponent>
-  implements OnInit {
+export class ModalLearnSubjectComponent
+  extends BaseModalComponent<Subject, ModalLearnSubjectComponent>
+  implements OnInit
+{
   students: User[];
 
   constructor(
@@ -41,19 +43,27 @@ export class ModalLearnSubjectComponent extends BaseModalComponent<Subject, Moda
     super(translateService, matDialogRef, data.subject);
   }
 
+  get title(): string {
+    return this.isSaveOrUpdate() ? TITLE_ADD : TITLE_UPDATE;
+  }
+
   ngOnInit(): void {
     super.ngOnInit();
-    this.userService.findAllByRole(RoleType.ROLE_STUDENT).pipe(
-      switchMap(students => {
-        this.students = students;
-        return this.isSaveOrUpdate() ? of([]) :
-          this.learnSubjectService.findStudentsBySubjectId(this.data.subject.id).pipe(
-            map(page => page.content)
-          );
-      })
-    ).subscribe(
-      students => FormGroupUtil.setValue(this.formGroup, 'students', students)
-    );
+    this.userService
+      .findAllByRole(RoleType.ROLE_STUDENT)
+      .pipe(
+        switchMap((students) => {
+          this.students = students;
+          return this.isSaveOrUpdate()
+            ? of([])
+            : this.learnSubjectService
+                .findStudentsBySubjectId(this.data.subject.id)
+                .pipe(map((page) => page.content));
+        })
+      )
+      .subscribe((students) =>
+        FormGroupUtil.setValue(this.formGroup, 'students', students)
+      );
   }
 
   isSaveOrUpdate(): boolean {
@@ -66,21 +76,19 @@ export class ModalLearnSubjectComponent extends BaseModalComponent<Subject, Moda
 
   protected getFormGroup(): FormGroup {
     return new FormGroup({
-      students: new FormControl()
+      students: new FormControl(),
     });
   }
 
   protected saveOrUpdateService(): Observable<Subject> {
     const selectedStudents: User[] = this.formGroup.get('students').value;
-    const learnSubjects = selectedStudents ? selectedStudents.map(
-      student => new LearnSubject(this.data.subject.id, student.id)) : [];
-    return this.learnSubjectService.create(this.data.subject.id, learnSubjects).pipe(
-      switchMap(() => of(this.data.subject))
-    );
+    const learnSubjects = selectedStudents
+      ? selectedStudents.map(
+          (student) => new LearnSubject(this.data.subject.id, student.id)
+        )
+      : [];
+    return this.learnSubjectService
+      .create(this.data.subject.id, learnSubjects)
+      .pipe(switchMap(() => of(this.data.subject)));
   }
-
-  get title(): string {
-    return this.isSaveOrUpdate() ? TITLE_ADD : TITLE_UPDATE;
-  }
-
 }

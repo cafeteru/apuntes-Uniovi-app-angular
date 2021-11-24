@@ -1,6 +1,12 @@
 <header class="modal-header-material">
-  <h1 mat-dialog-title>{{ title | translate}}
-    <button (click)="closeModal()" aria-label="Close" class="close" type="button">
+  <h1 mat-dialog-title>
+    {{ title | translate }}
+    <button
+      (click)="closeModal()"
+      aria-label="Close"
+      class="close"
+      type="button"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </h1>
@@ -8,31 +14,51 @@
 <form [formGroup]="formGroup">
   <section class="form-group row">
     <mat-form-field class="col">
-      <input cdkFocusInitial formControlName="name" id="name" matInput
-             placeholder="{{'unit-subject.name' | translate}}" required>
+      <input
+        cdkFocusInitial
+        formControlName="name"
+        id="name"
+        matInput
+        placeholder="{{ 'unit-subject.name' | translate }}"
+        required
+      />
       <mat-error *ngIf="formGroup.controls.name.errors?.required">
-        {{'error.unit-subject.required.name' | translate}}
+        {{ "error.unit-subject.required.name" | translate }}
       </mat-error>
       <mat-error *ngIf="formGroup.controls.name.errors?.maxlength">
-        {{'error.unit-subject.maxlength.name' | translate}}
+        {{ "error.unit-subject.maxlength.name" | translate }}
       </mat-error>
     </mat-form-field>
   </section>
   <section class="form-group row">
     <mat-form-field class="col">
-      <input formControlName="position" id="position" matInput type="number"
-             placeholder="{{'unit-subject.position' | translate}}" required>
+      <input
+        formControlName="position"
+        id="position"
+        matInput
+        placeholder="{{ 'unit-subject.position' | translate }}"
+        required
+        type="number"
+      />
       <mat-error *ngIf="formGroup.controls.position.errors?.required">
-        {{'error.unit-subject.required.position' | translate}}
+        {{ "error.unit-subject.required.position" | translate }}
       </mat-error>
       <mat-error *ngIf="formGroup.controls.position.errors?.min">
-        {{'error.unit-subject.min.position' | translate}}
+        {{ "error.unit-subject.min.position" | translate }}
       </mat-error>
     </mat-form-field>
   </section>
   <section class="float-right modal-buttons">
-    <button (click)="saveOrUpdate()" class="btn btn-outline-success" id="add">{{'button.save'| translate}}</button>
-    <button (click)="closeModal()" class="btn btn-outline-danger" id="cancel"
-            type="button">{{'button.cancel'| translate}}</button>
+    <button (click)="saveOrUpdate()" class="btn btn-outline-success" id="add">
+      {{ "button.save" | translate }}
+    </button>
+    <button
+      (click)="closeModal()"
+      class="btn btn-outline-danger"
+      id="cancel"
+      type="button"
+    >
+      {{ "button.cancel" | translate }}
+    </button>
   </section>
 </form>

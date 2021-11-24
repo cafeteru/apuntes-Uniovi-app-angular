@@ -11,10 +11,10 @@ import { RoleType } from './core/models/enums/role-type';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent extends BaseComponent {
-  @ViewChild('drawer', {static: true}) drawer: MatDrawer;
+  @ViewChild('drawer', { static: true }) drawer: MatDrawer;
   user: User;
   roleType = RoleType;
 
@@ -23,8 +23,10 @@ export class AppComponent extends BaseComponent {
     private store: Store<AppState>
   ) {
     super(translateService);
-    this.subscriptions.push(this.store.select('userState').subscribe(
-      userState => this.user = userState.user)
+    this.subscriptions.push(
+      this.store
+        .select('userState')
+        .subscribe((userState) => (this.user = userState.user))
     );
   }
 

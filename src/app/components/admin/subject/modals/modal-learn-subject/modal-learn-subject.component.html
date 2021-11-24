@@ -1,27 +1,50 @@
 <header class="modal-header-material">
-  <h1 mat-dialog-title>{{ title | translate}}
-    <button (click)="closeModal()" aria-label="Close" class="close" type="button">
+  <h1 mat-dialog-title>
+    {{ title | translate }}
+    <button
+      (click)="closeModal()"
+      aria-label="Close"
+      class="close"
+      type="button"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </h1>
 </header>
 <form [formGroup]="formGroup">
   <section class="row form-group">
-    <p-listbox class="col" [options]="students" formControlName="students" [metaKeySelection]="false"
-               [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="name"
-               [listStyle]="{'max-height':'250px'}">
+    <p-listbox
+      [checkbox]="true"
+      [filter]="true"
+      [listStyle]="{ 'max-height': '250px' }"
+      [metaKeySelection]="false"
+      [multiple]="true"
+      [options]="students"
+      class="col"
+      formControlName="students"
+      optionLabel="name"
+    >
       <ng-template let-student pTemplate="item">
         <div>
           <div>
-            {{student.name}} {{student.surname}} - {{'user.username' | translate}} : {{student.username}}
+            {{ student.name }} {{ student.surname }} -
+            {{ "user.username" | translate }} : {{ student.username }}
           </div>
         </div>
       </ng-template>
     </p-listbox>
   </section>
   <section class="float-right modal-buttons">
-    <button (click)="saveOrUpdate()" class="btn btn-outline-success" id="add">{{'button.save'| translate}}</button>
-    <button (click)="closeModal()" class="btn btn-outline-danger" id="cancel"
-            type="button">{{'button.cancel'| translate}}</button>
+    <button (click)="saveOrUpdate()" class="btn btn-outline-success" id="add">
+      {{ "button.save" | translate }}
+    </button>
+    <button
+      (click)="closeModal()"
+      class="btn btn-outline-danger"
+      id="cancel"
+      type="button"
+    >
+      {{ "button.cancel" | translate }}
+    </button>
   </section>
 </form>

@@ -34,7 +34,7 @@ export interface LoginData {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 /**
  * Service to identify user
@@ -42,11 +42,7 @@ export interface LoginData {
 export class LoginService {
   private url = `${environment.urlApi}/login`;
 
-  constructor(
-    private httpClient: HttpClient,
-    private store: Store<AppState>
-  ) {
-  }
+  constructor(private httpClient: HttpClient, private store: Store<AppState>) {}
 
   /**
    * Gets user authentication
@@ -59,7 +55,7 @@ export class LoginService {
         const iToken = jwt_decode<IToken>(res.authorization);
         localStorage.setItem('authorization', res.authorization);
         localStorage.setItem('exp', iToken.exp.toString());
-        this.store.dispatch(userActions.loadUser({id: iToken.id}));
+        this.store.dispatch(userActions.loadUser({ id: iToken.id }));
       })
     );
   }

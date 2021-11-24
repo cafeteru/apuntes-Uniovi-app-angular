@@ -17,10 +17,9 @@ describe('UserDetailsComponent', () => {
         HttpClientTestingModule,
         SharedModule,
         TestUtils.getLanguages(),
-        BrowserAnimationsModule
-      ]
-    })
-      .compileComponents();
+        BrowserAnimationsModule,
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

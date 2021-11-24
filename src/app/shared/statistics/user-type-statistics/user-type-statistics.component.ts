@@ -15,9 +15,12 @@ const ROLE_TYPE_TEACHER = marker('role-type.teacher');
 @Component({
   selector: 'app-user-type-statistics',
   templateUrl: './user-type-statistics.component.html',
-  styleUrls: ['./user-type-statistics.component.scss']
+  styleUrls: ['./user-type-statistics.component.scss'],
 })
-export class UserTypeStatisticsComponent extends BaseComponent implements OnInit {
+export class UserTypeStatisticsComponent
+  extends BaseComponent
+  implements OnInit
+{
   statisticsType: ChartType = 'pie';
   userRoleLabel: Label[] = [];
   userRoleData: MultiDataSet = [[0, 0, 0]];
@@ -28,39 +31,35 @@ export class UserTypeStatisticsComponent extends BaseComponent implements OnInit
     private store: Store<AppState>
   ) {
     super(translateService);
-    this.subscriptions.push(this.store.select('userState').subscribe(
-      () => this.getLabels())
+    this.subscriptions.push(
+      this.store.select('userState').subscribe(() => this.getLabels())
     );
   }
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.userService.getStatistics().subscribe(
-        userStatistics => {
-          this.userRoleData = [
-            [userStatistics.numAdmin, userStatistics.numStudents, userStatistics.numTeachers],
-          ];
-        }
-      )
+      this.userService.getStatistics().subscribe((userStatistics) => {
+        this.userRoleData = [
+          [
+            userStatistics.numAdmin,
+            userStatistics.numStudents,
+            userStatistics.numTeachers,
+          ],
+        ];
+      })
     );
   }
 
   private getLabels() {
-    const keys = [
-      ROLE_TYPE_ADMIN,
-      ROLE_TYPE_TEACHER,
-      ROLE_TYPE_STUDENT
-    ];
+    const keys = [ROLE_TYPE_ADMIN, ROLE_TYPE_TEACHER, ROLE_TYPE_STUDENT];
     this.subscriptions.push(
-      this.translateService.get(keys).subscribe(
-        res => {
-          this.userRoleLabel = [
-            res[ROLE_TYPE_ADMIN],
-            res[ROLE_TYPE_STUDENT],
-            res[ROLE_TYPE_TEACHER]
-          ];
-        }
-      )
+      this.translateService.get(keys).subscribe((res) => {
+        this.userRoleLabel = [
+          res[ROLE_TYPE_ADMIN],
+          res[ROLE_TYPE_STUDENT],
+          res[ROLE_TYPE_TEACHER],
+        ];
+      })
     );
   }
 }

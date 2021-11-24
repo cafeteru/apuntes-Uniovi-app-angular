@@ -9,15 +9,12 @@ import { SubjectStatistics } from '../models/statistics/subject-statistics';
 import { ServiceUtils } from './service-utils';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SubjectService {
   private url = `${environment.urlApi}/subjects`;
 
-  constructor(
-    private httpClient: HttpClient
-  ) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
   /**
    * Returns all subjects
@@ -26,8 +23,11 @@ export class SubjectService {
    * @param subject User
    */
   findAll(options: OptionsPage, subject?: Subject): Observable<Page<Subject>> {
-    return this.httpClient.post<Page<Subject>>(`${this.url}${options.toApi()}`, subject,
-      ServiceUtils.getHttpOptions());
+    return this.httpClient.post<Page<Subject>>(
+      `${this.url}${options.toApi()}`,
+      subject,
+      ServiceUtils.getHttpOptions()
+    );
   }
 
   /**
@@ -36,8 +36,11 @@ export class SubjectService {
    * @param subject Subject to create
    */
   create(subject: Subject): Observable<Subject> {
-    return this.httpClient.post<Subject>(`${this.url}/create`,
-      subject, ServiceUtils.getHttpOptions());
+    return this.httpClient.post<Subject>(
+      `${this.url}/create`,
+      subject,
+      ServiceUtils.getHttpOptions()
+    );
   }
 
   /**
@@ -46,8 +49,10 @@ export class SubjectService {
    * @param id Subject´s id
    */
   findById(id: number): Observable<Subject> {
-    return this.httpClient.get<Subject>(`${this.url}/${id}`,
-      ServiceUtils.getHttpOptions());
+    return this.httpClient.get<Subject>(
+      `${this.url}/${id}`,
+      ServiceUtils.getHttpOptions()
+    );
   }
 
   /**
@@ -57,7 +62,10 @@ export class SubjectService {
    */
   update(subject: Subject): Observable<Subject> {
     return this.httpClient.put<Subject>(
-      `${this.url}/${subject.id}`, subject, ServiceUtils.getHttpOptions());
+      `${this.url}/${subject.id}`,
+      subject,
+      ServiceUtils.getHttpOptions()
+    );
   }
 
   /**
@@ -68,7 +76,10 @@ export class SubjectService {
    */
   disable(id: number, active: boolean): Observable<Subject> {
     return this.httpClient.patch<Subject>(
-      `${this.url}/disable/${id}/${active}`, {}, ServiceUtils.getHttpOptions());
+      `${this.url}/disable/${id}/${active}`,
+      {},
+      ServiceUtils.getHttpOptions()
+    );
   }
 
   /**
@@ -77,15 +88,19 @@ export class SubjectService {
    * @param id Subject´s id
    */
   delete(id: number): Observable<boolean> {
-    return this.httpClient.delete<boolean>(`${this.url}/${id}`,
-      ServiceUtils.getHttpOptions());
+    return this.httpClient.delete<boolean>(
+      `${this.url}/${id}`,
+      ServiceUtils.getHttpOptions()
+    );
   }
 
   /**
    * Get subject statistics
    */
   getStatistics(): Observable<SubjectStatistics> {
-    return this.httpClient.get<SubjectStatistics>(`${this.url}/statistics`,
-      ServiceUtils.getHttpOptions());
+    return this.httpClient.get<SubjectStatistics>(
+      `${this.url}/statistics`,
+      ServiceUtils.getHttpOptions()
+    );
   }
 }

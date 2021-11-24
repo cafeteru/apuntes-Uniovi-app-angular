@@ -14,7 +14,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { GLOBAL_CONSTANTS } from '../../../../../core/utils/global-constants';
 import {
   ModalLearnSubjectComponent,
-  ModalLearnSubjectData
+  ModalLearnSubjectData,
 } from '../../modals/modal-learn-subject/modal-learn-subject.component';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { LearnSubject } from '../../../../../core/models/learn-subject';
@@ -26,9 +26,12 @@ const SUCCESS_ADD = marker('learn-subject.add.successfully');
 @Component({
   selector: 'app-learn-subject',
   templateUrl: './learn-subject.component.html',
-  styleUrls: ['./learn-subject.component.scss']
+  styleUrls: ['./learn-subject.component.scss'],
 })
-export class LearnSubjectComponent extends BaseTableComponent<User> implements OnInit {
+export class LearnSubjectComponent
+  extends BaseTableComponent<User>
+  implements OnInit
+{
   students = new MatTableDataSource<User>();
 
   private subject: Subject;
@@ -50,29 +53,26 @@ export class LearnSubjectComponent extends BaseTableComponent<User> implements O
       this.subject = this.route.snapshot.data.subject;
     }
     super.ngOnInit();
-
   }
 
   openModal(): void {
     const data: ModalLearnSubjectData = {
       subject: this.subject,
-      isEmpty: this.isEmpty
+      isEmpty: this.isEmpty,
     };
     const config = {
       width: GLOBAL_CONSTANTS.maxWidthModal,
       maxHeight: GLOBAL_CONSTANTS.maxHeightModal,
-      data
+      data,
     };
     const dialogRef = this.dialog.open(ModalLearnSubjectComponent, config);
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.cleanFilters();
         this.subscriptions.push(
-          this.translateService.get(SUCCESS_ADD).subscribe(
-            res => {
-              this.snackBarService.showSuccess(res);
-            }
-          )
+          this.translateService.get(SUCCESS_ADD).subscribe((res) => {
+            this.snackBarService.showSuccess(res);
+          })
         );
       }
     });
@@ -84,30 +84,34 @@ export class LearnSubjectComponent extends BaseTableComponent<User> implements O
 
   askDelete(id): void {
     this.subscriptions.push(
-      this.data$.pipe(
-        switchMap(students => {
-          const learnSubjects = students.filter(x => x.id !== id).map(
-            student => new LearnSubject(this.subject.id, student.id));
-          return this.learnSubjectService.create(this.subject.id, learnSubjects);
-        })
-      ).subscribe(
-        () => this.cleanFilters()
-      )
+      this.data$
+        .pipe(
+          switchMap((students) => {
+            const learnSubjects = students
+              .filter((x) => x.id !== id)
+              .map((student) => new LearnSubject(this.subject.id, student.id));
+            return this.learnSubjectService.create(
+              this.subject.id,
+              learnSubjects
+            );
+          })
+        )
+        .subscribe(() => this.cleanFilters())
     );
   }
 
   protected configFilter(): User {
     const namesFormGroups = Object.keys(this.formGroup.controls);
-    namesFormGroups.forEach(name => {
+    namesFormGroups.forEach((name) => {
       this.entityFilter[name] = this.formGroup.get(name).value;
     });
     return this.entityFilter;
   }
 
   protected getData(options: OptionsPage | undefined): Observable<Page<User>> {
-    return this.learnSubjectService.findStudentsBySubjectId(this.subject?.id, options).pipe(
-      tap(page => this.isEmpty = page ? page.empty : true),
-    );
+    return this.learnSubjectService
+      .findStudentsBySubjectId(this.subject?.id, options)
+      .pipe(tap((page) => (this.isEmpty = page ? page.empty : true)));
   }
 
   protected initColumns(): string[] {
@@ -127,7 +131,9 @@ export class LearnSubjectComponent extends BaseTableComponent<User> implements O
       birthDate: new FormControl(this.entityFilter.birthDate),
       username: new FormControl(this.entityFilter.username),
       identificationType: new FormControl(this.entityFilter.identificationType),
-      numberIdentification: new FormControl(this.entityFilter.numberIdentification),
+      numberIdentification: new FormControl(
+        this.entityFilter.numberIdentification
+      ),
       street: new FormControl(this.entityFilter.address.street),
       city: new FormControl(this.entityFilter.address.city),
       postalCode: new FormControl(this.entityFilter.address.postalCode),
@@ -138,22 +144,22 @@ export class LearnSubjectComponent extends BaseTableComponent<User> implements O
   protected loadData(): void {
     super.loadData();
     const subscription = this.data$.subscribe(
-      students => this.students.data = students ? students : []);
+      (students) => (this.students.data = students ? students : [])
+    );
     this.subscriptions.push(subscription);
     this.students.paginator = this.paginator;
-    this.students.sortingDataAccessor =
-      (user: User, property: string) => {
-        switch (property) {
-          case 'username':
-            return user.username;
-          case 'name':
-            return user.name;
-          case 'surname':
-            return user.surname;
-          default:
-            return user[property];
-        }
-      };
+    this.students.sortingDataAccessor = (user: User, property: string) => {
+      switch (property) {
+        case 'username':
+          return user.username;
+        case 'name':
+          return user.name;
+        case 'surname':
+          return user.surname;
+        default:
+          return user[property];
+      }
+    };
     this.students.sort = this.sort;
   }
 }

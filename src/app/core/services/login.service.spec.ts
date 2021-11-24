@@ -1,7 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
-import { IToken, LoginData, LoginService, ResponseLogin } from './login.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  IToken,
+  LoginData,
+  LoginService,
+  ResponseLogin,
+} from './login.service';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { RoleType } from '../models/enums/role-type';
@@ -19,32 +27,25 @@ describe('LoginService', () => {
   let store: MockStore;
   const loadingState: LoadingState = {
     isLoading: false,
-    loadedUser: false
+    loadedUser: false,
   };
 
   const user = new User();
   user.username = 'username';
   const userState: UserState = {
-    user: new User()
+    user: new User(),
   };
 
   const initialState: AppState = {
     loadingState,
-    userState
+    userState,
   };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule
-      ],
-      providers: [
-        LoginService,
-        provideMockStore({initialState})
-      ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
+      imports: [HttpClientTestingModule],
+      providers: [LoginService, provideMockStore({ initialState })],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     });
     service = TestBed.inject(LoginService);
     httpMock = TestBed.inject(HttpTestingController);
@@ -64,25 +65,23 @@ describe('LoginService', () => {
     expect(localStorage.getItem('authorization')).toBeNull();
     const loginData: LoginData = {
       username: 'username',
-      password: 'password'
+      password: 'password',
     };
     const content: IToken = {
       username: loginData.username,
       exp: 120,
       id: 1,
-      role: RoleType.ROLE_ADMIN
+      role: RoleType.ROLE_ADMIN,
     };
     localStorage.setItem('authorization', encode(content, 'test'));
-    service.login(loginData).subscribe(
-      () => {
-        expect(localStorage.getItem('authorization')).not.toBeNull();
-        expect(localStorage.getItem('exp')).toBe(content.exp.toString());
-      }
-    );
+    service.login(loginData).subscribe(() => {
+      expect(localStorage.getItem('authorization')).not.toBeNull();
+      expect(localStorage.getItem('exp')).toBe(content.exp.toString());
+    });
     const req = httpMock.expectOne(`${environment.urlApi}/login`);
     expect(req.request.method).toBe('POST');
     const token: ResponseLogin = {
-      authorization: jwt.encode(content, 'key')
+      authorization: jwt.encode(content, 'key'),
     };
     req.flush(token);
   });

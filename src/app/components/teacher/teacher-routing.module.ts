@@ -7,21 +7,18 @@ export const teacherRoutes: Routes = [
   {
     path: '',
     component: TeacherMenuComponent,
-    canLoad: [CheckTokenGuard]
+    canLoad: [CheckTokenGuard],
   },
   {
     path: 'subjects',
     loadChildren: () =>
-      import('./subject/subject.module').then(
-        (s) => s.SubjectModule
-      ),
-    canLoad: [CheckTokenGuard]
-  }
+      import('./subject/subject.module').then((s) => s.SubjectModule),
+    canLoad: [CheckTokenGuard],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(teacherRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class TeacherRoutingModule {
-}
+export class TeacherRoutingModule {}

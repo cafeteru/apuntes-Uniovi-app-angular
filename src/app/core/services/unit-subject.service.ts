@@ -7,28 +7,33 @@ import { UnitSubject } from '../models/unit-subject';
 import { Page } from '../models/server/page';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UnitSubjectService {
   private url = `${environment.urlApi}/unitSubjects`;
 
-  constructor(
-    private httpClient: HttpClient
-  ) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
   create(unitSubject: UnitSubject): Observable<UnitSubject> {
     return this.httpClient.post<UnitSubject>(
-      `${this.url}/create`, unitSubject, ServiceUtils.getHttpOptions());
+      `${this.url}/create`,
+      unitSubject,
+      ServiceUtils.getHttpOptions()
+    );
   }
 
   findBySubjectId(id: number): Observable<Page<UnitSubject>> {
     return this.httpClient.get<Page<UnitSubject>>(
-      `${this.url}/subject/${id}`, ServiceUtils.getHttpOptions());
+      `${this.url}/subject/${id}`,
+      ServiceUtils.getHttpOptions()
+    );
   }
 
   update(unitSubject: UnitSubject): Observable<UnitSubject> {
     return this.httpClient.post<UnitSubject>(
-      `${this.url}/create`, unitSubject, ServiceUtils.getHttpOptions());
+      `${this.url}/create`,
+      unitSubject,
+      ServiceUtils.getHttpOptions()
+    );
   }
 }

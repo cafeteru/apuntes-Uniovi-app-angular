@@ -31,17 +31,14 @@ describe('SubjectDataComponent', () => {
           useValue: {
             snapshot: {
               data: {
-                subject: new Subject()
-              }
-            }
-          }
-        }
+                subject: new Subject(),
+              },
+            },
+          },
+        },
       ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
-    })
-      .compileComponents();
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+    }).compileComponents();
   });
 
   beforeEach(() => {

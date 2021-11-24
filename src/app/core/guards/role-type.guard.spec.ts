@@ -15,24 +15,23 @@ import { SharedModule } from '../../shared/shared.module';
 import { CheckTokenGuard } from './check-token.guard';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
-describe('RoleType' +
-  'Guard', () => {
+describe('RoleType' + 'Guard', () => {
   let guard: RoleTypeGuard;
   let router: Router;
   let store: MockStore;
 
   const loadingState: LoadingState = {
     isLoading: false,
-    loadedUser: false
+    loadedUser: false,
   };
 
   const userState: UserState = {
-    user: new User()
+    user: new User(),
   };
 
   const initialState: AppState = {
     loadingState,
-    userState
+    userState,
   };
 
   beforeEach(() => {
@@ -41,15 +40,10 @@ describe('RoleType' +
         CoreModule,
         RouterTestingModule.withRoutes(userRoutes),
         TestUtils.getLanguages(),
-        SharedModule
+        SharedModule,
       ],
-      providers: [
-        CheckTokenGuard,
-        provideMockStore({initialState}),
-      ],
-      schemas: [
-        CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
-      ]
+      providers: [CheckTokenGuard, provideMockStore({ initialState })],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     }).compileComponents();
     store = TestBed.inject(MockStore);
     guard = TestBed.inject(RoleTypeGuard);

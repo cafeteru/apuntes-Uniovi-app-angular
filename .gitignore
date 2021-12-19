@@ -48,3 +48,4 @@ Thumbs.db
 documentation
 .angular/
 .vscode/
+package-lock.json
